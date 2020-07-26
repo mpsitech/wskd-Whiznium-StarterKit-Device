@@ -1,0 +1,2948 @@
+- IexWdbeDdd v0.9.51																
+- ImeIMUnit.sref																
+- skmn																
+	- ImeIMVector1.srefIxVBasetype	sref	srefsKOption													
+	- tixlin	VecVWskdSkmnState	filfed													
+		- ImeIMVectoritem1.sref	Title	Comment												
+		- nc	offline	red LED												
+		- commerr	communication error	red LED flashing												
+		- rdy	ready	green LED												
+		- act	active	green LED flashing												
+		- ImeIMVectoritem1.end														
+	- ImeIMVector1.end															
+	- ImeIMBank.srefIxWdbeVIop	sref	srefKVoltstd													
+	- retr	porta														
+		- ImeICPin.iref														
+		- 1														
+		- 2														
+		- ImeICPin.end														
+		- ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location											
+		- retrupd	1	pa4												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	cs0_stm												
+			- ImeIJMPinSref.end													
+		- retrupd	1	spi1_sck												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- spi1	sclk_stm												
+			- ImeIJMPinSref.end													
+		- retrupd	1	pa6												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	cs1_stm												
+			- ImeIJMPinSref.end													
+		- retrupd	1	spi1_mosi												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- spi1	mosi_stm												
+			- ImeIJMPinSref.end													
+		- retrupd	2	pa8												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	stgrn												
+			- ImeIJMPinSref.end													
+		- retrupd	2	pa9												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	stred												
+			- ImeIJMPinSref.end													
+		- retr	0	usb_dm												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- usb	dm												
+			- ImeIJMPinSref.end													
+		- retr	0	usb_dp												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- usb	dp												
+			- ImeIJMPinSref.end													
+		- retr	0	pa15												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	oe												
+			- ImeIJMPinSref.end													
+		- ImeIMPin.end														
+	- retr	portb														
+		- ImeICPin.iref														
+		- 1														
+		- 2														
+		- 3														
+		- ImeICPin.end														
+		- ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location											
+		- retrupd	2	pb4												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	step1_stm												
+			- ImeIJMPinSref.end													
+		- retrupd	2	pb5												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	step2_stm												
+			- ImeIJMPinSref.end													
+		- retrupd	2	pb6												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	step3_stm												
+			- ImeIJMPinSref.end													
+		- retrupd	2	pb7												
+			- ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref												
+			- 	step4_stm												
+			- ImeIJMPinSref.end													
+		- ImeIMPin.end														
+	- ImeIMBank.end															
+	- ImeIMModule.hsrefSupRefWdbeMModule	sref														
+	- 	hostif														
+	- 	chrono														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retr														
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	getTst	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- tst	uint			time stamp of 115200Hz clock								
+				- ImeIAMCommandRetpar2.end												
+			- ImeIMCommand2.end													
+		- ImeIMController.end														
+	- 	laser														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retr														
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	set	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- Tfrm	uint			1200000		in mclk clocks						
+				- rngL	_bool			false								
+				- seqL	vblob		32	x"00102030405060708090A0B0C0D0E0F0F0E0D0C0B0A090807060504030201000"								
+				- rngR	_bool			false								
+				- seqR	vblob		32	x"00102030405060708090A0B0C0D0E0F0F0E0D0C0B0A090807060504030201000"								
+				- ImeIAMCommandInvpar2.end												
+			- 0	setMinmax	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- minL	utinyint					DAC value						
+				- maxL	utinyint					DAC value						
+				- minR	utinyint					DAC value						
+				- maxR	utinyint					DAC value						
+				- ImeIAMCommandInvpar2.end												
+			- 0	shift	void											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- dt	int			0		in mclk clocks						
+				- ImeIAMCommandRetpar2.end												
+			- ImeIMCommand2.end													
+		- ImeIMController.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- op			false		false	main operation								
+			- ImeIMFsm.													
+			- 													
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- 	spimaster		control by laser												
+		- ImeICPort.iref														
+		- 1														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	1	rtepin	cs0_stm	out	sl	1			cs0_stm					
+		- ins	1	rtepin	cs1_stm	out	sl	1			cs1_stm					
+		- ImeIMPort.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- op			false		false	main operation								
+			- ImeIMFsm.													
+			- 													
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- 	state														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retr														
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	get	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- tixVSkmnState	tix	VecVWskdSkmnState										
+				- ImeIAMCommandRetpar2.end												
+			- ImeIMCommand2.end													
+		- ImeIMController.end														
+		- ImeICPort.iref														
+		- 1														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	1	rtepin	stred	out	sl	1			stred					
+		- ins	1	rtepin	stgrn	out	sl	1			stgrn					
+		- ins	0	rtepin	oe	out	sl	1			oe					
+		- ImeIMPort.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- led			false		false	LED control								
+			- ImeIMFsm.													
+			- 													
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- 	step														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retr														
+			- ImeIMVector2.srefIxVBasetype	sref	srefsKOption											
+			- tixlin	VecVWskdSkmnStepState	filfed;notit											
+				- ImeIMVectoritem2.sref	Title	Comment										
+				- idle												
+				- move												
+				- ImeIMVectoritem2.end												
+			- ImeIMVector2.end													
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	getInfo	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- tixVState	tix	VecVWskdSkmnStepState										
+				- angle	usmallint			in stepper motor steps (360\u00b0/4096)								
+				- ImeIAMCommandRetpar2.end												
+			- 0	moveto	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- angle	usmallint			0		in stepper motor steps (360\u00b0/4096)						
+				- ImeIAMCommandInvpar2.end												
+			- 0	set	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- rng	_bool			false								
+				- ccwNotCw	_bool			false								
+				- speed	utinyint			25		in stepper motor rps (max. 25 eq. 140\u00b0/s)						
+				- ImeIAMCommandInvpar2.end												
+			- 0	zero	void											
+			- ImeIMCommand2.end													
+		- ImeIMController.end														
+		- ImeICPort.iref														
+		- 1														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	1	rtepin	step1_stm	out	sl	1			step1_stm					
+		- ins	1	rtepin	step2_stm	out	sl	1			step2_stm					
+		- ins	1	rtepin	step3_stm	out	sl	1			step3_stm					
+		- ins	1	rtepin	step4_stm	out	sl	1			step4_stm					
+		- ImeIMPort.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- op			false		false	main operation								
+			- ImeIMFsm.													
+			- 													
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- ImeIMModule.end															
+- arty																
+	- ImeIMVector1.srefIxVBasetype	sref	srefsKOption													
+	- tixlin	VecVWskdArtyState	filfed													
+		- ImeIMVectoritem1.sref	Title	Comment												
+		- nc	offline													
+		- ready	ready													
+		- active	streaming													
+		- ImeIMVectoritem1.end														
+	- ImeIMVector1.end															
+	- ImeIMBank.srefIxWdbeVIop	sref	srefKVoltstd													
+	- retrupd	bank34	_3v3													
+		- ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location	Arty/Cora	Arty/Cora Schematic	Cable-based								
+		- retrupd	0	step1	N18	J3[0]	CK_IO8	d2								
+		- retrupd	0	step3	U15	J3[4]	CK_IO10	d4								
+		- retrupd	0	sclk	U14	J4[0]	CK_IO0	d8								
+		- retrupd	0	mosi	V13	J4[2]	CK_IO1	d9								
+		- retrupd	0	dbg0	T14	J4[4]	CK_IO2	xclk								
+		- retrupd	0	dbg1	T15	J4[6]	CK_IO3	pclk								
+		- retrupd	0	dbg2	V17	J4[8]	CK_IO4	href								
+		- retrupd	0	dbg3	V18	J4[10]	CK_IO5	vsync								
+		- retrupd	0	dbg4	R17	J4[12]	CK_IO6									
+		- retrupd	0	dbg5	R14	J4[14]	CK_IO7									
+		- retrupd	0	d2	Y18	JA[0]	JA1_P	step1								
+		- retrupd	0	d3	U18	JA[1]	JA3_P	cs0								
+		- retrupd	0	d4	Y19	JA[2]	JA1_N	step2								
+		- retrupd	0	d5	U19	JA[3]	JA3_N	cs1								
+		- retrupd	0	d6	Y16	JA[4]	JA2_P	step3								
+		- retrupd	0	d7	W18	JA[5]	JA4_P	sclk								
+		- retrupd	0	d8	Y17	JA[6]	JA2_N	step4								
+		- retrupd	0	d9	W19	JA[7]	JA4_N	mosi								
+		- retrupd	0	xclk	W14	JB[0]	JB1_P	rst								
+		- retrupd	0	pclk	V16	JB[1]	JB3_P	pwdn								
+		- retrupd	0	href	Y14	JB[2]	JB1_N	sioc								
+		- retrupd	0	vsync	W16	JB[3]	JB3_N	siod								
+		- retrupd	0	rst	T11	JB[4]	JB2_P									
+		- retrupd	0	pwdn	V12	JB[5]	JB4_P									
+		- retrupd	0	sioc	T10	JB[6]	JB2_N									
+		- retrupd	0	siod	W13	JB[7]	JB4_N									
+		- ImeIMPin.end														
+	- retrupd	bank35	_3v3													
+		- ImeICPin.iref														
+		- 1														
+		- 2														
+		- ImeICPin.end														
+		- ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location											
+		- retrupd	0	extclk	H16											
+		- retrupd	1	led4_b	L15											
+		- retrupd	1	led4_g	G17											
+		- retrupd	1	led4_r	N15											
+		- retrupd	2	led5_b	G14											
+		- retrupd	2	led5_g	L14											
+		- retrupd	2	led5_r	M15											
+		- retrupd	0	btn0	D20											
+		- retrupd	0	btn1	D19											
+		- retrupd	0	crypto_sda	J15											
+		- retrupd	0	step2	M18	J3[2]	CK_IO9	d3								
+		- retrupd	0	step4	K18	J3[6]	CK_IO11	d5								
+		- retrupd	0	cs0	J18	J3[8]	CK_IO12	d6								
+		- retrupd	0	cs1	G15	J3[10]	CK_IO13	d7								
+		- ImeIMPin.end														
+	- ImeIMBank.end															
+	- ImeIMModule.hsrefSupRefWdbeMModule	sref														
+	- arty_ip;arty_ip_AXI	top														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fExtclk				100000								
+		- retrupd	0	fMclk				50000								
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	rtepin	sw	in	slvdn	2			sw					
+		- ins	0	rtepin	led	out	slvdn	4			led					
+		- ImeIMPort.end														
+		- ImeICSignal.iref														
+		- 1														
+		- 2														
+		- 3														
+		- ImeICSignal.end														
+		- ImeIMSignal.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		- oth	0	mdl	hostif	commok	false	sl	1					false		
+		- oth	0	mdl	camif	camrng	false	sl	1					false		
+		- oth	0	mdl	tkclksrc	tkclk	false	sl	1					false		
+		- oth	2	mdl	debounceBtn0	btn0_sig	false	sl	1					false		
+		- oth	2	mdl	debounceBtn1	btn1_sig	false	sl	1					false		
+		- oth	2	mdl	debounceBtn2	btn2_sig	false	sl	1					false		
+		- oth	2	mdl	debounceBtn3	btn3_sig	false	sl	1					false		
+		- oth	0	mdl	state	rgb4	false	slvdn	24					false		
+		- oth	0	void		rgb5	false	slvdn	24					false		
+		- oth	0	void		camacqStrb_dbg	false	slvdn	6					false		
+		- oth	0	void		featdetStrb_dbg	false	slvdn	4					false		
+		- oth	3	void		bcddbg0	false	slvdn	8					false		
+		- oth	3	void		bcddbg1	false	slvdn	8					false		
+		- oth	3	void		bcddbg2	false	slvdn	8					false		
+		- oth	3	void		bcddbg3	false	slvdn	8					false		
+		- oth	3	void		bcddbg4	false	slvdn	8					false		
+		- oth	3	void		bcddbg5	false	slvdn	8					false		
+		- ImeIMSignal.end														
+	- arty_ip;arty_ip_AXI;top	bcdfreqDbg0														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fMclk					fMclk							
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		high								bcddbg0[7..4]			
+		- retrupd	0		low								bcddbg0[3..0]			
+		- retrupd	0		freq						dbg0					
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	bcdfreqDbg1														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fMclk					fMclk							
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		high								bcddbg1[7..4]			
+		- retrupd	0		low								bcddbg1[3..0]			
+		- retrupd	0		freq						dbg1					
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	bcdfreqDbg2														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fMclk					fMclk							
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		high								bcddbg2[7..4]			
+		- retrupd	0		low								bcddbg2[3..0]			
+		- retrupd	0		freq						dbg2					
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	bcdfreqDbg3														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fMclk					fMclk							
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		high								bcddbg3[7..4]			
+		- retrupd	0		low								bcddbg3[3..0]			
+		- retrupd	0		freq						dbg3					
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	bcdfreqDbg4														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fMclk					fMclk							
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		high								bcddbg4[7..4]			
+		- retrupd	0		low								bcddbg4[3..0]			
+		- retrupd	0		freq						dbg4					
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	bcdfreqDbg5														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fMclk					fMclk							
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		high								bcddbg5[7..4]			
+		- retrupd	0		low								bcddbg5[3..0]			
+		- retrupd	0		freq						dbg5					
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	debounceBtn0														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		tkclk								tkclk			
+		- retrupd	0		noisy						btn0					
+		- retrupd	0		clean								btn0_sig			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	debounceBtn1														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		tkclk								tkclk			
+		- retrupd	0		noisy						btn1					
+		- retrupd	0		clean								btn1_sig			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	rgbled4														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	mclk	in	sl	1					mclk			
+		- ins	0	clk	tkclk	in	sl	1					tkclk			
+		- ins	0	rtetop	rgb	in	slvdn	24					rgb4			
+		- ins	0	rtepin	r	out	sl	1			led4_r					
+		- ins	0	rtepin	g	out	sl	1			led4_g					
+		- ins	0	rtepin	b	out	sl	1			led4_b					
+		- ImeIMPort.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- red	tkclk	reset				red LED PWM								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	on	false										
+				- 0	off	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- green	tkclk	reset				green LED PWM								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	on	false										
+				- 0	off	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- blue	tkclk	reset				blue LED PWM								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	on	false										
+				- 0	off	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top	rgbled5														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	mclk	in	sl	1					mclk			
+		- ins	0	clk	tkclk	in	sl	1					tkclk			
+		- ins	0	rtetop	rgb	in	slvdn	24					rgb5			
+		- ins	0	rtepin	r	out	sl	1			led5_r					
+		- ins	0	rtepin	g	out	sl	1			led5_g					
+		- ins	0	rtepin	b	out	sl	1			led5_b					
+		- ImeIMPort.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- red	tkclk	reset				red LED PWM								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	on	false										
+				- 0	off	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- green	tkclk	reset				green LED PWM								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	on	false										
+				- 0	off	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- blue	tkclk	reset				blue LED PWM								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	on	false										
+				- 0	off	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top	hostif														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		tkclk								tkclk			
+		- retrupd	0		commok								commok			
+		- retrupd	0		btnReset								btn0_sig			
+		- retrupd	0		reqReset								reqReset			
+		- retrupd	0		rdyRx						rdyRx					
+		- retrupd	0		enRx						enRx					
+		- retrupd	0		rx						rx					
+		- retrupd	0		strbRx						strbRx					
+		- retrupd	0		rdyTx						rdyTx					
+		- retrupd	0		enTx						enTx					
+		- retrupd	0		tx						tx					
+		- retrupd	0		strbTx						strbTx					
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	camacq														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retrupd														
+			- ImeIMVector2.srefIxVBasetype	sref	srefsKOption											
+			- tixlin	VecVWskdArtyCamacqGrrdbufstate	filfed;notit											
+				- ImeIMVectoritem2.sref	Title	Comment										
+				- idle												
+				- empty												
+				- stream												
+				- pause												
+				- endfr												
+				- ImeIMVectoritem2.end												
+			- tixlin	VecVWskdArtyCamacqPvwbufstate	filfed;notit											
+				- ImeIMVectoritem2.sref	Title	Comment										
+				- idle												
+				- empty												
+				- abuf												
+				- bbuf												
+				- ImeIMVectoritem2.end												
+			- ImeIMVector2.end													
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	setSample	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- fallNotRise	_bool			fls8								
+				- ImeIAMCommandInvpar2.end												
+			- 0	setGrrd	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- rng	_bool			fls8								
+				- redNotGray	_bool			fls8								
+				- ImeIAMCommandInvpar2.end												
+			- 0	getGrrdinfo	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- tixVGrrdbufstate	tix	VecVWskdArtyCamacqGrrdbufstate										
+				- tkst	uint											
+				- ImeIAMCommandRetpar2.end												
+			- 0	setPvw	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- rng	_bool			fls8								
+				- rawNotBin	_bool			fls8								
+				- grayNotRgb	_bool			fls8								
+				- ImeIAMCommandInvpar2.end												
+			- 0	getPvwinfo	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- tixVPvwbufstate	tix	VecVWskdArtyCamacqPvwbufstate										
+				- tkst	uint											
+				- ImeIAMCommandRetpar2.end												
+			- ImeIMCommand2.end													
+			- ImeIRMCommandMController.srefRefWdbeMCommand	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal											
+			- tkst.getTkst													
+			- ImeIRMCommandMController.end													
+		- ImeIMController.end														
+		- ImeICPort.iref														
+		- 1														
+		- 2														
+		- 3														
+		- 4														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	mclk	in	sl	1					mclk			
+		- ins	0	cmdbus	ackInvSetSample	out	sl	1								
+		- ins	0	cmdbus	ackInvSetGrrd	out	sl	1								
+		- ins	1	cmdbus	getGrrdinfoTixVGrrdbufstate	out	slvdn	8								
+		- ins	1	cmdbus	getGrrdinfoTkst	out	slvdn	32								
+		- ins	0	cmdbus	ackInvSetPvw	out	sl	1								
+		- ins	2	cmdbus	getPvwinfoTixVPvwbufstate	out	slvdn	8								
+		- ins	2	cmdbus	getPvwinfoTkst	out	slvdn	32								
+		- ins	0	imb	ackGrrdabbufToFeatdet	out	sl	1								
+		- ins	0	imb	ackGrrdcdbufToFeatdet	out	sl	1								
+		- ins	0	imb	ackGrrdefbufToFeatdet	out	sl	1								
+		- ins	0	imb	ackPvwabufToHostif	out	sl	1								
+		- ins	0	imb	ackPvwbbufToHostif	out	sl	1								
+		- ins	0	rtetop	tkclksrcGetTkstTkst	in	slvdn	32					tkclksrcGetTkstTkst			
+		- ins	3	rtepin	pclk	in	sl	1			pclk					
+		- ins	3	rtepin	href	in	sl	1			href					
+		- ins	3	rtepin	vsync	in	sl	1			vsync					
+		- ins	4	rtepin	d2	in	sl	1			d2					
+		- ins	4	rtepin	d3	in	sl	1			d3					
+		- ins	4	rtepin	d4	in	sl	1			d4					
+		- ins	4	rtepin	d5	in	sl	1			d5					
+		- ins	4	rtepin	d6	in	sl	1			d6					
+		- ins	4	rtepin	d7	in	sl	1			d7					
+		- ins	4	rtepin	d8	in	sl	1			d8					
+		- ins	4	rtepin	d9	in	sl	1			d9					
+		- ins	0	dbg	strb_dbg	out	slvdn	6					camacqStrb_dbg			
+		- ImeIMPort.end														
+		- ImeICSignal.iref														
+		- 1														
+		- 2														
+		- 3														
+		- 4														
+		- 5														
+		- 6														
+		- 7														
+		- 8														
+		- 9														
+		- 10														
+		- 11														
+		- 12														
+		- 13														
+		- 14														
+		- 15														
+		- 16														
+		- 17														
+		- 18														
+		- 19														
+		- 20														
+		- 21														
+		- 22														
+		- 23														
+		- 24														
+		- 25														
+		- 26														
+		- 27														
+		- 28														
+		- 29														
+		- 30														
+		- 31														
+		- 32														
+		- 33														
+		- 34														
+		- 35														
+		- 36														
+		- 37														
+		- ImeICSignal.end														
+		- ImeIMSignal.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		- oprt	1	prc	grrd	tixVGrrdbufstate	false	slvdn	8				tixVGrrdbufstateIdle	false	getGrrdinfoTixVGrrdbufstate	
+		- oprt	1	prc	grrd	grrdTkst	false	slvdn	32				0	false	getGrrdinfoTkst	
+		- oth	0	prc	grrd	grrdbuf	false	grrdbuf_t					grrdbufAb	false		
+		- oth	2	prc	grrd	enGrrdabbuf	false	sl	1		grrdbuf=grrdbufAb and state(store)	1	0	false		
+		- oth	2	prc	grrd	enGrrdcdbuf	false	sl	1		grrdbuf=grrdbufCd and state(store)	1	0	false		
+		- oth	2	prc	grrd	enGrrdefbuf	false	sl	1		grrdbuf=grrdbufEf and state(store)	1	0	false		
+		- oth	3	prc	grrd	aGrrdbuf_vec	false	slvdn	11					false		
+		- oth	3	prc	grrd	aGrrdbuf	false	nat		0..2048			0	false		
+		- oth	0	prc	grrd	dwrGrrdbuf	false	slvdn	8				0	false		
+		- oth	0	prc	grrd	grrdaccrun	false	sl	1		state(ready;store)	1	0	false		
+		- oprt	0	prc	grrdabbufB	ackGrrdabbufToFeatdet	false	sl	1				0	false	ackGrrdabbufToFeatdet	
+		- oth	0	prc	grrdabbufB	enGrrdabbufB	false	sl	1		!strbDGrrdabbufToFeatdet and state(readA)	1	0	false		
+		- oth	4	prc	grrdabbufB	aGrrdabbufB_vec	false	slvdn	11					false		
+		- oth	4	prc	grrdabbufB	aGrrdabbufB	false	nat		0..2048			0	false		
+		- oth	5	prc	grrdacc	dGrrdacc	false	slvdn	8				0	false		
+		- strb	5	prc	grrdacc	strbDGrrdacc	false	sl	1				0	false		
+		- oth	0	prc	grrdacc	enEvenbuf	false	sl	1		state(LASA..D)	1	0	false		
+		- oth	0	prc	grrdacc	weEvenbuf	false	sl	1				0	false		
+		- oth	6	prc	grrdacc	aEvenbuf_vec	false	slvdn	12					false		
+		- oth	6	prc	grrdacc	aEvenbuf	false	nat		0..4096			0	false		
+		- oth	0	prc	grrdacc	dwrEvenbuf	false	slvdn	8				0	false		
+		- oprt	0	prc	grrdcdbufB	ackGrrdcdbufToFeatdet	false	sl	1				0	false	ackGrrdcdbufToFeatdet	
+		- oth	0	prc	grrdcdbufB	enGrrdcdbufB	false	sl	1		!strbDGrrdcdbufToFeatdet and state(readA)	1	0	false		
+		- oth	7	prc	grrdcdbufB	aGrrdcdbufB_vec	false	slvdn	11					false		
+		- oth	7	prc	grrdcdbufB	aGrrdcdbufB	false	nat		0..2048			0	false		
+		- oprt	0	prc	grrdefbufB	ackGrrdefbufToFeatdet	false	sl	1				0	false	ackGrrdefbufToFeatdet	
+		- oth	0	prc	grrdefbufB	enGrrdefbufB	false	sl	1		!strbDGrrdefbufToFeatdet and state(readA)	1	0	false		
+		- oth	8	prc	grrdefbufB	aGrrdefbufB_vec	false	slvdn	11					false		
+		- oth	8	prc	grrdefbufB	aGrrdefbufB	false	nat		0..2048			0	false		
+		- strb	0	prc	op	strbFrame	false	sl	1				0	false		
+		- strb	9	prc	op	strbRow120	false	sl	1				0	false		
+		- strb	9	prc	op	strbRow192	false	sl	1				0	false		
+		- strb	9	prc	op	strbRow768	false	sl	1				0	false		
+		- strb	9	prc	op	strbRow960	false	sl	1				0	false		
+		- strb	10	prc	op	strbCol160N1	false	sl	1				0	false		
+		- strb	10	prc	op	strbCol256N3	false	sl	1				0	false		
+		- strb	10	prc	op	strbCol1024N3	false	sl	1				0	false		
+		- strb	10	prc	op	strbCol1024N9	false	sl	1				0	false		
+		- strb	10	prc	op	strbCol1280	false	sl	1				0	false		
+		- strb	10	prc	op	strbCol1280N9	false	sl	1				0	false		
+		- oprt	0	prc	op	ackInvSetGrrd	false	sl	1				0	false	ackInvSetGrrd	
+		- oprt	0	prc	op	ackInvSetPvw	false	sl	1				0	false	ackInvSetPvw	
+		- oth	0	prc	op	grrdrun	false	sl	1				0	false		
+		- oth	0	prc	op	grrdRedNotGray	false	sl	1				0	false		
+		- oth	0	prc	op	pvwrun	false	sl	1				0	false		
+		- oth	0	prc	op	pvwacc	false	pvwacc_t					pvwaccBinrgb	false		
+		- oth	11	prc	pvw	pvwTkstA	false	slvdn	32				0	false		
+		- oth	11	prc	pvw	pvwTkstB	false	slvdn	32				0	false		
+		- oth	0	prc	pvw	pvwLatestBNotA	false	sl	1				0	false		
+		- oth	12	prc	pvw	enPvwabuf	false	sl	1		pvwabufLock=lockPvw and state(storeA..D)	1	0	false		
+		- oth	12	prc	pvw	enPvwbbuf	false	sl	1		pvwbbufLock=lockPvw and state(storeA..D)	1	0	false		
+		- oth	13	prc	pvw	aPvwbuf_vec	false	slvdn	16					false		
+		- oth	13	prc	pvw	aPvwbuf	false	nat		0..57600			0	false		
+		- oth	0	prc	pvw	dwrPvwbuf	false	slvdn	8				0	false		
+		- oth	14	prc	pvw	pvwbingrayrun	false	sl	1		pvwacc=pvwaccBingray and state(ready;storeA..D)	1	0	false		
+		- oth	14	prc	pvw	pvwbinrgbrun	false	sl	1		pvwacc=pvwaccBinrgb and state(ready;storeA..D)	1	0	false		
+		- oth	14	prc	pvw	pvwrawgrayrun	false	sl	1		pvwacc=pvwaccRawgray and state(ready;storeA..D)	1	0	false		
+		- oth	14	prc	pvw	pvwrawrgbrun	false	sl	1		pvwacc=pvwaccRawrgb and state(ready;storeA..D)	1	0	false		
+		- oth	15	prc	pvwbingray	dPvwbingrayGr	false	slvdn	8				0	false		
+		- strb	15	prc	pvwbingray	strbDPvwbingrayGr	false	sl	1				0	false		
+		- oth	0	prc	pvwbingray	enBingraybuf	false	sl	1		state(LASB..C)	1	0	false		
+		- oth	0	prc	pvwbingray	weBingraybuf	false	sl	1				0	false		
+		- oth	16	prc	pvwbingray	aBingraybuf_vec	false	slvdn	11					false		
+		- oth	16	prc	pvwbingray	aBingraybuf	false	nat		0..2048			0	false		
+		- oth	0	prc	pvwbingray	dwrBingraybuf	false	slvdn	8				0	false		
+		- oth	17	prc	pvwbinrgb	dPvwbinrgbRd	false	slvdn	8				0	false		
+		- strb	17	prc	pvwbinrgb	strbDPvwbinrgbRd	false	sl	1				0	false		
+		- oth	18	prc	pvwbinrgb	dPvwbinrgbGn	false	slvdn	8				0	false		
+		- oth	18	prc	pvwbinrgb	dPvwbinrgbBl	false	slvdn	8				0	false		
+		- strb	18	prc	pvwbinrgb	strbDPvwbinrgbGnBl	false	sl	1				0	false		
+		- oth	0	prc	pvwbinrgb	enBinrgbbuf	false	sl	1		state(LASB..C)	1	0	false		
+		- oth	0	prc	pvwbinrgb	weBinrgbbuf	false	sl	1				0	false		
+		- oth	19	prc	pvwbinrgb	aBinrgbbuf_vec	false	slvdn	11					false		
+		- oth	19	prc	pvwbinrgb	aBinrgbbuf	false	nat		0..2048			0	false		
+		- oth	0	prc	pvwbinrgb	dwrBinrgbbuf	false	slvdn	8				0	false		
+		- oth	20	prc	pvwbuf	pvwabufLock	false	lock_t					lockIdle	false		
+		- oth	20	prc	pvwbuf	pvwabufFull	false	sl	1				0	false		
+		- oth	21	prc	pvwbuf	pvwbbufLock	false	lock_t					lockIdle	false		
+		- oth	21	prc	pvwbuf	pvwbbufFull	false	sl	1				0	false		
+		- oth	22	prc	pvwbufB	enPvwabufB	false	sl	1		pvwabufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false		
+		- oth	22	prc	pvwbufB	enPvwbbufB	false	sl	1		pvwbbufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false		
+		- oth	23	prc	pvwbufB	aPvwbufB_vec	false	slvdn	14					false		
+		- oth	23	prc	pvwbufB	aPvwbufB	false	nat		0..14400			0	false		
+		- oprt	24	prc	pvwbufB	tixVPvwbufstate	false	slvdn	8				tixVPvwbufstateIdle	false	getPvwinfoTixVPvwbufstate	
+		- oth	24	prc	pvwbufB	pvwtkst	false	slvdn	32				0	false	getPvwinfoTkst	
+		- oth	25	prc	pvwbufB	ackPvwbufToHostif	false	sl	1				0	false		
+		- oprt	25	prc	pvwbufB	ackPvwabufToHostif	false	sl	1		pvwabufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwabufToHostif	
+		- oprt	25	prc	pvwbufB	ackPvwbbufToHostif	false	sl	1		pvwbbufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwbbufToHostif	
+		- oth	26	prc	pvwrawgray	dPvwrawgrayGr	false	slvdn	8				0	false		
+		- strb	26	prc	pvwrawgray	strbDPvwrawgrayGr	false	sl	1				0	false		
+		- oth	0	prc	pvwrawgray	enRawgraybuf	false	sl	1		state(LASA..D)	1	0	false		
+		- oth	0	prc	pvwrawgray	weRawgraybuf	false	sl	1				0	false		
+		- oth	27	prc	pvwrawgray	aRawgraybuf_vec	false	slvdn	11					false		
+		- oth	27	prc	pvwrawgray	aRawgraybuf	false	nat		0..2048			0	false		
+		- oth	0	prc	pvwrawgray	dwrRawgraybuf	false	slvdn	8				0	false		
+		- oth	28	prc	pvwrawrgb	dPvwrawrgbRd	false	slvdn	8				0	false		
+		- strb	28	prc	pvwrawrgb	strbDPvwrawrgbRd	false	sl	1				0	false		
+		- oth	29	prc	pvwrawrgb	dPvwrawrgbGn	false	slvdn	8				0	false		
+		- oth	29	prc	pvwrawrgb	dPvwrawrgbBl	false	slvdn	8				0	false		
+		- strb	29	prc	pvwrawrgb	strbDPvwrawrgbGnBl	false	sl	1				0	false		
+		- oprt	0	prc	sample	ackInvSetSample	false	sl	1		state(inv)	1	0	false	ackInvSetSample	
+		- oth	0	prc	sample	d	false	slvdn	8				0	false		
+		- oth	0	prc	sample	d_shift	false	slvdn	8				0	false		
+		- oth	0	mdl	bingraybuf	drdBingraybuf	false	slvdn	8					false		
+		- oth	0	mdl	binrgbbuf	drdBinrgbbuf	false	slvdn	8					false		
+		- oth	0	mdl	evenbuf	drdEvenbuf	false	slvdn	8					false		
+		- oth	0	mdl	rawgraybuf	drdRawgraybuf	false	slvdn	8					false		
+		- oth	0	void		nmclk	false	sl	1					false		
+		- hshk	30	prc	pvw	reqPvwToPvwbufAbufLock	false	sl	1				0	false		
+		- hshk	30	prc	pvwbuf	ackPvwToPvwbufAbufLock	false	sl	1				0	false		
+		- hshk	30	prc	pvwbuf	dnyPvwToPvwbufAbufLock	false	sl	1				0	false		
+		- hshk	31	prc	pvw	reqPvwToPvwbufAbufSetFull	false	sl	1				0	false		
+		- hshk	31	prc	pvwbuf	ackPvwToPvwbufAbufSetFull	false	sl	1				0	false		
+		- hshk	32	prc	pvw	reqPvwToPvwbufBbufLock	false	sl	1				0	false		
+		- hshk	32	prc	pvwbuf	ackPvwToPvwbufBbufLock	false	sl	1				0	false		
+		- hshk	32	prc	pvwbuf	dnyPvwToPvwbufBbufLock	false	sl	1				0	false		
+		- hshk	33	prc	pvw	reqPvwToPvwbufBbufSetFull	false	sl	1				0	false		
+		- hshk	33	prc	pvwbuf	ackPvwToPvwbufBbufSetFull	false	sl	1				0	false		
+		- hshk	34	prc	pvwbufB	reqPvwbufBToPvwbufAbufLock	false	sl	1				0	false		
+		- hshk	34	prc	pvwbuf	ackPvwbufBToPvwbufAbufLock	false	sl	1				0	false		
+		- hshk	34	prc	pvwbuf	dnyPvwbufBToPvwbufAbufLock	false	sl	1				0	false		
+		- hshk	35	prc	pvwbufB	reqPvwbufBToPvwbufAbufClear	false	sl	1				0	false		
+		- hshk	35	prc	pvwbuf	ackPvwbufBToPvwbufAbufClear	false	sl	1				0	false		
+		- hshk	36	prc	pvwbufB	reqPvwbufBToPvwbufBbufLock	false	sl	1				0	false		
+		- hshk	36	prc	pvwbuf	ackPvwbufBToPvwbufBbufLock	false	sl	1				0	false		
+		- hshk	36	prc	pvwbuf	dnyPvwbufBToPvwbufBbufLock	false	sl	1				0	false		
+		- hshk	37	prc	pvwbufB	reqPvwbufBToPvwbufBbufClear	false	sl	1				0	false		
+		- hshk	37	prc	pvwbuf	ackPvwbufBToPvwbufBbufClear	false	sl	1				0	false		
+		- ImeIMSignal.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- grrd	mclk	reset	false	state(init) or !grrdrun	false	gray/red operation, also managing grrd{ab/cd/ef}buf								
+			- ImeIAVKeylistKey.sref	Title	Comment											
+			- grrdbuf_t	(grrdbufAb, grrdbufCd, grrdbufEf)	grrdbufAb											
+			- ImeIAVKeylistKey.end													
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!grrdrun	toIdle									
+					- waitFrame	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	strbFrame	waitFrame									
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- store	strbDGrrdacc	ready									
+					- ImeIAMFsmstateStep.end											
+				- 0	store	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	aGrrdbuf=2046	eorEven									
+					- init	aGrrdbuf=2047	eorOdd	rowcnt=768	eof							
+					- ready	aGrrdbuf=2047	eorOdd	else	eorOddInt							
+					- ready	else	inc									
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- grrdabbufB	mclk	reset	false	state(init) or tixVGrrdbufstate/=tixVGrrdbufstateStream	false	grrdabbuf B/featdet-facing operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	tixVGrrdbufstate/=tixVGrrdbufstateStream										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- readA	reqGrrdabbufToFeatdet	ready									
+					- ImeIAMFsmstateStep.end											
+				- 1	readA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	!reqGrrdabbufToFeatdet	done									
+					- readB	!strbDGrrdabbufToFeatdet	next									
+					- ImeIAMFsmstateStep.end											
+				- 1	readB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- readA	strbDGrrdabbufToFeatdet	inc									
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- grrdacc	mclk	reset	false	state(init) or !grrdaccrun	false	gray/red accumulation, also managing evenbuf								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!grrdaccrun										
+					- waitFrame	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitRow	strbRow768	waitFrame									
+					- ImeIAMFsmstateStep.end											
+				- 0	waitRow	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	strbCol1024N3	waitRow									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASB		LASA									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASC		LASB									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASD		LASC									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASD	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	pre='1'	preOff									
+					- LASA	col2A=2048 and post='0'	postOn									
+					- waitFrame	post='1'	incRow	row=std_logic_vector(to_unsigned(1536, 11))								
+					- waitRow	post='1'	incRow	else								
+					- LASA	else										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- grrdcdbufB	mclk	reset	false	state(init) or tixVGrrdbufstate/=tixVGrrdbufstateStream		grrdcdbuf B/featdet-facing operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	tixVGrrdbufstate/=tixVGrrdbufstateStream										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- readA	reqGrrdcdbufToFeatdet	ready									
+					- ImeIAMFsmstateStep.end											
+				- 1	readA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	!reqGrrdcdbufToFeatdet	done									
+					- readB	!strbDGrrdcdbufToFeatdet	next									
+					- ImeIAMFsmstateStep.end											
+				- 1	readB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- readA	strbDGrrdcdbufToFeatdet	inc									
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- grrdefbufB	mclk	reset	false	state(init) or tixVGrrdbufstate/=tixVGrrdbufstateStream		grrdefbuf B/featdet-facing operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	tixVGrrdbufstate/=tixVGrrdbufstateStream										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- readA	reqGrrdefbufToFeatdet	ready									
+					- ImeIAMFsmstateStep.end											
+				- 1	readA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	!reqGrrdefbufToFeatdet	done									
+					- readB	!strbDGrrdefbufToFeatdet	next									
+					- ImeIAMFsmstateStep.end											
+				- 1	readB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- readA	strbDGrrdefbufToFeatdet	inc									
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- op	mclk	reset	false	state(init) or (state(!invGrrd) and state(!invPvw) and state(!inv) and (reqInvSetGrrd or reqInvSetPvw))	false	main operation								
+			- ImeIAVKeylistKey.sref	Title	Comment											
+			- pvwacc_t	(pvwaccBingray, pvwaccBinrgb, pvwaccRawgray, pvwaccRawrgb)	pvwaccBingray											
+			- ImeIAVKeylistKey.end													
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- 2												
+				- 3												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- invGrrd	reqInvSetGrrd	invSetGrrd									
+					- invPvw	reqInvSetPvw	invSetPvw									
+					- frameA	grrdrun or pvwrun										
+					- init	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	invGrrd	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- inv		invGrrd									
+					- ImeIAMFsmstateStep.end											
+				- 0	invPvw	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- inv		invPvw									
+					- ImeIAMFsmstateStep.end											
+				- 0	inv	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	(!reqInvSetGrrd and ackInvSetGrrd_sig) or (!reqInvSetPvw and ackInvSetPvw_sig)	inv									
+					- ImeIAMFsmstateStep.end											
+				- 1	frameA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- frameB	vsync										
+					- ImeIAMFsmstateStep.end											
+				- 1	frameB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- rowA	!vsync	frameB									
+					- ImeIAMFsmstateStep.end											
+				- 2	rowA	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- rowB	!href										
+					- ImeIAMFsmstateStep.end											
+				- 2	rowB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- rowC	href	rowB									
+					- ImeIAMFsmstateStep.end											
+				- 2	rowC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- rowD		rowC									
+					- ImeIAMFsmstateStep.end											
+				- 2	rowD	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- colA		rowD									
+					- ImeIAMFsmstateStep.end											
+				- 3	colA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- colB		colA									
+					- ImeIAMFsmstateStep.end											
+				- 3	colB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- frameA	k=kmax	incRow	j=jmax								
+					- rowA	k=kmax	incRow	else								
+					- colA	else										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- pvw	mclk	reset	false	state(init) or !pvwrun	false	preview operation, also managing pvw{a/b}buf								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- 2												
+				- 3												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!pvwrun	reset									
+					- trylockA	else	toLock									
+					- ImeIAMFsmstateStep.end											
+				- 1	trylockA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitFrame	ackPvwToPvwbufAbufLock	ack									
+					- trylockB	dnyPvwToPvwbufAbufLock	dny									
+					- ImeIAMFsmstateStep.end											
+				- 1	trylockB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitFrame	ackPvwToPvwbufBbufLock	ack									
+					- trylockA	dnyPvwToPvwbufBbufLock	dny									
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	strbFrame	waitFrame									
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- storeA	strbDPvwbingrayGr	bingrayGr									
+					- storeA	strbDPvwrawgrayGr	rawgrayGr									
+					- storeB	strbDPvwbinrgbRd	binrgbRd									
+					- storeB	strbDPvwrawrgbRd	rawrgbRd									
+					- storeC	strbDPvwbinrgbGnBl	binrgbGnBl									
+					- storeC	strbDPvwrawrgbGnBl	rawrgbGnBl									
+					- ImeIAMFsmstateStep.end											
+				- 2	storeA	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- doneA	aPvwbufGr=49152										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 2	storeB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready		inc									
+					- ImeIAMFsmstateStep.end											
+				- 2	storeC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- storeD		storeC									
+					- ImeIAMFsmstateStep.end											
+				- 2	storeD	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- doneA	aPvwbufGnBl=57601										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 3	doneA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- doneB		doneA									
+					- ImeIAMFsmstateStep.end											
+				- 3	doneB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- trylockB	ackPvwToPvwbufAbufSetFull or ackPvwToPvwbufBbufSetFull	doneB	!pvwLatestBNotA	bbuf							
+					- trylockA	ackPvwToPvwbufAbufSetFull or ackPvwToPvwbufBbufSetFull	doneB	else	abuf							
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- pvwbingray	mclk	reset	false	state(init) or !pvwbingrayrun	false	preview 4x4 pixel binning gray, also managing bingraybuf								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!pvwbingrayrun										
+					- waitFrame	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitRow	strbRow768	reset									
+					- ImeIAMFsmstateStep.end											
+				- 0	waitRow	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	strbCol1024N9	reset									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASB		LASA									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASC											
+					- ImeIAMFsmstateStep.end											
+				- 1	LASC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASD		LASC									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASD	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	pixcnt="00"		pre1='1'	pre1							
+					- LASA	pixcnt="00"		pre2='1'	pre2							
+					- LASA	pixcnt="00"		col2L=512 and post1='0' and post2='0'	post							
+					- LASA	pixcnt="00"		post1='1'	post1							
+					- waitFrame	pixcnt="00"		post2='1'	post2	row=std_logic_vector(to_unsigned(1536, 11))						
+					- waitRow	pixcnt="00"		post2='1'	post2	else						
+					- LASA	pixcnt="00"		else								
+					- LASA	else										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- pvwbinrgb	mclk	reset	false	state(init) or !pvwbinrgbrun	false	preview 8x8 pixel binning RGB, also managing binrgbbuf								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!pvwbinrgbrun	syncrst									
+					- waitFrame	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitRow	strbRow960	reset									
+					- ImeIAMFsmstateStep.end											
+				- 0	waitRow	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	strbCol1280N9	reset									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASB		LASA									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASC											
+					- ImeIAMFsmstateStep.end											
+				- 1	LASC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASD		LASC									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASD	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	pixcnt="000"		pre1='1'	pre1							
+					- LASA	pixcnt="000"		pre2='1'	pre2							
+					- LASA	pixcnt="000"		col2L=320 and post1='0' and post2='0'	post							
+					- LASA	pixcnt="000"		post1='1'	post1							
+					- waitFrame	pixcnt="000"		post2='1'	post2	row=std_logic_vector(to_unsigned(1920, 11))						
+					- waitRow	pixcnt="000"		post2='1'	post2	else						
+					- LASA	pixcnt="000"		else								
+					- LASA	else										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- pvwbuf	mclk	reset	false	state(init) or !pvwrun	false	pvw{a/b}buf mutex management								
+			- ImeIAVKeylistKey.sref	Title	Comment											
+			- lock_t	(lockIdle, lockBufB, lockPvw)	lockIdle											
+			- ImeIAVKeylistKey.end													
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!pvwrun										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ack	reqPvwToPvwbufAbufLock	pvwAbufLock									
+					- ack	reqPvwToPvwbufAbufSetFull	pvwAbufFull									
+					- ack	reqPvwToPvwbufBbufLock	pvwBbufLock									
+					- ack	reqPvwToPvwbufBbufSetFull	pvwBbufFull									
+					- ack	reqPvwbufBToPvwbufAbufLock	pvwbufBAbufLock									
+					- ack	reqPvwbufBToPvwbufAbufClear	pvwbufBAbufClear									
+					- ack	reqPvwbufBToPvwbufBbufLock	pvwbufBBbufLock									
+					- ack	reqPvwbufBToPvwbufBbufClear	pvwbufBBbufClear									
+					- ImeIAMFsmstateStep.end											
+				- 0	ack	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	(ackPvwToPvwbufAbufLock or dnyPvwToPvwbufAbufLock) and !reqPvwToPvwbufAbufLock	pvwAbufLock									
+					- ready	ackPvwToPvwbufAbufSetFull and !reqPvwToPvwbufAbufSetFull	pvwAbufFull									
+					- ready	(ackPvwToPvwbufBbufLock or dnyPvwToPvwbufBbufLock) and !reqPvwToPvwbufBbufLock	pvwBbufLock									
+					- ready	ackPvwToPvwbufBbufSetFull and !reqPvwToPvwbufBbufSetFull	pvwBbufFull									
+					- ready	(ackPvwbufBToPvwbufAbufLock or dnyPvwbufBToPvwbufAbufLock) and !reqPvwbufBToPvwbufAbufLock	pvwbufBAbufLock									
+					- ready	ackPvwbufBToPvwbufAbufClear and !reqPvwbufBToPvwbufAbufClear	pvwbufBAbufClear									
+					- ready	(ackPvwbufBToPvwbufBbufLock or dnyPvwbufBToPvwbufBbufLock) and !reqPvwbufBToPvwbufBbufLock	pvwbufBBbufLock									
+					- ready	ackPvwbufBToPvwbufBbufClear and !reqPvwbufBToPvwbufBbufClear	pvwbufBBbufClear									
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- pvwbufB	mclk	reset	false	state(init) or !pvwrun	false	pvw{a/b}buf B/hostif-facing operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!pvwrun										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- trylock	tixVPvwbufstate=tixVPvwbufstateAbuf and reqPvwabufToHostif	aprep									
+					- trylock	tixVPvwbufstate=tixVPvwbufstateBbuf and reqPvwbbufToHostif	bprep									
+					- ImeIAMFsmstateStep.end											
+				- 0	trylock	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- readA	ackPvwbufBToPvwbufAbufLock or ackPvwbufBToPvwbufBbufLock	ack									
+					- init	dnyPvwbufBToPvwbufAbufLock or dnyPvwbufBToPvwbufBbufLock										
+					- ImeIAMFsmstateStep.end											
+				- 1	readA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- done	pvwabufLock=lockBufB		dnePvwabufToHostif	adne							
+					- done	pvwabufLock=lockBufB		!reqPvwabufToHostif	acnc							
+					- readB	pvwabufLock=lockBufB		!strbDPvwabufToHostif	astep							
+					- done	pvwbbufLock=lockBufB		dnePvwbbufToHostif	bdne							
+					- done	pvwbbufLock=lockBufB		!reqPvwbbufToHostif	bcnc							
+					- readB	pvwbbufLock=lockBufB		!strbDPvwbbufToHostif	bstep							
+					- ImeIAMFsmstateStep.end											
+				- 1	readB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- done	pvwabufLock=lockBufB		!reqPvwabufToHostif	acnc							
+					- readA	pvwabufLock=lockBufB		strbDPvwabufToHostif	ainc							
+					- done	pvwbbufLock=lockBufB		!reqPvwbbufToHostif	bcnc							
+					- readA	pvwbbufLock=lockBufB		strbDPvwbbufToHostif	binc							
+					- ImeIAMFsmstateStep.end											
+				- 0	done	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	ackPvwbufBToPvwbufAbufLock or ackPvwbufBToPvwbufAbufClear or ackPvwbufBToPvwbufBbufLock or ackPvwbufBToPvwbufBbufClear										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- pvwrawgray	mclk	reset	false	state(init) or !pvwrawgrayrun	false	preview raw gray, also managing rawgraybuf								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!pvwrawgrayrun										
+					- waitFrame	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitRow	strbRow192	reset									
+					- ImeIAMFsmstateStep.end											
+				- 0	waitRow	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	strbCol256N3	reset									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASB		LASA									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASC		LASB									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASD		LASC									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASD	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	pre='1'	pre									
+					- LASA	col2A=512 and post='0'	toPost									
+					- waitFrame	post='1'	post	row=std_logic_vector(to_unsigned(384, 9))								
+					- waitRow	post='1'	post	else								
+					- LASA	else										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- pvwrawrgb	mclk	reset	false	state(init) or !pvwrawrgbrun	false	preview raw RGB								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!pvwrawrgbrun										
+					- waitFrame	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitRow	strbRow120	reset									
+					- ImeIAMFsmstateStep.end											
+				- 0	waitRow	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASA	strbCol160N1	reset									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASB		LASA									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASC											
+					- ImeIAMFsmstateStep.end											
+				- 1	LASC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LASD		LASC									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASD	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitFrame	col=160	inc	row=std_logic_vector(to_unsigned(240, 8))								
+					- waitRow	col=160	inc	else								
+					- LASA	else										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- sample	mclk	reset	true	state(init) or (state(!init) and reqInvSetSample)		camera data sampling at rising or falling mclk edge								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- inv	reqInvSetSample	invSetSample									
+					- run	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	inv	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!reqInvSetSample										
+					- ImeIAMFsmstateStep.end											
+				- 0	run	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top;camacq	bingraybuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clk								mclk			
+		- retrupd	0		en								enBingraybuf			
+		- retrupd	0		we								weBingraybuf			
+		- retrupd	0		a								aBingraybuf_vec			
+		- retrupd	0		drd								drdBingraybuf			
+		- retrupd	0		dwr								dwrBingraybuf			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camacq	binrgbbuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clk								mclk			
+		- retrupd	0		en								enBinrgbbuf			
+		- retrupd	0		we								weBinrgbbuf			
+		- retrupd	0		a								aBinrgbbuf_vec			
+		- retrupd	0		drd								drdBinrgbbuf			
+		- retrupd	0		dwr								dwrBinrgbbuf			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camacq	evenbuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clk								nmclk			
+		- retrupd	0		en								enEvenbuf			
+		- retrupd	0		we								weEvenbuf			
+		- retrupd	0		a								aEvenbuf_vec			
+		- retrupd	0		drd								drdEvenbuf			
+		- retrupd	0		dwr								dwrEvenbuf			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camacq	rawgraybuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clk								nmclk			
+		- retrupd	0		en								enRawgraybuf			
+		- retrupd	0		we								weRawgraybuf			
+		- retrupd	0		a								aRawgraybuf_vec			
+		- retrupd	0		drd								drdRawgraybuf			
+		- retrupd	0		dwr								dwrRawgraybuf			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camacq	grrdabbuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clkA								mclk			
+		- retrupd	0		enA								enGrrdabbuf			
+		- retrupd	0		weA					1						
+		- retrupd	0		aA								aGrrdbuf_vec			
+		- retrupd	0		dwrA								dwrGrrdbuf			
+		- retrupd	0		clkB								nmclk			
+		- retrupd	0		enB								enGrrdabbufB			
+		- retrupd	0		aB								aGrrdabbufB_vec			
+		- retrupd	0		drdB							dGrrdabbufToFeatdet				
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camacq	grrdcdbuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clkA								mclk			
+		- retrupd	0		enA								enGrrdcdbuf			
+		- retrupd	0		weA					1						
+		- retrupd	0		aA								aGrrdbuf_vec			
+		- retrupd	0		dwrA								dwrGrrdbuf			
+		- retrupd	0		clkB								nmclk			
+		- retrupd	0		enB								enGrrdcdbufB			
+		- retrupd	0		aB								aGrrdcdbufB_vec			
+		- retrupd	0		drdB							dGrrdcdbufToFeatdet				
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camacq	grrdefbuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clkA								mclk			
+		- retrupd	0		enA								enGrrdefbuf			
+		- retrupd	0		weA					1						
+		- retrupd	0		aA								aGrrdbuf_vec			
+		- retrupd	0		dwrA								dwrGrrdbuf			
+		- retrupd	0		clkB								nmclk			
+		- retrupd	0		enB								enGrrdefbufB			
+		- retrupd	0		aB								aGrrdefbufB_vec			
+		- retrupd	0		drdB							dGrrdefbufToFeatdet				
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camacq	pvwabuf														
+		- ImeIMImbuf.Prio														
+		- 1														
+		- ImeIMImbuf.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clkA								mclk			
+		- retrupd	0		enA								enPvwabuf			
+		- retrupd	0		weA					1						
+		- retrupd	0		addrA								aPvwbuf_vec			
+		- retrupd	0		dinA								dwrPvwbuf			
+		- retrupd	0		clkB								mclk			
+		- retrupd	0		enB								enPvwabufB			
+		- retrupd	0		addrB								aPvwbufB_vec			
+		- retrupd	0		doutB							dPvwabufToHostif				
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camacq	pvwbbuf														
+		- ImeIMImbuf.Prio														
+		- 1														
+		- ImeIMImbuf.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clkA								mclk			
+		- retrupd	0		enA								enPvwbbuf			
+		- retrupd	0		weA					1						
+		- retrupd	0		addrA								aPvwbuf_vec			
+		- retrupd	0		dinA								dwrPvwbuf			
+		- retrupd	0		clkB								mclk			
+		- retrupd	0		enB								enPvwbbufB			
+		- retrupd	0		addrB								aPvwbufB_vec			
+		- retrupd	0		doutB							dPvwbbufToHostif				
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	camif														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retrupd														
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	setRng	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- rng	_bool			fls8								
+				- ImeIAMCommandInvpar2.end												
+			- 0	setFocus	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- vcm	usmallint					10bit VCM DAC value						
+				- ImeIAMCommandInvpar2.end												
+			- 0	setTexp	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- Texp	usmallint					in line/16 units						
+				- ImeIAMCommandInvpar2.end												
+			- 0	setReg	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- addr	usmallint											
+				- val	utinyint											
+				- ImeIAMCommandInvpar2.end												
+			- 0	getReg	immsng											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- addr	usmallint											
+				- ImeIAMCommandInvpar2.end												
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- val	utinyint											
+				- ImeIAMCommandRetpar2.end												
+			- 0	modReg	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- addr	usmallint											
+				- mask	utinyint											
+				- val	utinyint											
+				- ImeIAMCommandInvpar2.end												
+			- ImeIMCommand2.end													
+		- ImeIMController.end														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- ins	0	fMclk	nat		1..1000000	50000	fMclk	in kHz						
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	mclk	in	sl	1					mclk			
+		- ins	0	clk	tkclk	in	sl	1					tkclk			
+		- ins	0	cmdbus	ackInvSetRng	out	sl	1								
+		- ins	0	cmdbus	ackInvSetFocus	out	sl	1								
+		- ins	0	cmdbus	ackInvSetTexp	out	sl	1								
+		- ins	0	cmdbus	ackInvSetReg	out	sl	1								
+		- ins	0	cmdbus	ackInvGetReg	out	sl	1								
+		- ins	0	cmdbus	getRegVal	out	slvdn	8								
+		- ins	0	cmdbus	ackInvModReg	out	sl	1								
+		- ins	0	rtetop	rng	out	sl	1					camrng			
+		- ins	0	rtepin	rst	out	sl	1			rst					
+		- ins	0	rtepin	pwdn	out	sl	1			pwdn					
+		- ins	0	rtepin	xclk	out	sl	1			xclk					
+		- ImeIMPort.end														
+		- ImeICSignal.iref														
+		- 1														
+		- 2														
+		- 3														
+		- ImeICSignal.end														
+		- ImeIMSignal.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		- oprt	0	prc	camclk	xclk	false	sl	1				0	false	xclk	
+		- oprt	0	prc	op	rng	false	sl	1				0	true	rng	
+		- oprt	0	prc	op	rst	false	sl	1				0	true	rst	
+		- oprt	0	prc	op	pwdn	false	sl	1				0	true	pwdn	
+		- oprt	0	prc	op	ackInvSetRng	false	sl	1				0	false	ackInvSetRng	
+		- oprt	0	prc	op	ackInvSetFocus	false	sl	1				0	false	ackInvSetFocus	
+		- oprt	0	prc	op	ackInvSetTexp	false	sl	1				0	false	ackInvSetTexp	
+		- oprt	0	prc	op	ackInvSetReg	false	sl	1				0	false	ackInvSetReg	
+		- oprt	0	prc	op	ackInvGetReg	false	sl	1				0	false	ackInvGetReg	
+		- oprt	0	prc	op	regVal	false	slvdn	8				0	false	getRegVal	
+		- oprt	0	prc	op	ackInvModReg	false	sl	1				0	false	ackInvModReg	
+		- oth	0	prc	op	enParrom	false	sl	1		state(loadA)	1	0	false		
+		- oth	1	prc	op	aParrom_vec	false	slvdn	11					false		
+		- oth	1	prc	op	aParrom	false	nat		0..2048			0	false		
+		- oth	2	prc	op	i2cReadNotWrite	false	sl	1				0	false		
+		- oth	2	prc	op	i2cRegaddr	false	slvdn	16				0	false		
+		- oth	2	prc	op	i2cSend	false	slvdn	8				0	false		
+		- oth	0	mdl	i2c	i2cRecv	false	slvdn	8					false		
+		- oth	0	mdl	parrom	drdParrom	false	slvdn	8					false		
+		- hshk	3	prc	op	reqI2c	false	sl	1		state(xfer)	1	0	false		
+		- hshk	3	mdl	i2c	ackI2c	false	sl	1					false		
+		- hshk	3	mdl	i2c	dneI2c	false	sl	1					false		
+		- ImeIMSignal.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- camclk	mclk	reset	false		false	camera master clock								
+		- op	mclk	reset	false	state(init)	false	main operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- 2												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- pwupB	cmdNotPrep='0'	prep									
+					- xfer	reqInvSetFocus	invSetFocus									
+					- xfer	reqInvSetTexp	invSetTexp									
+					- xfer	reqInvSetReg	invSetReg									
+					- xfer	reqInvGetReg	invGetReg									
+					- xfer	reqInvModReg	invModReg									
+					- ImeIAMFsmstateStep.end											
+				- 1	pwupA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- pwupD	tkclk		i=imax	done							
+					- pwupB	tkclk		else								
+					- ImeIAMFsmstateStep.end											
+				- 1	pwupB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- pwupA	!tkclk	inc									
+					- ImeIAMFsmstateStep.end											
+				- 1	pwupC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- loadA	tkclk		j=jmax	done							
+					- pwupD	tkclk		else								
+					- ImeIAMFsmstateStep.end											
+				- 1	pwupD	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- pwupC	!tkclk	inc									
+					- ImeIAMFsmstateStep.end											
+				- 2	loadA	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- loadB	k=kmax										
+					- ImeIAMFsmstateStep.end											
+				- 2	loadB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- loadA	bytecnt=1 and drdParrom=x"00"		specNotGnr='0'	prepSpec							
+					- init	bytecnt=1 and drdParrom=x"00"		else	done							
+					- xfer	else	inc	bytecnt=0								
+					- loadA	else	inc	bytecnt=1	addrmsb							
+					- loadA	else	inc	bytecnt=2	addrlsb							
+					- loadA	else	inc	bytecnt=3	val							
+					- ImeIAMFsmstateStep.end											
+				- 0	xfer	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- step	dneI2c										
+					- ImeIAMFsmstateStep.end											
+				- 0	step	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- loadA	!i2cReadNotWrite		cmdNotPrep='0'	prep							
+					- inv	!i2cReadNotWrite		else		msbNotLsb='0'		specNotGnr='0'	gnrDone			
+					- inv	!i2cReadNotWrite		else		msbNotLsb='0'		else	specDone			
+					- xfer	!i2cReadNotWrite		else		else	lsb					
+					- inv	else		modNotGetSet='0'	get							
+					- xfer	else		else	mod							
+					- ImeIAMFsmstateStep.end											
+				- 0	inv	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	(!reqInvSetRng and ackInvSetRng_sig) or (!reqInvSetFocus and ackInvSetFocus_sig) or (!reqInvSetTexp and ackInvSetTexp_sig) or (!reqInvSetReg and ackInvSetReg_sig) or (!reqInvGetReg and ackInvGetReg_sig) or (!reqInvModReg and ackInvModReg_sig)										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top;camif	i2c														
+		- ImeICGeneric.iref														
+		- 1														
+		- ImeICGeneric.end														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- ins	0	fMclk	nat		1..1000000		fMclk	in kHz						
+		- ins	1	clkFastNotStd	sl	1		1		1Mbps/400kbps vs. 100kbps						
+		- ins	1	clkFastplusNotFast	sl	1		0		1Mbps vs. 400kbps						
+		- ins	0	devaddr	slvdn	8		01111000		0x78, not 0x3C as in Linux version						
+		- ImeIMGeneric.end														
+		- ImeICPort.iref														
+		- 1														
+		- 2														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	mclk	in	sl	1					mclk			
+		- ins	1	rtesup	req	in	sl	1					reqI2c			
+		- ins	1	rtesup	ack	out	sl	1								
+		- ins	1	rtesup	dne	out	sl	1					dneI2c			
+		- ins	0	rtesup	readNotWrite	in	sl	1					i2cReadNotWrite			
+		- ins	0	rtesup	regaddr	in	slvdn	16					i2cRegaddr			
+		- ins	0	rtesup	send	in	slvdn	8					i2cSend			
+		- ins	0	rtesup	recv	out	slvdn	8					i2cRecv			
+		- ins	2	rtepin	scl	out	sl	1			sioc					
+		- ins	2	rtepin	sda	inout	sl	1			siod					
+		- ImeIMPort.end														
+		- ImeIMSignal.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		- oprt	0	prc	xfer	ack	false	sl	1		state(init)	1	0	true	ack	
+		- oprt	0	prc	xfer	dne	false	sl	1		state(done)	1	0	false	dne	
+		- oprt	0	prc	xfer	recv	false	slvdn	8				0	false	recv	
+		- oprt	0	prc	xfer	scl	false	sl	1		state(bitA;ackA;restart;stopA)	1	0	true	scl	
+		- oth	0	prc	xfer	sda_sig	false	sl	1				0	false		
+		- oth	0	mdl	iobuf	sda_in	false	sl	1				0	false		
+		- ImeIMSignal.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- xfer	mclk	reset	false	state(init) or !req	false	transfer operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- 2												
+				- 3												
+				- 4												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!req										
+					- startA	else										
+					- ImeIAMFsmstateStep.end											
+				- 1	startA	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startB	i=imax	step									
+					- ImeIAMFsmstateStep.end											
+				- 1	startB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- bitA	i=imax	step									
+					- ImeIAMFsmstateStep.end											
+				- 2	bitA	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- bitB	i=imax	step									
+					- ImeIAMFsmstateStep.end											
+				- 2	bitB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ackA	i=imax	step	bitcnt=8								
+					- bitA	i=imax	step	else								
+					- ImeIAMFsmstateStep.end											
+				- 3	ackA	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ackB	i=imax	step									
+					- ImeIAMFsmstateStep.end											
+				- 3	ackB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- restart	i=imax	step	bytecnt=3		readNotWrite						
+					- bitA	i=imax	step	bytecnt=3		else						
+					- stopA	i=imax	step	(bytecnt=4 and !readNotWrite) or (bytecnt=5 and readNotWrite)	prepStop							
+					- bitA	i=imax	step	else								
+					- ImeIAMFsmstateStep.end											
+				- 0	restart	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startA	i=imax	step									
+					- ImeIAMFsmstateStep.end											
+				- 4	stopA	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- stopB	i=imax	step									
+					- ImeIAMFsmstateStep.end											
+				- 4	stopB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- stopC	i=imax	step									
+					- ImeIAMFsmstateStep.end											
+				- 4	stopC	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- done	i=imax	step									
+					- ImeIAMFsmstateStep.end											
+				- 0	done	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!req										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top;camif;i2c	iobuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		O								sda_in			
+		- retrupd	0		IO							sda				
+		- retrupd	0		I					0						
+		- retrupd	0		T								sda_sig			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camif	parrom														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clk								mclk			
+		- retrupd	0		en								enParrom			
+		- retrupd	0		we					0						
+		- retrupd	0		a								aParrom_vec			
+		- retrupd	0		drd								drdParrom			
+		- retrupd	0		dwr					0						
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;camif;parrom	bram														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- ins	0	INIT_00	slvdn	256		x"003630360001083100033730001A343000FF183000FF17300003033100420830"								
+		- ins	0	INIT_01	slvdn	256		x"0001173700781537005A033700A0043700E021360012333600E23236000E3136"								
+		- ins	0	INIT_02	slvdn	256		x"003301360008003600123137000A01390010063900020539001A053700600B37"								
+		- ins	0	INIT_03	slvdn	256		x"00133536007C193A0000183A0043133A00501C4700201B370052203600602D30"								
+		- ins	0	INIT_04	slvdn	256		x"0000063C0098053C0028043C0034013C00DE6050000122360040343600033636"								
+		- ins	0	INIT_05	slvdn	256		x"00001238001011380000103800400B3C009C0A3C001C093C0000083C0007073C"								
+		- ins	0	INIT_06	slvdn	256		x"0000004300002E3000580E3000FF043000000030001A05400002014000640837"								
+		- ins	0	INIT_07	slvdn	256		x"0060113A00261E3A00301B3A0028103A00300F3A00A7005000000E4400031F50"								
+		- ins	0	INIT_08	slvdn	256		x"000C06580026055800120458000F0358000F0258001401580023005800141F3A"								
+		- ins	0	INIT_09	slvdn	256		x"00000E5800030D5800080C58000D0B5800080A58000509580005085800080758"								
+		- ins	0	INIT_0A	slvdn	256		x"0003165800011558000014580003135800071258000911580003105800000F58"								
+		- ins	0	INIT_0B	slvdn	256		x"00291E58000E1D5800081C5800061B5800051A5800081958000D185800081758"								
+		- ins	0	INIT_0C	slvdn	256		x"0008265800262558004624580028235800152258001121580011205800171F58"								
+		- ins	0	INIT_0D	slvdn	256		x"00062E5800242D5800242C5800222B5800242A58002629580064285800262758"								
+		- ins	0	INIT_0E	slvdn	256		x"0022365800223558002434580026335800243258004231580040305800222F58"								
+		- ins	0	INIT_0F	slvdn	256		x"00FF805100CE3D5800423C5800283B5800263A58002439580044385800263758"								
+		- ins	0	INIT_10	slvdn	256		x"0009885100098751000986510024855100258451001483510000825100F28151"								
+		- ins	0	INIT_11	slvdn	256		x"0046905100568F51003D8E5100428D5100B28C5100E08B5100548A5100758951"								
+		- ins	0	INIT_12	slvdn	256		x"00049851000197510003965100F0955100F09451007093510004925100F89151"								
+		- ins	0	INIT_13	slvdn	256		x"000881540001805400389E5100829D5100069C5100009B5100049A5100129951"								
+		- ins	0	INIT_14	slvdn	256		x"0091895400878854007D87540071865400658554005184540028835400148254"								
+		- ins	0	INIT_15	slvdn	256		x"001E8153001D905400EA8F5400DD8E5400CD8D5400B88C5400AA8B54009A8A54"								
+		- ins	0	INIT_16	slvdn	256		x"00108953006C8853007C875300888653007E8553000A845300088353005B8253"								
+		- ins	0	INIT_17	slvdn	256		x"00F88B5500008A550010895500108455004083550006805500988B5300018A53"								
+		- ins	0	INIT_18	slvdn	256		x"0008065300300553000804530000035300100253003001530008005300401D50"								
+		- ins	0	INIT_19	slvdn	256		x"00000000000208300000255000060C5300040B5300300A530008095300160753"								
+		- ins	0	INIT_20	slvdn	256		x"00000038001115380011143800062138004020380007073C0069363000713530"								
+		- ins	0	INIT_21	slvdn	256		x"000A0838009F073800070638003F0538000A0438000003380000023800000138"								
+		- ins	0	INIT_22	slvdn	256		x"0004133800B00F3800070E38001C0D38000B0C3800980B3800070A3800200938"								
+		- ins	0	INIT_23	slvdn	256		x"0002134700C30630001C02300006044000000C3700120937002B123600041836"								
+		- ins	0	INIT_24	slvdn	256		x"00000000000003350083015000012438002C374800200C4600370B46000C0744"								
+		- ImeIMGeneric.end														
+	- arty_ip;arty_ip_AXI;top	featdet														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retr														
+			- ImeIMVector2.srefIxVBasetype	sref	srefsKOption											
+			- tixlin	VecVWskdArtyFeatdetFlgbufstate	filfed;notit											
+				- ImeIMVectoritem2.sref	Title	Comment										
+				- idle												
+				- empty												
+				- full												
+				- ImeIMVectoritem2.end												
+			- tixlin	VecVWskdArtyFeatdetThdstate	filfed;notit											
+				- ImeIMVectoritem2.sref	Title	Comment										
+				- idle												
+				- waitfirst												
+				- waitsecond												
+				- done												
+				- ImeIMVectoritem2.end												
+			- ImeIMVector2.end													
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	set	void				handled by op, with reset							
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- rng	_bool			fls8								
+				- thdNotCorner	_bool			fls8								
+				- thdDeltaNotAbs	_bool			fls8								
+				- ImeIAMCommandInvpar2.end												
+			- 0	getInfo	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- tixVFlgbufstate	tix	VecVWskdArtyFeatdetFlgbufstate		managed by flgbufB								
+				- tixVThdstate	tix	VecVWskdArtyFeatdetThdstate		managed by flg								
+				- tkst	uint			managed by flg								
+				- ImeIAMCommandRetpar2.end												
+			- 0	getCornerinfo	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- scoreMinMsb	usmallint			managed by imdstream								
+				- scoreMinLsb	uint											
+				- scoreMaxMsb	usmallint											
+				- scoreMaxLsb	uint											
+				- shift	utinyint			based on previous frame								
+				- Ncorner	uint			managed by maxsel								
+				- thd	utinyint			based on previous frame								
+				- ImeIAMCommandRetpar2.end												
+			- 0	setCorner	void				handled by op, no reset							
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- Ntrg	uint			1000								
+				- ImeIAMCommandInvpar2.end												
+			- 0	setThd	void				handled by op, no reset							
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- lvlFirst	utinyint											
+				- lvlSecond	utinyint											
+				- ImeIAMCommandInvpar2.end												
+			- 0	triggerThd	void											
+			- ImeIMCommand2.end													
+			- ImeIRMCommandMController.srefRefWdbeMCommand	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal											
+			- camacq.getGrrdinfo													
+			- ImeIRMCommandMController.end													
+		- ImeIMController.end														
+		- ImeICPort.iref														
+		- 1														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	mclk	in	sl	1					mclk			
+		- ins	0	cmdbus	ackInvSet	out	sl	1								
+		- ins	1	cmdbus	getInfoTixVFlgbufstate	out	slvdn	8								
+		- ins	1	cmdbus	getInfoTixVThdstate	out	slvdn	8								
+		- ins	1	cmdbus	getInfoTkst	out	slvdn	32								
+		- ins	0	cmdbus	ackInvSetCorner	out	sl	1								
+		- ins	0	cmdbus	ackInvSetThd	out	sl	1								
+		- ins	0	cmdbus	ackInvTriggerThd	out	sl	1								
+		- ins	0	imb	ackFlgbufToHostif	out	sl	1								
+		- ins	0	dbg	strb_dbg	out	slvdn	4					featdetStrb_dbg			
+		- ImeIMPort.end														
+		- ImeICSignal.iref														
+		- 1														
+		- 2														
+		- 3														
+		- 4														
+		- 5														
+		- 6														
+		- 7														
+		- 8														
+		- 9														
+		- 10														
+		- 11														
+		- 12														
+		- 13														
+		- 14														
+		- 15														
+		- 16														
+		- 17														
+		- 18														
+		- 19														
+		- 20														
+		- 21														
+		- 22														
+		- 23														
+		- 24														
+		- 25														
+		- 26														
+		- ImeICSignal.end														
+		- ImeIMSignal.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		- oprt	0	prc	flg	ackInvTriggerThd	false	sl	1		state(inv)	1	0	false	ackInvTriggerThd	
+		- oprt	1	prc	flg	tixVThdstate	false	slvdn	8				tixVThdstateIdle	false	getInfoTixVThdstate	
+		- oprt	1	prc	flg	tkst	false	slvdn	32				0	false	getInfoTkst	
+		- oth	0	prc	flg	enFlgbuf	false	sl	1		state(loadA;storeA)	1	0	false		
+		- oth	0	prc	flg	weFlgbuf	false	slvdn	1				0	false		
+		- oth	2	prc	flg	aFlgbuf_vec	false	slvdn	17					false		
+		- oth	2	prc	flg	aFlgbuf	false	nat		0..98304			0	false		
+		- oth	0	prc	flg	dwrFlgbuf	false	slvdn	8				0	false		
+		- oth	0	prc	flg	thdrun	false	sl	1		thdNotCorner and state(ready;loadA;storeA)	1	0	false		
+		- oth	0	prc	flg	thdSecondNotFirst	false	sl	1				0	false		
+		- oth	0	prc	flg	cornerrun	false	sl	1		!thdNotCorner and state(ready;loadA;storeA)	1	0	false		
+		- oth	0	prc	flg	drdThd	false	slvdn	8				0	false		
+		- oth	3	prc	flgbuf	flgbufLock	false	lock_t					lockIdle	false		
+		- oth	3	prc	flgbuf	flgbufFull	false	sl	1				0	false		
+		- oprt	0	prc	flgbufB	tixVFlgbufstate	false	slvdn	8					false	getInfoTixVFlgbufstate	
+		- oth	0	prc	flgbufB	enFlgbufB	false	sl	1		flgbufLock=lockBufB and !strbDFlgbufToHostif and state(readA)	1	0	false		
+		- oth	2	prc	flgbufB	aFlgbufB_vec	false	slvdn	15					false		
+		- oth	2	prc	flgbufB	aFlgbufB	false	nat		0..24576			0	false		
+		- oprt	0	prc	flgbufB	ackFlgbufToHostif	false	sl	1				0	false	ackFlgbufToHostif	
+		- oth	4	prc	maxsel	dCorner	false	slvdn	8				0	false		
+		- strb	4	prc	maxsel	strbDCorner	false	sl	1		state(store)	1	0	false		
+		- oth	0	prc	maxsel	Ncorner	false	nat		0..786432			0	false		1024 x 768
+		- oth	0	prc	maxsel	thd	false	nat		0..254			0	false		1024 x 768
+		- oth	0	prc	op	streamrun	false	sl	1				0	false		
+		- oprt	0	prc	op	ackInvSet	false	sl	1				0	false	ackInvSet	
+		- oth	0	prc	op	thdNotCorner	false	sl	1				0	false		
+		- oth	0	prc	op	thdDeltaNotAbs	false	sl	1				0	false		
+		- oprt	0	prc	op	ackInvSetCorner	false	sl	1				0	false	ackInvSetCorner	
+		- oth	0	prc	op	Ntrg	false	nat		0..786432			1000	false		
+		- oprt	0	prc	op	ackInvSetThd	false	sl	1				0	false	ackInvSetThd	
+		- oth	5	prc	op	thdLvlFirst	false	slvdn	8				0	false		
+		- oth	5	prc	op	thdLvlSecond	false	slvdn	8				0	false		
+		- oth	6	prc	stream	reqGrrdbuf	false	sl	1				0	false		
+		- oth	6	prc	stream	ackGrrdbuf	false	sl	1					false		
+		- strb	0	prc	stream	strbDGrrdbuf	false	sl	1		state(loadAceB;loadBdfB)	1	0	false		
+		- oth	7	prc	stream	dStream	false	slvdn	48				0	false		
+		- strb	7	prc	stream	strbDStream	false	sl	1		state(loadBdfB)	1	0	false		
+		- oth	8	prc	thd	dwrThd	false	slvdn	8				0	false		
+		- strb	8	prc	thd	strbDwrThd	false	sl	1				0	false		
+		- strb	0	prc	thd	strbDrdThd	false	sl	1				0	false		
+		- oth	0	prc	imdstream	shift	false	nat		0..40			16	false		
+		- oth	9	prc	imdstream	scoreMin	false	slvdn	48				1	false		
+		- oth	9	prc	imdstream	scoreMax	false	slvdn	48				0	false		
+		- oth	0	prc	imdstream	enImdbuf	false	sl	1		state(startrowC;LSB;LSD)	1	0	false		
+		- oth	0	prc	imdstream	enImdabbuf	false	sl	1				0	false		
+		- oth	0	prc	imdstream	weImdabbuf	false	sl	1				0	false		
+		- oth	10	prc	imdstream	aImdabbuf_vec	false	slvdn	11					false		
+		- oth	10	prc	imdstream	aImdabbuf	false	nat		0..2048			0	false		
+		- oth	0	prc	imdstream	dwrImdabbuf	false	slvdn	8				0	false		
+		- oth	0	prc	imdstream	enImdcdbuf	false	sl	1				0	false		
+		- oth	0	prc	imdstream	weImdcdbuf	false	sl	1				0	false		
+		- oth	11	prc	imdstream	aImdcdbuf_vec	false	slvdn	11					false		
+		- oth	11	prc	imdstream	aImdcdbuf	false	nat		0..2048			0	false		
+		- oth	0	prc	imdstream	dwrImdcdbuf	false	slvdn	8				0	false		
+		- oth	0	prc	imdstream	enImdefbuf	false	sl	1				0	false		
+		- oth	0	prc	imdstream	weImdefbuf	false	sl	1				0	false		
+		- oth	12	prc	imdstream	aImdefbuf_vec	false	slvdn	11					false		
+		- oth	12	prc	imdstream	aImdefbuf	false	nat		0..2048			0	false		
+		- oth	0	prc	imdstream	dwrImdefbuf	false	slvdn	8				0	false		
+		- oth	13	prc	imdstream	dImdstream	false	slvdn	40				0	false		
+		- strb	13	prc	imdstream	strbDImdstream	false	sl	1		state(LSD)	1	0	false		
+		- oth	0	mdl	flgbuf	drdFlgbuf	false	slvdn	8					false		
+		- oth	0	mdl	imdabbuf	drdImdabbuf	false	slvdn	8					false		
+		- oth	0	mdl	imdcdbuf	drdImdcdbuf	false	slvdn	8					false		
+		- oth	0	mdl	imdefbuf	drdImdefbuf	false	slvdn	8					false		
+		- hshk	14	prc	flg	reqFlgToFlgbufLock	false	sl	1				0	false		
+		- hshk	14	prc	flgbuf	ackFlgToFlgbufLock	false	sl	1				0	false		
+		- hshk	14	prc	flgbuf	dnyFlgToFlgbufLock	false	sl	1				0	false		
+		- hshk	15	prc	flg	reqFlgToFlgbufSetFull	false	sl	1		state(doneB)	1	0	false		
+		- hshk	15	prc	flgbuf	ackFlgToFlgbufSetFull	false	sl	1				0	false		
+		- hshk	16	prc	flgbufB	reqFlgbufBToFlgbufLock	false	sl	1				0	false		
+		- hshk	16	prc	flgbuf	ackFlgbufBToFlgbufLock	false	sl	1				0	false		
+		- hshk	16	prc	flgbuf	dnyFlgbufBToFlgbufLock	false	sl	1				0	false		
+		- hshk	17	prc	flgbufB	reqFlgbufBToFlgbufClear	false	sl	1				0	false		
+		- hshk	17	prc	flgbuf	ackFlgbufBToFlgbufClear	false	sl	1				0	false		
+		- oth	0	void		nmclk	false	sl	1					false		
+		- oth	0	prc	corner	ceScore	false	sl	1		state(pipe)	1	0	true		
+		- oth	0	prc	corner	abcde	false	nat	0..4				0	false		
+		- oth	0	prc	corner	dx	false	slvdn	45				0	false		5x 9bits
+		- oth	0	prc	corner	dy	false	slvdn	45				0	false		5y 9bits
+		- oth	0	void		xsqr	false	slvdn	90					false		5x 18bits, set by modules xsqr0 to xsqr4
+		- oth	0	mdl	colsumXA	colsumXA	false	slvdn	20					false		
+		- oth	18	prc	fwd	xsqr3p1	false	slvdn	18				0	false		
+		- oth	18	prc	fwd	xsqr3p2	false	slvdn	18				0	false		
+		- oth	19	prc	fwd	xsqr4p1	false	slvdn	18				0	false		
+		- oth	19	prc	fwd	xsqr4p2	false	slvdn	18				0	false		
+		- oth	0	mdl	colsumXB	colsumXB	false	slvdn	21					false		
+		- oth	0	prc	copy	colsumX	false	slvdn	105				0	false		5x 21bits
+		- oth	0	mdl	sumXA	sumXA	false	slvdn	22					false		
+		- oth	0	mdl	sumXB	sumXB	false	slvdn	22					false		
+		- oth	0	mdl	sumXC	sumXC	false	slvdn	23					false		
+		- oth	20	prc	fwd	colsumX4p1	false	slvdn	21				0	false		
+		- oth	20	prc	fwd	colsumX4p2	false	slvdn	21				0	false		
+		- oth	20	prc	fwd	colsumX4p3	false	slvdn	21				0	false		
+		- oth	20	prc	fwd	colsumX4p4	false	slvdn	21				0	false		
+		- oth	0	mdl	sumX	sumX	false	slvdn	23					false		
+		- oth	0	void		ysqr	false	slvdn	90					false		5x 18bits, set by modules ysqr0 to ysqr4
+		- oth	0	mdl	colsumYA	colsumYA	false	slvdn	20					false		
+		- oth	21	prc	fwd	ysqr3p1	false	slvdn	18				0	false		
+		- oth	21	prc	fwd	ysqr3p2	false	slvdn	18				0	false		
+		- oth	22	prc	fwd	ysqr4p1	false	slvdn	18				0	false		
+		- oth	22	prc	fwd	ysqr4p2	false	slvdn	18				0	false		
+		- oth	0	mdl	colsumYB	colsumYB	false	slvdn	21					false		
+		- oth	0	prc	copy	colsumY	false	slvdn	105				0	false		5x 21bits
+		- oth	0	mdl	sumYA	sumYA	false	slvdn	22					false		
+		- oth	0	mdl	sumYB	sumYB	false	slvdn	22					false		
+		- oth	0	mdl	sumYC	sumYC	false	slvdn	23					false		
+		- oth	23	prc	fwd	colsumY4p1	false	slvdn	21				0	false		
+		- oth	23	prc	fwd	colsumY4p2	false	slvdn	21				0	false		
+		- oth	23	prc	fwd	colsumY4p3	false	slvdn	21				0	false		
+		- oth	23	prc	fwd	colsumY4p4	false	slvdn	21				0	false		
+		- oth	0	mdl	sumY	sumY	false	slvdn	23					false		
+		- oth	0	void		xy	false	slvdn	90					false		5x 18bits, set by modules xy0 to xy4
+		- oth	0	mdl	colsumXYA	colsumXYA	false	slvdn	20					false		
+		- oth	24	prc	fwd	xy3p1	false	slvdn	18				0	false		
+		- oth	24	prc	fwd	xy3p2	false	slvdn	18				0	false		
+		- oth	25	prc	fwd	xy4p1	false	slvdn	18				0	false		
+		- oth	25	prc	fwd	xy4p2	false	slvdn	18				0	false		
+		- oth	0	mdl	colsumXYB	colsumXYB	false	slvdn	21					false		
+		- oth	0	prc	copy	colsumXY	false	slvdn	105				0	false		5x 21bits
+		- oth	0	mdl	sumXYA	sumXYA	false	slvdn	22					false		
+		- oth	0	mdl	sumXYB	sumXYB	false	slvdn	22					false		
+		- oth	0	mdl	sumXYC	sumXYC	false	slvdn	23					false		
+		- oth	26	prc	fwd	colsumXY4p1	false	slvdn	21				0	false		
+		- oth	26	prc	fwd	colsumXY4p2	false	slvdn	21				0	false		
+		- oth	26	prc	fwd	colsumXY4p3	false	slvdn	21				0	false		
+		- oth	26	prc	fwd	colsumXY4p4	false	slvdn	21				0	false		
+		- oth	0	mdl	sumXY	sumXY	false	slvdn	23					false		
+		- oth	0	mdl	sumIII	sumIII	false	slvdn	24					false		
+		- oth	0	mdl	termI	termI	false	slvdn	46					false		
+		- oth	0	mdl	termII	termII	false	slvdn	46					false		
+		- oth	0	mdl	termIII	termIII	false	slvdn	48					false		
+		- oth	0	prc	factk	termIIIk	false	slvdn	44				0	false		
+		- oth	0	mdl	diffI_II	diffI_II	false	slvdn	47					false		
+		- oth	0	prc	fwd	diffI_IIp1	false	slvdn	47				0	false		
+		- oth	0	mdl	r	r	false	slvdn	48					false		
+		- ImeIMSignal.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- flg	mclk	reset	false	state(init) or !streamrun	false	flagging operation, also managing flgbuf								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!streamrun	off									
+					- trylock	else		!thdNotCorner	corner							
+					- waitTrig	else		else	thd							
+					- ImeIAMFsmstateStep.end											
+				- 0	waitTrig	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- inv	reqInvTriggerThd										
+					- ImeIAMFsmstateStep.end											
+				- 0	inv	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- trylock	!reqInvTriggerThd		!thdSecondNotFirst	trigFirst							
+					- waitFrame	!reqInvTriggerThd		else								
+					- ImeIAMFsmstateStep.end											
+				- 0	trylock	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- waitFrame	ackFlgToFlgbufLock	ack									
+					- init	dnyFlgToFlgbufLock	dny									
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEmpty	tkst	!thdNotCorner	corner							
+					- ldthd	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEmpty	tkst	else	thd							
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- stcorner	strbDCorner	prepStcorner									
+					- ldthd	strbDrdThd	prepLdthd									
+					- stthd	strbDwrThd	prepStthd									
+					- ImeIAMFsmstateStep.end											
+				- 0	ldthd	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready		ldthd									
+					- ImeIAMFsmstateStep.end											
+				- 0	stcorner	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- doneB	aFlgbuf=93184	cmt									
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	stthd	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- doneA	arowFlgbufWr=768	lastRow	acolFlgbufWr=128	lastCol	a0FlgbufWr=98304						
+					- ready	arowFlgbufWr=768	lastRow	acolFlgbufWr=128	lastCol	else						
+					- ready	arowFlgbufWr=768	lastRow	else								
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 1	doneA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- doneB	!thdDeltaNotAbs or thdSecondNotFirst	final									
+					- waitTrig	else	second									
+					- ImeIAMFsmstateStep.end											
+				- 1	doneB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- doneC	ackFlgToFlgbufSetFull										
+					- ImeIAMFsmstateStep.end											
+				- 1	doneC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!flgbufFull										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- flgbuf	mclk	reset	false	state(init) or !streamrun	false	flgbuf mutex management								
+			- ImeIAVKeylistKey.sref	Title	Comment											
+			- lock_t	(lockIdle, lockBufB, lockFlg)	lockIdle											
+			- ImeIAVKeylistKey.end													
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!streamrun										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ack	reqFlgToFlgbufLock	flgLock									
+					- ack	reqFlgToFlgbufSetFull	flgFull									
+					- ack	reqFlgbufBToFlgbufLock	flgbufBLock									
+					- ack	reqFlgbufBToFlgbufClear	flgbufBClear									
+					- ImeIAMFsmstateStep.end											
+				- 0	ack	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	(ackFlgToFlgbufLock or dnyFlgToFlgbufLock) and !reqFlgToFlgbufLock	flgLock									
+					- ready	ackFlgToFlgbufSetFull and !reqFlgToFlgbufSetFull	flgFull									
+					- ready	(ackFlgbufBToFlgbufLock or dnyFlgbufBToFlgbufLock) and !reqFlgbufBToFlgbufLock	flgbufBLock									
+					- ready	ackFlgbufBToFlgbufClear and !reqFlgbufBToFlgbufClear	flgbufBClear									
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- flgbufB	mclk	reset	false	state(init) or !streamrun	false	flgbuf B/hostif-facing operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!streamrun										
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- trylock	tixVFlgbufstate=tixVFlgbufstateFull and reqFlgbufToHostif	prep									
+					- ImeIAMFsmstateStep.end											
+				- 0	trylock	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- readA	ackFlgbufBToFlgbufLock	ack									
+					- init	dnyFlgbufBToFlgbufLock										
+					- ImeIAMFsmstateStep.end											
+				- 1	readA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- done	flgbufLock=lockBufB		dneFlgbufToHostif	dne							
+					- done	flgbufLock=lockBufB		!reqFlgbufToHostif	cnc							
+					- readB	flgbufLock=lockBufB		!strbDFlgbufToHostif	step							
+					- ImeIAMFsmstateStep.end											
+				- 1	readB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- done	flgbufLock=lockBufB		!reqFlgbufToHostif	cnc							
+					- readA	flgbufLock=lockBufB		strbDFlgbufToHostif	inc							
+					- ImeIAMFsmstateStep.end											
+				- 0	done	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	ackFlgbufBToFlgbufLock or ackFlgbufBToFlgbufClear										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- op	mclk	reset	false	state(init) or (state(!inv) and state(!invSet) and (reqInvSet or reqInvSetCorner or reqInvSetThd))		main operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- invSet	reqInvSet	invSet									
+					- inv	reqInvSetCorner	invSetCorner									
+					- inv	reqInvSetThd	invSetThd									
+					- run	streamrun										
+					- init	else	syncrst									
+					- ImeIAMFsmstateStep.end											
+				- 0	invSet	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- inv		invSet									
+					- ImeIAMFsmstateStep.end											
+				- 0	inv	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	(!reqInvSet and ackInvSet_sig) or (!reqInvSetCorner and ackInvSetCorner_sig) or (!reqInvSetThd and ackInvSetThd_sig)	inv									
+					- ImeIAMFsmstateStep.end											
+				- 0	run	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- stream	mclk	reset	false	state(init) or !streamrun	false	streaming operation, also handling grrd{ab/cd/ef}bufFromCamacq								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- 2												
+				- 3												
+				- 4												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!streamrun										
+					- waitFrame	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- skipA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEmpty	waitFrame									
+					- ImeIAMFsmstateStep.end											
+				- 1	skipA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- skipB	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateStream										
+					- ImeIAMFsmstateStep.end											
+				- 1	skipB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startrowA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstatePause	inc	row=5								
+					- skipA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstatePause	inc	else								
+					- ImeIAMFsmstateStep.end											
+				- 2	startrowA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startrowB	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateStream	startrowA									
+					- ImeIAMFsmstateStep.end											
+				- 2	startrowB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- loadAceA	ackGrrdbuf	startrowB									
+					- ImeIAMFsmstateStep.end											
+				- 3	loadAceA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- loadAceB		loadAceA									
+					- ImeIAMFsmstateStep.end											
+				- 3	loadAceB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- loadBdfA											
+					- ImeIAMFsmstateStep.end											
+				- 4	loadBdfA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- loadBdfB		loadBdfA									
+					- ImeIAMFsmstateStep.end											
+				- 4	loadBdfB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- stoprow	col=1024	lastCol									
+					- loadAceA	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	stoprow	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startrowA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstatePause	incRow									
+					- init	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEndfr										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- thd	mclk	reset	false	state(init) or !thdrun	false	threshold detection								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!thdrun	stop									
+					- LASA	else	start									
+					- ImeIAMFsmstateStep.end											
+				- 1	LASA	false	complex conditional jump to LASB									
+				- 1	LASB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- done	blk=127 and row=1 and byteS=6										
+					- LASA	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	done	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- copy	mclk	reset	false	state(init) or !cornerrun	false	Harris score pipeline copy operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!cornerrun										
+					- run	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	run	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- corner	mclk	reset	false	state(init) or !cornerrun	false	Harris corner detection and score pipeline operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!cornerrun										
+					- diff	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	diff	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- pipe	strbDStream	diff									
+					- ImeIAMFsmstateStep.end											
+				- 0	pipe	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- step											
+					- ImeIAMFsmstateStep.end											
+				- 0	step	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- diff		step									
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- factk	mclk	reset	false	state(init) or !cornerrun	false	Harris score third term 5/128 multiplier								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!cornerrun										
+					- run	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	run	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- fwd	mclk	reset	false	state(init) or !cornerrun	false	Harris score pipeline forward operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!cornerrun										
+					- run	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	run	false										
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- imdstream	mclk	reset	false	state(init) or !cornerrun	false	intermediate result streaming operation, also handling imd{ab/cd/ef}buf								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- 2												
+				- 3												
+				- 4												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!cornerrun										
+					- waitFrame	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	waitFrame	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- skipA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEmpty	waitFrame									
+					- ImeIAMFsmstateStep.end											
+				- 1	skipA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- skipB	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateStream										
+					- ImeIAMFsmstateStep.end											
+				- 1	skipB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startrowA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstatePause	inc	row=5								
+					- skipA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstatePause	inc	else								
+					- ImeIAMFsmstateStep.end											
+				- 2	startrowA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startrowB	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateStream	startrowA									
+					- ImeIAMFsmstateStep.end											
+				- 2	startrowB	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startrowC	i=imax	startrowB									
+					- ImeIAMFsmstateStep.end											
+				- 2	startrowC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LSA											
+					- ImeIAMFsmstateStep.end											
+				- 3	LSA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LSB		LSA									
+					- ImeIAMFsmstateStep.end											
+				- 3	LSB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LSC											
+					- ImeIAMFsmstateStep.end											
+				- 4	LSC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- LSD		LSC									
+					- ImeIAMFsmstateStep.end											
+				- 4	LSD	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- stoprow	col=1024										
+					- LSA	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	stoprow	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- startrowA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstatePause	incRow									
+					- init	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEndfr										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- maxsel	mclk	reset	false	state(init) or !cornerrun	false	maximum selection								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	!cornerrun										
+					- imd	else	start									
+					- ImeIAMFsmstateStep.end											
+				- 0	imd	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- max	strbDImdstream	maxEl									
+					- ImeIAMFsmstateStep.end											
+				- 0	max	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- act		max									
+					- ImeIAMFsmstateStep.end											
+				- 0	act	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- store	i=8	toStore									
+					- imd	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	store	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- imd											
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xsqr0														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[44..36]			
+		- retrupd	0		b								dx[44..36]			
+		- retrupd	0		p								xsqr[89..72]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xsqr1														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[35..27]			
+		- retrupd	0		b								dx[35..27]			
+		- retrupd	0		p								xsqr[71..54]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xsqr2														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[26..18]			
+		- retrupd	0		b								dx[26..18]			
+		- retrupd	0		p								xsqr[53..36]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xsqr3														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[17..9]			
+		- retrupd	0		b								dx[17..9]			
+		- retrupd	0		p								xsqr[35..18]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xsqr4														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[8..0]			
+		- retrupd	0		b								dx[8..0]			
+		- retrupd	0		p								xsqr[17..0]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	colsumXA														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								xsqr[89..72]			
+		- retrupd	0		c								xsqr[71..54]			
+		- retrupd	0		d								xsqr[53..36]			
+		- retrupd	0		p								colsumXA			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	colsumXB														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								xsqr[35..18]			
+		- retrupd	0		c								colsumXA			
+		- retrupd	0		d								xsqr[17..0]			
+		- retrupd	0		p								colsumXB			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumXA														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								colsumX[104..84]			
+		- retrupd	0		b								colsumX[83..63]			
+		- retrupd	0		s								sumXA			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumXB														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								colsumX[62..42]			
+		- retrupd	0		b								colsumX[41..21]			
+		- retrupd	0		s								sumXB			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumXC														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumXA			
+		- retrupd	0		b								sumXB			
+		- retrupd	0		s								sumXC			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumX														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumXC			
+		- retrupd	0		b								colsumX4p4			
+		- retrupd	0		s								sumX			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	ysqr0														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dy[44..36]			
+		- retrupd	0		b								dy[44..36]			
+		- retrupd	0		p								ysqr[89..72]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	ysqr1														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dy[35..27]			
+		- retrupd	0		b								dy[35..27]			
+		- retrupd	0		p								ysqr[71..54]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	ysqr2														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dy[26..18]			
+		- retrupd	0		b								dy[26..18]			
+		- retrupd	0		p								ysqr[53..36]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	ysqr3														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dy[17..9]			
+		- retrupd	0		b								dy[17..9]			
+		- retrupd	0		p								ysqr[35..18]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	ysqr4														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dy[8..0]			
+		- retrupd	0		b								dy[8..0]			
+		- retrupd	0		p								ysqr[17..0]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	colsumYA														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								ysqr[89..72]			
+		- retrupd	0		c								ysqr[71..54]			
+		- retrupd	0		d								ysqr[53..36]			
+		- retrupd	0		p								colsumYA			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	colsumYB														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								ysqr[35..18]			
+		- retrupd	0		c								colsumYA			
+		- retrupd	0		d								ysqr[17..0]			
+		- retrupd	0		p								colsumYB			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumYA														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								colsumY[104..84]			
+		- retrupd	0		b								colsumY[83..63]			
+		- retrupd	0		s								sumYA			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumYB														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								colsumY[62..42]			
+		- retrupd	0		b								colsumY[41..21]			
+		- retrupd	0		s								sumYB			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumYC														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumYA			
+		- retrupd	0		b								sumYB			
+		- retrupd	0		s								sumYC			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumY														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumYC			
+		- retrupd	0		b								colsumY4p4			
+		- retrupd	0		s								sumY			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xy0														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[44..36]			
+		- retrupd	0		b								dy[44..36]			
+		- retrupd	0		p								xy[89..72]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xy1														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[35..27]			
+		- retrupd	0		b								dy[35..27]			
+		- retrupd	0		p								xy[71..54]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xy2														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[26..18]			
+		- retrupd	0		b								dy[26..18]			
+		- retrupd	0		p								xy[53..36]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xy3														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[17..9]			
+		- retrupd	0		b								dy[17..9]			
+		- retrupd	0		p								xy[35..18]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	xy4														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								dx[8..0]			
+		- retrupd	0		b								dy[8..0]			
+		- retrupd	0		p								xy[17..0]			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	colsumXYA														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								xy[89..72]			
+		- retrupd	0		c								xy[71..54]			
+		- retrupd	0		d								xy[53..36]			
+		- retrupd	0		p								colsumXYA			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	colsumXYB														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								xy[35..18]			
+		- retrupd	0		c								colsumXYA			
+		- retrupd	0		d								xy[17..0]			
+		- retrupd	0		p								colsumXYB			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumXYA														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								colsumXY[104..84]			
+		- retrupd	0		b								colsumXY[83..63]			
+		- retrupd	0		s								sumXYA			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumXYB														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								colsumXY[62..42]			
+		- retrupd	0		b								colsumXY[41..21]			
+		- retrupd	0		s								sumXYB			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumXYC														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumXYA			
+		- retrupd	0		b								sumXYB			
+		- retrupd	0		s								sumXYC			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumXY														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumXYC			
+		- retrupd	0		b								colsumXY4p4			
+		- retrupd	0		s								sumXY			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	sumIII														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumX			
+		- retrupd	0		b								sumY			
+		- retrupd	0		s								sumIII			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	termIII														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumIII			
+		- retrupd	0		b								sumIII			
+		- retrupd	0		p								termIII			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	termII														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumXY			
+		- retrupd	0		b								sumXY			
+		- retrupd	0		p								termII			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	termI														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								sumX			
+		- retrupd	0		b								sumY			
+		- retrupd	0		p								termI			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	diffI_II														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								termI			
+		- retrupd	0		b								termII			
+		- retrupd	0		s								diffI_II			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	r														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		ce								ceScore			
+		- retrupd	0		clk								mclk			
+		- retrupd	0		a								diffI_II			
+		- retrupd	0		b								termIIIk			
+		- retrupd	0		s								r			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	flgbuf														
+		- ImeIMImbuf.Prio														
+		- 1														
+		- ImeIMImbuf.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clkA								nmclk			
+		- retrupd	0		enA								enFlgbuf			
+		- retrupd	0		weA								weFlgbuf			
+		- retrupd	0		addrA								aFlgbuf_vec			
+		- retrupd	0		doutA								drdFlgbuf			
+		- retrupd	0		dinA								dwrFlgbuf			
+		- retrupd	0		clkB								mclk			
+		- retrupd	0		enB								enFlgbufB			
+		- retrupd	0		addrB								aFlgbufB_vec			
+		- retrupd	0		doutB							dFlgbufToHostif				
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	imdabbuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clk								mclk			
+		- retrupd	0		en								enImdabbuf			
+		- retrupd	0		we								weImdabbuf			
+		- retrupd	0		a								aImdabbuf_vec			
+		- retrupd	0		drd								drdImdabbuf			
+		- retrupd	0		dwr								dwrImdabbuf			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	imdcdbuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clk								mclk			
+		- retrupd	0		en								enImdcdbuf			
+		- retrupd	0		we								weImdcdbuf			
+		- retrupd	0		a								aImdcdbuf_vec			
+		- retrupd	0		drd								drdImdcdbuf			
+		- retrupd	0		dwr								dwrImdcdbuf			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top;featdet	imdefbuf														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		clk								mclk			
+		- retrupd	0		en								enImdefbuf			
+		- retrupd	0		we								weImdefbuf			
+		- retrupd	0		a								aImdefbuf_vec			
+		- retrupd	0		drd								drdImdefbuf			
+		- retrupd	0		dwr								dwrImdefbuf			
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	laser														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retr														
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	set	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- l	usmallint					DAC value						
+				- r	usmallint					DAC value						
+				- ImeIAMCommandInvpar2.end												
+			- ImeIMCommand2.end													
+		- ImeIMController.end														
+		- ImeICPort.iref														
+		- 1														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	mclk	in	sl	1					mclk			
+		- ins	0	cmdbus	ackInvSet	out	sl	1								
+		- ins	1	rtepin	cs0	out	sl	1			cs0					
+		- ins	1	rtepin	cs1	out	sl	1			cs1					
+		- ImeIMPort.end														
+		- ImeICSignal.iref														
+		- 1														
+		- 2														
+		- ImeICSignal.end														
+		- ImeIMSignal.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		- oprt	0	prc	op	ackInvSet	false	sl	1					false	ackInvSet	
+		- oth	1	prc	op	cmdNotPrep	false	sl	1					false		
+		- oth	1	prc	op	rNotL	false	sl	1					false		
+		- oth	0	prc	op	spilen	false	slvdn	17				0	false		
+		- oth	0	prc	op	spisend	false	slvdn	8				0	false		
+		- hshk	2	prc	op	reqSpi	false	sl	1				0	false		
+		- hshk	2	mdl	spi	dneSpi	false	sl	1				0	false		
+		- strb	0	mdl	spi	strbSpisend	false	sl	1				0	false		
+		- oth	0	mdl	spi	nss	false	sl	1				0	false		
+		- ImeIMSignal.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- op	mclk	reset	false	state(init)	false	main operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- 2												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- prepC											
+					- ImeIAMFsmstateStep.end											
+				- 1	prepA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- wait	dneSpi	done									
+					- prepB	else										
+					- ImeIAMFsmstateStep.end											
+				- 1	prepB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- prepC		prepB									
+					- ImeIAMFsmstateStep.end											
+				- 1	prepC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- prepD		prepC									
+					- ImeIAMFsmstateStep.end											
+				- 1	prepD	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- prepA	strbSpisend										
+					- ImeIAMFsmstateStep.end											
+				- 0	wait	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- idle	i=imax	done									
+					- ImeIAMFsmstateStep.end											
+				- 0	idle	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- setC	reqInvSet	prepL									
+					- ImeIAMFsmstateStep.end											
+				- 2	setA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- setC	dneSpi	spioff	!rNotL	prepR							
+					- inv	dneSpi	spioff	else								
+					- setB	!strbSpisend										
+					- ImeIAMFsmstateStep.end											
+				- 2	setB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- setC		setB									
+					- ImeIAMFsmstateStep.end											
+				- 2	setC	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- setD		setC									
+					- ImeIAMFsmstateStep.end											
+				- 2	setD	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- setA	strbSpisend										
+					- ImeIAMFsmstateStep.end											
+				- 0	inv	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- idle	!reqInvSet										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top;laser	spi														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fMclk					fMclk							
+		- retrupd	0	cpol				0								
+		- retrupd	0	cpha				1								
+		- retrupd	0	fSclk				8333333								
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		req								reqSpi			
+		- retrupd	0		dne								dneSpi			
+		- retrupd	0		len								spilen			
+		- retrupd	0		send								spisend			
+		- retrupd	0		strbSend								strbSpisend			
+		- retrupd	0		nss								nss			
+		- retrupd	0		sclk						sclk					
+		- retrupd	0		mosi						mosi					
+		- retrupd	0		miso					0						
+		- ImeIMPort.end														
+	- arty_ip;arty_ip_AXI;top	state														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retr														
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	get	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- tixVArtyState	tix	VecVWskdArtyState										
+				- ImeIAMCommandRetpar2.end												
+			- ImeIMCommand2.end													
+		- ImeIMController.end														
+		- ImeICPort.iref														
+		- 1														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	tkclk	in	sl	1					tkclk			
+		- ins	1	rtetop	commok	in	sl	1					commok			
+		- ins	1	rtetop	camrng	in	sl	1					camrng			
+		- ins	0	rtetop	rgb	out	slvdn	24					rgb4			
+		- ImeIMPort.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- led	tkclk	reset	false		false	LED control								
+			- ImeIMFsm.													
+			- 													
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	on	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- off	i=1000	prepOff									
+					- ImeIAMFsmstateStep.end											
+				- 0	off	true										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- on	i=4000	prepOn									
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top	step														
+		- ImeIMController.srefIxWdbeVIop	srefClrRefWdbeMSignal													
+		- retr														
+			- ImeIMVector2.srefIxVBasetype	sref	srefsKOption											
+			- tixlin	VecVWskdArtyStepState	filfed;notit											
+				- ImeIMVectoritem2.sref	Title	Comment										
+				- idle												
+				- move												
+				- ImeIMVectoritem2.end												
+			- ImeIMVector2.end													
+			- ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment							
+			- 0	getInfo	statsng											
+				- ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment								
+				- tixVState	tix	VecVWskdArtyStepState										
+				- angle	usmallint			in stepper motor steps (4096 per rev.)								
+				- ImeIAMCommandRetpar2.end												
+			- 0	moveto	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- angle	usmallint			0		in stepper motor steps (4096 per rev.)						
+				- ImeIAMCommandInvpar2.end												
+			- 0	set	void											
+				- ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment						
+				- rng	_bool			fls8								
+				- ccwNotCw	_bool			fls8								
+				- Tstep	utinyint			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)						
+				- ImeIAMCommandInvpar2.end												
+			- 0	zero	void											
+			- ImeIMCommand2.end													
+		- ImeIMController.end														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- ins	0	fMclk	nat		1..1000000	50000	fMclk	in kHz						
+		- ImeIMGeneric.end														
+		- ImeICPort.iref														
+		- 1														
+		- ImeICPort.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- ins	0	reset	reset	in	sl	1					reset			
+		- ins	0	clk	mclk	in	sl	1					mclk			
+		- ins	0	clk	tkclk	in	sl	1					tkclk			
+		- ins	0	cmdbus	getInfoTixVState	out	slvdn	8								
+		- ins	0	cmdbus	getInfoAngle	out	slvdn	16								
+		- ins	0	cmdbus	ackInvMoveto	out	sl	1								
+		- ins	0	cmdbus	ackInvSet	out	sl	1								
+		- ins	0	cmdbus	ackInvZero	out	sl	1								
+		- ins	1	rtepin	step1	out	sl	1			step1					
+		- ins	1	rtepin	step2	out	sl	1			step2					
+		- ins	1	rtepin	step3	out	sl	1			step3					
+		- ins	1	rtepin	step4	out	sl	1			step4					
+		- ImeIMPort.end														
+		- ImeICSignal.iref														
+		- 1														
+		- 2														
+		- ImeICSignal.end														
+		- ImeIMSignal.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		- oprt	1	prc	op	angle	false	nat		0..4095			0	false	getInfoAngle	
+		- oth	1	prc	op	angle_vec	false	slvdn	16					false		
+		- oprt	0	prc	op	ackInvMoveto	false	sl	1				0	false	ackInvMoveto	
+		- oprt	0	prc	op	ackInvSet	false	sl	1				0	false	ackInvSet	
+		- oprt	0	prc	op	ackInvZero	false	sl	1				0	false	ackInvZero	
+		- oprt	2	prc	op	step1	false	sl	1				1	false	step1	
+		- oprt	2	prc	op	step2	false	sl	1				1	false	step2	
+		- oprt	2	prc	op	step3	false	sl	1				1	false	step3	
+		- oprt	2	prc	op	step4	false	sl	1				1	false	step4	
+		- ImeIMSignal.end														
+		- ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment								
+		- op	mclk	reset	false	state(init) or (state(!inv) and (reqInvMoveto or reqInvSet or reqInvZero))	false	main operation								
+			- ImeIMFsm.													
+			- 													
+				- ImeICFsmstate.iref												
+				- 1												
+				- ImeICFsmstate.end												
+				- ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment									
+				- 0	init	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- inv	reqInvMoveto	moveto									
+					- inv	reqInvSet	set									
+					- inv	reqInvZero	zero									
+					- ready	else										
+					- ImeIAMFsmstateStep.end											
+				- 0	ready	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- runB	setTstep/=x"00"		targetNotSteady='0' and setRng=tru8	steady							
+					- runB	setTstep/=x"00"		targetNotSteady='1' and atTarget='0'	target							
+					- ImeIAMFsmstateStep.end											
+				- 1	runA	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- runB	tkclk	runA									
+					- ImeIAMFsmstateStep.end											
+				- 1	runB	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- ready	!tkclk	runB	targetNotSteady='1' and to_integer(unsigned(movetoAngle))=angle	done							
+					- runA	!tkclk	runB	else								
+					- ImeIAMFsmstateStep.end											
+				- 0	inv	false										
+					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
+					- init	(reqInvMoveto='0' and ackInvMoveto_sig='1') or (reqInvSet='0' and ackInvSet_sig='1') or (reqInvZero='0' and ackInvZero_sig='1')										
+					- ImeIAMFsmstateStep.end											
+				- ImeIMFsmstate.end												
+			- ImeIMFsm.end													
+		- ImeIMProcess.end														
+	- arty_ip;arty_ip_AXI;top	tkclksrc														
+		- ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment						
+		- retrupd	0	fMclk					fMclk							
+		- ImeIMGeneric.end														
+		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
+		- retrupd	0		reset								reset			
+		- retrupd	0		mclk								mclk			
+		- retrupd	0		tkclk								tkclk			
+		- ImeIMPort.end														
+	- ImeIMModule.end															
+- ImeIMUnit.end																
