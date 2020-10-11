@@ -2,8 +2,8 @@
 	* \file CtrWskdArtyStep.cpp
 	* step controller (implementation)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #include "CtrWskdArtyStep.h"
@@ -155,16 +155,19 @@ Cmd* CtrWskdArtyStep::getNewCmdMoveto() {
 	Cmd* cmd = new Cmd(0x06, VecVCommand::MOVETO, Cmd::VecVRettype::VOID);
 
 	cmd->addParInv("angle", Par::VecVType::USMALLINT);
+	cmd->addParInv("Tstep", Par::VecVType::UTINYINT);
 
 	return cmd;
 };
 
 void CtrWskdArtyStep::moveto(
 			const usmallint angle
+			, const utinyint Tstep
 		) {
 	Cmd* cmd = getNewCmdMoveto();
 
 	cmd->parsInv["angle"].setUsmallint(angle);
+	cmd->parsInv["Tstep"].setUtinyint(Tstep);
 
 	if (unt->runCmd(cmd)) {
 	} else {

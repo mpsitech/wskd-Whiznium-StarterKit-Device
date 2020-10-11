@@ -2,8 +2,8 @@
 	* \file CtrWskdArtyFeatdet.h
 	* featdet controller (declarations)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #ifndef CTRWSKDARTYFEATDET_H
@@ -96,10 +96,10 @@ public:
 	void getInfo(Sbecore::utinyint& tixVFlgbufstate, Sbecore::utinyint& tixVThdstate, Sbecore::uint& tkst);
 
 	static Dbecore::Cmd* getNewCmdGetCornerinfo();
-	void getCornerinfo(Sbecore::usmallint& scoreMinMsb, Sbecore::uint& scoreMinLsb, Sbecore::usmallint& scoreMaxMsb, Sbecore::uint& scoreMaxLsb, Sbecore::utinyint& shift, Sbecore::uint& Ncorner, Sbecore::utinyint& thd);
+	void getCornerinfo(Sbecore::utinyint& shift, Sbecore::utinyint& scoreMin, Sbecore::utinyint& scoreMax);
 
 	static Dbecore::Cmd* getNewCmdSetCorner();
-	void setCorner(const Sbecore::uint Ntrg);
+	void setCorner(const bool linNotLog, const Sbecore::utinyint thd);
 
 	static Dbecore::Cmd* getNewCmdSetThd();
 	void setThd(const Sbecore::utinyint lvlFirst, const Sbecore::utinyint lvlSecond);

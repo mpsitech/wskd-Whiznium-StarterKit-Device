@@ -2,8 +2,8 @@
 	* \file CtrWskdArtyStep.h
 	* step controller (declarations)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #ifndef CTRWSKDARTYSTEP_H
@@ -71,7 +71,7 @@ public:
 	void getInfo(Sbecore::utinyint& tixVState, Sbecore::usmallint& angle);
 
 	static Dbecore::Cmd* getNewCmdMoveto();
-	void moveto(const Sbecore::usmallint angle);
+	void moveto(const Sbecore::usmallint angle, const Sbecore::utinyint Tstep);
 
 	static Dbecore::Cmd* getNewCmdSet();
 	void set(const bool rng, const bool ccwNotCw, const Sbecore::utinyint Tstep);

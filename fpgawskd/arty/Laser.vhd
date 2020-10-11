@@ -1,8 +1,8 @@
 -- file Laser.vhd
 -- Laser easy model controller implementation
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -219,7 +219,7 @@ begin
 
 					stateOp <= stateOpWait;
 
-				else
+				elsif strbSpisend='0' then
 					stateOp <= stateOpPrepB;
 				end if;
 

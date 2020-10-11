@@ -1,8 +1,8 @@
 -- file Dpbram_v1_0_size2kB.vhd
 -- Dpbram_v1_0_size2kB dpbram_v1_0 implementation
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;

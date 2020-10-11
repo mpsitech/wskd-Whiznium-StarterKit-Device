@@ -1,8 +1,8 @@
 -- file Featdet.vhd
 -- Featdet easy model controller implementation
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -16,6 +16,9 @@ entity Featdet is
 		reset: in std_logic;
 		mclk: in std_logic;
 
+		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
+		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
+
 		reqInvSet: in std_logic;
 		ackInvSet: out std_logic;
 
@@ -27,18 +30,15 @@ entity Featdet is
 		getInfoTixVThdstate: out std_logic_vector(7 downto 0);
 		getInfoTkst: out std_logic_vector(31 downto 0);
 
-		getCornerinfoScoreMinMsb: out std_logic_vector(15 downto 0);
-		getCornerinfoScoreMinLsb: out std_logic_vector(31 downto 0);
-		getCornerinfoScoreMaxMsb: out std_logic_vector(15 downto 0);
-		getCornerinfoScoreMaxLsb: out std_logic_vector(31 downto 0);
 		getCornerinfoShift: out std_logic_vector(7 downto 0);
-		getCornerinfoNcorner: out std_logic_vector(31 downto 0);
-		getCornerinfoThd: out std_logic_vector(7 downto 0);
+		getCornerinfoScoreMin: out std_logic_vector(7 downto 0);
+		getCornerinfoScoreMax: out std_logic_vector(7 downto 0);
 
 		reqInvSetCorner: in std_logic;
 		ackInvSetCorner: out std_logic;
 
-		setCornerNtrg: in std_logic_vector(31 downto 0);
+		setCornerLinNotLog: in std_logic_vector(7 downto 0);
+		setCornerThd: in std_logic_vector(7 downto 0);
 
 		reqInvSetThd: in std_logic;
 		ackInvSetThd: out std_logic;
@@ -49,9 +49,6 @@ entity Featdet is
 		reqInvTriggerThd: in std_logic;
 		ackInvTriggerThd: out std_logic;
 
-		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
-		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
-
 		reqFlgbufToHostif: in std_logic;
 		ackFlgbufToHostif: out std_logic;
 		dneFlgbufToHostif: in std_logic;
@@ -59,27 +56,17 @@ entity Featdet is
 		avllenFlgbufToHostif: out std_logic_vector(8 downto 0);
 
 		dFlgbufToHostif: out std_logic_vector(31 downto 0);
-		strbDFlgbufToHostif: in std_logic;
-
-		reqGrrdefbufFromCamacq: out std_logic;
 
 		reqGrrdabbufFromCamacq: out std_logic;
 
-		ackGrrdefbufFromCamacq: in std_logic;
+		strbDFlgbufToHostif: in std_logic;
 
 		ackGrrdabbufFromCamacq: in std_logic;
 		dneGrrdabbufFromCamacq: out std_logic;
 
-		dneGrrdefbufFromCamacq: out std_logic;
-
 		avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
-		avllenGrrdefbufFromCamacq: in std_logic_vector(3 downto 0);
 
 		dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
-
-		dGrrdefbufFromCamacq: in std_logic_vector(7 downto 0);
-		strbDGrrdefbufFromCamacq: out std_logic;
-
 		strbDGrrdabbufFromCamacq: out std_logic;
 
 		reqGrrdcdbufFromCamacq: out std_logic;
@@ -91,9 +78,19 @@ entity Featdet is
 		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
 		strbDGrrdcdbufFromCamacq: out std_logic;
 
+		reqGrrdefbufFromCamacq: out std_logic;
+		ackGrrdefbufFromCamacq: in std_logic;
+		dneGrrdefbufFromCamacq: out std_logic;
+
+		avllenGrrdefbufFromCamacq: in std_logic_vector(3 downto 0);
+
+		dGrrdefbufFromCamacq: in std_logic_vector(7 downto 0);
+		strbDGrrdefbufFromCamacq: out std_logic;
+
 		strb_dbg: out std_logic_vector(3 downto 0);
 		stateCopy_dbg: out std_logic_vector(7 downto 0);
 		stateCorner_dbg: out std_logic_vector(7 downto 0);
+		stateExp_dbg: out std_logic_vector(7 downto 0);
 		stateFactk_dbg: out std_logic_vector(7 downto 0);
 		stateFlg_dbg: out std_logic_vector(7 downto 0);
 		stateFlgbuf_dbg: out std_logic_vector(7 downto 0);
@@ -280,9 +277,9 @@ architecture Featdet of Featdet is
 	);
 	signal stateCopy: stateCopy_t := stateCopyInit;
 
-	signal colsumX: std_logic_vector(104 downto 0);
-	signal colsumY: std_logic_vector(104 downto 0);
-	signal colsumXY: std_logic_vector(104 downto 0);
+	signal colsumX: std_logic_vector(104 downto 0); -- 5x 21bits
+	signal colsumY: std_logic_vector(104 downto 0); -- 5x 21bits
+	signal colsumXY: std_logic_vector(104 downto 0); -- 5x 21bits
 
 	-- IP sigs.copy.cust --- INSERT
 
@@ -297,10 +294,22 @@ architecture Featdet of Featdet is
 
 	signal ceScore: std_logic;
 	signal abcde: natural;
-	signal dx: std_logic_vector(44 downto 0);
-	signal dy: std_logic_vector(44 downto 0);
+	signal dx: std_logic_vector(44 downto 0); -- 5x 9bits
+	signal dy: std_logic_vector(44 downto 0); -- 5y 9bits
 
 	-- IP sigs.corner.cust --- INSERT
+
+	---- Harris score result exponent/mantissa transform (exp)
+	type stateExp_t is (
+		stateExpInit,
+		stateExpRun
+	);
+	signal stateExp: stateExp_t := stateExpInit;
+
+	signal rexp: std_logic_vector(7 downto 0);
+	signal rshift: natural range 0 to 39;
+
+	-- IP sigs.exp.cust --- INSERT
 
 	---- Harris score third term 5/128 multiplier (factk)
 	type stateFactk_t is (
@@ -437,10 +446,9 @@ architecture Featdet of Featdet is
 	);
 	signal stateImdstream: stateImdstream_t := stateImdstreamInit;
 
-	signal shift: natural range 0 to 40;
-
-	signal scoreMin: std_logic_vector(47 downto 0);
-	signal scoreMax: std_logic_vector(47 downto 0);
+	signal shift: natural range 0 to 47;
+	signal scoreMin: std_logic_vector(7 downto 0);
+	signal scoreMax: std_logic_vector(7 downto 0);
 
 	signal enImdbuf: std_logic;
 	signal enImdabbuf: std_logic;
@@ -483,9 +491,6 @@ architecture Featdet of Featdet is
 	signal dCorner: std_logic_vector(7 downto 0);
 	signal strbDCorner: std_logic;
 
-	signal Ncorner: natural range 0 to 786432;
-	signal thd: natural range 0 to 254;
-
 	-- IP sigs.maxsel.cust --- INSERT
 
 	---- main operation (op)
@@ -502,7 +507,8 @@ architecture Featdet of Featdet is
 	signal thdNotCorner: std_logic;
 	signal thdDeltaNotAbs: std_logic;
 	signal ackInvSetCorner_sig: std_logic;
-	signal Ntrg: natural range 0 to 786432;
+	signal cornerLinNotLog: std_logic;
+	signal cornerThd: natural range 0 to 255;
 	signal ackInvSetThd_sig: std_logic;
 
 	signal thdLvlFirst: std_logic_vector(7 downto 0);
@@ -652,9 +658,9 @@ architecture Featdet of Featdet is
 
 	---- other
 	signal nmclk: std_logic;
-	signal xsqr: std_logic_vector(89 downto 0);
-	signal ysqr: std_logic_vector(89 downto 0);
-	signal xy: std_logic_vector(89 downto 0);
+	signal xsqr: std_logic_vector(89 downto 0); -- 5x 18bits, set by modules xsqr0 to xsqr4
+	signal ysqr: std_logic_vector(89 downto 0); -- 5x 18bits, set by modules ysqr0 to ysqr4
+	signal xy: std_logic_vector(89 downto 0); -- 5x 18bits, set by modules xy0 to xy4
 	-- IP sigs.oth.cust --- IBEGIN
 	constant tixVCamacqGrrdbufstateIdle: std_logic_vector(7 downto 0) := x"00";
 	constant tixVCamacqGrrdbufstateEmpty: std_logic_vector(7 downto 0) := x"01";
@@ -1239,6 +1245,87 @@ begin
 	-- IP impl.corner.rising --- END
 
 	------------------------------------------------------------------------
+	-- implementation: Harris score result exponent/mantissa transform (exp)
+	------------------------------------------------------------------------
+
+	-- IP impl.exp.wiring --- BEGIN
+	stateExp_dbg <= x"00" when stateExp=stateExpInit
+				else x"10" when stateExp=stateExpRun
+				else (others => '1');
+	-- IP impl.exp.wiring --- END
+
+	-- IP impl.exp.rising --- BEGIN
+	process (reset, mclk, stateExp)
+		-- IP impl.exp.vars --- RBEGIN
+		variable msb: natural range 0 to 47;
+		-- IP impl.exp.vars --- REND
+
+	begin
+		if reset='1' then
+			-- IP impl.exp.asyncrst --- BEGIN
+			stateExp <= stateExpInit;
+			rexp <= (others => '0');
+			rshift <= 0;
+			-- IP impl.exp.asyncrst --- END
+
+		elsif rising_edge(mclk) then
+			if (stateExp=stateExpInit or cornerrun='0') then
+				-- IP impl.exp.syncrst --- BEGIN
+				rexp <= (others => '0');
+				rshift <= 0;
+
+				-- IP impl.exp.syncrst --- END
+
+				if cornerrun='0' then
+					stateExp <= stateExpInit;
+
+				else
+					stateExp <= stateExpRun;
+				end if;
+
+			elsif stateExp=stateExpRun then
+				-- IP impl.exp.run --- IBEGIN
+				if ceScore='1' then
+					for i in 0 to 47 loop
+						if r(i)='1' then
+							msb := i;
+						end if;
+					end loop;
+
+					if cornerLinNotLog='0' then
+						if msb<2 then
+							rexp <= "000000" & r(1 downto 0);
+						elsif msb=47 then
+							rexp <= (others => '0');
+						else
+							rexp <= std_logic_vector(to_unsigned(msb-1, 6)) & r(msb-1 downto msb-2);
+						end if;
+
+					else
+						if (msb<7 or msb=47) then
+							rshift <= 0;
+						else
+							rshift <= msb - 7;
+						end if;
+	
+						if msb=47 then
+							rexp <= (others => '0');
+						elsif msb<shift then
+							rexp <= (others => '0');
+						elsif msb>shift+7 then
+							rexp <= (others => '1');
+						else
+							rexp <= r(shift+7 downto shift);
+						end if;
+					end if;
+				end if;
+				-- IP impl.exp.run --- IEND
+			end if;
+		end if;
+	end process;
+	-- IP impl.exp.rising --- END
+
+	------------------------------------------------------------------------
 	-- implementation: Harris score third term 5/128 multiplier (factk)
 	------------------------------------------------------------------------
 
@@ -1501,7 +1588,7 @@ begin
 			elsif stateFlg=stateFlgStcorner then
 				aFlgbuf <= aFlgbuf + 1; -- IP impl.flg.stcorner.ext --- ILINE
 
-				if aFlgbuf=93184 then
+				if aFlgbuf=97664 then
 					-- 98304 - 5*1024/8 -- IP impl.flg.stcorner.cmt --- ILINE
 
 					stateFlg <= stateFlgDoneB;
@@ -1972,8 +2059,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.imdstream.wiring --- RBEGIN
-	cornerShift <= to_integer(unsigned(cornerShift_vec));
-
 	enImdbuf <= '1' when (stateImdstream=stateImdstreamStartrowC or stateImdstream=stateImdstreamLSB or stateImdstream=stateImdstreamLSD) else '0';
 
 	enImdabbuf <= enImdbuf;
@@ -1987,10 +2072,8 @@ begin
 
 	strbDImdstream <= '1' when stateImdstream=stateImdstreamLSD else '0';
 
-	getCornerinfoScoreMinMsb <= scoreMin(47 downto 32);
-	getCornerinfoScoreMinLsb <= scoreMin(31 downto 0);
-	getCornerinfoScoreMaxMsb <= scoreMax(47 downto 32);
-	getCornerinfoScoreMaxLsb <= scoreMax(31 downto 0);
+	getCornerinfoScoreMin <= scoreMin;
+	getCornerinfoScoreMax <= scoreMax;
 
 	stateImdstream_dbg <= x"00" when stateImdstream=stateImdstreamInit
 		else (others => '1');
@@ -2004,14 +2087,20 @@ begin
 
 		constant a0Bdf: natural := 1024;
 
-		constant imax: natural := 21; -- pipeline latency
+		variable shift_lcl: natural range 0 to 47;
+
+		variable scoreMin_lcl: std_logic_vector(7 downto 0);
+		variable scoreMax_lcl: std_logic_vector(7 downto 0);
+
+		constant imax: natural := 89; -- pipeline latency (4x22 + 1 to account for ceScore being active only one in four mclk cycles)
 		variable i: natural range 0 to imax;
-		-- IP impl.imdstream.vars --- REND
+				-- IP impl.imdstream.vars --- REND
 
 	begin
 		if reset='1' then
 			-- IP impl.imdstream.asyncrst --- RBEGIN
 			stateImdstream <= stateImdstreamInit;
+			shift <= 0;
 			scoreMin <= (others => '1');
 			scoreMax <= (others => '0');
 			weImdabbuf <= '0';
@@ -2027,6 +2116,9 @@ begin
 
 			row := 0;
 			col := 0;
+			shift_lcl := 0;
+			scoreMin_lcl := (others => '1');
+			scoreMax_lcl := (others => '0');
 			i := 0;
 			-- IP impl.imdstream.asyncrst --- REND
 
@@ -2046,6 +2138,9 @@ begin
 
 				row := 0;
 				col := 0;
+				shift_lcl := 0;
+				scoreMin_lcl := (others => '1');
+				scoreMax_lcl := (others => '0');
 				i := 0;
 				-- IP impl.imdstream.syncrst --- REND
 
@@ -2058,12 +2153,7 @@ begin
 
 			elsif stateImdstream=stateImdstreamWaitFrame then
 				if camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEmpty then
-					-- IP impl.imdstream.waitFrame --- IBEGIN
-					scoreMin <= (others => '1');
-					scoreMax <= (others => '0');
-
-					row := 0;
-					-- IP impl.imdstream.waitFrame --- IEND
+					row := 0; -- IP impl.imdstream.waitFrame --- ILINE
 
 					stateImdstream <= stateImdstreamSkipA;
 				end if;
@@ -2151,17 +2241,17 @@ begin
 					-- (cdefab)
 					weImdabbuf <= '1';
 					aImdabbuf <= a0Bdf + col;
-					dwrImdabbuf <= r(cornerShift+7 downto cornerShift);
+					dwrImdabbuf <= rexp;
 				elsif row=3 then
 					-- (efabcd)
 					weImdcdbuf <= '1';
 					aImdcdbuf <= a0Bdf + col;
-					dwrImdcdbuf <= r(cornerShift+7 downto cornerShift);
+					dwrImdcdbuf <= rexp;
 				elsif row=5 then
 					-- (abcdef)
 					weImdefbuf <= '1';
 					aImdefbuf <= a0Bdf + col;
-					dwrImdefbuf <= r(cornerShift+7 downto cornerShift);
+					dwrImdefbuf <= rexp;
 				end if;
 
 				-- preparation for next load
@@ -2249,12 +2339,16 @@ begin
 				end if;
 
 				-- min/max update
-				if unsigned(r)<unsigned(scoreMin) then
-					scoreMin <= r;
+				if unsigned(rexp)<unsigned(scoreMin_lcl) then
+					scoreMin_lcl := rexp;
 				end if;
 				
-				if unsigned(r)>unsigned(scoreMax) then
-					scoreMax <= r;
+				if unsigned(rexp)>unsigned(scoreMax_lcl) then
+					scoreMax_lcl := rexp;
+				end if;
+				
+				if rshift>shift_lcl then
+					shift_lcl := rshift;
 				end if;
 
 				-- store
@@ -2262,17 +2356,17 @@ begin
 					-- (bcdefa)
 					weImdabbuf <= '1';
 					aImdabbuf <= col;
-					dwrImdabbuf <= r(cornerShift+7 downto cornerShift);
+					dwrImdabbuf <= rexp;
 				elsif row=2 then
 					-- (defabc)
 					weImdcdbuf <= '1';
 					aImdcdbuf <= col;
-					dwrImdcdbuf <= r(cornerShift+7 downto cornerShift);
+					dwrImdcdbuf <= rexp;
 				elsif row=4 then
 					-- (fabcde)
 					weImdefbuf <= '1';
 					aImdefbuf <= col;
-					dwrImdefbuf <= r(cornerShift+7 downto cornerShift);
+					dwrImdefbuf <= rexp;
 				end if;
 
 				col := col + 1;
@@ -2348,6 +2442,17 @@ begin
 					stateImdstream <= stateImdstreamStartrowA;
 
 				elsif camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEndfr then
+					-- IP impl.imdstream.stoprow.updScore --- IBEGIN
+					if shift_lcl>=40 then
+						shift <= 40;
+					else
+						shift <= shift_lcl;
+					end if;
+
+					scoreMin <= scoreMin_lcl;
+					scoreMax <= scoreMax_lcl;
+					-- IP impl.imdstream.stoprow.updScore --- IEND
+
 					stateImdstream <= stateImdstreamInit;
 				end if;
 			end if;
@@ -2360,11 +2465,7 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.maxsel.wiring --- RBEGIN
-	cornerThd <= to_integer(unsigned(cornerThd_vec));
-
 	strbDCorner <= '1' when stateMaxsel=stateMaxselStore else '0';
-	
-	getCornerinfoNcorner <= std_logic_vector(to_unsigned(Ncorner, 32));
 
 	stateMaxsel_dbg <= x"00" when stateMaxsel=stateMaxselInit
 				else x"10" when stateMaxsel=stateMaxselImd
@@ -2409,14 +2510,23 @@ begin
 			-- IP impl.maxsel.asyncrst --- BEGIN
 			stateMaxsel <= stateMaxselInit;
 			dCorner <= (others => '0');
-			Ncorner <= 0;
-			thd <= 0;
 			-- IP impl.maxsel.asyncrst --- END
 
 		elsif rising_edge(mclk) then
 			if (stateMaxsel=stateMaxselInit or cornerrun='0') then
 				-- IP impl.maxsel.syncrst --- RBEGIN
 				dCorner <= (others => '0');
+
+				for j in 0 to 4 loop
+					maximds(j) := (others => '0');
+					ixMaximds(j) := 0;
+					unqMaximds(j) := false;
+				end loop;
+
+				ixMax := 0;
+				unqMax := false;
+
+				col := 0;
 
 				i := 0;
 				-- IP impl.maxsel.syncrst --- REND
@@ -2425,8 +2535,6 @@ begin
 					stateMaxsel <= stateMaxselInit;
 
 				else
-					Ncorner <= 0; -- IP impl.maxsel.init.start --- ILINE
-
 					stateMaxsel <= stateMaxselImd;
 				end if;
 
@@ -2564,18 +2672,29 @@ begin
 				-- IP impl.maxsel.act.ext --- IBEGIN
 				flag := '0';
 
-				if unqMax then
-					if (col=0 and ixMax=3 and unqMaximds(3) and unsigned(maximds(3))>cornerThd) then
-						flag := '1';
-					elsif (col=1 and ixMax=4 and unqMaximds(4) and unsigned(maximds(4))>cornerThd) then
-						flag := '1';
-					elsif (col=2 and ixMax=0 and unqMaximds(0) and unsigned(maximds(0))>cornerThd) then
-						flag := '1';
-					elsif (col=3 and ixMax=1 and unqMaximds(1) and unsigned(maximds(1))>cornerThd) then
-						flag := '1';
-					elsif (col=4 and ixMax=2 and unqMaximds(2) and unsigned(maximds(2))>cornerThd) then
-						flag := '1';
-					end if;
+--				if unqMax then
+--					if (col=0 and ixMax=3 and unqMaximds(3) and unsigned(maximds(3))>cornerThd) then
+--						flag := '1';
+--					elsif (col=1 and ixMax=4 and unqMaximds(4) and unsigned(maximds(4))>cornerThd) then
+--						flag := '1';
+--					elsif (col=2 and ixMax=0 and unqMaximds(0) and unsigned(maximds(0))>cornerThd) then
+--						flag := '1';
+--					elsif (col=3 and ixMax=1 and unqMaximds(1) and unsigned(maximds(1))>cornerThd) then
+--						flag := '1';
+--					elsif (col=4 and ixMax=2 and unqMaximds(2) and unsigned(maximds(2))>cornerThd) then
+--						flag := '1';
+--					end if;
+--				end if;
+				if (col=0 and ixMax=3 and unsigned(maximds(3))>cornerThd) then
+					flag := '1';
+				elsif (col=1 and ixMax=4 and unsigned(maximds(4))>cornerThd) then
+					flag := '1';
+				elsif (col=2 and ixMax=0 and unsigned(maximds(0))>cornerThd) then
+					flag := '1';
+				elsif (col=3 and ixMax=1 and unsigned(maximds(1))>cornerThd) then
+					flag := '1';
+				elsif (col=4 and ixMax=2 and unsigned(maximds(2))>cornerThd) then
+					flag := '1';
 				end if;
 
 				if col=4 then
@@ -2584,11 +2703,7 @@ begin
 					col := col + 1;
 				end if;
 
-				dCorner(i) <= flag;
-
-				if flag='1' then
-					Ncorner <= Ncorner + 1;
-				end if;
+				dCorner(7-i) <= flag;
 
 				i := i + 1;
 				-- IP impl.maxsel.act.ext --- IEND
@@ -2639,7 +2754,8 @@ begin
 			thdNotCorner <= '0';
 			thdDeltaNotAbs <= '0';
 			ackInvSetCorner_sig <= '0';
-			Ntrg <= 1000;
+			cornerLinNotLog <= '0';
+			cornerThd <= 127;
 			ackInvSetThd_sig <= '0';
 			thdLvlFirst <= (others => '0');
 			thdLvlSecond <= (others => '0');
@@ -2654,8 +2770,12 @@ begin
 
 				elsif reqInvSetCorner='1' then
 					-- IP impl.op.init.invSetCorner --- IBEGIN
-					cornerShift_vec <= setCornerShift;
-					cornerThd_vec <= setCornerThd;
+					if setCornerLinNotLog=tru8 then
+						cornerLinNotLog <= '1';
+					else
+						cornerLinNotLog <= '0';
+					end if;
+					cornerThd <= to_integer(unsigned(setCornerThd));
 
 					ackInvSetCorner_sig <= '1';
 					-- IP impl.op.init.invSetCorner --- IEND
@@ -3155,7 +3275,7 @@ begin
 	-- IP impl.oth.cust --- IBEGIN
 	nmclk <= not mclk;
 
-	strb_dbg <= strbDGrrdbuf & strbDStream & strbDwrThd & strbDrdThd;
+	strb_dbg <= ceScore & strbDStream & strbDwrThd & strbDrdThd;
 	-- IP impl.oth.cust --- IEND
 
 end Featdet;

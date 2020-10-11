@@ -1,8 +1,8 @@
 -- file Hostif.vhd
 -- Hostif axihostif_Easy_v2_0 easy model host interface implementation
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -20,111 +20,6 @@ entity Hostif is
 
 		btnReset: in std_logic;
 		reqReset: out std_logic;
-
-		stepGetInfoTixVState: in std_logic_vector(7 downto 0);
-		stepGetInfoAngle: in std_logic_vector(15 downto 0);
-
-		reqInvStepMoveto: out std_logic;
-		ackInvStepMoveto: in std_logic;
-
-		stepMovetoAngle: out std_logic_vector(15 downto 0);
-
-		reqInvStepSet: out std_logic;
-		ackInvStepSet: in std_logic;
-
-		stepSetRng: out std_logic_vector(7 downto 0);
-		stepSetCcwNotCw: out std_logic_vector(7 downto 0);
-		stepSetTstep: out std_logic_vector(7 downto 0);
-
-		reqInvStepZero: out std_logic;
-		ackInvStepZero: in std_logic;
-
-		stateGetTixVArtyState: in std_logic_vector(7 downto 0);
-
-		reqInvLaserSet: out std_logic;
-		ackInvLaserSet: in std_logic;
-
-		laserSetL: out std_logic_vector(15 downto 0);
-		laserSetR: out std_logic_vector(15 downto 0);
-
-		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
-
-		reqInvTkclksrcSetTkst: out std_logic;
-		ackInvTkclksrcSetTkst: in std_logic;
-
-		tkclksrcSetTkstTkst: out std_logic_vector(31 downto 0);
-
-		reqInvFeatdetSet: out std_logic;
-		ackInvFeatdetSet: in std_logic;
-
-		featdetSetRng: out std_logic_vector(7 downto 0);
-		featdetSetThdNotCorner: out std_logic_vector(7 downto 0);
-		featdetSetThdDeltaNotAbs: out std_logic_vector(7 downto 0);
-
-		featdetGetInfoTixVFlgbufstate: in std_logic_vector(7 downto 0);
-		featdetGetInfoTixVThdstate: in std_logic_vector(7 downto 0);
-		featdetGetInfoTkst: in std_logic_vector(31 downto 0);
-
-		featdetGetCornerinfoScoreMinMsb: in std_logic_vector(15 downto 0);
-		featdetGetCornerinfoScoreMinLsb: in std_logic_vector(31 downto 0);
-		featdetGetCornerinfoScoreMaxMsb: in std_logic_vector(15 downto 0);
-		featdetGetCornerinfoScoreMaxLsb: in std_logic_vector(31 downto 0);
-		featdetGetCornerinfoShift: in std_logic_vector(7 downto 0);
-		featdetGetCornerinfoNcorner: in std_logic_vector(31 downto 0);
-		featdetGetCornerinfoThd: in std_logic_vector(7 downto 0);
-
-		reqInvFeatdetSetCorner: out std_logic;
-		ackInvFeatdetSetCorner: in std_logic;
-
-		featdetSetCornerNtrg: out std_logic_vector(31 downto 0);
-
-		reqInvFeatdetSetThd: out std_logic;
-		ackInvFeatdetSetThd: in std_logic;
-
-		featdetSetThdLvlFirst: out std_logic_vector(7 downto 0);
-		featdetSetThdLvlSecond: out std_logic_vector(7 downto 0);
-
-		reqInvFeatdetTriggerThd: out std_logic;
-		ackInvFeatdetTriggerThd: in std_logic;
-
-		reqInvCamifSetRng: out std_logic;
-		ackInvCamifSetRng: in std_logic;
-
-		camifSetRngRng: out std_logic_vector(7 downto 0);
-
-		reqInvCamifSetFocus: out std_logic;
-		ackInvCamifSetFocus: in std_logic;
-
-		camifSetFocusVcm: out std_logic_vector(15 downto 0);
-
-		reqInvCamifSetTexp: out std_logic;
-		ackInvCamifSetTexp: in std_logic;
-
-		camifSetTexpTexp: out std_logic_vector(15 downto 0);
-
-		reqInvCamifSetReg: out std_logic;
-		ackInvCamifSetReg: in std_logic;
-
-		camifSetRegAddr: out std_logic_vector(15 downto 0);
-		camifSetRegVal: out std_logic_vector(7 downto 0);
-
-		reqInvCamifGetReg: out std_logic;
-		ackInvCamifGetReg: in std_logic;
-
-		camifGetRegAddr: out std_logic_vector(15 downto 0);
-		camifGetRegVal: in std_logic_vector(7 downto 0);
-
-		reqInvCamifModReg: out std_logic;
-		ackInvCamifModReg: in std_logic;
-
-		camifModRegAddr: out std_logic_vector(15 downto 0);
-		camifModRegMask: out std_logic_vector(7 downto 0);
-		camifModRegVal: out std_logic_vector(7 downto 0);
-
-		reqInvCamacqSetSample: out std_logic;
-		ackInvCamacqSetSample: in std_logic;
-
-		camacqSetSampleFallNotRise: out std_logic_vector(7 downto 0);
 
 		reqInvCamacqSetGrrd: out std_logic;
 		ackInvCamacqSetGrrd: in std_logic;
@@ -145,6 +40,98 @@ entity Hostif is
 		camacqGetPvwinfoTixVPvwbufstate: in std_logic_vector(7 downto 0);
 		camacqGetPvwinfoTkst: in std_logic_vector(31 downto 0);
 
+		reqInvCamifSetRng: out std_logic;
+		ackInvCamifSetRng: in std_logic;
+
+		camifSetRngRng: out std_logic_vector(7 downto 0);
+
+		reqInvCamifSetReg: out std_logic;
+		ackInvCamifSetReg: in std_logic;
+
+		camifSetRegAddr: out std_logic_vector(15 downto 0);
+		camifSetRegVal: out std_logic_vector(7 downto 0);
+
+		reqInvCamifSetRegaddr: out std_logic;
+		ackInvCamifSetRegaddr: in std_logic;
+
+		camifSetRegaddrAddr: out std_logic_vector(15 downto 0);
+
+		reqInvCamifGetReg: out std_logic;
+		ackInvCamifGetReg: in std_logic;
+
+		camifGetRegVal: in std_logic_vector(7 downto 0);
+
+		reqInvCamifModReg: out std_logic;
+		ackInvCamifModReg: in std_logic;
+
+		camifModRegAddr: out std_logic_vector(15 downto 0);
+		camifModRegMask: out std_logic_vector(7 downto 0);
+		camifModRegVal: out std_logic_vector(7 downto 0);
+
+		reqInvFeatdetSet: out std_logic;
+		ackInvFeatdetSet: in std_logic;
+
+		featdetSetRng: out std_logic_vector(7 downto 0);
+		featdetSetThdNotCorner: out std_logic_vector(7 downto 0);
+		featdetSetThdDeltaNotAbs: out std_logic_vector(7 downto 0);
+
+		featdetGetInfoTixVFlgbufstate: in std_logic_vector(7 downto 0);
+		featdetGetInfoTixVThdstate: in std_logic_vector(7 downto 0);
+		featdetGetInfoTkst: in std_logic_vector(31 downto 0);
+
+		featdetGetCornerinfoShift: in std_logic_vector(7 downto 0);
+		featdetGetCornerinfoScoreMin: in std_logic_vector(7 downto 0);
+		featdetGetCornerinfoScoreMax: in std_logic_vector(7 downto 0);
+
+		reqInvFeatdetSetCorner: out std_logic;
+		ackInvFeatdetSetCorner: in std_logic;
+
+		featdetSetCornerLinNotLog: out std_logic_vector(7 downto 0);
+		featdetSetCornerThd: out std_logic_vector(7 downto 0);
+
+		reqInvFeatdetSetThd: out std_logic;
+		ackInvFeatdetSetThd: in std_logic;
+
+		featdetSetThdLvlFirst: out std_logic_vector(7 downto 0);
+		featdetSetThdLvlSecond: out std_logic_vector(7 downto 0);
+
+		reqInvFeatdetTriggerThd: out std_logic;
+		ackInvFeatdetTriggerThd: in std_logic;
+
+		reqInvLaserSet: out std_logic;
+		ackInvLaserSet: in std_logic;
+
+		laserSetL: out std_logic_vector(15 downto 0);
+		laserSetR: out std_logic_vector(15 downto 0);
+
+		stateGetTixVArtyState: in std_logic_vector(7 downto 0);
+
+		stepGetInfoTixVState: in std_logic_vector(7 downto 0);
+		stepGetInfoAngle: in std_logic_vector(15 downto 0);
+
+		reqInvStepMoveto: out std_logic;
+		ackInvStepMoveto: in std_logic;
+
+		stepMovetoAngle: out std_logic_vector(15 downto 0);
+		stepMovetoTstep: out std_logic_vector(7 downto 0);
+
+		reqInvStepSet: out std_logic;
+		ackInvStepSet: in std_logic;
+
+		stepSetRng: out std_logic_vector(7 downto 0);
+		stepSetCcwNotCw: out std_logic_vector(7 downto 0);
+		stepSetTstep: out std_logic_vector(7 downto 0);
+
+		reqInvStepZero: out std_logic;
+		ackInvStepZero: in std_logic;
+
+		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
+
+		reqInvTkclksrcSetTkst: out std_logic;
+		ackInvTkclksrcSetTkst: in std_logic;
+
+		tkclksrcSetTkstTkst: out std_logic_vector(31 downto 0);
+
 		reqFlgbufFromFeatdet: out std_logic;
 		ackFlgbufFromFeatdet: in std_logic;
 		dneFlgbufFromFeatdet: out std_logic;
@@ -155,26 +142,26 @@ entity Hostif is
 		strbDFlgbufFromFeatdet: out std_logic;
 
 		reqPvwabufFromCamacq: out std_logic;
-
-		reqPvwbbufFromCamacq: out std_logic;
-		ackPvwbbufFromCamacq: in std_logic;
-
 		ackPvwabufFromCamacq: in std_logic;
 
-		dnePvwbbufFromCamacq: out std_logic;
+		reqPvwbbufFromCamacq: out std_logic;
 
 		dnePvwabufFromCamacq: out std_logic;
 
-		avllenPvwbbufFromCamacq: in std_logic_vector(7 downto 0);
+		ackPvwbbufFromCamacq: in std_logic;
+
 		avllenPvwabufFromCamacq: in std_logic_vector(7 downto 0);
 
-		dPvwbbufFromCamacq: in std_logic_vector(31 downto 0);
+		dnePvwbbufFromCamacq: out std_logic;
 
 		dPvwabufFromCamacq: in std_logic_vector(31 downto 0);
 
-		strbDPvwbbufFromCamacq: out std_logic;
+		avllenPvwbbufFromCamacq: in std_logic_vector(7 downto 0);
 
 		strbDPvwabufFromCamacq: out std_logic;
+
+		dPvwbbufFromCamacq: in std_logic_vector(31 downto 0);
+		strbDPvwbbufFromCamacq: out std_logic;
 
 		rdyRx: out std_logic;
 		enRx: in std_logic;
@@ -307,7 +294,7 @@ architecture Hostif of Hostif is
 	type rxbuf_t is array (0 to sizeRxbuf-1) of std_logic_vector(7 downto 0);
 	signal rxbuf: rxbuf_t;
 
-	constant sizeTxbuf: natural := 20;
+	constant sizeTxbuf: natural := 8;
 	type txbuf_t is array (0 to sizeTxbuf-1) of std_logic_vector(7 downto 0);
 	signal txbuf: txbuf_t;
 
@@ -349,49 +336,45 @@ architecture Hostif of Hostif is
 	signal strbCrcd: std_logic;
 	signal torestart: std_logic;
 
-	signal stepMovetoAngle_sig: std_logic_vector(15 downto 0);
-
-	signal stepSetRng_sig: std_logic_vector(7 downto 0);
-	signal stepSetCcwNotCw_sig: std_logic_vector(7 downto 0);
-	signal stepSetTstep_sig: std_logic_vector(7 downto 0);
-
-	signal laserSetL_sig: std_logic_vector(15 downto 0);
-	signal laserSetR_sig: std_logic_vector(15 downto 0);
-
-	signal tkclksrcSetTkstTkst_sig: std_logic_vector(31 downto 0);
-
-	signal featdetSetRng_sig: std_logic_vector(7 downto 0);
-	signal featdetSetThdNotCorner_sig: std_logic_vector(7 downto 0);
-	signal featdetSetThdDeltaNotAbs_sig: std_logic_vector(7 downto 0);
-
-	signal featdetSetCornerNtrg_sig: std_logic_vector(31 downto 0);
-
-	signal featdetSetThdLvlFirst_sig: std_logic_vector(7 downto 0);
-	signal featdetSetThdLvlSecond_sig: std_logic_vector(7 downto 0);
-
-	signal camifSetRngRng_sig: std_logic_vector(7 downto 0);
-
-	signal camifSetFocusVcm_sig: std_logic_vector(15 downto 0);
-
-	signal camifSetTexpTexp_sig: std_logic_vector(15 downto 0);
-
-	signal camifSetRegAddr_sig: std_logic_vector(15 downto 0);
-	signal camifSetRegVal_sig: std_logic_vector(7 downto 0);
-
-	signal camifGetRegAddr_sig: std_logic_vector(15 downto 0);
-
-	signal camifModRegAddr_sig: std_logic_vector(15 downto 0);
-	signal camifModRegMask_sig: std_logic_vector(7 downto 0);
-	signal camifModRegVal_sig: std_logic_vector(7 downto 0);
-
-	signal camacqSetSampleFallNotRise_sig: std_logic_vector(7 downto 0);
-
 	signal camacqSetGrrdRng_sig: std_logic_vector(7 downto 0);
 	signal camacqSetGrrdRedNotGray_sig: std_logic_vector(7 downto 0);
 
 	signal camacqSetPvwRng_sig: std_logic_vector(7 downto 0);
 	signal camacqSetPvwRawNotBin_sig: std_logic_vector(7 downto 0);
 	signal camacqSetPvwGrayNotRgb_sig: std_logic_vector(7 downto 0);
+
+	signal camifSetRngRng_sig: std_logic_vector(7 downto 0);
+
+	signal camifSetRegAddr_sig: std_logic_vector(15 downto 0);
+	signal camifSetRegVal_sig: std_logic_vector(7 downto 0);
+
+	signal camifSetRegaddrAddr_sig: std_logic_vector(15 downto 0);
+
+	signal camifModRegAddr_sig: std_logic_vector(15 downto 0);
+	signal camifModRegMask_sig: std_logic_vector(7 downto 0);
+	signal camifModRegVal_sig: std_logic_vector(7 downto 0);
+
+	signal featdetSetRng_sig: std_logic_vector(7 downto 0);
+	signal featdetSetThdNotCorner_sig: std_logic_vector(7 downto 0);
+	signal featdetSetThdDeltaNotAbs_sig: std_logic_vector(7 downto 0);
+
+	signal featdetSetCornerLinNotLog_sig: std_logic_vector(7 downto 0);
+	signal featdetSetCornerThd_sig: std_logic_vector(7 downto 0);
+
+	signal featdetSetThdLvlFirst_sig: std_logic_vector(7 downto 0);
+	signal featdetSetThdLvlSecond_sig: std_logic_vector(7 downto 0);
+
+	signal laserSetL_sig: std_logic_vector(15 downto 0);
+	signal laserSetR_sig: std_logic_vector(15 downto 0);
+
+	signal stepMovetoAngle_sig: std_logic_vector(15 downto 0);
+	signal stepMovetoTstep_sig: std_logic_vector(7 downto 0);
+
+	signal stepSetRng_sig: std_logic_vector(7 downto 0);
+	signal stepSetCcwNotCw_sig: std_logic_vector(7 downto 0);
+	signal stepSetTstep_sig: std_logic_vector(7 downto 0);
+
+	signal tkclksrcSetTkstTkst_sig: std_logic_vector(31 downto 0);
 
 	---- myCrc
 	signal crc: std_logic_vector(15 downto 0);
@@ -525,17 +508,17 @@ begin
 	reqReset <= (reqReset_sig or btnReset);
 
 	-- tx/ret command
+	reqInvCamifGetReg <= '1' when (stateOp=stateOpVoidinv and opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandGetReg) else '0';
 
-	ackVoidinv <= '0';
+	ackVoidinv <= ackInvCamifGetReg when (opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandGetReg)
+				else '0';
 
 	-- rx/inv command
-	reqInvCamacqSetSample <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamacq and opbuf(ixOpbufCommand)=tixVCamacqCommandSetSample) else '0';
 	reqInvCamacqSetGrrd <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamacq and opbuf(ixOpbufCommand)=tixVCamacqCommandSetGrrd) else '0';
 	reqInvCamacqSetPvw <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamacq and opbuf(ixOpbufCommand)=tixVCamacqCommandSetPvw) else '0';
 	reqInvCamifSetRng <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetRng) else '0';
-	reqInvCamifSetFocus <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetFocus) else '0';
-	reqInvCamifSetTexp <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetTexp) else '0';
 	reqInvCamifSetReg <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetReg) else '0';
+	reqInvCamifSetRegaddr <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetRegaddr) else '0';
 	reqInvCamifModReg <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandModReg) else '0';
 	reqInvFeatdetSet <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerFeatdet and opbuf(ixOpbufCommand)=tixVFeatdetCommandSet) else '0';
 	reqInvFeatdetSetCorner <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerFeatdet and opbuf(ixOpbufCommand)=tixVFeatdetCommandSetCorner) else '0';
@@ -547,13 +530,11 @@ begin
 	reqInvStepZero <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerStep and opbuf(ixOpbufCommand)=tixVStepCommandZero) else '0';
 	reqInvTkclksrcSetTkst <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVControllerTkclksrc and opbuf(ixOpbufCommand)=tixVTkclksrcCommandSetTkst) else '0';
 
-	ackInv <= ackInvCamacqSetSample when (opbuf(ixOpbufController)=tixVControllerCamacq and opbuf(ixOpbufCommand)=tixVCamacqCommandSetSample)
-				else ackInvCamacqSetGrrd when (opbuf(ixOpbufController)=tixVControllerCamacq and opbuf(ixOpbufCommand)=tixVCamacqCommandSetGrrd)
+	ackInv <= ackInvCamacqSetGrrd when (opbuf(ixOpbufController)=tixVControllerCamacq and opbuf(ixOpbufCommand)=tixVCamacqCommandSetGrrd)
 				else ackInvCamacqSetPvw when (opbuf(ixOpbufController)=tixVControllerCamacq and opbuf(ixOpbufCommand)=tixVCamacqCommandSetPvw)
 				else ackInvCamifSetRng when (opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetRng)
-				else ackInvCamifSetFocus when (opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetFocus)
-				else ackInvCamifSetTexp when (opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetTexp)
 				else ackInvCamifSetReg when (opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetReg)
+				else ackInvCamifSetRegaddr when (opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandSetRegaddr)
 				else ackInvCamifModReg when (opbuf(ixOpbufController)=tixVControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandModReg)
 				else ackInvFeatdetSet when (opbuf(ixOpbufController)=tixVControllerFeatdet and opbuf(ixOpbufCommand)=tixVFeatdetCommandSet)
 				else ackInvFeatdetSetCorner when (opbuf(ixOpbufController)=tixVControllerFeatdet and opbuf(ixOpbufCommand)=tixVFeatdetCommandSetCorner)
@@ -601,49 +582,45 @@ begin
 	avllenRxbuf <= 0;
 
 	-- IP impl.op.wiring --- BEGIN
-	stepMovetoAngle <= stepMovetoAngle_sig;
-
-	stepSetRng <= stepSetRng_sig;
-	stepSetCcwNotCw <= stepSetCcwNotCw_sig;
-	stepSetTstep <= stepSetTstep_sig;
-
-	laserSetL <= laserSetL_sig;
-	laserSetR <= laserSetR_sig;
-
-	tkclksrcSetTkstTkst <= tkclksrcSetTkstTkst_sig;
-
-	featdetSetRng <= featdetSetRng_sig;
-	featdetSetThdNotCorner <= featdetSetThdNotCorner_sig;
-	featdetSetThdDeltaNotAbs <= featdetSetThdDeltaNotAbs_sig;
-
-	featdetSetCornerNtrg <= featdetSetCornerNtrg_sig;
-
-	featdetSetThdLvlFirst <= featdetSetThdLvlFirst_sig;
-	featdetSetThdLvlSecond <= featdetSetThdLvlSecond_sig;
-
-	camifSetRngRng <= camifSetRngRng_sig;
-
-	camifSetFocusVcm <= camifSetFocusVcm_sig;
-
-	camifSetTexpTexp <= camifSetTexpTexp_sig;
-
-	camifSetRegAddr <= camifSetRegAddr_sig;
-	camifSetRegVal <= camifSetRegVal_sig;
-
-	camifGetRegAddr <= camifGetRegAddr_sig;
-
-	camifModRegAddr <= camifModRegAddr_sig;
-	camifModRegMask <= camifModRegMask_sig;
-	camifModRegVal <= camifModRegVal_sig;
-
-	camacqSetSampleFallNotRise <= camacqSetSampleFallNotRise_sig;
-
 	camacqSetGrrdRng <= camacqSetGrrdRng_sig;
 	camacqSetGrrdRedNotGray <= camacqSetGrrdRedNotGray_sig;
 
 	camacqSetPvwRng <= camacqSetPvwRng_sig;
 	camacqSetPvwRawNotBin <= camacqSetPvwRawNotBin_sig;
 	camacqSetPvwGrayNotRgb <= camacqSetPvwGrayNotRgb_sig;
+
+	camifSetRngRng <= camifSetRngRng_sig;
+
+	camifSetRegAddr <= camifSetRegAddr_sig;
+	camifSetRegVal <= camifSetRegVal_sig;
+
+	camifSetRegaddrAddr <= camifSetRegaddrAddr_sig;
+
+	camifModRegAddr <= camifModRegAddr_sig;
+	camifModRegMask <= camifModRegMask_sig;
+	camifModRegVal <= camifModRegVal_sig;
+
+	featdetSetRng <= featdetSetRng_sig;
+	featdetSetThdNotCorner <= featdetSetThdNotCorner_sig;
+	featdetSetThdDeltaNotAbs <= featdetSetThdDeltaNotAbs_sig;
+
+	featdetSetCornerLinNotLog <= featdetSetCornerLinNotLog_sig;
+	featdetSetCornerThd <= featdetSetCornerThd_sig;
+
+	featdetSetThdLvlFirst <= featdetSetThdLvlFirst_sig;
+	featdetSetThdLvlSecond <= featdetSetThdLvlSecond_sig;
+
+	laserSetL <= laserSetL_sig;
+	laserSetR <= laserSetR_sig;
+
+	stepMovetoAngle <= stepMovetoAngle_sig;
+	stepMovetoTstep <= stepMovetoTstep_sig;
+
+	stepSetRng <= stepSetRng_sig;
+	stepSetCcwNotCw <= stepSetCcwNotCw_sig;
+	stepSetTstep <= stepSetTstep_sig;
+
+	tkclksrcSetTkstTkst <= tkclksrcSetTkstTkst_sig;
 	-- IP impl.op.wiring --- END
 
 	reqCrc <= '1' when (stateOp=stateOpRxopA or stateOp=stateOpRxopB or stateOp=stateOpRxopC or stateOp=stateOpRxopD or stateOp=stateOpRxopE
@@ -676,40 +653,41 @@ begin
 				else x"12" when stateOp=stateOpRxopC
 				else x"13" when stateOp=stateOpRxopD
 				else x"14" when stateOp=stateOpRxopE
-				else x"20" when stateOp=stateOpPrepTxA
-				else x"21" when stateOp=stateOpPrepTxB
-				else x"30" when stateOp=stateOpTxA
-				else x"31" when stateOp=stateOpTxB
-				else x"32" when stateOp=stateOpTxC
-				else x"33" when stateOp=stateOpTxD
-				else x"34" when stateOp=stateOpTxE
-				else x"35" when stateOp=stateOpTxF
-				else x"40" when stateOp=stateOpTxbufA
-				else x"41" when stateOp=stateOpTxbufB
-				else x"42" when stateOp=stateOpTxbufC
-				else x"43" when stateOp=stateOpTxbufD
-				else x"44" when stateOp=stateOpTxbufE
-				else x"45" when stateOp=stateOpTxbufF
-				else x"46" when stateOp=stateOpTxbufG
-				else x"47" when stateOp=stateOpTxbufH
-				else x"48" when stateOp=stateOpTxbufI
-				else x"49" when stateOp=stateOpTxbufJ
-				else x"4A" when stateOp=stateOpTxbufK
-				else x"50" when stateOp=stateOpPrepRx
-				else x"60" when stateOp=stateOpRxA
-				else x"61" when stateOp=stateOpRxB
-				else x"62" when stateOp=stateOpRxC
-				else x"63" when stateOp=stateOpRxD
-				else x"70" when stateOp=stateOpCopyRxA
-				else x"71" when stateOp=stateOpCopyRxB
-				else x"80" when stateOp=stateOpPrepRxbuf
-				else x"90" when stateOp=stateOpRxbufA
-				else x"91" when stateOp=stateOpRxbufB
-				else x"92" when stateOp=stateOpRxbufC
-				else x"93" when stateOp=stateOpRxbufD
-				else x"94" when stateOp=stateOpRxbufE
-				else x"A0" when stateOp=stateOpTxackA
-				else x"A1" when stateOp=stateOpTxackB
+				else x"20" when stateOp=stateOpVoidinv
+				else x"30" when stateOp=stateOpPrepTxA
+				else x"31" when stateOp=stateOpPrepTxB
+				else x"40" when stateOp=stateOpTxA
+				else x"41" when stateOp=stateOpTxB
+				else x"42" when stateOp=stateOpTxC
+				else x"43" when stateOp=stateOpTxD
+				else x"44" when stateOp=stateOpTxE
+				else x"45" when stateOp=stateOpTxF
+				else x"50" when stateOp=stateOpTxbufA
+				else x"51" when stateOp=stateOpTxbufB
+				else x"52" when stateOp=stateOpTxbufC
+				else x"53" when stateOp=stateOpTxbufD
+				else x"54" when stateOp=stateOpTxbufE
+				else x"55" when stateOp=stateOpTxbufF
+				else x"56" when stateOp=stateOpTxbufG
+				else x"57" when stateOp=stateOpTxbufH
+				else x"58" when stateOp=stateOpTxbufI
+				else x"59" when stateOp=stateOpTxbufJ
+				else x"5A" when stateOp=stateOpTxbufK
+				else x"60" when stateOp=stateOpPrepRx
+				else x"70" when stateOp=stateOpRxA
+				else x"71" when stateOp=stateOpRxB
+				else x"72" when stateOp=stateOpRxC
+				else x"73" when stateOp=stateOpRxD
+				else x"80" when stateOp=stateOpCopyRxA
+				else x"81" when stateOp=stateOpCopyRxB
+				else x"90" when stateOp=stateOpPrepRxbuf
+				else x"A0" when stateOp=stateOpRxbufA
+				else x"A1" when stateOp=stateOpRxbufB
+				else x"A2" when stateOp=stateOpRxbufC
+				else x"A3" when stateOp=stateOpRxbufD
+				else x"A4" when stateOp=stateOpRxbufE
+				else x"B0" when stateOp=stateOpTxackA
+				else x"B1" when stateOp=stateOpTxackB
 				else x"FF";
 
 	process (reset, mclk, stateOp)
@@ -741,34 +719,33 @@ begin
 			dRxbuf <= (others => '0');
 			strbDRxbuf <= '0';
 
-			stepMovetoAngle_sig <= (others => '0');
-			stepSetRng_sig <= fls8;
-			stepSetCcwNotCw_sig <= fls8;
-			stepSetTstep_sig <= x"96";
-			laserSetL_sig <= (others => '0');
-			laserSetR_sig <= (others => '0');
-			tkclksrcSetTkstTkst_sig <= (others => '0');
-			featdetSetRng_sig <= fls8;
-			featdetSetThdNotCorner_sig <= fls8;
-			featdetSetThdDeltaNotAbs_sig <= fls8;
-			featdetSetCornerNtrg_sig <= x"000003E8";
-			featdetSetThdLvlFirst_sig <= (others => '0');
-			featdetSetThdLvlSecond_sig <= (others => '0');
-			camifSetRngRng_sig <= fls8;
-			camifSetFocusVcm_sig <= (others => '0');
-			camifSetTexpTexp_sig <= (others => '0');
-			camifSetRegAddr_sig <= (others => '0');
-			camifSetRegVal_sig <= (others => '0');
-			camifGetRegAddr_sig <= (others => '0');
-			camifModRegAddr_sig <= (others => '0');
-			camifModRegMask_sig <= (others => '0');
-			camifModRegVal_sig <= (others => '0');
-			camacqSetSampleFallNotRise_sig <= fls8;
 			camacqSetGrrdRng_sig <= fls8;
 			camacqSetGrrdRedNotGray_sig <= fls8;
 			camacqSetPvwRng_sig <= fls8;
 			camacqSetPvwRawNotBin_sig <= fls8;
 			camacqSetPvwGrayNotRgb_sig <= fls8;
+			camifSetRngRng_sig <= fls8;
+			camifSetRegAddr_sig <= (others => '0');
+			camifSetRegVal_sig <= (others => '0');
+			camifSetRegaddrAddr_sig <= (others => '0');
+			camifModRegAddr_sig <= (others => '0');
+			camifModRegMask_sig <= (others => '0');
+			camifModRegVal_sig <= (others => '0');
+			featdetSetRng_sig <= fls8;
+			featdetSetThdNotCorner_sig <= fls8;
+			featdetSetThdDeltaNotAbs_sig <= fls8;
+			featdetSetCornerLinNotLog_sig <= (others => '0');
+			featdetSetCornerThd_sig <= (others => '0');
+			featdetSetThdLvlFirst_sig <= (others => '0');
+			featdetSetThdLvlSecond_sig <= (others => '0');
+			laserSetL_sig <= (others => '0');
+			laserSetR_sig <= (others => '0');
+			stepMovetoAngle_sig <= (others => '0');
+			stepMovetoTstep_sig <= x"96";
+			stepSetRng_sig <= fls8;
+			stepSetCcwNotCw_sig <= fls8;
+			stepSetTstep_sig <= x"96";
+			tkclksrcSetTkstTkst_sig <= (others => '0');
 
 		elsif rising_edge(mclk) then
 			if stateOp=stateOpIdle then
@@ -861,7 +838,38 @@ begin
 				length := opbuf(ixOpbufLength) & opbuf(ixOpbufLength+1);
 
 				if opbuf(ixOpbufBuffer)=tixWBufferCmdretToHostif then
-					if ( 0=1 ) then
+					-- length: 2 bytes of CRC included, but excluded from CRC calculation
+					if length(1 downto 0)="00" then
+						lsb := "01";
+					elsif length(1 downto 0)="01" then
+						lsb := "10";
+					elsif length(1 downto 0)="10" then
+						lsb := "11";
+					else
+						lsb := "00";
+					end if;
+
+					wordcntLast := to_integer(unsigned(length(15 downto 2)));
+
+					if (wordcntLast>0 and length(1 downto 0)/="00") then
+						wordcntLast := wordcntLast - 1;
+					end if;
+
+					if wordcntLast=0 then
+						lsbCrcd <= lsb;
+					else
+						lsbCrcd <= "11";
+					end if;
+
+					if length(1 downto 0)="00" then
+						atxlen <= "00000000" & length(15 downto 2);
+					else
+						atxlen <= "00000000" & std_logic_vector(unsigned(length(15 downto 2)) + 1);
+					end if;
+
+					wordcnt := 0;
+
+					if ( (opbuf(ixOpbufController)=tixVControllerCamif and (opbuf(ixOpbufCommand)=tixVCamifCommandGetReg)) ) then
 
 						stateOp <= stateOpVoidinv;
 
@@ -871,43 +879,15 @@ begin
 								or (opbuf(ixOpbufController)=tixVControllerStep and (opbuf(ixOpbufCommand)=tixVStepCommandGetInfo))
 								or (opbuf(ixOpbufController)=tixVControllerTkclksrc and (opbuf(ixOpbufCommand)=tixVTkclksrcCommandGetTkst)) ) then
 
-						-- length: 2 bytes of CRC included, but excluded from CRC calculation
-						if length(1 downto 0)="00" then
-							lsb := "01";
-						elsif length(1 downto 0)="01" then
-							lsb := "10";
-						elsif length(1 downto 0)="10" then
-							lsb := "11";
-						else
-							lsb := "00";
-						end if;
-
-						wordcntLast := to_integer(unsigned(length(15 downto 2)));
-
-						if (wordcntLast>0 and length(1 downto 0)/="00") then
-							wordcntLast := wordcntLast - 1;
-						end if;
-
-						if wordcntLast=0 then
-							lsbCrcd <= lsb;
-						else
-							lsbCrcd <= "11";
-						end if;
-
-						if length(1 downto 0)="00" then
-							atxlen <= "00000000" & length(15 downto 2);
-						else
-							atxlen <= "00000000" & std_logic_vector(unsigned(length(15 downto 2)) + 1);
-						end if;
-
-						wordcnt := 0;
-
 						stateOp <= stateOpPrepTxA;
+
+					else
+						stateOp <= stateOpIdle;
 					end if;
 
 				elsif opbuf(ixOpbufBuffer)=tixWBufferHostifToCmdinv then
-					if ( (opbuf(ixOpbufController)=tixVControllerCamacq and (opbuf(ixOpbufCommand)=tixVCamacqCommandSetSample or opbuf(ixOpbufCommand)=tixVCamacqCommandSetGrrd or opbuf(ixOpbufCommand)=tixVCamacqCommandSetPvw))
-								or (opbuf(ixOpbufController)=tixVControllerCamif and (opbuf(ixOpbufCommand)=tixVCamifCommandSetRng or opbuf(ixOpbufCommand)=tixVCamifCommandSetFocus or opbuf(ixOpbufCommand)=tixVCamifCommandSetTexp or opbuf(ixOpbufCommand)=tixVCamifCommandSetReg or opbuf(ixOpbufCommand)=tixVCamifCommandModReg))
+					if ( (opbuf(ixOpbufController)=tixVControllerCamacq and (opbuf(ixOpbufCommand)=tixVCamacqCommandSetGrrd or opbuf(ixOpbufCommand)=tixVCamacqCommandSetPvw))
+								or (opbuf(ixOpbufController)=tixVControllerCamif and (opbuf(ixOpbufCommand)=tixVCamifCommandSetRng or opbuf(ixOpbufCommand)=tixVCamifCommandSetReg or opbuf(ixOpbufCommand)=tixVCamifCommandSetRegaddr or opbuf(ixOpbufCommand)=tixVCamifCommandModReg))
 								or (opbuf(ixOpbufController)=tixVControllerFeatdet and (opbuf(ixOpbufCommand)=tixVFeatdetCommandSet or opbuf(ixOpbufCommand)=tixVFeatdetCommandSetCorner or opbuf(ixOpbufCommand)=tixVFeatdetCommandSetThd or opbuf(ixOpbufCommand)=tixVFeatdetCommandTriggerThd))
 								or (opbuf(ixOpbufController)=tixVControllerLaser and (opbuf(ixOpbufCommand)=tixVLaserCommandSet))
 								or (opbuf(ixOpbufController)=tixVControllerStep and (opbuf(ixOpbufCommand)=tixVStepCommandMoveto or opbuf(ixOpbufCommand)=tixVStepCommandSet or opbuf(ixOpbufCommand)=tixVStepCommandZero))
@@ -1024,23 +1004,9 @@ begin
 							txbuf(2+i) <= featdetGetInfoTkst((4-i)*8-1 downto (3-i)*8);
 						end loop;
 					elsif opbuf(ixOpbufCommand)=tixVFeatdetCommandGetCornerinfo then
-						for i in 0 to 1 loop
-							txbuf(i) <= featdetGetCornerinfoScoreMinMsb((2-i)*8-1 downto (1-i)*8);
-						end loop;
-						for i in 0 to 3 loop
-							txbuf(2+i) <= featdetGetCornerinfoScoreMinLsb((4-i)*8-1 downto (3-i)*8);
-						end loop;
-						for i in 0 to 1 loop
-							txbuf(6+i) <= featdetGetCornerinfoScoreMaxMsb((2-i)*8-1 downto (1-i)*8);
-						end loop;
-						for i in 0 to 3 loop
-							txbuf(8+i) <= featdetGetCornerinfoScoreMaxLsb((4-i)*8-1 downto (3-i)*8);
-						end loop;
-						txbuf(12) <= featdetGetCornerinfoShift;
-						for i in 0 to 3 loop
-							txbuf(13+i) <= featdetGetCornerinfoNcorner((4-i)*8-1 downto (3-i)*8);
-						end loop;
-						txbuf(17) <= featdetGetCornerinfoThd;
+						txbuf(0) <= featdetGetCornerinfoShift;
+						txbuf(1) <= featdetGetCornerinfoScoreMin;
+						txbuf(2) <= featdetGetCornerinfoScoreMax;
 					end if;
 
 				elsif opbuf(ixOpbufController)=tixVControllerState then
@@ -1359,9 +1325,7 @@ begin
 
 			elsif stateOp=stateOpCopyRxA then
 				if opbuf(ixOpbufController)=tixVControllerCamacq then
-					if opbuf(ixOpbufCommand)=tixVCamacqCommandSetSample then
-						camacqSetSampleFallNotRise_sig <= rxbuf(0);
-					elsif opbuf(ixOpbufCommand)=tixVCamacqCommandSetGrrd then
+					if opbuf(ixOpbufCommand)=tixVCamacqCommandSetGrrd then
 						camacqSetGrrdRng_sig <= rxbuf(0);
 						camacqSetGrrdRedNotGray_sig <= rxbuf(1);
 					elsif opbuf(ixOpbufCommand)=tixVCamacqCommandSetPvw then
@@ -1373,22 +1337,14 @@ begin
 				elsif opbuf(ixOpbufController)=tixVControllerCamif then
 					if opbuf(ixOpbufCommand)=tixVCamifCommandSetRng then
 						camifSetRngRng_sig <= rxbuf(0);
-					elsif opbuf(ixOpbufCommand)=tixVCamifCommandSetFocus then
-						for i in 0 to 1 loop
-							camifSetFocusVcm_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(i);
-						end loop;
-					elsif opbuf(ixOpbufCommand)=tixVCamifCommandSetTexp then
-						for i in 0 to 1 loop
-							camifSetTexpTexp_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(i);
-						end loop;
 					elsif opbuf(ixOpbufCommand)=tixVCamifCommandSetReg then
 						for i in 0 to 1 loop
 							camifSetRegAddr_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(i);
 						end loop;
 						camifSetRegVal_sig <= rxbuf(2);
-					elsif opbuf(ixOpbufCommand)=tixVCamifCommandGetReg then
+					elsif opbuf(ixOpbufCommand)=tixVCamifCommandSetRegaddr then
 						for i in 0 to 1 loop
-							camifGetRegAddr_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(i);
+							camifSetRegaddrAddr_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(i);
 						end loop;
 					elsif opbuf(ixOpbufCommand)=tixVCamifCommandModReg then
 						for i in 0 to 1 loop
@@ -1404,9 +1360,8 @@ begin
 						featdetSetThdNotCorner_sig <= rxbuf(1);
 						featdetSetThdDeltaNotAbs_sig <= rxbuf(2);
 					elsif opbuf(ixOpbufCommand)=tixVFeatdetCommandSetCorner then
-						for i in 0 to 3 loop
-							featdetSetCornerNtrg_sig((4-i)*8-1 downto (3-i)*8) <= rxbuf(i);
-						end loop;
+						featdetSetCornerLinNotLog_sig <= rxbuf(0);
+						featdetSetCornerThd_sig <= rxbuf(1);
 					elsif opbuf(ixOpbufCommand)=tixVFeatdetCommandSetThd then
 						featdetSetThdLvlFirst_sig <= rxbuf(0);
 						featdetSetThdLvlSecond_sig <= rxbuf(1);
@@ -1427,6 +1382,7 @@ begin
 						for i in 0 to 1 loop
 							stepMovetoAngle_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(i);
 						end loop;
+						stepMovetoTstep_sig <= rxbuf(2);
 					elsif opbuf(ixOpbufCommand)=tixVStepCommandSet then
 						stepSetRng_sig <= rxbuf(0);
 						stepSetCcwNotCw_sig <= rxbuf(1);

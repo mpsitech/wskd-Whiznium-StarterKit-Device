@@ -1,8 +1,8 @@
 -- file I2c.vhd
 -- I2c other module implementation
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -21,7 +21,7 @@ entity I2c is
 		clkFastNotStd: std_logic := '1'; -- 1Mbps/400kbps vs. 100kbps
 		clkFastplusNotFast: std_logic := '0'; -- 1Mbps vs. 400kbps
 
-		devaddr: std_logic_vector(7 downto 0) := "01111000" -- 0x78, not 0x3C as in Linux version
+		devaddr: std_logic_vector(7 downto 0) := "01111000" -- 0x3C left-shifted by one
 	);
 	port (
 		reset: in std_logic;

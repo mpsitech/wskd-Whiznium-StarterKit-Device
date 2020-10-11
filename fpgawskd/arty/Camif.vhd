@@ -1,8 +1,8 @@
 -- file Camif.vhd
 -- Camif easy model controller implementation
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -26,26 +26,20 @@ entity Camif is
 
 		setRngRng: in std_logic_vector(7 downto 0);
 
-		reqInvSetFocus: in std_logic;
-		ackInvSetFocus: out std_logic;
-
-		setFocusVcm: in std_logic_vector(15 downto 0);
-
-		reqInvSetTexp: in std_logic;
-		ackInvSetTexp: out std_logic;
-
-		setTexpTexp: in std_logic_vector(15 downto 0);
-
 		reqInvSetReg: in std_logic;
 		ackInvSetReg: out std_logic;
 
 		setRegAddr: in std_logic_vector(15 downto 0);
 		setRegVal: in std_logic_vector(7 downto 0);
 
+		reqInvSetRegaddr: in std_logic;
+		ackInvSetRegaddr: out std_logic;
+
+		setRegaddrAddr: in std_logic_vector(15 downto 0);
+
 		reqInvGetReg: in std_logic;
 		ackInvGetReg: out std_logic;
 
-		getRegAddr: in std_logic_vector(15 downto 0);
 		getRegVal: out std_logic_vector(7 downto 0);
 
 		reqInvModReg: in std_logic;
@@ -99,13 +93,11 @@ architecture Camif of Camif is
 		);
 	end component;
 
-	component Spbram_v1_0_size2kB is
+	component Parrom is
 		port (
 			clk: in std_logic;
-
 			en: in std_logic;
 			we: in std_logic;
-
 			a: in std_logic_vector(10 downto 0);
 			drd: out std_logic_vector(7 downto 0);
 			dwr: in std_logic_vector(7 downto 0)
@@ -125,10 +117,11 @@ architecture Camif of Camif is
 	---- main operation (op)
 	type stateOp_t is (
 		stateOpInit,
-		stateOpPwupA, stateOpPwupB, stateOpPwupC, stateOpPwupD,
+		stateOpPrepA, stateOpPrepB, stateOpPrepC, stateOpPrepD,
 		stateOpLoadA, stateOpLoadB,
 		stateOpXfer,
 		stateOpStep,
+		stateOpPwupdnA, stateOpPwupdnB,
 		stateOpInv
 	);
 	signal stateOp: stateOp_t := stateOpInit;
@@ -137,9 +130,8 @@ architecture Camif of Camif is
 	signal rst_sig: std_logic;
 	signal pwdn_sig: std_logic;
 	signal ackInvSetRng_sig: std_logic;
-	signal ackInvSetFocus_sig: std_logic;
-	signal ackInvSetTexp_sig: std_logic;
 	signal ackInvSetReg_sig: std_logic;
+	signal ackInvSetRegaddr_sig: std_logic;
 	signal ackInvGetReg_sig: std_logic;
 	signal regVal: std_logic_vector(7 downto 0);
 	signal ackInvModReg_sig: std_logic;
@@ -182,7 +174,7 @@ begin
 			clkFastNotStd => '1', -- 1Mbps/400kbps vs. 100kbps
 			clkFastplusNotFast => '0', -- 1Mbps vs. 400kbps
 
-			devaddr => "01111000" -- 0x78, not 0x3C as in Linux version
+			devaddr => "01111000" -- 0x3C left-shifted by one
 		)
 		port map (
 			reset => reset,
@@ -201,13 +193,11 @@ begin
 			sda => sda
 		);
 
-	myParrom : Spbram_v1_0_size2kB
+	myParrom : Parrom
 		port map (
 			clk => mclk,
-
 			en => enParrom,
 			we => '0',
-
 			a => aParrom_vec,
 			drd => drdParrom,
 			dwr => (others => '0')
@@ -259,11 +249,10 @@ begin
 	pwdn <= pwdn_sig;
 
 	ackInvSetRng <= ackInvSetRng_sig;
-	ackInvSetFocus <= ackInvSetFocus_sig;
-	ackInvSetTexp <= ackInvSetTexp_sig;
 	ackInvSetReg <= ackInvSetReg_sig;
-	ackInvGetReg <= ackInvGetReg_sig;
+	ackInvSetRegaddr <= ackInvSetRegaddr_sig;
 
+	ackInvGetReg <= ackInvGetReg_sig;
 	getRegVal <= regVal;
 
 	ackInvModReg <= ackInvModReg_sig;
@@ -275,10 +264,10 @@ begin
 	reqI2c <= '1' when stateOp=stateOpXfer else '0';
 
 	stateOp_dbg <= x"00" when stateOp=stateOpInit
-				else x"10" when stateOp=stateOpPwupA
-				else x"11" when stateOp=stateOpPwupB
-				else x"12" when stateOp=stateOpPwupC
-				else x"13" when stateOp=stateOpPwupD
+				else x"10" when stateOp=stateOpPrepA
+				else x"11" when stateOp=stateOpPrepB
+				else x"12" when stateOp=stateOpPrepC
+				else x"13" when stateOp=stateOpPrepD
 				else x"20" when stateOp=stateOpLoadA
 				else x"21" when stateOp=stateOpLoadB
 				else x"30" when stateOp=stateOpXfer
@@ -290,23 +279,13 @@ begin
 	-- IP impl.op.rising --- BEGIN
 	process (reset, mclk, stateOp)
 		-- IP impl.op.vars --- RBEGIN
-		constant regFocusMsb: std_logic_vector(15 downto 0) := x"3603";
-		constant regFocusLsb: std_logic_vector(15 downto 0) := x"3602";
-
-		constant regTexpMsb: std_logic_vector(15 downto 0) := x"350C";
-		constant regTexpLsb: std_logic_vector(15 downto 0) := x"350D";
-
 		constant a0ParromSpec: natural := 1024;
 
-		variable regaddrLsb: std_logic_vector(15 downto 0);
-		variable lsb: std_logic_vector(7 downto 0);
+		variable prepdone: boolean;
 
-		variable cmdNotPrep: std_logic;
-		variable specNotGnr: std_logic; -- prep: general vs. 5MP, cmd: focus/Texp vs. set/get/mod 
+		variable specNotGnr: boolean; -- during preparation: general vs. 5MP
 
-		variable modNotGetSet: std_logic;
-
-		variable msbNotLsb: std_logic;
+		variable modNotGetSet: boolean;
 
 		variable bytecnt: natural range 0 to 4;
 
@@ -326,80 +305,78 @@ begin
 			stateOp <= stateOpInit;
 
 			rng_sig <= '0';
+
 			rst_sig <= '0';
 			pwdn_sig <= '1';
+
 			ackInvSetRng_sig <= '0';
-			ackInvSetFocus_sig <= '0';
-			ackInvSetTexp_sig <= '0';
 			ackInvSetReg_sig <= '0';
+			ackInvSetRegaddr_sig <= '0';
 			ackInvGetReg_sig <= '0';
 			regVal <= (others => '0');
 			ackInvModReg_sig <= '0';
+
 			i2cReadNotWrite <= '0';
 			i2cRegaddr <= (others => '0');
 			i2cSend <= (others => '0');
+
 			aParrom <= 0;
 
-			cmdNotPrep := '0';
+			prepdone := false;
 			-- IP impl.op.asyncrst --- REND
 
 		elsif rising_edge(mclk) then
 			if stateOp=stateOpInit then
 				-- IP impl.op.syncrst --- RBEGIN
 				ackInvSetRng_sig <= '0';
-				ackInvSetFocus_sig <= '0';
-				ackInvSetTexp_sig <= '0';
 				ackInvSetReg_sig <= '0';
+				ackInvSetRegaddr_sig <= '0';
 				ackInvGetReg_sig <= '0';
 				regVal <= (others => '0');
 				ackInvModReg_sig <= '0';
+
 				aParrom <= 0;
 				-- IP impl.op.syncrst --- REND
 
-				if cmdNotPrep='0' then
+				if not prepdone then
 					-- IP impl.op.init.prep --- IBEGIN
+					rst_sig <= '0';
 					pwdn_sig <= '0';
 
 					i := 0;
 					-- IP impl.op.init.prep --- IEND
 
-					stateOp <= stateOpPwupB;
+					stateOp <= stateOpPrepB;
 
-				elsif reqInvSetFocus='1' then
-					-- IP impl.op.init.invSetFocus --- IBEGIN
-					specNotGnr := '1';
-					msbNotLsb := '1';
+				elsif reqInvSetRng='1' then
+					if (setRngRng=fls8 and pwdn_sig='0') then
+						-- IP impl.op.init.pwdn --- IBEGIN
+						rng_sig <= '0';
+						pwdn_sig <= '1';
 
-					i2cReadNotWrite <= '0';
-					i2cRegaddr <= regFocusMsb;
-					i2cSend <= "00" & setFocusVcm(9 downto 4);
+						j := 0;
+						-- IP impl.op.init.pwdn --- IEND
 
-					regaddrLsb := regFocusLsb;
-					lsb := setFocusVcm(3 downto 0) & "0000";
-					-- IP impl.op.init.invSetFocus --- IEND
+						stateOp <= stateOpPwupdnB;
 
-					stateOp <= stateOpXfer;
+					elsif (setRngRng=tru8 and pwdn_sig='1') then
+						-- IP impl.op.init.pwup --- IBEGIN
+						pwdn_sig <= '0'; -- power up
 
-				elsif reqInvSetTexp='1' then
-					-- IP impl.op.init.invSetTexp --- IBEGIN
-					specNotGnr := '1';
-					msbNotLsb := '1';
+						j := 0;
+						-- IP impl.op.init.pwup --- IEND
 
-					i2cReadNotWrite <= '0';
-					i2cRegaddr <= regTexpMsb;
-					i2cSend <= "00" & setTexpTexp(13 downto 8);
+						stateOp <= stateOpPwupdnB;
 
-					regaddrLsb := regTexpLsb;
-					lsb := setTexpTexp(7 downto 0);
-					-- IP impl.op.init.invSetTexp --- IEND
+					else
+						ackInvSetRng_sig <= '1'; -- IP impl.op.init.invSetRng --- ILINE
 
-					stateOp <= stateOpXfer;
+						stateOp <= stateOpInv;
+					end if;
 
 				elsif reqInvSetReg='1' then
 					-- IP impl.op.init.invSetReg --- IBEGIN
-					modNotGetSet := '0';
-					specNotGnr := '0';
-					msbNotLsb := '0';
+					modNotGetSet := false;
 					
 					i2cReadNotWrite <= '0';
 					i2cRegaddr <= setRegAddr;
@@ -408,22 +385,27 @@ begin
 
 					stateOp <= stateOpXfer;
 
+				elsif reqInvSetRegaddr='1' then
+					-- IP impl.op.init.invSetRegaddr --- IBEGIN
+					i2cRegaddr <= setRegaddrAddr;
+
+					ackInvSetRegaddr_sig <= '1';
+					-- IP impl.op.init.invSetRegaddr --- IEND
+
+					stateOp <= stateOpInv;
+
 				elsif reqInvGetReg='1' then
 					-- IP impl.op.init.invGetReg --- IBEGIN
-					modNotGetSet := '0';
-					msbNotLsb := '0';
+					modNotGetSet := false;
 
 					i2cReadNotWrite <= '1';
-					i2cRegaddr <= getRegAddr;
 					-- IP impl.op.init.invGetReg --- IEND
 
 					stateOp <= stateOpXfer;
 
 				elsif reqInvModReg='1' then
 					-- IP impl.op.init.invModReg --- IBEGIN
-					modNotGetSet := '1';
-					specNotGnr := '0';
-					msbNotLsb := '0';
+					modNotGetSet := true;
 
 					i2cReadNotWrite <= '1';
 					i2cRegaddr <= modRegAddr;
@@ -432,35 +414,34 @@ begin
 					stateOp <= stateOpXfer;
 				end if;
 
-			elsif stateOp=stateOpPwupA then
+			elsif stateOp=stateOpPrepA then
 				if tkclk='1' then
 					if i=imax then
-						-- IP impl.op.pwupA.done --- IBEGIN
+						-- IP impl.op.prepA.done --- IBEGIN
 						rst_sig <= '1';
 
 						j := 0;
-						-- IP impl.op.pwupA.done --- IEND
+						-- IP impl.op.prepA.done --- IEND
 
-						stateOp <= stateOpPwupD;
+						stateOp <= stateOpPrepD;
 
 					else
-						stateOp <= stateOpPwupB;
+						stateOp <= stateOpPrepB;
 					end if;
 				end if;
 
-			elsif stateOp=stateOpPwupB then
+			elsif stateOp=stateOpPrepB then
 				if tkclk='0' then
-					i := i + 1; -- IP impl.op.pwupB.inc --- ILINE
+					i := i + 1; -- IP impl.op.prepB.inc --- ILINE
 
-					stateOp <= stateOpPwupA;
+					stateOp <= stateOpPrepA;
 				end if;
 
-			elsif stateOp=stateOpPwupC then
+			elsif stateOp=stateOpPrepC then
 				if tkclk='1' then
 					if j=jmax then
-						-- IP impl.op.pwupC.done --- IBEGIN
-						specNotGnr := '0';
-						msbNotLsb := '0';
+						-- IP impl.op.prepC.done --- IBEGIN
+						specNotGnr := false;
 	
 						i2cReadNotWrite <= '0';
 	
@@ -469,20 +450,20 @@ begin
 						bytecnt := 0;
 						
 						k := 0;
-						-- IP impl.op.pwupC.done --- IEND
+						-- IP impl.op.prepC.done --- IEND
 
 						stateOp <= stateOpLoadA;
 
 					else
-						stateOp <= stateOpPwupD;
+						stateOp <= stateOpPrepD;
 					end if;
 				end if;
 
-			elsif stateOp=stateOpPwupD then
+			elsif stateOp=stateOpPrepD then
 				if tkclk='0' then
-					j := j + 1; -- IP impl.op.pwupD.inc --- ILINE
+					j := j + 1; -- IP impl.op.prepD.inc --- ILINE
 
-					stateOp <= stateOpPwupC;
+					stateOp <= stateOpPrepC;
 				end if;
 
 			elsif stateOp=stateOpLoadA then
@@ -502,11 +483,11 @@ begin
 				-- IP impl.op.loadB.ext --- IEND
 
 				if (bytecnt=1 and drdParrom=x"00") then
-					if specNotGnr='0' then
+					if not specNotGnr then
 						-- IP impl.op.loadB.prepSpec --- IBEGIN
 						aParrom <= a0ParromSpec;
 						
-						specNotGnr := '1';
+						specNotGnr := true;
 
 						bytecnt := 0;
 						
@@ -516,11 +497,7 @@ begin
 						stateOp <= stateOpLoadA;
 
 					else
-						-- IP impl.op.loadB.done --- IBEGIN
-						rng_sig <= '1';
-
-						cmdNotPrep := '1';
-						-- IP impl.op.loadB.done --- IEND
+						prepdone := true; -- IP impl.op.loadB.done --- ILINE
 
 						stateOp <= stateOpInit;
 					end if;
@@ -567,7 +544,7 @@ begin
 
 			elsif stateOp=stateOpStep then
 				if i2cReadNotWrite='0' then
-					if cmdNotPrep='0' then
+					if not prepdone then
 						-- IP impl.op.step.prep --- IBEGIN
 						bytecnt := 0;
 
@@ -577,44 +554,19 @@ begin
 						stateOp <= stateOpLoadA;
 
 					else
-						if msbNotLsb='0' then
-							if specNotGnr='0' then
-								-- IP impl.op.step.gnrDone --- IBEGIN
-								if modNotGetSet='0' then
-									ackInvSetReg_sig <= '1';
-								else
-									ackInvModReg_sig <= '1';
-								end if;
-								-- IP impl.op.step.gnrDone --- IEND
-
-								stateOp <= stateOpInv;
-
-							else
-								-- IP impl.op.step.specDone --- IBEGIN
-								if regaddrLsb=regFocusLsb then
-									ackInvSetFocus_sig <= '1';
-								else
-									ackInvSetTexp_sig <= '1';
-								end if;
-								-- IP impl.op.step.specDone --- IEND
-
-								stateOp <= stateOpInv;
-							end if;
-
+						-- IP impl.op.step.cmdDone --- IBEGIN
+						if not modNotGetSet then
+							ackInvSetReg_sig <= '1';
 						else
-							-- IP impl.op.step.lsb --- IBEGIN
-							msbNotLsb := '0';
-
-							i2cRegaddr <= regaddrLsb;
-							i2cSend <= lsb;
-							-- IP impl.op.step.lsb --- IEND
-
-							stateOp <= stateOpXfer;
+							ackInvModReg_sig <= '1';
 						end if;
+						-- IP impl.op.step.cmdDone --- IEND
+
+						stateOp <= stateOpInv;
 					end if;
 
 				else
-					if modNotGetSet='0' then
+					if not modNotGetSet then
 						-- IP impl.op.step.get --- IBEGIN
 						regVal <= i2cRecv;
 
@@ -633,8 +585,31 @@ begin
 					end if;
 				end if;
 
+			elsif stateOp=stateOpPwupdnA then
+				if tkclk='1' then
+					if j=jmax then
+						-- IP impl.op.pwupdnA.done --- IBEGIN
+						rng_sig <= not pwdn_sig;
+
+						ackInvSetRng_sig <= '1';
+						-- IP impl.op.pwupdnA.done --- IEND
+
+						stateOp <= stateOpInv;
+
+					else
+						stateOp <= stateOpPwupdnB;
+					end if;
+				end if;
+
+			elsif stateOp=stateOpPwupdnB then
+				if tkclk='0' then
+					j := j + 1; -- IP impl.op.pwupdnB.inc --- ILINE
+
+					stateOp <= stateOpPwupdnA;
+				end if;
+
 			elsif stateOp=stateOpInv then
-				if ((reqInvSetRng='0' and ackInvSetRng_sig='1') or (reqInvSetFocus='0' and ackInvSetFocus_sig='1') or (reqInvSetTexp='0' and ackInvSetTexp_sig='1') or (reqInvSetReg='0' and ackInvSetReg_sig='1') or (reqInvGetReg='0' and ackInvGetReg_sig='1') or (reqInvModReg='0' and ackInvModReg_sig='1')) then
+				if ((reqInvSetRng='0' and ackInvSetRng_sig='1') or (reqInvSetReg='0' and ackInvSetReg_sig='1') or (reqInvSetRegaddr='0' and ackInvSetRegaddr_sig='1') or (reqInvGetReg='0' and ackInvGetReg_sig='1') or (reqInvModReg='0' and ackInvModReg_sig='1')) then
 					stateOp <= stateOpInit;
 				end if;
 			end if;

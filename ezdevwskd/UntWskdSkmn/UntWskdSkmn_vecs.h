@@ -2,8 +2,8 @@
 	* \file UntWskdSkmn_vecs.h
 	* MPSI starter kit mainboard unit vectors (declarations)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #ifndef UNTWSKDSKMN_VECS_H

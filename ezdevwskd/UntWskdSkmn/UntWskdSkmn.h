@@ -2,8 +2,8 @@
 	* \file UntWskdSkmn.h
 	* MPSI starter kit mainboard unit (declarations)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #ifndef UNTWSKDSKMN_H
@@ -18,7 +18,7 @@
 #include "CtrWskdSkmnState.h"
 #include "CtrWskdSkmnStep.h"
 
-// IP custInclude --- INSERT
+// IP include.cust --- INSERT
 
 /**
 	* UntWskdSkmn
@@ -34,7 +34,7 @@ public:
 	~UntWskdSkmn();
 
 public:
-	// IP custVar --- INSERT
+	// IP vars.cust --- INSERT
 
 public:
 	CtrWskdSkmnChrono* chrono;

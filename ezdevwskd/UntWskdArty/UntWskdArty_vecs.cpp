@@ -2,8 +2,8 @@
 	* \file UntWskdArty_vecs.cpp
 	* Digilent Arty Z7 unit vectors (implementation)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #include "UntWskdArty_vecs.h"

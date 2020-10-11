@@ -2,8 +2,8 @@
 	* \file CtrWskdArtyCamif.h
 	* camif controller (declarations)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #ifndef CTRWSKDARTYCAMIF_H
@@ -28,11 +28,10 @@ public:
 
 	public:
 		static const Sbecore::utinyint SETRNG = 0x00;
-		static const Sbecore::utinyint SETFOCUS = 0x01;
-		static const Sbecore::utinyint SETTEXP = 0x02;
-		static const Sbecore::utinyint SETREG = 0x03;
-		static const Sbecore::utinyint GETREG = 0x04;
-		static const Sbecore::utinyint MODREG = 0x05;
+		static const Sbecore::utinyint SETREG = 0x01;
+		static const Sbecore::utinyint SETREGADDR = 0x02;
+		static const Sbecore::utinyint GETREG = 0x03;
+		static const Sbecore::utinyint MODREG = 0x04;
 
 		static Sbecore::utinyint getTix(const std::string& sref);
 		static std::string getSref(const Sbecore::utinyint tix);
@@ -56,17 +55,14 @@ public:
 	static Dbecore::Cmd* getNewCmdSetRng();
 	void setRng(const bool rng);
 
-	static Dbecore::Cmd* getNewCmdSetFocus();
-	void setFocus(const Sbecore::usmallint vcm);
-
-	static Dbecore::Cmd* getNewCmdSetTexp();
-	void setTexp(const Sbecore::usmallint Texp);
-
 	static Dbecore::Cmd* getNewCmdSetReg();
 	void setReg(const Sbecore::usmallint addr, const Sbecore::utinyint val);
 
+	static Dbecore::Cmd* getNewCmdSetRegaddr();
+	void setRegaddr(const Sbecore::usmallint addr);
+
 	static Dbecore::Cmd* getNewCmdGetReg();
-	void getReg(const Sbecore::usmallint addr, Sbecore::utinyint& val);
+	void getReg(Sbecore::utinyint& val);
 
 	static Dbecore::Cmd* getNewCmdModReg();
 	void modReg(const Sbecore::usmallint addr, const Sbecore::utinyint mask, const Sbecore::utinyint val);

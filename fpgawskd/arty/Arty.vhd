@@ -1,8 +1,8 @@
 -- file Arty.vhd
 -- Digilent Arty Z7 global constants and types
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -47,18 +47,16 @@ package Arty is
 	constant tixWBufferPvwabufCamacqToHostif: std_logic_vector(7 downto 0) := x"08";
 	constant tixWBufferPvwbbufCamacqToHostif: std_logic_vector(7 downto 0) := x"10";
 
-	constant tixVCamacqCommandSetSample: std_logic_vector(7 downto 0) := x"00";
-	constant tixVCamacqCommandSetGrrd: std_logic_vector(7 downto 0) := x"01";
-	constant tixVCamacqCommandGetGrrdinfo: std_logic_vector(7 downto 0) := x"02";
-	constant tixVCamacqCommandSetPvw: std_logic_vector(7 downto 0) := x"03";
-	constant tixVCamacqCommandGetPvwinfo: std_logic_vector(7 downto 0) := x"04";
+	constant tixVCamacqCommandSetGrrd: std_logic_vector(7 downto 0) := x"00";
+	constant tixVCamacqCommandGetGrrdinfo: std_logic_vector(7 downto 0) := x"01";
+	constant tixVCamacqCommandSetPvw: std_logic_vector(7 downto 0) := x"02";
+	constant tixVCamacqCommandGetPvwinfo: std_logic_vector(7 downto 0) := x"03";
 
 	constant tixVCamifCommandSetRng: std_logic_vector(7 downto 0) := x"00";
-	constant tixVCamifCommandSetFocus: std_logic_vector(7 downto 0) := x"01";
-	constant tixVCamifCommandSetTexp: std_logic_vector(7 downto 0) := x"02";
-	constant tixVCamifCommandSetReg: std_logic_vector(7 downto 0) := x"03";
-	constant tixVCamifCommandGetReg: std_logic_vector(7 downto 0) := x"04";
-	constant tixVCamifCommandModReg: std_logic_vector(7 downto 0) := x"05";
+	constant tixVCamifCommandSetReg: std_logic_vector(7 downto 0) := x"01";
+	constant tixVCamifCommandSetRegaddr: std_logic_vector(7 downto 0) := x"02";
+	constant tixVCamifCommandGetReg: std_logic_vector(7 downto 0) := x"03";
+	constant tixVCamifCommandModReg: std_logic_vector(7 downto 0) := x"04";
 
 	constant tixVFeatdetCommandSet: std_logic_vector(7 downto 0) := x"00";
 	constant tixVFeatdetCommandGetInfo: std_logic_vector(7 downto 0) := x"01";

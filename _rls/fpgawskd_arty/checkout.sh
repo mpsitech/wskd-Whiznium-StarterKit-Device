@@ -2,8 +2,8 @@
 # file checkout.sh
 # checkout script for Wskd embedded system code, release fpgawskd_arty
 # author Catherine Johnson
-# date created: 16 May 2020
-# modified: 16 May 2020
+# date created: 6 Oct 2020
+# modified: 6 Oct 2020
 
 export set FPGAROOT=
 

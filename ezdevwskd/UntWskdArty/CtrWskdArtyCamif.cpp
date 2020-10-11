@@ -2,8 +2,8 @@
 	* \file CtrWskdArtyCamif.cpp
 	* camif controller (implementation)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #include "CtrWskdArtyCamif.h"
@@ -23,9 +23,8 @@ utinyint CtrWskdArtyCamif::VecVCommand::getTix(
 	string s = StrMod::lc(sref);
 
 	if (s == "setrng") return SETRNG;
-	else if (s == "setfocus") return SETFOCUS;
-	else if (s == "settexp") return SETTEXP;
 	else if (s == "setreg") return SETREG;
+	else if (s == "setregaddr") return SETREGADDR;
 	else if (s == "getreg") return GETREG;
 	else if (s == "modreg") return MODREG;
 
@@ -36,9 +35,8 @@ string CtrWskdArtyCamif::VecVCommand::getSref(
 			const utinyint tix
 		) {
 	if (tix == SETRNG) return("setRng");
-	else if (tix == SETFOCUS) return("setFocus");
-	else if (tix == SETTEXP) return("setTexp");
 	else if (tix == SETREG) return("setReg");
+	else if (tix == SETREGADDR) return("setRegaddr");
 	else if (tix == GETREG) return("getReg");
 	else if (tix == MODREG) return("modReg");
 
@@ -50,7 +48,7 @@ void CtrWskdArtyCamif::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {SETRNG,SETFOCUS,SETTEXP,SETREG,GETREG,MODREG};
+	std::set<utinyint> items = {SETRNG,SETREG,SETREGADDR,GETREG,MODREG};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -88,9 +86,8 @@ Cmd* CtrWskdArtyCamif::getNewCmd(
 	Cmd* cmd = NULL;
 
 	if (tixVCommand == VecVCommand::SETRNG) cmd = getNewCmdSetRng();
-	else if (tixVCommand == VecVCommand::SETFOCUS) cmd = getNewCmdSetFocus();
-	else if (tixVCommand == VecVCommand::SETTEXP) cmd = getNewCmdSetTexp();
 	else if (tixVCommand == VecVCommand::SETREG) cmd = getNewCmdSetReg();
+	else if (tixVCommand == VecVCommand::SETREGADDR) cmd = getNewCmdSetRegaddr();
 	else if (tixVCommand == VecVCommand::GETREG) cmd = getNewCmdGetReg();
 	else if (tixVCommand == VecVCommand::MODREG) cmd = getNewCmdModReg();
 
@@ -116,54 +113,6 @@ void CtrWskdArtyCamif::setRng(
 	} else {
 		delete cmd;
 		throw DbeException("error running setRng");
-	};
-
-	delete cmd;
-};
-
-Cmd* CtrWskdArtyCamif::getNewCmdSetFocus() {
-	Cmd* cmd = new Cmd(0x02, VecVCommand::SETFOCUS, Cmd::VecVRettype::VOID);
-
-	cmd->addParInv("vcm", Par::VecVType::USMALLINT);
-
-	return cmd;
-};
-
-void CtrWskdArtyCamif::setFocus(
-			const usmallint vcm
-		) {
-	Cmd* cmd = getNewCmdSetFocus();
-
-	cmd->parsInv["vcm"].setUsmallint(vcm);
-
-	if (unt->runCmd(cmd)) {
-	} else {
-		delete cmd;
-		throw DbeException("error running setFocus");
-	};
-
-	delete cmd;
-};
-
-Cmd* CtrWskdArtyCamif::getNewCmdSetTexp() {
-	Cmd* cmd = new Cmd(0x02, VecVCommand::SETTEXP, Cmd::VecVRettype::VOID);
-
-	cmd->addParInv("Texp", Par::VecVType::USMALLINT);
-
-	return cmd;
-};
-
-void CtrWskdArtyCamif::setTexp(
-			const usmallint Texp
-		) {
-	Cmd* cmd = getNewCmdSetTexp();
-
-	cmd->parsInv["Texp"].setUsmallint(Texp);
-
-	if (unt->runCmd(cmd)) {
-	} else {
-		delete cmd;
-		throw DbeException("error running setTexp");
 	};
 
 	delete cmd;
@@ -196,10 +145,32 @@ void CtrWskdArtyCamif::setReg(
 	delete cmd;
 };
 
-Cmd* CtrWskdArtyCamif::getNewCmdGetReg() {
-	Cmd* cmd = new Cmd(0x02, VecVCommand::GETREG, Cmd::VecVRettype::IMMSNG);
+Cmd* CtrWskdArtyCamif::getNewCmdSetRegaddr() {
+	Cmd* cmd = new Cmd(0x02, VecVCommand::SETREGADDR, Cmd::VecVRettype::VOID);
 
 	cmd->addParInv("addr", Par::VecVType::USMALLINT);
+
+	return cmd;
+};
+
+void CtrWskdArtyCamif::setRegaddr(
+			const usmallint addr
+		) {
+	Cmd* cmd = getNewCmdSetRegaddr();
+
+	cmd->parsInv["addr"].setUsmallint(addr);
+
+	if (unt->runCmd(cmd)) {
+	} else {
+		delete cmd;
+		throw DbeException("error running setRegaddr");
+	};
+
+	delete cmd;
+};
+
+Cmd* CtrWskdArtyCamif::getNewCmdGetReg() {
+	Cmd* cmd = new Cmd(0x02, VecVCommand::GETREG, Cmd::VecVRettype::IMMSNG);
 
 	cmd->addParRet("val", Par::VecVType::UTINYINT);
 
@@ -207,12 +178,9 @@ Cmd* CtrWskdArtyCamif::getNewCmdGetReg() {
 };
 
 void CtrWskdArtyCamif::getReg(
-			const usmallint addr
-			, utinyint& val
+			utinyint& val
 		) {
 	Cmd* cmd = getNewCmdGetReg();
-
-	cmd->parsInv["addr"].setUsmallint(addr);
 
 	if (unt->runCmd(cmd)) {
 		val = cmd->parsRet["val"].getUtinyint();

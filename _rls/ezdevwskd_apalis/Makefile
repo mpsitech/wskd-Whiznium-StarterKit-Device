@@ -1,8 +1,8 @@
 # file Makefile
 # make file for Wskd device access library, release ezdevwskd_apalis(linux cross-compilation)
 # author Catherine Johnson
-# date created: 16 May 2020
-# modified: 16 May 2020
+# date created: 6 Oct 2020
+# modified: 6 Oct 2020
 
 SRCROOT = ${WHIZROOT}/src
 LIBROOT = ${SYSROOT}${WHIZROOT}/lib

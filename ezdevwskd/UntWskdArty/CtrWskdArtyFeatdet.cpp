@@ -2,8 +2,8 @@
 	* \file CtrWskdArtyFeatdet.cpp
 	* featdet controller (implementation)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #include "CtrWskdArtyFeatdet.h"
@@ -233,36 +233,24 @@ void CtrWskdArtyFeatdet::getInfo(
 Cmd* CtrWskdArtyFeatdet::getNewCmdGetCornerinfo() {
 	Cmd* cmd = new Cmd(0x03, VecVCommand::GETCORNERINFO, Cmd::VecVRettype::STATSNG);
 
-	cmd->addParRet("scoreMinMsb", Par::VecVType::USMALLINT);
-	cmd->addParRet("scoreMinLsb", Par::VecVType::UINT);
-	cmd->addParRet("scoreMaxMsb", Par::VecVType::USMALLINT);
-	cmd->addParRet("scoreMaxLsb", Par::VecVType::UINT);
 	cmd->addParRet("shift", Par::VecVType::UTINYINT);
-	cmd->addParRet("Ncorner", Par::VecVType::UINT);
-	cmd->addParRet("thd", Par::VecVType::UTINYINT);
+	cmd->addParRet("scoreMin", Par::VecVType::UTINYINT);
+	cmd->addParRet("scoreMax", Par::VecVType::UTINYINT);
 
 	return cmd;
 };
 
 void CtrWskdArtyFeatdet::getCornerinfo(
-			usmallint& scoreMinMsb
-			, uint& scoreMinLsb
-			, usmallint& scoreMaxMsb
-			, uint& scoreMaxLsb
-			, utinyint& shift
-			, uint& Ncorner
-			, utinyint& thd
+			utinyint& shift
+			, utinyint& scoreMin
+			, utinyint& scoreMax
 		) {
 	Cmd* cmd = getNewCmdGetCornerinfo();
 
 	if (unt->runCmd(cmd)) {
-		scoreMinMsb = cmd->parsRet["scoreMinMsb"].getUsmallint();
-		scoreMinLsb = cmd->parsRet["scoreMinLsb"].getUint();
-		scoreMaxMsb = cmd->parsRet["scoreMaxMsb"].getUsmallint();
-		scoreMaxLsb = cmd->parsRet["scoreMaxLsb"].getUint();
 		shift = cmd->parsRet["shift"].getUtinyint();
-		Ncorner = cmd->parsRet["Ncorner"].getUint();
-		thd = cmd->parsRet["thd"].getUtinyint();
+		scoreMin = cmd->parsRet["scoreMin"].getUtinyint();
+		scoreMax = cmd->parsRet["scoreMax"].getUtinyint();
 	} else {
 		delete cmd;
 		throw DbeException("error running getCornerinfo");
@@ -274,17 +262,20 @@ void CtrWskdArtyFeatdet::getCornerinfo(
 Cmd* CtrWskdArtyFeatdet::getNewCmdSetCorner() {
 	Cmd* cmd = new Cmd(0x03, VecVCommand::SETCORNER, Cmd::VecVRettype::VOID);
 
-	cmd->addParInv("Ntrg", Par::VecVType::UINT);
+	cmd->addParInv("linNotLog", Par::VecVType::_BOOL);
+	cmd->addParInv("thd", Par::VecVType::UTINYINT);
 
 	return cmd;
 };
 
 void CtrWskdArtyFeatdet::setCorner(
-			const uint Ntrg
+			const bool linNotLog
+			, const utinyint thd
 		) {
 	Cmd* cmd = getNewCmdSetCorner();
 
-	cmd->parsInv["Ntrg"].setUint(Ntrg);
+	cmd->parsInv["linNotLog"].setBool(linNotLog);
+	cmd->parsInv["thd"].setUtinyint(thd);
 
 	if (unt->runCmd(cmd)) {
 	} else {

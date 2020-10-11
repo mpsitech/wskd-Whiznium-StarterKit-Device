@@ -103,10 +103,8 @@
 	- ectr	arty_ip;arty_ip_AXI;top		camif	camera control (OV5640 via I2C)	
 	- oth	arty_ip;arty_ip_AXI;top;camif		i2c		
 	- mnfprim	arty_ip;arty_ip_AXI;top;camif;i2c	IOBUF	iobuf		
-	- oth	arty_ip;arty_ip_AXI;top;camif	spbram_v1_0	parrom	OV5640 register initialization parameters ROM	
-		- ImeIAMModulePar.x1SrefKKey	Val			
-		- size	2			
-		- ImeIAMModulePar.end				
+	- oth	arty_ip;arty_ip_AXI;top;camif		parrom	OV5640 register initialization parameters ROM	
+	- mnfprim	arty_ip;arty_ip_AXI;top;camif;parrom	RAMB16_S9	bram		
 	- ectr	arty_ip;arty_ip_AXI;top		featdet	feature detection	
 	- oth	arty_ip;arty_ip_AXI;top;featdet	dsp48_v3_0_aMultB	xsqr0		
 		- ImeIAMModulePar.x1SrefKKey	Val			

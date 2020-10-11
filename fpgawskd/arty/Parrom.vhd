@@ -1,8 +1,8 @@
--- file Parrom_size2kB.vhd
--- Parrom_size2kB spbram_v1_0 implementation
+-- file Parrom.vhd
+-- Parrom other module implementation
 -- author Catherine Johnson
--- date created: 18 Nov 2019
--- date modified: 18 Nov 2019
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -14,20 +14,29 @@ use unisim.vcomponents.all;
 use work.Dbecore.all;
 use work.Arty.all;
 
-entity Parrom_size2kB is
+entity Parrom is
 	port (
 		clk: in std_logic;
-
 		en: in std_logic;
 		we: in std_logic;
-
 		a: in std_logic_vector(10 downto 0);
 		drd: out std_logic_vector(7 downto 0);
 		dwr: in std_logic_vector(7 downto 0)
 	);
-end Parrom_size2kB;
+end Parrom;
 
-architecture Parrom_size2kB of Parrom_size2kB is
+architecture Parrom of Parrom is
+
+	------------------------------------------------------------------------
+	-- component declarations
+	------------------------------------------------------------------------
+
+	------------------------------------------------------------------------
+	-- signal declarations
+	------------------------------------------------------------------------
+
+	---- other
+	-- IP sigs.oth.cust --- INSERT
 
 begin
 
@@ -45,7 +54,7 @@ begin
 			INIT_04 => x"0000063C0098053C0028043C0034013C00DE6050000122360040343600033636",
 			INIT_05 => x"00001238001011380000103800400B3C009C0A3C001C093C0000083C0007073C",
 			INIT_06 => x"0000004300002E3000580E3000FF043000000030001A05400002014000640837",
-			INIT_07 => x"0060113A00261E3A00301B3A0028103A00300F3A00A7005000000E4400031F50",
+			INIT_07 => x"0060113A00261E3A00301B3A0028103A00300F3A00A7005000000E4400011F50",
 			INIT_08 => x"000C06580026055800120458000F0358000F0258001401580023005800141F3A",
 			INIT_09 => x"00000E5800030D5800080C58000D0B5800080A58000509580005085800080758",
 			INIT_0A => x"0003165800011558000014580003135800071258000911580003105800000F58",
@@ -76,11 +85,18 @@ begin
 			ADDR => a,
 			CLK => clk,
 			DI => dwr,
-			DIP => "0",
+			DIP => (others => '0'),
 			EN => en,
 			SSR => '0',
 			WE => we
 		);
 
-end Parrom_size2kB;
+	------------------------------------------------------------------------
+	-- implementation: other 
+	------------------------------------------------------------------------
+
+	
+	-- IP impl.oth.cust --- INSERT
+
+end Parrom;
 

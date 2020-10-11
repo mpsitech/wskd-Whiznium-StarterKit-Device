@@ -2,8 +2,8 @@
 	* \file UntWskdArty.h
 	* Digilent Arty Z7 unit (declarations)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #ifndef UNTWSKDARTY_H
@@ -21,7 +21,7 @@
 #include "CtrWskdArtyStep.h"
 #include "CtrWskdArtyTkclksrc.h"
 
-// IP custInclude --- INSERT
+// IP include.cust --- INSERT
 
 /**
 	* UntWskdArty
@@ -30,20 +30,20 @@ class UntWskdArty : public UntWskd {
 
 public:
 	static constexpr unsigned int sizeRxbuf = 6;
-	static constexpr unsigned int sizeTxbuf = 20;
+	static constexpr unsigned int sizeTxbuf = 8;
 
 public:
 	UntWskdArty();
 	~UntWskdArty();
 
 public:
-	// IP custVar --- IBEGIN
+	// IP vars.cust --- IBEGIN
 	std::string path;
 	int fd;
 
 	bool histNotDump;
 	std::vector<std::string> hist;
-	// IP custVar --- IEND
+	// IP vars.cust --- IEND
 
 public:
 	CtrWskdArtyCamacq* camacq;

@@ -1,8 +1,8 @@
 -- file Camacq.vhd
 -- Camacq easy model controller implementation
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -16,11 +16,7 @@ entity Camacq is
 		reset: in std_logic;
 		mclk: in std_logic;
 		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
-
-		reqInvSetSample: in std_logic;
-		ackInvSetSample: out std_logic;
-
-		setSampleFallNotRise: in std_logic_vector(7 downto 0);
+		btnPhase: in std_logic;
 
 		reqInvSetGrrd: in std_logic;
 		ackInvSetGrrd: out std_logic;
@@ -41,58 +37,57 @@ entity Camacq is
 		getPvwinfoTixVPvwbufstate: out std_logic_vector(7 downto 0);
 		getPvwinfoTkst: out std_logic_vector(31 downto 0);
 
-		reqPvwabufToHostif: in std_logic;
-
-		reqGrrdefbufToFeatdet: in std_logic;
-
 		reqGrrdabbufToFeatdet: in std_logic;
 
+		reqPvwabufToHostif: in std_logic;
+
+		reqGrrdcdbufToFeatdet: in std_logic;
+
 		reqPvwbbufToHostif: in std_logic;
+		ackPvwbbufToHostif: out std_logic;
 
 		ackGrrdabbufToFeatdet: out std_logic;
 
-		ackGrrdefbufToFeatdet: out std_logic;
+		ackGrrdcdbufToFeatdet: out std_logic;
 
 		ackPvwabufToHostif: out std_logic;
-
-		ackPvwbbufToHostif: out std_logic;
-
-		dneGrrdefbufToFeatdet: in std_logic;
-
 		dnePvwabufToHostif: in std_logic;
+
+		dneGrrdcdbufToFeatdet: in std_logic;
 
 		dnePvwbbufToHostif: in std_logic;
 
 		dneGrrdabbufToFeatdet: in std_logic;
 
-		avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
-		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
 		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
+		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
+		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
 		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
+
+		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 
 		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
 
 		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
-		dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
-
 		dPvwabufToHostif: out std_logic_vector(31 downto 0);
-		strbDPvwabufToHostif: in std_logic;
-
-		strbDGrrdefbufToFeatdet: in std_logic;
-
-		strbDPvwbbufToHostif: in std_logic;
 
 		strbDGrrdabbufToFeatdet: in std_logic;
 
-		reqGrrdcdbufToFeatdet: in std_logic;
-		ackGrrdcdbufToFeatdet: out std_logic;
-		dneGrrdcdbufToFeatdet: in std_logic;
+		strbDPvwabufToHostif: in std_logic;
 
-		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
-
-		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 		strbDGrrdcdbufToFeatdet: in std_logic;
+
+		strbDPvwbbufToHostif: in std_logic;
+
+		reqGrrdefbufToFeatdet: in std_logic;
+		ackGrrdefbufToFeatdet: out std_logic;
+		dneGrrdefbufToFeatdet: in std_logic;
+
+		avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
+
+		dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
+		strbDGrrdefbufToFeatdet: in std_logic;
 
 		pclk: in std_logic;
 		href: in std_logic;
@@ -107,7 +102,13 @@ entity Camacq is
 		d8: in std_logic;
 		d9: in std_logic;
 
+		cntFallA_dbg: out std_logic_vector(7 downto 0);
+		cntRiseA_dbg: out std_logic_vector(7 downto 0);
+		cntFallB_dbg: out std_logic_vector(7 downto 0);
+		cntRiseB_dbg: out std_logic_vector(7 downto 0);
+
 		strb_dbg: out std_logic_vector(5 downto 0);
+		stateAlign_dbg: out std_logic_vector(7 downto 0);
 		stateGrrd_dbg: out std_logic_vector(7 downto 0);
 		stateGrrdabbufB_dbg: out std_logic_vector(7 downto 0);
 		stateGrrdacc_dbg: out std_logic_vector(7 downto 0);
@@ -121,7 +122,8 @@ entity Camacq is
 		statePvwbufB_dbg: out std_logic_vector(7 downto 0);
 		statePvwrawgray_dbg: out std_logic_vector(7 downto 0);
 		statePvwrawrgb_dbg: out std_logic_vector(7 downto 0);
-		stateSample_dbg: out std_logic_vector(7 downto 0)
+		stateSample_dbg: out std_logic_vector(7 downto 0);
+		stateTag_dbg: out std_logic_vector(7 downto 0)
 	);
 end Camacq;
 
@@ -215,6 +217,27 @@ architecture Camacq of Camacq is
 	constant tixVPvwbufstateEmpty: std_logic_vector(7 downto 0) := x"01";
 	constant tixVPvwbufstateAbuf: std_logic_vector(7 downto 0) := x"02";
 	constant tixVPvwbufstateBbuf: std_logic_vector(7 downto 0) := x"03";
+
+	---- pixel clock alignment (align)
+	type stateAlign_t is (
+		stateAlignInit,
+		stateAlignCountA, stateAlignCountB, stateAlignCountC,
+		stateAlignRun
+	);
+	signal stateAlign: stateAlign_t := stateAlignInit;
+
+	constant cntmax: natural := 8;
+
+	signal cntFallA: natural range 0 to cntmax;
+	signal cntRiseA: natural range 0 to cntmax;
+	signal cntFallB: natural range 0 to cntmax;
+	signal cntRiseB: natural range 0 to cntmax;
+
+	type phase_t is (phaseFallA, phaseRiseA, phaseFallB, phaseRiseB);
+	signal phase: phase_t;
+	signal pclk_shift: std_logic;
+
+	-- IP sigs.align.cust --- INSERT
 
 	---- gray/red operation, also managing grrd{ab/cd/ef}buf (grrd)
 	type stateGrrd_t is (
@@ -318,26 +341,9 @@ architecture Camacq of Camacq is
 		stateOpInit,
 		stateOpInvGrrd,
 		stateOpInvPvw,
-		stateOpInv,
-		stateOpFrameA, stateOpFrameB,
-		stateOpRowA, stateOpRowB, stateOpRowC, stateOpRowD,
-		stateOpColA, stateOpColB
+		stateOpInv
 	);
 	signal stateOp: stateOp_t := stateOpInit;
-
-	signal strbFrame: std_logic;
-
-	signal strbRow120: std_logic;
-	signal strbRow192: std_logic;
-	signal strbRow768: std_logic;
-	signal strbRow960: std_logic;
-
-	signal strbCol160N1: std_logic;
-	signal strbCol256N3: std_logic;
-	signal strbCol1024N3: std_logic;
-	signal strbCol1024N9: std_logic;
-	signal strbCol1280: std_logic;
-	signal strbCol1280N9: std_logic;
 
 	signal ackInvSetGrrd_sig: std_logic;
 	signal ackInvSetPvw_sig: std_logic;
@@ -510,19 +516,68 @@ architecture Camacq of Camacq is
 
 	-- IP sigs.pvwrawrgb.cust --- INSERT
 
-	---- camera data sampling at rising or falling mclk edge (sample)
+	---- camera data sampling at every other rising or falling mclk edge (sample)
 	type stateSample_t is (
 		stateSampleInit,
-		stateSampleInv,
-		stateSampleRun
+		stateSampleRunA, stateSampleRunB
 	);
 	signal stateSample: stateSample_t := stateSampleInit;
 
-	signal ackInvSetSample_sig: std_logic;
+	signal vsync_sig: std_logic;
+	signal vsync_shift: std_logic;
+
+	signal href_sig: std_logic;
+	signal href_shift: std_logic;
+
 	signal d: std_logic_vector(7 downto 0);
 	signal d_shift: std_logic_vector(7 downto 0);
 
 	-- IP sigs.sample.cust --- INSERT
+
+	---- camera frame tagging (tag)
+	type stateTag_t is (
+		stateTagInit,
+		stateTagFrameA, stateTagFrameB,
+		stateTagRowA, stateTagRowB, stateTagRowC, stateTagRowD,
+		stateTagColA, stateTagColB
+	);
+	signal stateTag: stateTag_t := stateTagInit;
+
+	constant rowmax: natural := 1944;
+
+	constant row120: natural := 852; -- skiprow (1944 - 240) / 2
+	constant row192: natural := 780; -- skiprow (1944 - 384) / 2
+	constant row768: natural := 204; -- skiprow (1944 - 1536) / 2
+	constant row960: natural := 12; -- skiprow (1944 - 1920) / 2
+
+	constant colmax: natural := 2592;
+
+	constant col160N1: natural := 1135; -- skipcol (2592 - 320) / 2 - 1
+	constant col256N3: natural := 1037; -- skipcol (2592 - 512) / 2 - 3
+	constant col1024N3: natural := 269; -- skipcol (2592 - 2048) / 2 - 3
+	constant col1024N9: natural := 263; -- skipcol (2592 - 2048) / 2 - 9
+	constant col1280: natural := 16; -- skipcol (2592 - 2560) / 2
+	constant col1280N9: natural := 7; -- skipcol (2592 - 2560) / 2 - 9
+
+	signal row: natural range 0 to rowmax;
+
+	signal col: natural range 0 to colmax;
+
+	signal strbFrame: std_logic;
+
+	signal strbRow120: std_logic;
+	signal strbRow192: std_logic;
+	signal strbRow768: std_logic;
+	signal strbRow960: std_logic;
+
+	signal strbCol160N1: std_logic;
+	signal strbCol256N3: std_logic;
+	signal strbCol1024N3: std_logic;
+	signal strbCol1024N9: std_logic;
+	signal strbCol1280: std_logic;
+	signal strbCol1280N9: std_logic;
+
+	-- IP sigs.tag.cust --- INSERT
 
 	---- myBingraybuf
 	signal drdBingraybuf: std_logic_vector(7 downto 0);
@@ -575,7 +630,14 @@ architecture Camacq of Camacq is
 
 	---- other
 	signal nmclk: std_logic;
-	-- IP sigs.oth.cust --- INSERT
+	-- IP sigs.oth.cust --- IBEGIN
+	signal stateAlign_dbg: std_logic_vector(7 downto 0);
+
+	signal cntFallA_sig: std_logic_vector(7 downto 0);
+	signal cntRiseA_sig: std_logic_vector(7 downto 0);
+	signal cntFallB_sig: std_logic_vector(7 downto 0);
+	signal cntRiseB_sig: std_logic_vector(7 downto 0);
+	-- IP sigs.oth.cust --- IEND
 
 begin
 
@@ -737,6 +799,153 @@ begin
 		);
 
 	------------------------------------------------------------------------
+	-- implementation: pixel clock alignment (align)
+	------------------------------------------------------------------------
+
+	-- IP impl.align.wiring --- RBEGIN
+	cntFallA_dbg <= std_logic_vector(to_unsigned(cntFallA, 8));
+	cntRiseA_dbg <= std_logic_vector(to_unsigned(cntRiseA, 8));
+	cntFallB_dbg <= std_logic_vector(to_unsigned(cntFallB, 8));
+	cntRiseB_dbg <= std_logic_vector(to_unsigned(cntRiseB, 8));
+
+	stateAlign_dbg <= x"00" when stateAlign=stateAlignInit
+				else x"10" when stateAlign=stateAlignCountA
+				else x"11" when stateAlign=stateAlignCountB
+				else x"12" when stateAlign=stateAlignCountC
+				else x"20" when stateAlign=stateAlignRun
+				else (others => '1');
+	-- IP impl.align.wiring --- REND
+
+	-- IP impl.align.rising --- BEGIN
+	process (reset, mclk, stateAlign)
+		-- IP impl.align.vars --- RBEGIN
+		variable i: natural range 0 to cntmax;
+		
+		variable btndead: boolean;
+		-- IP impl.align.vars --- REND
+
+	begin
+		if reset='1' then
+			-- IP impl.align.asyncrst --- RBEGIN
+			stateAlign <= stateAlignInit;
+			cntFallA <= 0;
+			cntRiseA <= 0;
+			cntFallB <= 0;
+			cntRiseB <= 0;
+			phase <= phaseFallA;
+			-- IP impl.align.asyncrst --- REND
+
+		elsif rising_edge(mclk) then
+			if (stateAlign=stateAlignInit or (grrdrun='0' and pvwrun='0')) then
+				-- IP impl.align.syncrst --- RBEGIN
+				phase <= phaseFallA;
+				-- IP impl.align.syncrst --- REND
+
+				if (grrdrun='1' or pvwrun='1') then
+					-- IP impl.align.init.start --- IBEGIN
+					cntFallA <= 0;
+					cntRiseA <= 0;
+					cntFallB <= 0;
+					cntRiseB <= 0;
+
+					i := 0;
+					
+					btndead := false;
+					-- IP impl.align.init.start --- IEND
+
+					stateAlign <= stateAlignCountA;
+
+				else
+					stateAlign <= stateAlignInit;
+				end if;
+
+			elsif stateAlign=stateAlignCountA then
+				-- IP impl.align.countA --- IBEGIN
+				if pclk_shift='1' then
+					cntFallA <= cntFallA + 1;
+				end if;
+
+				if pclk='1' then
+					cntRiseA <= cntRiseA + 1;
+				end if;
+				-- IP impl.align.countA --- IEND
+
+				stateAlign <= stateAlignCountB;
+
+			elsif stateAlign=stateAlignCountB then
+				-- IP impl.align.countB.ext --- IBEGIN
+				if pclk_shift='1' then
+					cntFallB <= cntFallB + 1;
+				end if;
+
+				if pclk='1' then
+					cntRiseB <= cntRiseB + 1;
+				end if;
+
+				i := i + 1;
+				-- IP impl.align.countB.ext --- IEND
+
+				if i=imax then
+					stateAlign <= stateAlignCountC;
+
+				else
+					stateAlign <= stateAlignCountA;
+				end if;
+
+			elsif stateAlign=stateAlignCountC then
+				-- IP impl.align.countC --- IBEGIN
+				if cntFallA<cntmax and cntRiseA=cntmax then
+					phase <= phaseFallB;
+				elsif cntRiseA<cntmax and cntFallB=cntmax then
+					phase <= phaseRiseB;
+				elsif cntFallB<cntmax and cntRiseB=cntmax then
+					phase <= phaseFallA;
+				elsif cntRiseB<cntmax and cntFallA=cntmax then
+					phase <= phaseRiseA;
+				end if;
+				-- IP impl.align.countC --- IEND
+
+				stateAlign <= stateAlignRun;
+
+			elsif stateAlign=stateAlignRun then
+				-- IP impl.align.run --- IBEGIN
+				if btnPhase='1' and not btndead then
+					if phase=phaseRiseA then
+						phase <= phaseFallB;
+					elsif phase=phaseFallB then
+						phase <= phaseRiseB;
+					elsif phase=phaseRiseB then
+						phase <= phaseFallA;
+					else
+						phase <= phaseRiseA;
+					end if;
+					
+					btndead := true;
+
+				elsif btnPhase='0' and btndead then
+					btndead := false;
+				end if;
+				-- IP impl.align.run --- IEND
+			end if;
+		end if;
+	end process;
+	-- IP impl.align.rising --- END
+
+	-- IP impl.align.falling --- RBEGIN
+	process (reset, mclk)
+		-- IP impl.align.falling.vars --- BEGIN
+		-- IP impl.align.falling.vars --- END
+	begin
+		if reset='1' then
+			pclk_shift <= '0';
+
+		elsif falling_edge(mclk) then
+			pclk_shift <= pclk;
+		end if;
+	end process;
+	-- IP impl.align.falling --- REND
+
+	------------------------------------------------------------------------
 	-- implementation: gray/red operation, also managing grrd{ab/cd/ef}buf (grrd)
 	------------------------------------------------------------------------
 
@@ -876,7 +1085,7 @@ begin
 	enGrrdabbufB <= '1' when (strbDGrrdabbufToFeatdet='0' and stateGrrdabbufB=stateGrrdabbufBReadA) else '0';
 	ackGrrdabbufToFeatdet <= ackGrrdabbufToFeatdet_sig;
 
-  aGrrdabbufB_vec <= std_logic_vector(to_unsigned(aGrrdabbufB, 11));
+	aGrrdabbufB_vec <= std_logic_vector(to_unsigned(aGrrdabbufB, 11));
 
 	stateGrrdabbufB_dbg <= x"00" when stateGrrdabbufB=stateGrrdabbufBInit
 				else x"10" when stateGrrdabbufB=stateGrrdabbufBReady
@@ -915,26 +1124,26 @@ begin
 
 			elsif stateGrrdabbufB=stateGrrdabbufBReady then
 				if reqGrrdabbufToFeatdet='1' then
-          aGrrdabbufB <= 0; -- IP impl.grrdabbufB.ready --- ILINE
+					aGrrdabbufB <= 0; -- IP impl.grrdabbufB.ready --- ILINE
 
 					stateGrrdabbufB <= stateGrrdabbufBReadA;
 				end if;
 
 			elsif stateGrrdabbufB=stateGrrdabbufBReadA then
 				if reqGrrdabbufToFeatdet='0' then
-          ackGrrdabbufToFeatdet_sig <= '0'; -- IP impl.grrdabbufB.readA.done --- ILINE
+					ackGrrdabbufToFeatdet_sig <= '0'; -- IP impl.grrdabbufB.readA.done --- ILINE
 
 					stateGrrdabbufB <= stateGrrdabbufBReady;
 
 				elsif strbDGrrdabbufToFeatdet='0' then
-          ackGrrdabbufToFeatdet_sig <= '1'; -- IP impl.grrdabbufB.readA.next --- ILINE
+					ackGrrdabbufToFeatdet_sig <= '1'; -- IP impl.grrdabbufB.readA.next --- ILINE
 
 					stateGrrdabbufB <= stateGrrdabbufBReadB;
 				end if;
 
 			elsif stateGrrdabbufB=stateGrrdabbufBReadB then
 				if strbDGrrdabbufToFeatdet='1' then
-          aGrrdabbufB <= aGrrdabbufB + 1; -- IP impl.grrdabbufB.readB.inc --- ILINE
+					aGrrdabbufB <= aGrrdabbufB + 1; -- IP impl.grrdabbufB.readB.inc --- ILINE
 
 					stateGrrdabbufB <= stateGrrdabbufBReadA;
 				end if;
@@ -987,7 +1196,8 @@ begin
 
 		variable ab: natural range 0 to 1; -- accumulator used for adding - 0: a, 1: b
 
-		variable row: std_logic_vector(10 downto 0); -- 0 to 1536
+		constant rowmax_lcl: natural := 1536;
+		variable row_lcl: std_logic_vector(10 downto 0);
 
 		variable pre: std_logic;
 		variable post: std_logic;
@@ -1016,7 +1226,7 @@ begin
 			bl := (others => '0');
 			grrd := (others => '0');
 			ab := 0;
-			row := (others => '0');
+			row_lcl := (others => '0');
 			pre := '0';
 			post := '0';
 			col2L := 0;
@@ -1044,7 +1254,7 @@ begin
 
 			elsif stateGrrdacc=stateGrrdaccWaitFrame then
 				if strbRow768='1' then
-					row := (others => '0'); -- IP impl.grrdacc.waitFrame --- ILINE
+					row_lcl := (others => '0'); -- IP impl.grrdacc.waitFrame --- ILINE
 
 					stateGrrdacc <= stateGrrdaccWaitRow;
 				end if;
@@ -1069,7 +1279,7 @@ begin
 				-- IP impl.grrdacc.LASA --- IBEGIN
 				if post='0' then
 					-- load
-					if row(0)='1' then
+					if row_lcl(0)='1' then
 						weEvenbuf <= '0';
 
 						aEvenbuf <= col2L;
@@ -1078,7 +1288,7 @@ begin
 
 				if pre='0' then
 					-- store
-					if row(0)='0' then
+					if row_lcl(0)='0' then
 						weEvenbuf <= '1';
 
 						aEvenbuf <= col2S;
@@ -1095,7 +1305,7 @@ begin
 
 				if (pre='0' and post='0') then
 					-- add
-					if row(0)='0' then
+					if row_lcl(0)='0' then
 						if ab=0 then
 							gnA := d;
 						else
@@ -1115,7 +1325,7 @@ begin
 				-- IP impl.grrdacc.LASB --- IBEGIN
 				if post='0' then
 					-- load
-					if row(0)='1' then
+					if row_lcl(0)='1' then
 						if ab=0 then
 							gnB := drdEvenbuf;
 						else
@@ -1133,7 +1343,7 @@ begin
 				-- IP impl.grrdacc.LASC --- IBEGIN
 				if post='0' then
 					-- load
-					if row(0)='1' then
+					if row_lcl(0)='1' then
 						weEvenbuf <= '0';
 
 						aEvenbuf <= col2L;
@@ -1142,7 +1352,7 @@ begin
 
 				if pre='0' then
 					-- store
-					if row(0)='0' then
+					if row_lcl(0)='0' then
 						weEvenbuf <= '1';
 
 						aEvenbuf <= col2S;
@@ -1158,7 +1368,7 @@ begin
 				end if;
 
 				if (pre='0' and post='0') then
-					if row(0)='0' then
+					if row_lcl(0)='0' then
 						-- add
 						if ab=0 then
 							rdA := d;
@@ -1215,7 +1425,7 @@ begin
 
 				if post='0' then
 					-- load
-					if row(0)='1' then
+					if row_lcl(0)='1' then
 						if ab=0 then
 							rdB := drdEvenbuf;
 						else
@@ -1244,9 +1454,9 @@ begin
 					stateGrrdacc <= stateGrrdaccLASA;
 
 				elsif post='1' then
-					row := std_logic_vector(unsigned(row) + 1); -- IP impl.grrdacc.LASD.incRow --- ILINE
+					row_lcl := std_logic_vector(unsigned(row_lcl) + 1); -- IP impl.grrdacc.LASD.incRow --- ILINE
 
-					if row=std_logic_vector(to_unsigned(1536, 11)) then
+					if row_lcl=std_logic_vector(to_unsigned(rowmax_lcl, 11)) then
 						stateGrrdacc <= stateGrrdaccWaitFrame;
 
 					else
@@ -1433,14 +1643,6 @@ begin
 				else x"10" when stateOp=stateOpInvGrrd
 				else x"20" when stateOp=stateOpInvPvw
 				else x"30" when stateOp=stateOpInv
-				else x"40" when stateOp=stateOpFrameA
-				else x"41" when stateOp=stateOpFrameB
-				else x"50" when stateOp=stateOpRowA
-				else x"51" when stateOp=stateOpRowB
-				else x"52" when stateOp=stateOpRowC
-				else x"53" when stateOp=stateOpRowD
-				else x"60" when stateOp=stateOpColA
-				else x"61" when stateOp=stateOpColB
 				else (others => '1');
 	-- IP impl.op.wiring --- END
 
@@ -1450,41 +1652,12 @@ begin
 		-- currently not in use: assume pclk = mclk / 2
 		--constant imax: natural := 2; -- mclk per pclk
 		--variable i: natural range 0 to imax;
-
-		constant jmax: natural := 1944; -- number of rows
-		variable j: natural range 0 to jmax;
-
-		constant jRow120: natural := 852; -- skiprow (1944 - 240) / 2
-		constant jRow192: natural := 780; -- skiprow (1944 - 384) / 2
-		constant jRow768: natural := 204; -- skiprow (1944 - 1536) / 2
-		constant jRow960: natural := 12; -- skiprow (1944 - 1920) / 2 ; should be 12
-
-		constant kmax: natural := 2592; -- number of columns
-		variable k: natural range 0 to kmax;
-
-		constant kCol160N1: natural := 1135; -- skipcol (2592 - 320) / 2 - 1
-		constant kCol256N3: natural := 1037; -- skipcol (2592 - 512) / 2 - 3
-		constant kCol1024N3: natural := 269; -- skipcol (2592 - 2048) / 2 - 3
-		constant kCol1024N9: natural := 263; -- skipcol (2592 - 2048) / 2 - 9
-		constant kCol1280: natural := 16; -- skipcol (2592 - 2560) / 2
-		constant kCol1280N9: natural := 7; -- skipcol (2592 - 2560) / 2 - 9 ; should be 7
 		-- IP impl.op.vars --- REND
 
 	begin
 		if reset='1' then
 			-- IP impl.op.asyncrst --- BEGIN
 			stateOp <= stateOpInit;
-			strbFrame <= '0';
-			strbRow120 <= '0';
-			strbRow192 <= '0';
-			strbRow768 <= '0';
-			strbRow960 <= '0';
-			strbCol160N1 <= '0';
-			strbCol256N3 <= '0';
-			strbCol1024N3 <= '0';
-			strbCol1024N9 <= '0';
-			strbCol1280 <= '0';
-			strbCol1280N9 <= '0';
 			ackInvSetGrrd_sig <= '0';
 			ackInvSetPvw_sig <= '0';
 			grrdrun <= '0';
@@ -1496,22 +1669,8 @@ begin
 		elsif rising_edge(mclk) then
 			if (stateOp=stateOpInit or (stateOp/=stateOpInvGrrd and stateOp/=stateOpInvPvw and stateOp/=stateOpInv and (reqInvSetGrrd='1' or reqInvSetPvw='1'))) then
 				-- IP impl.op.syncrst --- RBEGIN
-				strbFrame <= '0';
-
-				strbRow120 <= '0';
-				strbRow192 <= '0';
-				strbRow960 <= '0';
-				strbRow768 <= '0';
-
-				strbCol160N1 <= '0';
-				strbCol256N3 <= '0';
-				strbCol1024N3 <= '0';
-				strbCol1024N9 <= '0';
-				strbCol1280 <= '0';
-				strbCol1280N9 <= '0';
-
-				j := 0;
-				k := 0;
+				ackInvSetGrrd_sig <= '0';
+				ackInvSetPvw_sig <= '0';
 				-- IP impl.op.syncrst --- REND
 
 				if reqInvSetGrrd='1' then
@@ -1523,9 +1682,6 @@ begin
 					pvwrun <= '0'; -- IP impl.op.init.invSetPvw --- ILINE
 
 					stateOp <= stateOpInvPvw;
-
-				elsif (grrdrun='1' or pvwrun='1') then
-					stateOp <= stateOpFrameA;
 
 				else
 					stateOp <= stateOpInit;
@@ -1575,128 +1731,7 @@ begin
 
 			elsif stateOp=stateOpInv then
 				if ((reqInvSetGrrd='0' and ackInvSetGrrd_sig='1') or (reqInvSetPvw='0' and ackInvSetPvw_sig='1')) then
-					-- IP impl.op.inv --- IBEGIN
-					ackInvSetGrrd_sig <= '0';
-					ackInvSetPvw_sig <= '0';
-					-- IP impl.op.inv --- IEND
-
 					stateOp <= stateOpInit;
-				end if;
-
-			elsif stateOp=stateOpFrameA then
-				if vsync='1' then
-					stateOp <= stateOpFrameB;
-				end if;
-
-			elsif stateOp=stateOpFrameB then
-				if vsync='0' then
-					-- IP impl.op.frameB --- IBEGIN
-					strbFrame <= '1';
-				
-					j := 0;
-					-- IP impl.op.frameB --- IEND
-
-					stateOp <= stateOpRowA;
-				end if;
-
-			elsif stateOp=stateOpRowA then
-				strbFrame <= '0'; -- IP impl.op.rowA.ext --- ILINE
-
-				if href='0' then
-					stateOp <= stateOpRowB;
-				end if;
-
-			elsif stateOp=stateOpRowB then
-				if href='1' then
-					-- IP impl.op.rowB --- IBEGIN
-					if j=jRow120 then
-						strbRow120 <= '1';
-					end if;
-
-					if j=jRow192 then
-						strbRow192 <= '1';
-					end if;
-
-					if j=jRow768 then
-						strbRow768 <= '1';
-					end if;
-
-					if j=jRow960 then
-						strbRow960 <= '1';
-					end if;
-					-- IP impl.op.rowB --- IEND
-
-					stateOp <= stateOpRowC;
-				end if;
-
-			elsif stateOp=stateOpRowC then
-				-- IP impl.op.rowC --- IBEGIN
-				strbRow120 <= '0';
-				strbRow192 <= '0';
-				strbRow960 <= '0';
-				strbRow768 <= '0';
-				-- IP impl.op.rowC --- IEND
-
-				stateOp <= stateOpRowD;
-
-			elsif stateOp=stateOpRowD then
-				k := 1; -- IP impl.op.rowD --- ILINE
-
-				stateOp <= stateOpColA;
-
-			elsif stateOp=stateOpColA then
-				-- IP impl.op.colA --- IBEGIN
-				if k=kCol160N1 then
-					strbCol160N1 <= '1';
-				end if;
-
-				if k=kCol256N3 then
-					strbCol256N3 <= '1';
-				end if;
-
-				if k=kCol1024N3 then
-					strbCol1024N3 <= '1';
-				end if;
-
-				if k=kCol1024N9 then
-					strbCol1024N9 <= '1';
-				end if;
-
-				if k=kCol1280 then
-					strbCol1280 <= '1';
-				end if;
-
-				if k=kCol1280N9 then
-					strbCol1280N9 <= '1';
-				end if;
-				-- IP impl.op.colA --- IEND
-
-				stateOp <= stateOpColB;
-
-			elsif stateOp=stateOpColB then
-				-- IP impl.op.colB.ext --- IBEGIN
-				strbCol160N1 <= '0';
-				strbCol256N3 <= '0';
-				strbCol1024N3 <= '0';
-				strbCol1024N9 <= '0';
-				strbCol1280 <= '0';
-				strbCol1280N9 <= '0';
-
-				k := k + 1;
-				-- IP impl.op.colB.ext --- IEND
-
-				if k=kmax then
-					j := j + 1; -- IP impl.op.colB.incRow --- ILINE
-
-					if j=jmax then
-						stateOp <= stateOpFrameA;
-
-					else
-						stateOp <= stateOpRowA;
-					end if;
-
-				else
-					stateOp <= stateOpColA;
 				end if;
 			end if;
 		end if;
@@ -1735,10 +1770,11 @@ begin
 	-- IP impl.pvw.rising --- BEGIN
 	process (reset, mclk, statePvw)
 		-- IP impl.pvw.vars --- RBEGIN
-		variable aPvwbufGr: natural range 0 to 49152;
+		variable aPvwbufGr: natural range 0 to 49151;
 
-		variable aPvwbufRd: natural range 0 to 57600;
-		variable aPvwbufGnBl: natural range 0 to 57601;
+		variable aPvwbufRd: natural range 0 to 19199;
+		variable aPvwbufGn: natural range 19200 to 38399;
+		variable aPvwbufBl: natural range 38400 to 57599;
 		-- IP impl.pvw.vars --- REND
 
 	begin
@@ -1760,7 +1796,8 @@ begin
 			aPvwbufGr := 0;
 
 			aPvwbufRd := 0;
-			aPvwbufGnBl := 0;
+			aPvwbufGn := 19200;
+			aPvwbufBl := 38400;
 			-- IP impl.pvw.asyncrst --- REND
 
 		elsif rising_edge(mclk) then
@@ -1828,10 +1865,11 @@ begin
 						pvwTkstB <= tkclksrcGetTkstTkst;
 					end if;
 
-					aPvwbufGr := 0;
+					aPvwbufGr := 49151;
 
-					aPvwbufRd := 0;
-					aPvwbufGnBl := 1;
+					aPvwbufRd := 19199;
+					aPvwbufGn := 38399;
+					aPvwbufBl := 57599;
 					-- IP impl.pvw.waitFrame --- IEND
 
 					statePvw <= statePvwReady;
@@ -1872,7 +1910,7 @@ begin
 
 				elsif strbDPvwbinrgbGnBl='1' then
 					-- IP impl.pvw.ready.binrgbGnBl --- IBEGIN
-					aPvwbuf <= aPvwbufGnBl;
+					aPvwbuf <= aPvwbufGn;
 					dwrPvwbuf <= dPvwbinrgbGn;
 					-- IP impl.pvw.ready.binrgbGnBl --- IEND
 
@@ -1880,7 +1918,7 @@ begin
 
 				elsif strbDPvwrawrgbGnBl='1' then
 					-- IP impl.pvw.ready.rawrgbGnBl --- IBEGIN
-					aPvwbuf <= aPvwbufGnBl;
+					aPvwbuf <= aPvwbufGn;
 					dwrPvwbuf <= dPvwrawrgbGn;
 					-- IP impl.pvw.ready.rawrgbGnBl --- IEND
 
@@ -1888,25 +1926,25 @@ begin
 				end if;
 
 			elsif statePvw=statePvwStoreA then
-				aPvwbufGr := aPvwbufGr + 1; -- IP impl.pvw.storeA.ext --- ILINE
-
-				if aPvwbufGr=49152 then
+				if aPvwbufGr=0 then
 					statePvw <= statePvwDoneA;
 
 				else
+					aPvwbufGr := aPvwbufGr - 1; -- IP impl.pvw.storeA.dec --- ILINE
+
 					statePvw <= statePvwReady;
 				end if;
 
 			elsif statePvw=statePvwStoreB then
-				aPvwbufRd := aPvwbufRd + 3; -- IP impl.pvw.storeB.inc --- ILINE
+				aPvwbufRd := aPvwbufRd - 1; -- IP impl.pvw.storeB.dec --- ILINE
 
 				statePvw <= statePvwReady;
 
 			elsif statePvw=statePvwStoreC then
 				-- IP impl.pvw.storeC --- IBEGIN
-				aPvwbufGnBl := aPvwbufGnBl + 1;
-				
-				aPvwbuf <= aPvwbufGnBl;
+				aPvwbufGn := aPvwbufGn - 1;
+
+				aPvwbuf <= aPvwbufBl;
 
 				if pvwacc=pvwaccBinrgb then
 					dwrPvwbuf <= dPvwbinrgbBl;
@@ -1918,12 +1956,12 @@ begin
 				statePvw <= statePvwStoreD;
 
 			elsif statePvw=statePvwStoreD then
-				aPvwbufGnBl := aPvwbufGnBl + 2; -- IP impl.pvw.storeD.ext --- ILINE
-
-				if aPvwbufGnBl=57601 then
+				if aPvwbufBl=38400 then
 					statePvw <= statePvwDoneA;
 
 				else
+					aPvwbufBl := aPvwbufBl - 1; -- IP impl.pvw.storeD.dec --- ILINE
+
 					statePvw <= statePvwReady;
 				end if;
 
@@ -1994,7 +2032,8 @@ begin
 
 		variable ab: natural range 0 to 1; -- accumulator used for adding - 0: a, 1: b
 
-		variable row: std_logic_vector(10 downto 0); -- 0 to 1536
+		constant rowmax_lcl: natural := 1536;
+		variable row_lcl: std_logic_vector(10 downto 0);
 
 		variable pre1, pre2: std_logic;
 		variable post1, post2: std_logic;
@@ -2020,7 +2059,7 @@ begin
 			grA := (others => '0');
 			grB := (others => '0');
 			ab := 0;
-			row := (others => '0');
+			row_lcl := (others => '0');
 			pre1 := '0';
 			pre2 := '0';
 			post1 := '0';
@@ -2051,7 +2090,7 @@ begin
 
 			elsif statePvwbingray=statePvwbingrayWaitFrame then
 				if strbRow768='1' then
-					row := (others => '0'); -- IP impl.pvwbingray.waitFrame.reset --- ILINE
+					row_lcl := (others => '0'); -- IP impl.pvwbingray.waitFrame.reset --- ILINE
 
 					statePvwbingray <= statePvwbingrayWaitRow;
 				end if;
@@ -2124,7 +2163,7 @@ begin
 
 				if (pre1='0' and post2='0') then
 					-- add
-					if (row(2 downto 0)="000" and pixcnt="00") then
+					if (row_lcl(2 downto 0)="000" and pixcnt="00") then
 						if ab=0 then
 							grA := "000000" & d;
 						else
@@ -2182,7 +2221,7 @@ begin
 					col2A := col2A + 1;
 
 					if pixcnt="11" then
-						if row(2 downto 0)="111" then
+						if row_lcl(2 downto 0)="111" then
 							-- store gray/64
 							if ab=0 then
 								dPvwbingrayGr <= grA(13 downto 6);
@@ -2242,9 +2281,9 @@ begin
 						statePvwbingray <= statePvwbingrayLASA;
 
 					elsif post2='1' then
-						row := std_logic_vector(unsigned(row) + 1); -- IP impl.pvwbingray.LASD.post2 --- ILINE
+						row_lcl := std_logic_vector(unsigned(row_lcl) + 1); -- IP impl.pvwbingray.LASD.post2 --- ILINE
 
-						if row=std_logic_vector(to_unsigned(1536, 11)) then
+						if row_lcl=std_logic_vector(to_unsigned(rowmax_lcl, 11)) then
 							statePvwbingray <= statePvwbingrayWaitFrame;
 
 						else
@@ -2303,7 +2342,8 @@ begin
 
 		variable abc: natural range 0 to 2; -- accumulator used for adding - 0: a, 1: b, 2: c
 
-		variable row: std_logic_vector(10 downto 0); -- 0 to 1920
+		constant rowmax_lcl: natural := 1920;
+		variable row_lcl: std_logic_vector(10 downto 0);
 
 		variable pre1, pre2: std_logic;
 		variable post1, post2: std_logic;
@@ -2336,7 +2376,7 @@ begin
 			rdblB := (others => '0');
 			rdblC := (others => '0');
 			abc := 0;
-			row := (others => '0');
+			row_lcl := (others => '0');
 			pre1 := '0';
 			pre2 := '0';
 			post1 := '0';
@@ -2370,7 +2410,7 @@ begin
 
 			elsif statePvwbinrgb=statePvwbinrgbWaitFrame then
 				if strbRow960='1' then
-					row := (others => '0'); -- IP impl.pvwbinrgb.waitFrame.reset --- ILINE
+					row_lcl := (others => '0'); -- IP impl.pvwbinrgb.waitFrame.reset --- ILINE
 
 					statePvwbinrgb <= statePvwbinrgbWaitRow;
 				end if;
@@ -2402,14 +2442,14 @@ begin
 					if pixcnt="000" then
 						weBinrgbbuf <= '0';
 	
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							aBinrgbbuf <= a0BinrgbbufGreen + col2L;
 						else
 							aBinrgbbuf <= a0BinrgbbufBlue + col2L;
 						end if;
 	
 					elsif pixcnt="001" then
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							if abc=0 then
 								gnB(15 downto 8) := drdBinrgbbuf;
 							elsif abc=1 then
@@ -2429,14 +2469,14 @@ begin
 	
 						weBinrgbbuf <= '0';
 	
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							aBinrgbbuf <= a0BinrgbbufRed + col2L;
 						else
 							aBinrgbbuf <= a0BinrgbbufGreen + col2L;
 						end if;
 	
 					elsif pixcnt="010" then
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							if abc=0 then
 								rdblB(15 downto 8) := drdBinrgbbuf;
 							elsif abc=1 then
@@ -2458,14 +2498,14 @@ begin
 	
 						col2L := col2L + 1;
 						
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							aBinrgbbuf <= a0BinrgbbufGreen + col2L;
 						else
 							aBinrgbbuf <= a0BinrgbbufBlue + col2L;
 						end if;
 	
 					elsif pixcnt="011" then
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							if abc=0 then
 								gnB(7 downto 0) := drdBinrgbbuf;
 							elsif abc=1 then
@@ -2485,14 +2525,14 @@ begin
 		
 						weBinrgbbuf <= '0';
 	
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							aBinrgbbuf <= a0BinrgbbufRed + col2L;
 						else
 							aBinrgbbuf <= a0BinrgbbufGreen + col2L;
 						end if;
 		
 					elsif pixcnt="100" then
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							if abc=0 then
 								rdblB(7 downto 0) := drdBinrgbbuf;
 							elsif abc=1 then
@@ -2519,13 +2559,13 @@ begin
 					if pixcnt="100" then
 						weBinrgbbuf <= '1';
 	
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							aBinrgbbuf <= a0BinrgbbufGreen + col2S;
 						else
 							aBinrgbbuf <= a0BinrgbbufBlue + col2S;
 						end if;
 		
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							if abc=0 then
 								dwrBinrgbbuf <= gnC(15 downto 8);
 							elsif abc=1 then
@@ -2546,13 +2586,13 @@ begin
 					elsif pixcnt="101" then
 						weBinrgbbuf <= '1';
 	
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							aBinrgbbuf <= a0BinrgbbufRed + col2S;
 						else
 							aBinrgbbuf <= a0BinrgbbufGreen + col2S;
 						end if;
 		
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							if abc=0 then
 								dwrBinrgbbuf <= rdblC(15 downto 8);
 							elsif abc=1 then
@@ -2575,13 +2615,13 @@ begin
 					elsif pixcnt="110" then
 						weBinrgbbuf <= '1';
 	
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							aBinrgbbuf <= a0BinrgbbufGreen + col2S;
 						else
 							aBinrgbbuf <= a0BinrgbbufBlue + col2S;
 						end if;
 		
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							if abc=0 then
 								dwrBinrgbbuf <= gnC(7 downto 0);
 							elsif abc=1 then
@@ -2602,13 +2642,13 @@ begin
 					elsif pixcnt="111" then
 						weBinrgbbuf <= '1';
 	
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							aBinrgbbuf <= a0BinrgbbufRed + col2S;
 						else
 							aBinrgbbuf <= a0BinrgbbufGreen + col2S;
 						end if;
 		
-						if row(0)='0' then
+						if row_lcl(0)='0' then
 							if abc=0 then
 								dwrBinrgbbuf <= rdblC(7 downto 0);
 							elsif abc=1 then
@@ -2632,7 +2672,7 @@ begin
 
 				if (pre1='0' and post2='0') then
 					-- add
-					if (row(3 downto 0)="0000" and pixcnt="000") then
+					if (row_lcl(3 downto 0)="0000" and pixcnt="000") then
 						if abc=0 then
 							gnA := x"00" & d; -- green
 						elsif abc=1 then
@@ -2640,7 +2680,7 @@ begin
 						else
 							gnC := x"00" & d;
 						end if;
-					elsif (row(3 downto 0)="0001" and pixcnt="000") then
+					elsif (row_lcl(3 downto 0)="0001" and pixcnt="000") then
 						if abc=0 then
 							rdblA := x"00" & d; -- blue
 						elsif abc=1 then
@@ -2648,7 +2688,7 @@ begin
 						else
 							rdblC := x"00" & d;
 						end if;
-					elsif row(0)='0' then
+					elsif row_lcl(0)='0' then
 						if abc=0 then
 							gnA := std_logic_vector(unsigned(gnA) + unsigned(x"00" & d)); -- green
 						elsif abc=1 then
@@ -2681,7 +2721,7 @@ begin
 					-- add and store in pvwbuf
 
 					-- add
-					if (row(3 downto 0)="0000" and pixcnt="000") then
+					if (row_lcl(3 downto 0)="0000" and pixcnt="000") then
 						if abc=0 then
 							rdblA := x"00" & d; -- red
 						elsif abc=1 then
@@ -2689,7 +2729,7 @@ begin
 						else
 							rdblC := x"00" & d;
 						end if;
-					elsif row(0)='0' then
+					elsif row_lcl(0)='0' then
 						if abc=0 then
 							rdblA := std_logic_vector(unsigned(rdblA) + unsigned(x"00" & d)); -- red
 						elsif abc=1 then
@@ -2710,7 +2750,7 @@ begin
 					col2A := col2A + 1;
 	
 					if pixcnt="111" then
-						if row(3 downto 0)="1110" then
+						if row_lcl(3 downto 0)="1110" then
 							-- store red/64
 							if abc=0 then
 								dPvwbinrgbRd <= rdblA(13 downto 6);
@@ -2722,7 +2762,7 @@ begin
 
 							strbDPvwbinrgbRd <= '1';
 	
-						elsif row(3 downto 0)="1111" then
+						elsif row_lcl(3 downto 0)="1111" then
 							-- store blue/64
 							if abc=0 then
 								dPvwbinrgbBl <= rdblA(13 downto 6);
@@ -2796,9 +2836,9 @@ begin
 						statePvwbinrgb <= statePvwbinrgbLASA;
 
 					elsif post2='1' then
-						row := std_logic_vector(unsigned(row) + 1); -- IP impl.pvwbinrgb.LASD.post2 --- ILINE
+						row_lcl := std_logic_vector(unsigned(row_lcl) + 1); -- IP impl.pvwbinrgb.LASD.post2 --- ILINE
 
-						if row=std_logic_vector(to_unsigned(1920, 11)) then
+						if row_lcl=std_logic_vector(to_unsigned(rowmax_lcl, 11)) then
 							statePvwbinrgb <= statePvwbinrgbWaitFrame;
 
 						else
@@ -3058,7 +3098,6 @@ begin
 	enPvwabufB <= '1' when (pvwabufLock=lockBufB and strbDPvwabufToHostif='0' and statePvwbufB=statePvwbufBReadA) else '0';
 	enPvwbbufB <= '1' when (pvwbbufLock=lockBufB and strbDPvwbbufToHostif='0' and statePvwbufB=statePvwbufBReadA) else '0';
 
----
 	aPvwbufB_vec <= std_logic_vector(to_unsigned(aPvwbufB, 14));
 
 	tixVPvwbufstate <= tixVPvwbufstateAbuf when ((pvwLatestBNotA='0' and pvwabufLock=lockIdle and pvwabufFull='1') or (pvwLatestBNotA='1' and pvwbbufLock=lockPvw and pvwabufFull='1'))
@@ -3071,7 +3110,6 @@ begin
 	pvwtkst <= pvwTkstB when tixVPvwbufstate=tixVPvwbufstateBbuf else pvwTkstA;
 	getPvwinfoTkst <= pvwtkst;
 
----
 	avllenPvwabufToHostif <= std_logic_vector(to_unsigned(225, 8)) when ((pvwacc=pvwaccBinrgb or pvwacc=pvwaccRawrgb) and pvwabufLock=lockIdle and pvwabufFull='1')
 				else std_logic_vector(to_unsigned(192, 8)) when ((pvwacc=pvwaccBingray or pvwacc=pvwaccRawgray) and pvwabufLock=lockIdle and pvwabufFull='1')
 				else (others => '0');
@@ -3279,7 +3317,8 @@ begin
 
 		variable ab: natural range 0 to 1; -- accumulator used for adding - 0: a, 1: b
 
-		variable row: std_logic_vector(8 downto 0); -- 0 to 384
+		constant rowmax_lcl: natural := 384;
+		variable row_lcl: std_logic_vector(8 downto 0);
 
 		variable pre: std_logic;
 		variable post: std_logic;
@@ -3307,7 +3346,7 @@ begin
 			grA := (others => '0');
 			grB := (others => '0');
 			ab := 0;
-			row := (others => '0');
+			row_lcl := (others => '0');
 			pre := '0';
 			post := '0';
 			col2L := 0;
@@ -3335,7 +3374,7 @@ begin
 
 			elsif statePvwrawgray=statePvwrawgrayWaitFrame then
 				if strbRow192='1' then
-					row := (others => '0'); -- IP impl.pvwrawgray.waitFrame.reset --- ILINE
+					row_lcl := (others => '0'); -- IP impl.pvwrawgray.waitFrame.reset --- ILINE
 
 					statePvwrawgray <= statePvwrawgrayWaitRow;
 				end if;
@@ -3360,7 +3399,7 @@ begin
 				-- IP impl.pvwrawgray.LASA --- IBEGIN
 				if post='0' then
 					-- load
-					if row(0)='1' then
+					if row_lcl(0)='1' then
 						weRawgraybuf <= '0';
 
 						aRawgraybuf <= col2L;
@@ -3369,7 +3408,7 @@ begin
 
 				if pre='0' then
 					-- store
-					if row(0)='0' then
+					if row_lcl(0)='0' then
 						weRawgraybuf <= '1';
 
 						aRawgraybuf <= col2S;
@@ -3386,7 +3425,7 @@ begin
 
 				if (pre='0' and post='0') then
 					-- add
-					if row(0)='0' then
+					if row_lcl(0)='0' then
 						if ab=0 then
 							gnA := d;
 						else
@@ -3410,7 +3449,7 @@ begin
 				-- IP impl.pvwrawgray.LASB --- IBEGIN
 				if post='0' then
 					-- load
-					if row(0)='1' then
+					if row_lcl(0)='1' then
 						if ab=0 then
 							gnB := drdRawgraybuf;
 						else
@@ -3428,7 +3467,7 @@ begin
 				-- IP impl.pvwrawgray.LASC --- IBEGIN
 				if post='0' then
 					-- load
-					if row(0)='1' then
+					if row_lcl(0)='1' then
 						weRawgraybuf <= '0';
 
 						aRawgraybuf <= col2L;
@@ -3437,7 +3476,7 @@ begin
 
 				if pre='0' then
 					-- store
-					if row(0)='0' then
+					if row_lcl(0)='0' then
 						weRawgraybuf <= '1';
 
 						aRawgraybuf <= col2S;
@@ -3453,7 +3492,7 @@ begin
 				end if;
 
 				if (pre='0' and post='0') then
-					if row(0)='0' then
+					if row_lcl(0)='0' then
 						-- add
 						if ab=0 then
 							rdA := d;
@@ -3486,7 +3525,7 @@ begin
 
 				if post='0' then
 					-- load
-					if row(0)='1' then
+					if row_lcl(0)='1' then
 						if ab=0 then
 							rdB := drdRawgraybuf;
 						else
@@ -3515,9 +3554,9 @@ begin
 					statePvwrawgray <= statePvwrawgrayLASA;
 
 				elsif post='1' then
-					row := std_logic_vector(unsigned(row) + 1); -- IP impl.pvwrawgray.LASD.post --- ILINE
+					row_lcl := std_logic_vector(unsigned(row_lcl) + 1); -- IP impl.pvwrawgray.LASD.post --- ILINE
 
-					if row=std_logic_vector(to_unsigned(384, 9)) then
+					if row_lcl=std_logic_vector(to_unsigned(rowmax_lcl, 9)) then
 						statePvwrawgray <= statePvwrawgrayWaitFrame;
 
 					else
@@ -3557,9 +3596,11 @@ begin
 		variable gn: std_logic_vector(8 downto 0);
 		variable bl: std_logic_vector(7 downto 0);
 
-		variable row: std_logic_vector(7 downto 0); -- 0 to 240
+		constant rowmax_lcl: natural := 240;
+		variable row_lcl: std_logic_vector(7 downto 0);
 
-		variable col: natural range 0 to 160;
+		constant colmax_lcl: natural := 160;
+		variable col_lcl: natural range 0 to colmax_lcl;
 
 		type rawrgbbuf_t is array (0 to 159) of std_logic_vector(7 downto 0);
 		variable rawrgbbuf: rawrgbbuf_t;
@@ -3577,8 +3618,12 @@ begin
 			strbDPvwrawrgbRd <= '0';
 
 			gn := (others => '0');
-			row := (others => '0');
-			col := 0;
+			bl := (others => '0');
+			row_lcl := (others => '0');
+			col_lcl := 0;
+			for i in 0 to 159 loop
+				rawrgbbuf(i) := (others => '0');
+			end loop;
 			-- IP impl.pvwrawrgb.asyncrst --- REND
 
 		elsif rising_edge(mclk) then
@@ -3601,25 +3646,25 @@ begin
 
 			elsif statePvwrawrgb=statePvwrawrgbWaitFrame then
 				if strbRow120='1' then
-					row := (others => '0'); -- IP impl.pvwrawrgb.waitFrame.reset --- ILINE
+					row_lcl := (others => '0'); -- IP impl.pvwrawrgb.waitFrame.reset --- ILINE
 
 					statePvwrawrgb <= statePvwrawrgbWaitRow;
 				end if;
 
 			elsif statePvwrawrgb=statePvwrawrgbWaitRow then
 				if strbCol160N1='1' then
-					col := 0; -- IP impl.pvwrawrgb.waitRow.reset --- ILINE
+					col_lcl := 0; -- IP impl.pvwrawrgb.waitRow.reset --- ILINE
 
 					statePvwrawrgb <= statePvwrawrgbLASA;
 				end if;
 
 			elsif statePvwrawrgb=statePvwrawrgbLASA then
 				-- IP impl.pvwrawrgb.LASA --- IBEGIN
-				if row(0)='0' then
+				if row_lcl(0)='0' then
 					-- store
-					rawrgbbuf(col) := d;
+					rawrgbbuf(col_lcl) := d;
 
-				elsif row(0)='1' then
+				elsif row_lcl(0)='1' then
 					-- store in pvwbuf
 					bl := d;
 				end if;
@@ -3632,16 +3677,16 @@ begin
 
 			elsif statePvwrawrgb=statePvwrawrgbLASC then
 				-- IP impl.pvwrawrgb.LASC --- IBEGIN
-				if row(0)='0' then
+				if row_lcl(0)='0' then
 					-- store in pvwbuf
 					dPvwrawrgbRd <= d;
 
 					strbDPvwrawrgbRd <= '1';
 
-				elsif row(0)='1' then
+				elsif row_lcl(0)='1' then
 					-- load / store in pvwbuf
 					--gn := std_logic_vector(unsigned("0" & drdRawrgbbuf) + unsigned("0" & d));
-					gn := std_logic_vector(unsigned('0' & rawrgbbuf(col)) + unsigned('0' & d));
+					gn := std_logic_vector(unsigned('0' & rawrgbbuf(col_lcl)) + unsigned('0' & d));
 
 					dPvwrawrgbGn <= gn(8 downto 1);
 					dPvwrawrgbBl <= bl;
@@ -3649,7 +3694,7 @@ begin
 					strbDPvwrawrgbGnBl <= '1';
 				end if;
 
-				col := col + 1;
+				col_lcl := col_lcl + 1;
 				-- IP impl.pvwrawrgb.LASC --- IEND
 
 				statePvwrawrgb <= statePvwrawrgbLASD;
@@ -3660,10 +3705,10 @@ begin
 				strbDPvwrawrgbGnBl <= '0';
 				-- IP impl.pvwrawrgb.LASD.ext --- IEND
 
-				if col=160 then
-					row := std_logic_vector(unsigned(row) + 1); -- IP impl.pvwrawrgb.LASD.inc --- ILINE
+				if col_lcl=colmax_lcl then
+					row_lcl := std_logic_vector(unsigned(row_lcl) + 1); -- IP impl.pvwrawrgb.LASD.inc --- ILINE
 
-					if row=std_logic_vector(to_unsigned(240, 8)) then
+					if row_lcl=std_logic_vector(to_unsigned(rowmax_lcl, 8)) then
 						statePvwrawrgb <= statePvwrawrgbWaitFrame;
 
 					else
@@ -3679,23 +3724,19 @@ begin
 	-- IP impl.pvwrawrgb.rising --- END
 
 	------------------------------------------------------------------------
-	-- implementation: camera data sampling at rising or falling mclk edge (sample)
+	-- implementation: camera data sampling at every other rising or falling mclk edge (sample)
 	------------------------------------------------------------------------
 
 	-- IP impl.sample.wiring --- BEGIN
-	ackInvSetSample_sig <= '1' when stateSample=stateSampleInv else '0';
-	ackInvSetSample <= ackInvSetSample_sig;
-
 	stateSample_dbg <= x"00" when stateSample=stateSampleInit
-				else x"10" when stateSample=stateSampleInv
-				else x"20" when stateSample=stateSampleRun
+				else x"10" when stateSample=stateSampleRunA
+				else x"11" when stateSample=stateSampleRunB
 				else (others => '1');
 	-- IP impl.sample.wiring --- END
 
 	-- IP impl.sample.rising --- BEGIN
 	process (reset, mclk, stateSample)
 		-- IP impl.sample.vars --- RBEGIN
-		variable fallNotRise: std_logic;
 		-- IP impl.sample.vars --- REND
 
 	begin
@@ -3703,68 +3744,203 @@ begin
 			-- IP impl.sample.asyncrst --- RBEGIN
 			stateSample <= stateSampleInit;
 
-			fallNotRise := '0';
+			vsync_sig <= '0';
+			href_sig <= '0';
+
+			d <= (others => '0');
 			-- IP impl.sample.asyncrst --- REND
 
 		elsif rising_edge(mclk) then
-			if (stateSample=stateSampleInit or (stateSample/=stateSampleInit and reqInvSetSample='1')) then
-				-- IP impl.sample.syncrst --- BEGIN
+			if (stateSample=stateSampleInit or (grrdrun='0' and pvwrun='0')) then
+				-- IP impl.sample.syncrst --- RBEGIN
+				vsync_sig <= '0';
+				href_sig <= '0';
+
 				d <= (others => '0');
-				d_shift <= (others => '0');
+				-- IP impl.sample.syncrst --- REND
 
-				-- IP impl.sample.syncrst --- END
-
-				if reqInvSetSample='1' then
-					-- IP impl.sample.init.invSetSample --- IBEGIN
-					if setSampleFallNotRise=fls8 then
-						fallNotRise := '0';
-					else
-						fallNotRise := '1';
-					end if;
-					-- IP impl.sample.init.invSetSample --- IEND
-
-					stateSample <= stateSampleInv;
+				if (grrdrun='1' or pvwrun='1') then
+					stateSample <= stateSampleRunA;
 
 				else
-					stateSample <= stateSampleRun;
-				end if;
-
-			elsif stateSample=stateSampleInv then
-				if reqInvSetSample='0' then
 					stateSample <= stateSampleInit;
 				end if;
 
-			elsif stateSample=stateSampleRun then
-				-- IP impl.sample.run --- IBEGIN
-				--d <= x"80";
-				--dRd <= x"01";
-				--dGn <= x"05";
-				--dBl <= x"07";
-
-				if fallNotRise='0' then
-					d <= d9 & d8 & d7 & d6 & d5 & d4 & d3 & d2;
-				else
+			elsif stateSample=stateSampleRunA then
+				-- IP impl.sample.runA --- IBEGIN
+				if phase=phaseFallA then
+					vsync_sig <= vsync_shift;
+					href_sig <= href_shift;
 					d <= d_shift;
+
+				elsif phase=phaseRiseA then
+					vsync_sig <= vsync;
+					href_sig <= href;
+					d <= d9 & d8 & d7 & d6 & d5 & d4 & d3 & d2;
 				end if;
-				-- IP impl.sample.run --- IEND
+				-- IP impl.sample.runA --- IEND
+
+				stateSample <= stateSampleRunB;
+
+			elsif stateSample=stateSampleRunB then
+				-- IP impl.sample.runB --- IBEGIN
+				if phase=phaseFallB then
+					vsync_sig <= vsync_shift;
+					href_sig <= href_shift;
+					d <= d_shift;
+
+				elsif phase=phaseRiseB then
+					vsync_sig <= vsync;
+					href_sig <= href;
+					d <= d9 & d8 & d7 & d6 & d5 & d4 & d3 & d2;
+				end if;
+				-- IP impl.sample.runB --- IEND
+
+				stateSample <= stateSampleRunA;
 			end if;
 		end if;
 	end process;
 	-- IP impl.sample.rising --- END
 
 	-- IP impl.sample.falling --- RBEGIN
-	process (mclk)
+	process (reset, mclk)
 		-- IP impl.sample.falling.vars --- BEGIN
 		-- IP impl.sample.falling.vars --- END
 	begin
 		if reset='1' then
+			vsync_shift <= '0';
+			href_shift <= '0';
+
 			d_shift <= (others => '0');
 
 		elsif falling_edge(mclk) then
+			vsync_shift <= vsync;
+			href_shift <= href;
+
 			d_shift <= d9 & d8 & d7 & d6 & d5 & d4 & d3 & d2;
 		end if;
 	end process;
 	-- IP impl.sample.falling --- REND
+
+	------------------------------------------------------------------------
+	-- implementation: camera frame tagging (tag)
+	------------------------------------------------------------------------
+
+	-- IP impl.tag.wiring --- BEGIN
+	strbFrame <= '1' when (stateTag=stateTagFrameB and vsync_sig='0') else '0';
+
+	strbRow120 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row120) else '0';
+	strbRow192 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row192) else '0';
+	strbRow768 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row768) else '0';
+	strbRow960 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row960) else '0';
+
+	strbCol160N1 <= '1' when (stateTag=stateTagColA and col=col160N1) else '0';
+	strbCol256N3 <= '1' when (stateTag=stateTagColA and col=col256N3) else '0';
+	strbCol1024N3 <= '1' when (stateTag=stateTagColA and col=col1024N3) else '0';
+	strbCol1024N9 <= '1' when (stateTag=stateTagColA and col=col1024N9) else '0';
+	strbCol1280 <= '1' when (stateTag=stateTagColA and col=col1280) else '0';
+	strbCol1280N9 <= '1' when (stateTag=stateTagColA and col=col1280N9) else '0';
+
+	stateTag_dbg <= x"00" when stateTag=stateTagInit
+				else x"10" when stateTag=stateTagFrameA
+				else x"11" when stateTag=stateTagFrameB
+				else x"20" when stateTag=stateTagRowA
+				else x"21" when stateTag=stateTagRowB
+				else x"22" when stateTag=stateTagRowC
+				else x"23" when stateTag=stateTagRowD
+				else x"30" when stateTag=stateTagColA
+				else x"31" when stateTag=stateTagColB
+				else (others => '1');
+	-- IP impl.tag.wiring --- END
+
+	-- IP impl.tag.rising --- BEGIN
+	process (reset, mclk, stateTag)
+		-- IP impl.tag.vars --- RBEGIN
+		-- currently not in use: assume pclk = mclk / 2
+		--constant imax: natural := 2; -- mclk per pclk
+		--variable i: natural range 0 to imax;
+		-- IP impl.tag.vars --- REND
+
+	begin
+		if reset='1' then
+			-- IP impl.tag.asyncrst --- BEGIN
+			stateTag <= stateTagInit;
+			row <= 0;
+			col <= 0;
+			-- IP impl.tag.asyncrst --- END
+
+		elsif rising_edge(mclk) then
+			if (stateTag=stateTagInit or (grrdrun='0' and pvwrun='0')) then
+				-- IP impl.tag.syncrst --- BEGIN
+				row <= 0;
+				col <= 0;
+
+				-- IP impl.tag.syncrst --- END
+
+				if (grrdrun='1' or pvwrun='1') then
+					stateTag <= stateTagFrameA;
+
+				else
+					stateTag <= stateTagInit;
+				end if;
+
+			elsif stateTag=stateTagFrameA then
+				if vsync_sig='1' then
+					stateTag <= stateTagFrameB;
+				end if;
+
+			elsif stateTag=stateTagFrameB then
+				if vsync_sig='0' then
+					row <= 0; -- IP impl.tag.frameB --- ILINE
+
+					stateTag <= stateTagRowA;
+				end if;
+
+			elsif stateTag=stateTagRowA then
+				if href_sig='0' then
+					stateTag <= stateTagRowB;
+				end if;
+
+			elsif stateTag=stateTagRowB then
+				if href_sig='1' then
+					stateTag <= stateTagRowC;
+				end if;
+
+			elsif stateTag=stateTagRowC then
+				stateTag <= stateTagRowD;
+
+			elsif stateTag=stateTagRowD then
+				col <= 1; -- IP impl.tag.rowD --- ILINE
+
+				stateTag <= stateTagColA;
+
+			elsif stateTag=stateTagColA then
+				stateTag <= stateTagColB;
+
+			elsif stateTag=stateTagColB then
+				if col=colmax-1 then
+					col <= 0; -- IP impl.tag.colB.colzero --- ILINE
+
+					if row=rowmax-1 then
+						row <= 0; -- IP impl.tag.colB.rowzero --- ILINE
+
+						stateTag <= stateTagFrameA;
+
+					else
+						row <= row + 1; -- IP impl.tag.colB.rowinc --- ILINE
+
+						stateTag <= stateTagRowA;
+					end if;
+
+				else
+					col <= col + 1; -- IP impl.tag.colB.colinc --- ILINE
+
+					stateTag <= stateTagColA;
+				end if;
+			end if;
+		end if;
+	end process;
+	-- IP impl.tag.rising --- END
 
 	------------------------------------------------------------------------
 	-- implementation: other 
@@ -3775,7 +3951,8 @@ begin
 	nmclk <= not mclk;
 
 	--strb_dbg <= strbFrame & strbRow960 & strbRow768 & strbCol1280N9 & strbCol1280 & strbCol1024N3;
-	strb_dbg <= strbDPvwbinrgbGnBl & strbDPvwbinrgbRd & strbRow960 & strbCol1280N9 & strbCol1280 & strbCol1024N3;
+	strb_dbg <= strbFrame & strbRow192 & strbRow768 & strbDPvwbinrgbGnBl & strbDPvwbinrgbRd & strbDPvwbingrayGr;
+	--strb_dbg <= "000000";
 	-- IP impl.oth.cust --- IEND
 
 end Camacq;

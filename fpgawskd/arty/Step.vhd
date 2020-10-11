@@ -1,8 +1,8 @@
 -- file Step.vhd
 -- Step easy model controller implementation
 -- author Catherine Johnson
--- date created: 16 May 2020
--- date modified: 16 May 2020
+-- date created: 6 Oct 2020
+-- date modified: 6 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -27,6 +27,7 @@ entity Step is
 		ackInvMoveto: out std_logic;
 
 		movetoAngle: in std_logic_vector(15 downto 0);
+		movetoTstep: in std_logic_vector(7 downto 0);
 
 		reqInvSet: in std_logic;
 		ackInvSet: out std_logic;
@@ -119,16 +120,21 @@ begin
 
 		constant seqmax: natural := 7;
 		type seq_t is array (0 to seqmax) of std_logic_vector(3 downto 0);
-		constant seq: seq_t := ("1000", "1100", "0100", "0110", "0010", "0011", "0001", "1001");
+		--constant seq: seq_t := ("1000", "1100", "0100", "0110", "0010", "0011", "0001", "1001");
+		constant seq: seq_t := ("1100", "1100", "0110", "0110", "0011", "0011", "1001", "1001");
 
 		variable iseq: natural range 0 to seqmax;
 
+		variable target: natural range 0 to 4095;
 		variable dAngle: integer range -4095 to 4096;
 
-		variable ccwNotCw: std_logic;
+		variable rng: boolean;
+		variable ccwNotCw: boolean;
 
-		variable targetNotSteady: std_logic;
-		variable atTarget: std_logic;
+		variable Tstep: natural range 0 to 255;
+
+		variable targetNotSteady: boolean;
+		variable atTarget: boolean;
 		-- IP impl.op.vars --- REND
 
 	begin
@@ -150,12 +156,16 @@ begin
 			i := 0;
 			iseq := 0;
 
+			target := 0;
 			dAngle := 0;
 
-			ccwNotCw := '0';
+			rng := false;
+			ccwNotCw := false;
 
-			targetNotSteady := '0';
-			atTarget := '0';
+			Tstep := 150;
+
+			targetNotSteady := false;
+			atTarget := false;
 			-- IP impl.op.asyncrst --- REND
 
 		elsif rising_edge(mclk) then
@@ -173,27 +183,29 @@ begin
 
 				if reqInvMoveto='1' then
 					-- IP impl.op.init.moveto --- IBEGIN
-					targetNotSteady := '1';
+					targetNotSteady := true;
 
 					-- determine shortest path
-					dAngle := to_integer(unsigned(movetoAngle)) - angle;
-					if dAngle = 0 then
-						atTarget := '1';
-					else
-						atTarget := '0';
+					target := to_integer(unsigned(movetoAngle));
+					dAngle := target - angle;
 
+					atTarget := (dAngle = 0);
+
+					if not atTarget then
 						if dAngle > 2048 then
 							-- dAngle := dAngle - 4096; -- will become negative
-							ccwNotCw := '1';
+							ccwNotCw := true;
 						elsif dAngle < -2047 then
 							--dAngle := dAngle + 4096; -- will become positive
-							ccwNotCw := '0';
+							ccwNotCw := false;
 						elsif dAngle > 0 then
-							ccwNotCw := '0';
+							ccwNotCw := false;
 						else
-							ccwNotCw := '1';
+							ccwNotCw := true;
 						end if;
 					end if;
+
+					Tstep := to_integer(unsigned(movetoTstep));
 
 					ackInvMoveto_sig <= '1';
 					-- IP impl.op.init.moveto --- IEND
@@ -202,14 +214,12 @@ begin
 
 				elsif reqInvSet='1' then
 					-- IP impl.op.init.set --- IBEGIN
-					targetNotSteady := '0';
-					
-					if setCcwNotCw=fls8 then
-						ccwNotCw := '0';
-					else
-						ccwNotCw := '1';
-					end if;
-					
+					targetNotSteady := false;
+
+					rng := (setRng = tru8);
+					ccwNotCw := (setCcwNotCw = tru8);
+					Tstep := to_integer(unsigned(setTstep));
+
 					ackInvSet_sig <= '1';
 					-- IP impl.op.init.set --- IEND
 
@@ -229,13 +239,13 @@ begin
 				end if;
 
 			elsif stateOp=stateOpReady then
-				if setTstep/=x"00" then
-					if (targetNotSteady='0' and setRng=tru8) then
+				if Tstep/=0 then
+					if not targetNotSteady and rng then
 						i := 0; -- IP impl.op.ready.steady --- ILINE
 
 						stateOp <= stateOpRunB;
 
-					elsif (targetNotSteady='1' and atTarget='0') then
+					elsif targetNotSteady and not atTarget then
 						i := 0; -- IP impl.op.ready.target --- ILINE
 
 						stateOp <= stateOpRunB;
@@ -245,10 +255,10 @@ begin
 			elsif stateOp=stateOpRunA then
 				if tkclk='1' then
 					-- IP impl.op.runA --- IBEGIN
-					if i=to_integer(unsigned(setTstep)) then
+					if i=Tstep then
 						i := 0;
 	
-						if ccwNotCw = '0' then
+						if not ccwNotCw then
 							if iseq=0 then
 								iseq := seqmax;
 							else
@@ -289,8 +299,8 @@ begin
 				if tkclk='0' then
 					i := i + 1; -- IP impl.op.runB --- ILINE
 
-					if (targetNotSteady='1' and to_integer(unsigned(movetoAngle))=angle) then
-						atTarget := '1'; -- IP impl.op.runB.done --- ILINE
+					if targetNotSteady and target=angle then
+						atTarget := true; -- IP impl.op.runB.done --- ILINE
 
 						stateOp <= stateOpReady;
 

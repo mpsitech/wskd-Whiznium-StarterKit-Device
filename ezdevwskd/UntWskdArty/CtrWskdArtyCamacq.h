@@ -2,8 +2,8 @@
 	* \file CtrWskdArtyCamacq.h
 	* camacq controller (declarations)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #ifndef CTRWSKDARTYCAMACQ_H
@@ -30,11 +30,10 @@ public:
 	class VecVCommand {
 
 	public:
-		static const Sbecore::utinyint SETSAMPLE = 0x00;
-		static const Sbecore::utinyint SETGRRD = 0x01;
-		static const Sbecore::utinyint GETGRRDINFO = 0x02;
-		static const Sbecore::utinyint SETPVW = 0x03;
-		static const Sbecore::utinyint GETPVWINFO = 0x04;
+		static const Sbecore::utinyint SETGRRD = 0x00;
+		static const Sbecore::utinyint GETGRRDINFO = 0x01;
+		static const Sbecore::utinyint SETPVW = 0x02;
+		static const Sbecore::utinyint GETPVWINFO = 0x03;
 
 		static Sbecore::utinyint getTix(const std::string& sref);
 		static std::string getSref(const Sbecore::utinyint tix);
@@ -89,9 +88,6 @@ public:
 	static void fillFeedFCommand(Sbecore::Xmlio::Feed& feed);
 
 	static Dbecore::Cmd* getNewCmd(const Sbecore::utinyint tixVCommand);
-
-	static Dbecore::Cmd* getNewCmdSetSample();
-	void setSample(const bool fallNotRise);
 
 	static Dbecore::Cmd* getNewCmdSetGrrd();
 	void setGrrd(const bool rng, const bool redNotGray);

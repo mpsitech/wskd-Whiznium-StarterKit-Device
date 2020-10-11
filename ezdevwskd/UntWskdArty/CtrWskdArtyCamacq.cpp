@@ -2,8 +2,8 @@
 	* \file CtrWskdArtyCamacq.cpp
 	* camacq controller (implementation)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #include "CtrWskdArtyCamacq.h"
@@ -22,8 +22,7 @@ utinyint CtrWskdArtyCamacq::VecVCommand::getTix(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "setsample") return SETSAMPLE;
-	else if (s == "setgrrd") return SETGRRD;
+	if (s == "setgrrd") return SETGRRD;
 	else if (s == "getgrrdinfo") return GETGRRDINFO;
 	else if (s == "setpvw") return SETPVW;
 	else if (s == "getpvwinfo") return GETPVWINFO;
@@ -34,8 +33,7 @@ utinyint CtrWskdArtyCamacq::VecVCommand::getTix(
 string CtrWskdArtyCamacq::VecVCommand::getSref(
 			const utinyint tix
 		) {
-	if (tix == SETSAMPLE) return("setSample");
-	else if (tix == SETGRRD) return("setGrrd");
+	if (tix == SETGRRD) return("setGrrd");
 	else if (tix == GETGRRDINFO) return("getGrrdinfo");
 	else if (tix == SETPVW) return("setPvw");
 	else if (tix == GETPVWINFO) return("getPvwinfo");
@@ -48,7 +46,7 @@ void CtrWskdArtyCamacq::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {SETSAMPLE,SETGRRD,GETGRRDINFO,SETPVW,GETPVWINFO};
+	std::set<utinyint> items = {SETGRRD,GETGRRDINFO,SETPVW,GETPVWINFO};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -163,37 +161,12 @@ Cmd* CtrWskdArtyCamacq::getNewCmd(
 		) {
 	Cmd* cmd = NULL;
 
-	if (tixVCommand == VecVCommand::SETSAMPLE) cmd = getNewCmdSetSample();
-	else if (tixVCommand == VecVCommand::SETGRRD) cmd = getNewCmdSetGrrd();
+	if (tixVCommand == VecVCommand::SETGRRD) cmd = getNewCmdSetGrrd();
 	else if (tixVCommand == VecVCommand::GETGRRDINFO) cmd = getNewCmdGetGrrdinfo();
 	else if (tixVCommand == VecVCommand::SETPVW) cmd = getNewCmdSetPvw();
 	else if (tixVCommand == VecVCommand::GETPVWINFO) cmd = getNewCmdGetPvwinfo();
 
 	return cmd;
-};
-
-Cmd* CtrWskdArtyCamacq::getNewCmdSetSample() {
-	Cmd* cmd = new Cmd(0x01, VecVCommand::SETSAMPLE, Cmd::VecVRettype::VOID);
-
-	cmd->addParInv("fallNotRise", Par::VecVType::_BOOL);
-
-	return cmd;
-};
-
-void CtrWskdArtyCamacq::setSample(
-			const bool fallNotRise
-		) {
-	Cmd* cmd = getNewCmdSetSample();
-
-	cmd->parsInv["fallNotRise"].setBool(fallNotRise);
-
-	if (unt->runCmd(cmd)) {
-	} else {
-		delete cmd;
-		throw DbeException("error running setSample");
-	};
-
-	delete cmd;
 };
 
 Cmd* CtrWskdArtyCamacq::getNewCmdSetGrrd() {

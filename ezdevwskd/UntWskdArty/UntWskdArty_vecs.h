@@ -2,8 +2,8 @@
 	* \file UntWskdArty_vecs.h
 	* Digilent Arty Z7 unit vectors (declarations)
 	* \author Catherine Johnson
-	* \date created: 16 May 2020
-	* \date modified: 16 May 2020
+	* \date created: 6 Oct 2020
+	* \date modified: 6 Oct 2020
 	*/
 
 #ifndef UNTWSKDARTY_VECS_H

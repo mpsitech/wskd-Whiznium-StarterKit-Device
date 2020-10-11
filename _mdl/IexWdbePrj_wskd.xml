@@ -1,2 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<IexWdbePrj version="0.9.73"><ImeIMProject><Ii num="1"><sho>wskd</sho><tit>Whiznium StarterKit Device</tit><esy>true</esy><grl></grl><cmt></cmt><ImeIMVersion><Ii num="1"><maj>0</maj><min>1</min><sub>20</sub><ste>newimp</ste><abt>Whiznium StarterKit Device implements FPGA-based image processing for MPSI's tabletop 3D laser scanner (arty machine only).</abt><cmt></cmt><ImeIMRelease><Ii num="1"><typ>fpga</typ><mch>linux</mch><srf>fpgawskd_linux</srf><opt></opt><cmt></cmt></Ii><Ii num="2"><typ>fpga</typ><mch>arty</mch><srf>fpgawskd_arty</srf><opt></opt><cmt></cmt></Ii><Ii num="3"><typ>ezdev</typ><mch>mac</mch><srf>ezdevwskd_mac</srf><opt></opt><cmt></cmt></Ii><Ii num="4"><typ>ezdev</typ><mch>linux</mch><srf>ezdevwskd_linux</srf><opt></opt><cmt></cmt></Ii><Ii num="5"><typ>ezdev</typ><mch>arty</mch><srf>ezdevwskd_arty</srf><opt></opt><cmt></cmt></Ii><Ii num="6"><typ>ezdev</typ><mch>apalis</mch><srf>ezdevwskd_apalis</srf><opt></opt><cmt></cmt></Ii></ImeIMRelease></Ii></ImeIMVersion><ImeIRMPersonMProject><Ii num="1"><prs>Catherine Johnson</prs><fct>mgr</fct></Ii></ImeIRMPersonMProject></Ii></ImeIMProject></IexWdbePrj>
+<IexWdbePrj version="1.0.3">
+	<ImeIMProject>
+		<Ii num="1">
+			<sho>wskd</sho>
+			<tit>Whiznium StarterKit Device</tit>
+			<esy>true</esy>
+			<grl/>
+			<cmt/>
+			<ImeIMVersion>
+				<Ii num="1">
+					<maj>0</maj>
+					<min>1</min>
+					<sub>24</sub>
+					<ste>newimp</ste>
+					<abt>Whiznium StarterKit Device implements FPGA-based image processing for MPSI's tabletop 3D laser scanner (arty machine only).</abt>
+					<cmt/>
+					<ImeIMRelease>
+						<Ii num="1">
+							<typ>ezdev</typ>
+							<mch>apalis</mch>
+							<srf>ezdevwskd_apalis</srf>
+							<opt/>
+							<cmt/>
+						</Ii>
+						<Ii num="2">
+							<typ>ezdev</typ>
+							<mch>arty</mch>
+							<srf>ezdevwskd_arty</srf>
+							<opt/>
+							<cmt/>
+						</Ii>
+						<Ii num="3">
+							<typ>ezdev</typ>
+							<mch>linux</mch>
+							<srf>ezdevwskd_linux</srf>
+							<opt/>
+							<cmt/>
+						</Ii>
+						<Ii num="4">
+							<typ>ezdev</typ>
+							<mch>mac</mch>
+							<srf>ezdevwskd_mac</srf>
+							<opt/>
+							<cmt/>
+						</Ii>
+						<Ii num="5">
+							<typ>fpga</typ>
+							<mch>arty</mch>
+							<srf>fpgawskd_arty</srf>
+							<opt/>
+							<cmt/>
+						</Ii>
+						<Ii num="6">
+							<typ>fpga</typ>
+							<mch>linux</mch>
+							<srf>fpgawskd_linux</srf>
+							<opt/>
+							<cmt/>
+						</Ii>
+					</ImeIMRelease>
+				</Ii>
+			</ImeIMVersion>
+			<ImeIRMPersonMProject>
+				<Ii num="1">
+					<prs>Catherine Johnson</prs>
+					<fct>mgr</fct>
+				</Ii>
+			</ImeIRMPersonMProject>
+		</Ii>
+	</ImeIMProject>
+</IexWdbePrj>
