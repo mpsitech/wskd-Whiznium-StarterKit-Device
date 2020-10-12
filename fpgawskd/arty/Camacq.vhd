@@ -630,14 +630,7 @@ architecture Camacq of Camacq is
 
 	---- other
 	signal nmclk: std_logic;
-	-- IP sigs.oth.cust --- IBEGIN
-	signal stateAlign_dbg: std_logic_vector(7 downto 0);
-
-	signal cntFallA_sig: std_logic_vector(7 downto 0);
-	signal cntRiseA_sig: std_logic_vector(7 downto 0);
-	signal cntFallB_sig: std_logic_vector(7 downto 0);
-	signal cntRiseB_sig: std_logic_vector(7 downto 0);
-	-- IP sigs.oth.cust --- IEND
+	-- IP sigs.oth.cust --- INSERT
 
 begin
 
@@ -885,7 +878,7 @@ begin
 				i := i + 1;
 				-- IP impl.align.countB.ext --- IEND
 
-				if i=imax then
+				if i=cntmax then
 					stateAlign <= stateAlignCountC;
 
 				else

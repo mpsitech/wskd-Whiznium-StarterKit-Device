@@ -111,13 +111,17 @@ begin
 			elsif stateSend=stateSendDataA then
 				if wordcnt=to_integer(unsigned(len)) then
 					stateSend <= stateSendDoneA;
+				elsif enTx='0' then
+					stateSend <= stateSendErr;
 				elsif strbTx='1' then
 					i := 0;
 					stateSend <= stateSendDataB;
 				end if;
 
 			elsif stateSend=stateSendDataB then
-				i := i + 1;
+				if i<tstrblow then
+					i := i + 1;
+				end if;
 
 				if i=tstrblow then
 					if enTx='0' then

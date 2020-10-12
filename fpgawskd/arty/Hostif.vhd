@@ -784,7 +784,10 @@ begin
 				end if;
 
 			elsif stateOp=stateOpRxopB then
-				if strbArxd='1' then
+				if ackArx='0' then
+					stateOp <= stateOpIdle;
+
+				elsif strbArxd='1' then
 					for i in 0 to 3 loop
 						opbuf(4*wordcnt+i) <= arxd((4-i)*8-1 downto (3-i)*8);
 					end loop;
@@ -802,9 +805,6 @@ begin
 
 						stateOp <= stateOpRxopC;
 					end if;
-
-				elsif ackArx='0' then
-					stateOp <= stateOpIdle;
 				end if;
 
 			elsif stateOp=stateOpRxopC then -- strbCrcd='1'
@@ -1062,7 +1062,11 @@ begin
 				end if;
 
 			elsif stateOp=stateOpTxB then -- strbCrcd='1'
-				if dneAtx='1' then
+				if ackAtx='0' then
+					commok_sig <= '0';
+					stateOp <= stateOpIdle;
+
+				elsif dneAtx='1' then
 					stateOp <= stateOpIdle;
 
 				elsif strbAtxd='0' then
@@ -1075,10 +1079,6 @@ begin
 
 					stateOp <= stateOpTxC;
 
-				elsif ackAtx='0' then
-					commok_sig <= '0';
-					stateOp <= stateOpIdle;
-
 				elsif timeout='1' then
 					commok_sig <= '0';
 					stateOp <= stateOpIdle;
@@ -1088,13 +1088,13 @@ begin
 				end if;
 
 			elsif stateOp=stateOpTxC then
-				if strbAtxd='1' then
-					torestart <= '1';
-					stateOp <= stateOpTxB;
-
-				elsif ackAtx='0' then
+				if ackAtx='0' then
 					commok_sig <= '0';
 					stateOp <= stateOpIdle;
+
+				elsif strbAtxd='1' then
+					torestart <= '1';
+					stateOp <= stateOpTxB;
 				end if;
 
 --			elsif stateOp=stateOpTxD then -- captNotFin='0'
@@ -1161,7 +1161,11 @@ begin
 				end if;
 
 			elsif stateOp=stateOpTxbufC then -- strbCrcd='1'
-				if strbAtxd='0' then
+				if ackAtx='0' then
+					commok_sig <= '0';
+					stateOp <= stateOpIdle;
+
+				elsif strbAtxd='0' then
 					strbDTxbuf <= '1';
 
 					wordcnt := wordcnt + 1; -- number of words put out to be tx'ed
@@ -1171,10 +1175,6 @@ begin
 					else
 						stateOp <= stateOpTxbufD;
 					end if;
-
-				elsif ackAtx='0' then
-					commok_sig <= '0';
-					stateOp <= stateOpIdle;
 
 				elsif timeout='1' then
 					commok_sig <= '0';
@@ -1200,13 +1200,13 @@ begin
 			elsif stateOp=stateOpTxbufG then
 				crcd <= atxd;
 
-				if strbAtxd='1' then
-					torestart <= '1';
-					stateOp <= stateOpTxbufC;
-
-				elsif ackAtx='0' then
+				if ackAtx='0' then
 					commok_sig <= '0';
 					stateOp <= stateOpIdle;
+
+				elsif strbAtxd='1' then
+					torestart <= '1';
+					stateOp <= stateOpTxbufC;
 				end if;
 
 			elsif stateOp=stateOpTxbufH then -- captNotFin='0'
@@ -1218,14 +1218,13 @@ begin
 				end if;
 
 			elsif stateOp=stateOpTxbufI then
-				if dneAtx='1' then
-					dneTxbuf <= '1';
-
-					stateOp <= stateOpTxbufK;
-
-				elsif ackAtx='0' then
+				if ackAtx='0' then
 					commok_sig <= '0';
 					stateOp <= stateOpIdle;
+
+				elsif dneAtx='1' then
+					dneTxbuf <= '1';
+					stateOp <= stateOpTxbufK;
 
 				elsif timeout='1' then
 					commok_sig <= '0';
@@ -1236,13 +1235,13 @@ begin
 				end if;
 
 			elsif stateOp=stateOpTxbufJ then
-				if strbAtxd='1' then
-					torestart <= '1';
-					stateOp <= stateOpTxbufI;
-
-				elsif ackAtx='0' then
+				if ackAtx='0' then
 					commok_sig <= '0';
 					stateOp <= stateOpIdle;
+
+				elsif strbAtxd='1' then
+					torestart <= '1';
+					stateOp <= stateOpTxbufI;
 				end if;
 
 			elsif stateOp=stateOpTxbufK then
@@ -1271,7 +1270,10 @@ begin
 				end if;
 
 			elsif stateOp=stateOpRxB then
-				if strbArxd='1' then
+				if ackArx='0' then
+					stateOp <= stateOpIdle;
+
+				elsif strbArxd='1' then
 					for i in 0 to 3 loop
 						rxbuf(4*wordcnt + i) <= arxd((4-i)*8-1 downto (3-i)*8);
 					end loop;
@@ -1280,9 +1282,6 @@ begin
 
 					torestart <= '1';
 					stateOp <= stateOpRxC;
-
-				elsif ackArx='0' then
-					stateOp <= stateOpIdle;
 				end if;
 
 			elsif stateOp=stateOpRxC then -- strbCrcd='1'

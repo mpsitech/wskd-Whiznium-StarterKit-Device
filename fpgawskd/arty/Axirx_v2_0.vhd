@@ -117,7 +117,9 @@ begin
 				end if;
 
 			elsif stateRecv=stateRecvDataB then
-				i := i + 1;
+				if i<tstrbhigh then
+					i := i + 1;
+				end if;
 
 				if i=tstrbhigh then
 					if strbRx='0' then

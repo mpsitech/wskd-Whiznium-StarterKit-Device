@@ -1448,7 +1448,7 @@ begin
 			tx => tx,
 			strbTx => strbTx,
 
-			stateOp_dbg => open
+			stateOp_dbg => hostifStateOp_dbg
 		);
 
 	myLaser : Laser
@@ -1606,7 +1606,7 @@ begin
 	--	else hostifStateOp_dbg(3 downto 0) when sw = "00"
 	--	else "0000";
 	
-	--bcddbg0 <= hostifStateOp_dbg;
+--	bcddbg0 <= hostifStateOp_dbg;
 
 --	dbg5 <= camacqStrb_dbg(5);
 --	dbg4 <= camacqStrb_dbg(4);
@@ -1625,7 +1625,6 @@ begin
 --	dbg3 <= enTx;
 --	dbg2 <= strbTx;
 --	dbg1 <= reset;
---	bcddbg0 <= hostifStateOp_dbg;
 	-- IP impl.oth.cust --- IEND
 
 end Top;

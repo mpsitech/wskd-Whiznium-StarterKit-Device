@@ -187,6 +187,8 @@ architecture Arty_ip_v2_0_S00_AXI of Arty_ip_v2_0_S00_AXI is
 	);
 	signal stateOp: stateOp_t := stateOpInit;
 
+	signal stateOp_dbg: std_logic_vector(5 downto 0);
+
 	signal rdyRx: std_logic;
 	signal enRx: std_logic;
 
@@ -461,6 +463,28 @@ begin
 	------------------------------------------------------------------------
 
 	-- convention: Rd FPGA to host, Wr host to FPGA
+	stateOp_dbg <= "000000" when stateOp=stateOpInit
+		else "001000" when stateOp=stateOpIdle
+		else "010000" when stateOp=stateOpWrrdyA
+		else "010001" when stateOp=stateOpWrrdyB
+		else "010010" when stateOp=stateOpWrrdyC
+		else "010011" when stateOp=stateOpWrrdyD
+		else "010100" when stateOp=stateOpWrrdyE
+		else "011000" when stateOp=stateOpWrA
+		else "011001" when stateOp=stateOpWrB
+		else "011010" when stateOp=stateOpWrC
+		else "011011" when stateOp=stateOpWrD
+		else "100000" when stateOp=stateOpRdrdyA
+		else "100001" when stateOp=stateOpRdrdyB
+		else "100010" when stateOp=stateOpRdrdyC
+		else "100011" when stateOp=stateOpRdrdyD
+		else "100100" when stateOp=stateOpRdrdyE
+		else "101000" when stateOp=stateOpRdA
+		else "101001" when stateOp=stateOpRdB
+		else "101010" when stateOp=stateOpRdC
+		else "101011" when stateOp=stateOpRdD
+		else "101100" when stateOp=stateOpRdE
+		else "111111";
 
 	process (S_AXI_ARESETN, S_AXI_ACLK)
 		variable loc_waddr: std_logic_vector(OPT_MEM_ADDR_BITS downto 0);
@@ -484,6 +508,8 @@ begin
 				loc_raddr := axi_araddr(ADDR_LSB + OPT_MEM_ADDR_BITS downto ADDR_LSB);
 
 				if stateOp=stateOpInit then
+					enRx <= '0';
+					enTx <= '0';
 					axi_rdata <= (others => '0');
 					reqOpToStrbRx <= '0';
 					reqOpToStrbTx <= '0';

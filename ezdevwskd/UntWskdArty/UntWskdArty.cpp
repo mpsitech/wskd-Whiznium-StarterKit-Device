@@ -118,9 +118,11 @@ bool UntWskdArty::rx(
 			if (s > 0) {
 				n = read(fd, &(buf[reqlen-nleft]), nleft);
 
-				if (n >= 0) nleft -= n;
+				if (n > 0) nleft -= n;
 				else {
-					en = errno;
+					if (n == 0) en = ETIMEDOUT; // driver transfers all data at a time or none
+					else en = errno;
+
 					break;
 				};
 
@@ -171,7 +173,7 @@ bool UntWskdArty::tx(
 		while (nleft > 0) {
 			n = write(fd, &(buf[reqlen-nleft]), nleft);
 
-			if (n >= 0) nleft -= n;
+			if (n > 0) nleft -= n; // driver transfers all data at a time or none
 			else break;
 		};
 
