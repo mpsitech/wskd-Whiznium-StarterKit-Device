@@ -2,8 +2,8 @@
 	* \file UntWskdSkmn.h
 	* MPSI starter kit mainboard unit (declarations)
 	* \author Catherine Johnson
-	* \date created: 6 Oct 2020
-	* \date modified: 6 Oct 2020
+	* \date created: 17 Oct 2020
+	* \date modified: 17 Oct 2020
 	*/
 
 #ifndef UNTWSKDSKMN_H

@@ -2,8 +2,8 @@
 	* \file UntWskdSkmn.cpp
 	* MPSI starter kit mainboard unit (implementation)
 	* \author Catherine Johnson
-	* \date created: 6 Oct 2020
-	* \date modified: 6 Oct 2020
+	* \date created: 17 Oct 2020
+	* \date modified: 17 Oct 2020
 	*/
 
 #include "UntWskdSkmn.h"

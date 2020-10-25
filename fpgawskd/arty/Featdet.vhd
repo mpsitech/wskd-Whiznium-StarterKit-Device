@@ -1,8 +1,8 @@
 -- file Featdet.vhd
 -- Featdet easy model controller implementation
 -- author Catherine Johnson
--- date created: 6 Oct 2020
--- date modified: 6 Oct 2020
+-- date created: 17 Oct 2020
+-- date modified: 17 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -15,9 +15,6 @@ entity Featdet is
 	port (
 		reset: in std_logic;
 		mclk: in std_logic;
-
-		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
-		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
 
 		reqInvSet: in std_logic;
 		ackInvSet: out std_logic;
@@ -49,6 +46,9 @@ entity Featdet is
 		reqInvTriggerThd: in std_logic;
 		ackInvTriggerThd: out std_logic;
 
+		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
+		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
+
 		reqFlgbufToHostif: in std_logic;
 		ackFlgbufToHostif: out std_logic;
 		dneFlgbufToHostif: in std_logic;
@@ -57,9 +57,20 @@ entity Featdet is
 
 		dFlgbufToHostif: out std_logic_vector(31 downto 0);
 
-		reqGrrdabbufFromCamacq: out std_logic;
+		reqGrrdcdbufFromCamacq: out std_logic;
 
 		strbDFlgbufToHostif: in std_logic;
+
+		ackGrrdcdbufFromCamacq: in std_logic;
+		dneGrrdcdbufFromCamacq: out std_logic;
+
+		avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
+
+		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
+
+		reqGrrdabbufFromCamacq: out std_logic;
+
+		strbDGrrdcdbufFromCamacq: out std_logic;
 
 		ackGrrdabbufFromCamacq: in std_logic;
 		dneGrrdabbufFromCamacq: out std_logic;
@@ -68,15 +79,6 @@ entity Featdet is
 
 		dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
 		strbDGrrdabbufFromCamacq: out std_logic;
-
-		reqGrrdcdbufFromCamacq: out std_logic;
-		ackGrrdcdbufFromCamacq: in std_logic;
-		dneGrrdcdbufFromCamacq: out std_logic;
-
-		avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
-
-		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
-		strbDGrrdcdbufFromCamacq: out std_logic;
 
 		reqGrrdefbufFromCamacq: out std_logic;
 		ackGrrdefbufFromCamacq: in std_logic;

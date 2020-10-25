@@ -1,8 +1,8 @@
 # file Arty.xdc
 # Digilent Arty Z7 pin mapping and constraints
 # author Catherine Johnson
-# date created: 6 Oct 2020
-# modified: 6 Oct 2020
+# date created: 17 Oct 2020
+# modified: 17 Oct 2020
 
 # bank34 3.3V
 set_property PACKAGE_PIN Y18 [get_ports d2];

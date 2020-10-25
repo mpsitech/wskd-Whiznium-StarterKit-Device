@@ -1,8 +1,8 @@
 -- file Crc8005_32_v1_0.vhd
 -- Crc8005_32_v1_0 crcspec_32_v1_0 implementation
 -- author Catherine Johnson
--- date created: 6 Oct 2020
--- date modified: 6 Oct 2020
+-- date created: 17 Oct 2020
+-- date modified: 17 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;

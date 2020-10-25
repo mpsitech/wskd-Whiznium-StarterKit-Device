@@ -1,8 +1,8 @@
 # file checkout.sh
 # checkout script for Wskd device access library sources, release ezdevwskd_mac
 # author Catherine Johnson
-# date created: 6 Oct 2020
-# modified: 6 Oct 2020
+# date created: 17 Oct 2020
+# modified: 17 Oct 2020
 
 export set SRCROOT=${WHIZROOT}/src
 

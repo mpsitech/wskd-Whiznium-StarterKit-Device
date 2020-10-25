@@ -1,8 +1,8 @@
 -- file Camacq.vhd
 -- Camacq easy model controller implementation
 -- author Catherine Johnson
--- date created: 6 Oct 2020
--- date modified: 6 Oct 2020
+-- date created: 17 Oct 2020
+-- date modified: 17 Oct 2020
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -37,40 +37,42 @@ entity Camacq is
 		getPvwinfoTixVPvwbufstate: out std_logic_vector(7 downto 0);
 		getPvwinfoTkst: out std_logic_vector(31 downto 0);
 
-		reqGrrdabbufToFeatdet: in std_logic;
+		reqPvwbbufToHostif: in std_logic;
 
 		reqPvwabufToHostif: in std_logic;
 
+		reqGrrdabbufToFeatdet: in std_logic;
+
 		reqGrrdcdbufToFeatdet: in std_logic;
 
-		reqPvwbbufToHostif: in std_logic;
 		ackPvwbbufToHostif: out std_logic;
 
-		ackGrrdabbufToFeatdet: out std_logic;
+		ackPvwabufToHostif: out std_logic;
 
 		ackGrrdcdbufToFeatdet: out std_logic;
 
-		ackPvwabufToHostif: out std_logic;
-		dnePvwabufToHostif: in std_logic;
-
-		dneGrrdcdbufToFeatdet: in std_logic;
+		ackGrrdabbufToFeatdet: out std_logic;
 
 		dnePvwbbufToHostif: in std_logic;
 
+		dneGrrdcdbufToFeatdet: in std_logic;
+
 		dneGrrdabbufToFeatdet: in std_logic;
 
-		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
-		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
-		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
+		dnePvwabufToHostif: in std_logic;
+
 		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
+		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
+		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
+		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
+
+		dPvwabufToHostif: out std_logic_vector(31 downto 0);
+
+		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
 		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 
 		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
-
-		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
-
-		dPvwabufToHostif: out std_logic_vector(31 downto 0);
 
 		strbDGrrdabbufToFeatdet: in std_logic;
 
@@ -538,7 +540,7 @@ architecture Camacq of Camacq is
 	type stateTag_t is (
 		stateTagInit,
 		stateTagFrameA, stateTagFrameB,
-		stateTagRowA, stateTagRowB, stateTagRowC, stateTagRowD,
+		stateTagRowA, stateTagRowB,
 		stateTagColA, stateTagColB
 	);
 	signal stateTag: stateTag_t := stateTagInit;
@@ -888,13 +890,13 @@ begin
 			elsif stateAlign=stateAlignCountC then
 				-- IP impl.align.countC --- IBEGIN
 				if cntFallA<cntmax and cntRiseA=cntmax then
-					phase <= phaseFallB;
-				elsif cntRiseA<cntmax and cntFallB=cntmax then
-					phase <= phaseRiseB;
-				elsif cntFallB<cntmax and cntRiseB=cntmax then
-					phase <= phaseFallA;
-				elsif cntRiseB<cntmax and cntFallA=cntmax then
 					phase <= phaseRiseA;
+				elsif cntRiseA<cntmax and cntFallB=cntmax then
+					phase <= phaseFallB;
+				elsif cntFallB<cntmax and cntRiseB=cntmax then
+					phase <= phaseRiseB;
+				elsif cntRiseB<cntmax and cntFallA=cntmax then
+					phase <= phaseFallA;
 				end if;
 				-- IP impl.align.countC --- IEND
 
@@ -1858,11 +1860,11 @@ begin
 						pvwTkstB <= tkclksrcGetTkstTkst;
 					end if;
 
-					aPvwbufGr := 49151;
-
-					aPvwbufRd := 19199;
-					aPvwbufGn := 38399;
-					aPvwbufBl := 57599;
+					aPvwbufGr := 0;
+		
+					aPvwbufRd := 0;
+					aPvwbufGn := 19200;
+					aPvwbufBl := 38400;
 					-- IP impl.pvw.waitFrame --- IEND
 
 					statePvw <= statePvwReady;
@@ -1919,23 +1921,23 @@ begin
 				end if;
 
 			elsif statePvw=statePvwStoreA then
-				if aPvwbufGr=0 then
+				if aPvwbufGr=49151 then
 					statePvw <= statePvwDoneA;
 
 				else
-					aPvwbufGr := aPvwbufGr - 1; -- IP impl.pvw.storeA.dec --- ILINE
+					aPvwbufGr := aPvwbufGr + 1; -- IP impl.pvw.storeA.inc --- ILINE
 
 					statePvw <= statePvwReady;
 				end if;
 
 			elsif statePvw=statePvwStoreB then
-				aPvwbufRd := aPvwbufRd - 1; -- IP impl.pvw.storeB.dec --- ILINE
+				aPvwbufRd := aPvwbufRd + 1; -- IP impl.pvw.storeB.inc --- ILINE
 
 				statePvw <= statePvwReady;
 
 			elsif statePvw=statePvwStoreC then
 				-- IP impl.pvw.storeC --- IBEGIN
-				aPvwbufGn := aPvwbufGn - 1;
+				aPvwbufGn := aPvwbufGn + 1;
 
 				aPvwbuf <= aPvwbufBl;
 
@@ -1949,11 +1951,11 @@ begin
 				statePvw <= statePvwStoreD;
 
 			elsif statePvw=statePvwStoreD then
-				if aPvwbufBl=38400 then
+				if aPvwbufBl=57599 then
 					statePvw <= statePvwDoneA;
 
 				else
-					aPvwbufBl := aPvwbufBl - 1; -- IP impl.pvw.storeD.dec --- ILINE
+					aPvwbufBl := aPvwbufBl + 1; -- IP impl.pvw.storeD.inc --- ILINE
 
 					statePvw <= statePvwReady;
 				end if;
@@ -3839,8 +3841,6 @@ begin
 				else x"11" when stateTag=stateTagFrameB
 				else x"20" when stateTag=stateTagRowA
 				else x"21" when stateTag=stateTagRowB
-				else x"22" when stateTag=stateTagRowC
-				else x"23" when stateTag=stateTagRowD
 				else x"30" when stateTag=stateTagColA
 				else x"31" when stateTag=stateTagColB
 				else (others => '1');
@@ -3896,16 +3896,10 @@ begin
 
 			elsif stateTag=stateTagRowB then
 				if href_sig='1' then
-					stateTag <= stateTagRowC;
+					col <= 0; -- IP impl.tag.rowB --- ILINE
+
+					stateTag <= stateTagColA;
 				end if;
-
-			elsif stateTag=stateTagRowC then
-				stateTag <= stateTagRowD;
-
-			elsif stateTag=stateTagRowD then
-				col <= 1; -- IP impl.tag.rowD --- ILINE
-
-				stateTag <= stateTagColA;
 
 			elsif stateTag=stateTagColA then
 				stateTag <= stateTagColB;

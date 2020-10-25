@@ -2,8 +2,8 @@
 # file checkin.sh
 # checkin script for Digilent Arty Z7 unit of Wskd embedded system code, release fpgawskd_arty
 # author Catherine Johnson
-# date created: 6 Oct 2020
-# modified: 6 Oct 2020
+# date created: 17 Oct 2020
+# modified: 17 Oct 2020
 
 export set REPROOT=${WHIZROOT}/srcrep
 

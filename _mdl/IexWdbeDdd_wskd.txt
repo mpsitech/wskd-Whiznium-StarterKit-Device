@@ -781,7 +781,7 @@
 					- ImeIAMFsmstateStep.end											
 				- 1	countB	true										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
-					- countC	i=imax										
+					- countC	i=cntmax										
 					- countA	else										
 					- ImeIAMFsmstateStep.end											
 				- 1	countC	false										
@@ -1009,12 +1009,12 @@
 					- ImeIAMFsmstateStep.end											
 				- 2	storeA	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
-					- doneA	aPvwbufGr=0										
-					- ready	else	dec									
+					- doneA	aPvwbufGr=49151										
+					- ready	else	inc									
 					- ImeIAMFsmstateStep.end											
 				- 2	storeB	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
-					- ready		dec									
+					- ready		inc									
 					- ImeIAMFsmstateStep.end											
 				- 2	storeC	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
@@ -1022,8 +1022,8 @@
 					- ImeIAMFsmstateStep.end											
 				- 2	storeD	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
-					- doneA	aPvwbufBl=38400										
-					- ready	else	dec									
+					- doneA	aPvwbufBl=57599										
+					- ready	else	inc									
 					- ImeIAMFsmstateStep.end											
 				- 3	doneA	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
@@ -1338,15 +1338,7 @@
 					- ImeIAMFsmstateStep.end											
 				- 2	rowB	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
-					- rowC	href_sig										
-					- ImeIAMFsmstateStep.end											
-				- 2	rowC	false										
-					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
-					- rowD											
-					- ImeIAMFsmstateStep.end											
-				- 2	rowD	false										
-					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
-					- colA		rowD									
+					- colA	href_sig	rowB									
 					- ImeIAMFsmstateStep.end											
 				- 3	colA	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
@@ -1745,7 +1737,7 @@
 		- ins	0	INIT_04	slvdn	256		x"0000063C0098053C0028043C0034013C00DE6050000122360040343600033636"								
 		- ins	0	INIT_05	slvdn	256		x"00001238001011380000103800400B3C009C0A3C001C093C0000083C0007073C"								
 		- ins	0	INIT_06	slvdn	256		x"0000004300002E3000580E3000FF043000000030001A05400002014000640837"								
-		- ins	0	INIT_07	slvdn	256		x"0060113A00261E3A00301B3A0028103A00300F3A00A7005000000E4400011F50"								
+		- ins	0	INIT_07	slvdn	256		x"0060113A00261E3A00301B3A0028103A00300F3A00A7005000000E4400051F50"								
 		- ins	0	INIT_08	slvdn	256		x"000C06580026055800120458000F0358000F0258001401580023005800141F3A"								
 		- ins	0	INIT_09	slvdn	256		x"00000E5800030D5800080C58000D0B5800080A58000509580005085800080758"								
 		- ins	0	INIT_0A	slvdn	256		x"0003165800011558000014580003135800071258000911580003105800000F58"								
@@ -1768,7 +1760,7 @@
 		- ins	0	INIT_21	slvdn	256		x"000A0838009F073800070638003F0538000A0438000003380000023800000138"								
 		- ins	0	INIT_22	slvdn	256		x"0004133800B00F3800070E38001C0D38000B0C3800980B3800070A3800200938"								
 		- ins	0	INIT_23	slvdn	256		x"0002134700C30630001C02300006044000000C3700120937002B123600041836"								
-		- ins	0	INIT_24	slvdn	256		x"00000000000003350083015000012438002C374800200C4600370B46000C0744"								
+		- ins	0	INIT_24	slvdn	256		x"00462038000003350083015000012438002C374800200C4600370B46000C0744"								
 		- ImeIMGeneric.end														
 		- ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment		
 		- retrupd	0		DO							drd				
@@ -2235,7 +2227,7 @@
 				- 0	stoprow	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
 					- startrowA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstatePause	incRow									
-					- init	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEndfr	updScore									
+					- init	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEndfr										
 					- ImeIAMFsmstateStep.end											
 				- ImeIMFsmstate.end												
 			- ImeIMFsm.end													
@@ -2391,7 +2383,7 @@
 				- 0	stoprow	false										
 					- ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4			
 					- startrowA	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstatePause	incRow									
-					- init	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEndfr										
+					- init	camacqGetGrrdinfoTixVGrrdbufstate=tixVCamacqGrrdbufstateEndfr	updScore									
 					- ImeIAMFsmstateStep.end											
 				- ImeIMFsmstate.end												
 			- ImeIMFsm.end													
