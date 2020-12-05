@@ -1,10 +1,11 @@
 /**
 	* \file UntWskdArty.h
 	* Digilent Arty Z7 unit (declarations)
-	* \author Catherine Johnson
-	* \date created: 17 Oct 2020
-	* \date modified: 17 Oct 2020
+	* \copyright (C) 2017-2020 MPSI Technologies GmbH
+	* \author Catherine Johnson (auto-generation)
+	* \date created: 1 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef UNTWSKDARTY_H
 #define UNTWSKDARTY_H
@@ -92,6 +93,8 @@ public:
 };
 
 #endif
+
+
 
 
 

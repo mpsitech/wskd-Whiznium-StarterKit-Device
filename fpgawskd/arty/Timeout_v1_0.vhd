@@ -1,8 +1,10 @@
 -- file Timeout_v1_0.vhd
 -- Timeout_v1_0 module implementation
--- author Alexander Wirthmueller
+-- copyright: (C) 2017 MPSI Technologies GmbH
+-- author: Alexander Wirthmueller
 -- date created: 16 Jan 2017
 -- date modified: 6 Apr 2017
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -86,4 +88,5 @@ begin
 	end process;
 
 end Timeout_v1_0;
+
 

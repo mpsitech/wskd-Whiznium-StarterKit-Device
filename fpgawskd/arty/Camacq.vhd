@@ -1,8 +1,9 @@
 -- file Camacq.vhd
 -- Camacq easy model controller implementation
--- author Catherine Johnson
--- date created: 17 Oct 2020
--- date modified: 17 Oct 2020
+-- copyright: (C) 2016-2020 MPSI Technologies GmbH
+-- author: Catherine Johnson (auto-generation)
+-- date created: 1 Dec 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -39,46 +40,44 @@ entity Camacq is
 
 		reqPvwbbufToHostif: in std_logic;
 
-		reqPvwabufToHostif: in std_logic;
-
 		reqGrrdabbufToFeatdet: in std_logic;
 
 		reqGrrdcdbufToFeatdet: in std_logic;
 
-		ackPvwbbufToHostif: out std_logic;
-
+		reqPvwabufToHostif: in std_logic;
 		ackPvwabufToHostif: out std_logic;
-
-		ackGrrdcdbufToFeatdet: out std_logic;
 
 		ackGrrdabbufToFeatdet: out std_logic;
 
+		ackGrrdcdbufToFeatdet: out std_logic;
+
+		ackPvwbbufToHostif: out std_logic;
 		dnePvwbbufToHostif: in std_logic;
 
-		dneGrrdcdbufToFeatdet: in std_logic;
-
 		dneGrrdabbufToFeatdet: in std_logic;
+
+		dneGrrdcdbufToFeatdet: in std_logic;
 
 		dnePvwabufToHostif: in std_logic;
 
 		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
 		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
-		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
 		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
+		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
 
-		dPvwabufToHostif: out std_logic_vector(31 downto 0);
+		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
 
 		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
 		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 
-		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
+		dPvwabufToHostif: out std_logic_vector(31 downto 0);
 
-		strbDGrrdabbufToFeatdet: in std_logic;
+		strbDGrrdcdbufToFeatdet: in std_logic;
 
 		strbDPvwabufToHostif: in std_logic;
 
-		strbDGrrdcdbufToFeatdet: in std_logic;
+		strbDGrrdabbufToFeatdet: in std_logic;
 
 		strbDPvwbbufToHostif: in std_logic;
 

@@ -1,8 +1,9 @@
 -- file Spbram_v1_0_size4kB.vhd
 -- Spbram_v1_0_size4kB spbram_v1_0 implementation
--- author Catherine Johnson
--- date created: 17 Oct 2020
--- date modified: 17 Oct 2020
+-- copyright: (C) 2016-2020 MPSI Technologies GmbH
+-- author: Catherine Johnson (auto-generation)
+-- date created: 1 Dec 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -93,4 +94,5 @@ begin
 	-- IP impl --- END
 
 end Spbram_v1_0_size4kB;
+
 

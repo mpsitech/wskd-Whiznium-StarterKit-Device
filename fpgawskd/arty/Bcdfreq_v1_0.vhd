@@ -1,8 +1,10 @@
 -- file Bcdfreq_v1_0.vhd
 -- Bcdfreq_v1_0 module implementation
--- author Alexander Wirthmueller
+-- author: Alexander Wirthmueller
+-- copyright: (C) 2020 MPSI Technologies GmbH
 -- date created: 6 Jan 2020
 -- date modified: 4 Feb 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -147,4 +149,5 @@ begin
 	end process;
 
 end Bcdfreq_v1_0;
+
 

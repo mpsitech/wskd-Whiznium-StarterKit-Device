@@ -1,11 +1,15 @@
 #!/bin/bash
 # file checkout.sh
-# checkout script for Wskd embedded system code, release fpgawskd_arty
-# author Catherine Johnson
-# date created: 17 Oct 2020
-# modified: 17 Oct 2020
+# checkout script for Wskd embedded system code, release fpgawskd_any
+# copyright: (C) 2017-2020 MPSI Technologies GmbH
+# author: Catherine Johnson (auto-generation)
+# date created: 5 Dec 2020
+# IP header --- ABOVE
 
-export set FPGAROOT=
+if [ -z ${FPGAROOT+x} ]; then
+	echo "FPGAROOT is not defined. It looks as if you didn't run a Whiznium initialization script beforehand."
+	exit 1
+fi
 
 if [ $? -ne 0 ]; then
 	exit

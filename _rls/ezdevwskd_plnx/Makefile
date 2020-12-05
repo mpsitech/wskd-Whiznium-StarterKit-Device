@@ -1,20 +1,21 @@
 # file Makefile
-# make file for Wskd device access library, release ezdevwskd_arty(linux cross-compilation)
-# author Catherine Johnson
-# date created: 17 Oct 2020
-# modified: 17 Oct 2020
+# make file for Wskd device access library, release ezdevwskd_plnx(ubuntu cross-compilation)
+# copyright: (C) 2016-2020 MPSI Technologies GmbH
+# author: Catherine Johnson (auto-generation)
+# date created: 5 Dec 2020
+# IP header --- ABOVE
 
-SRCROOT = ${WHIZROOT}/src
-LIBROOT = ${SYSROOT}${WHIZROOT}/lib
+BUILDROOT = ${WHIZSDKROOT}/build
+LIBROOT = ${SYSROOT}${WHIZSDKROOT}/lib
 
 CPP = ${TCHROOT}/arm-xilinx-linux-gnueabi-g++
-CPPFLAGS = --sysroot=${SYSROOT} -std=c++11 -march=armv7-a -mthumb -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a9 -g -Wall -Os -pthread
+CPPFLAGS = --sysroot=${SYSROOT} -std=c++11 -march=armv7-a -mthumb -mfpu=neon -mfloat-abi=hard -g -Wall -Os -pthread
 
 STATLIB = ${TCHROOT}/arm-xilinx-linux-gnueabi-ar
 STATLIBFLAGS = rcs
 
-INCPATH = -I=$(SRCROOT)
-INCPATH += -I=${WHIZROOT}/src -I=/usr/include/libxml2
+INCPATH = -I=$(BUILDROOT)
+INCPATH += -I=${WHIZSDKROOT}/build -I=/usr/include/libxml2
 
 PCHS = DevWskd.h.gch
 

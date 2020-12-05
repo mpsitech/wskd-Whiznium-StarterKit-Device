@@ -1,8 +1,9 @@
 -- file Arty_ip_v1_0.vhd
 -- Arty_ip_v1_0 zynq_ip_v1_0 wrapper implementation
--- author Catherine Johnson
--- date created: 17 Oct 2020
--- date modified: 17 Oct 2020
+-- copyright: (C) 2016-2020 MPSI Technologies GmbH
+-- author: Catherine Johnson (auto-generation)
+-- date created: 1 Dec 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -253,4 +254,5 @@ begin
 	-- IP impl.oth.cust --- INSERT
 
 end Arty_ip_v1_0;
+
 

@@ -1,8 +1,9 @@
 -- file Step.vhd
 -- Step easy model controller implementation
--- author Catherine Johnson
--- date created: 17 Oct 2020
--- date modified: 17 Oct 2020
+-- copyright: (C) 2016-2020 MPSI Technologies GmbH
+-- author: Catherine Johnson (auto-generation)
+-- date created: 1 Dec 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -174,10 +175,10 @@ begin
 				ackInvMoveto_sig <= '0';
 				ackInvSet_sig <= '0';
 				ackInvZero_sig <= '0';
-				step1_sig <= '1';
-				step2_sig <= '1';
-				step3_sig <= '1';
-				step4_sig <= '1';
+				step1_sig <= '0';
+				step2_sig <= '0';
+				step3_sig <= '0';
+				step4_sig <= '0';
 
 				-- IP impl.op.syncrst --- REND
 
@@ -249,6 +250,16 @@ begin
 						i := 0; -- IP impl.op.ready.target --- ILINE
 
 						stateOp <= stateOpRunB;
+
+					else
+						-- IP impl.op.ready.hold --- IBEGIN
+						step1_sig <= '0';
+						step2_sig <= '0';
+						step3_sig <= '0';
+						step4_sig <= '0';
+						-- IP impl.op.ready.hold --- IEND
+
+						stateOp <= stateOpReady;
 					end if;
 				end if;
 

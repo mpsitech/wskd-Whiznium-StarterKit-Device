@@ -1,8 +1,10 @@
 -- file Debounce_v1_0.vhd
 -- Debounce_v1_0 module implementation
--- author Alexander Wirthmueller
+-- copyright: (C) 2016-2017 MPSI Technologies GmbH
+-- author: Alexander Wirthmueller
 -- date created: 4 Aug 2016
 -- date modified: 5 Apr 2017
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -80,4 +82,5 @@ begin
 	end process;
 
 end Debounce_v1_0;
+
 

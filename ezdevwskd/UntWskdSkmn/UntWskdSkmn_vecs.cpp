@@ -1,10 +1,11 @@
 /**
 	* \file UntWskdSkmn_vecs.cpp
 	* MPSI starter kit mainboard unit vectors (implementation)
-	* \author Catherine Johnson
-	* \date created: 17 Oct 2020
-	* \date modified: 17 Oct 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Catherine Johnson (auto-generation)
+	* \date created: 1 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "UntWskdSkmn_vecs.h"
 
@@ -132,4 +133,8 @@ void VecWWskdSkmnBuffer::fillFeed(
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
+
+
+
+
 

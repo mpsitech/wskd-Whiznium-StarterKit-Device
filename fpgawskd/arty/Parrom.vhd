@@ -1,8 +1,9 @@
 -- file Parrom.vhd
 -- Parrom other module implementation
--- author Catherine Johnson
--- date created: 17 Oct 2020
--- date modified: 17 Oct 2020
+-- copyright: (C) 2016-2020 MPSI Technologies GmbH
+-- author: Catherine Johnson (auto-generation)
+-- date created: 1 Dec 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -46,8 +47,8 @@ begin
 
 	myBram : RAMB16_S9
 		generic map (
-			WRITE_MODE => "WRITE_FIRST",
 			INIT_00 => x"003630360001083100033730001A343000FF183000FF17300003033100420830",
+			WRITE_MODE => "WRITE_FIRST",
 			INIT_01 => x"0001173700781537005A033700A0043700E021360012333600E23236000E3136",
 			INIT_02 => x"003301360008003600123137000A01390010063900020539001A053700600B37",
 			INIT_03 => x"00133536007C193A0000183A0043133A00501C4700201B370052203600602D30",
@@ -99,4 +100,5 @@ begin
 	-- IP impl.oth.cust --- INSERT
 
 end Parrom;
+
 

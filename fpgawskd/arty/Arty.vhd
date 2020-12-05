@@ -1,8 +1,9 @@
 -- file Arty.vhd
 -- Digilent Arty Z7 global constants and types
--- author Catherine Johnson
--- date created: 17 Oct 2020
--- date modified: 17 Oct 2020
+-- copyright: (C) 2017-2020 MPSI Technologies GmbH
+-- author: Catherine Johnson (auto-generation)
+-- date created: 1 Dec 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -29,24 +30,23 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 package Arty is
-	constant tixVControllerCamacq: std_logic_vector(7 downto 0) := x"01";
-	constant tixVControllerCamif: std_logic_vector(7 downto 0) := x"02";
-	constant tixVControllerFeatdet: std_logic_vector(7 downto 0) := x"03";
-	constant tixVControllerLaser: std_logic_vector(7 downto 0) := x"04";
-	constant tixVControllerState: std_logic_vector(7 downto 0) := x"05";
-	constant tixVControllerStep: std_logic_vector(7 downto 0) := x"06";
-	constant tixVControllerTkclksrc: std_logic_vector(7 downto 0) := x"07";
+	constant tixVArtyControllerCamacq: std_logic_vector(7 downto 0) := x"01";
+	constant tixVArtyControllerCamif: std_logic_vector(7 downto 0) := x"02";
+	constant tixVArtyControllerFeatdet: std_logic_vector(7 downto 0) := x"03";
+	constant tixVArtyControllerLaser: std_logic_vector(7 downto 0) := x"04";
+	constant tixVArtyControllerState: std_logic_vector(7 downto 0) := x"05";
+	constant tixVArtyControllerStep: std_logic_vector(7 downto 0) := x"06";
+	constant tixVArtyControllerTkclksrc: std_logic_vector(7 downto 0) := x"07";
 
-	constant tixVStateNc: std_logic_vector(7 downto 0) := x"00";
-	constant tixVStateReady: std_logic_vector(7 downto 0) := x"01";
-	constant tixVStateActive: std_logic_vector(7 downto 0) := x"02";
+	constant tixVArtyStateNc: std_logic_vector(7 downto 0) := x"00";
+	constant tixVArtyStateReady: std_logic_vector(7 downto 0) := x"01";
+	constant tixVArtyStateActive: std_logic_vector(7 downto 0) := x"02";
 
-	constant tixWBufferCmdretToHostif: std_logic_vector(7 downto 0) := x"01";
-	constant tixWBufferHostifToCmdinv: std_logic_vector(7 downto 0) := x"02";
-	constant tixWBufferFlgbufFeatdetToHostif: std_logic_vector(7 downto 0) := x"04";
-	constant tixWBufferPvwabufCamacqToHostif: std_logic_vector(7 downto 0) := x"08";
-	constant tixWBufferPvwbbufCamacqToHostif: std_logic_vector(7 downto 0) := x"10";
-
+	constant tixWArtyBufferCmdretToHostif: std_logic_vector(7 downto 0) := x"01";
+	constant tixWArtyBufferHostifToCmdinv: std_logic_vector(7 downto 0) := x"02";
+	constant tixWArtyBufferFlgbufFeatdetToHostif: std_logic_vector(7 downto 0) := x"04";
+	constant tixWArtyBufferPvwabufCamacqToHostif: std_logic_vector(7 downto 0) := x"08";
+	constant tixWArtyBufferPvwbbufCamacqToHostif: std_logic_vector(7 downto 0) := x"10";
 	constant tixVCamacqCommandSetGrrd: std_logic_vector(7 downto 0) := x"00";
 	constant tixVCamacqCommandGetGrrdinfo: std_logic_vector(7 downto 0) := x"01";
 	constant tixVCamacqCommandSetPvw: std_logic_vector(7 downto 0) := x"02";
@@ -77,4 +77,5 @@ package Arty is
 	constant tixVTkclksrcCommandGetTkst: std_logic_vector(7 downto 0) := x"00";
 	constant tixVTkclksrcCommandSetTkst: std_logic_vector(7 downto 0) := x"01";
 end Arty;
+
 

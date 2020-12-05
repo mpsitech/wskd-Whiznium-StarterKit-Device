@@ -1,8 +1,10 @@
 -- file Axitx_v2_0.vhd
 -- Axitx_v2_0 module implementation
--- author Alexander Wirthmueller
+-- copyright: (C) 2017-2020 MPSI Technologies GmbH
+-- author: Alexander Wirthmueller
 -- date created: 6 Mar 2017
 -- date modified: 10 Feb 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -150,4 +152,5 @@ begin
 	end process;
 
 end Axitx_v2_0;
+
 

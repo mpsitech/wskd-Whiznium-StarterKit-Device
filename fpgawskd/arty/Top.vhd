@@ -1,8 +1,9 @@
 -- file Top.vhd
 -- Top top_v1_0 top implementation
--- author Catherine Johnson
--- date created: 17 Oct 2020
--- date modified: 17 Oct 2020
+-- copyright: (C) 2016-2020 MPSI Technologies GmbH
+-- author: Catherine Johnson (auto-generation)
+-- date created: 1 Dec 2020
+-- IP header --- ABOVE
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -123,46 +124,44 @@ architecture Top of Top is
 
 			reqPvwbbufToHostif: in std_logic;
 
-			reqPvwabufToHostif: in std_logic;
-
 			reqGrrdabbufToFeatdet: in std_logic;
 
 			reqGrrdcdbufToFeatdet: in std_logic;
 
-			ackPvwbbufToHostif: out std_logic;
-
+			reqPvwabufToHostif: in std_logic;
 			ackPvwabufToHostif: out std_logic;
-
-			ackGrrdcdbufToFeatdet: out std_logic;
 
 			ackGrrdabbufToFeatdet: out std_logic;
 
+			ackGrrdcdbufToFeatdet: out std_logic;
+
+			ackPvwbbufToHostif: out std_logic;
 			dnePvwbbufToHostif: in std_logic;
 
-			dneGrrdcdbufToFeatdet: in std_logic;
-
 			dneGrrdabbufToFeatdet: in std_logic;
+
+			dneGrrdcdbufToFeatdet: in std_logic;
 
 			dnePvwabufToHostif: in std_logic;
 
 			avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
 			avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
-			avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
 			avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
+			avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
 
-			dPvwabufToHostif: out std_logic_vector(31 downto 0);
+			dPvwbbufToHostif: out std_logic_vector(31 downto 0);
 
 			dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
 			dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 
-			dPvwbbufToHostif: out std_logic_vector(31 downto 0);
+			dPvwabufToHostif: out std_logic_vector(31 downto 0);
 
-			strbDGrrdabbufToFeatdet: in std_logic;
+			strbDGrrdcdbufToFeatdet: in std_logic;
 
 			strbDPvwabufToHostif: in std_logic;
 
-			strbDGrrdcdbufToFeatdet: in std_logic;
+			strbDGrrdabbufToFeatdet: in std_logic;
 
 			strbDPvwbbufToHostif: in std_logic;
 
@@ -281,6 +280,9 @@ architecture Top of Top is
 			reset: in std_logic;
 			mclk: in std_logic;
 
+			camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
+			camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
+
 			reqInvSet: in std_logic;
 			ackInvSet: out std_logic;
 
@@ -311,9 +313,6 @@ architecture Top of Top is
 			reqInvTriggerThd: in std_logic;
 			ackInvTriggerThd: out std_logic;
 
-			camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
-			camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
-
 			reqFlgbufToHostif: in std_logic;
 			ackFlgbufToHostif: out std_logic;
 			dneFlgbufToHostif: in std_logic;
@@ -322,27 +321,29 @@ architecture Top of Top is
 
 			dFlgbufToHostif: out std_logic_vector(31 downto 0);
 
+			reqGrrdabbufFromCamacq: out std_logic;
+
 			reqGrrdcdbufFromCamacq: out std_logic;
 
 			strbDFlgbufToHostif: in std_logic;
 
 			ackGrrdcdbufFromCamacq: in std_logic;
+
+			ackGrrdabbufFromCamacq: in std_logic;
+
 			dneGrrdcdbufFromCamacq: out std_logic;
 
+			dneGrrdabbufFromCamacq: out std_logic;
+
 			avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
+			avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
 
 			dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
 
-			reqGrrdabbufFromCamacq: out std_logic;
+			dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
 
 			strbDGrrdcdbufFromCamacq: out std_logic;
 
-			ackGrrdabbufFromCamacq: in std_logic;
-			dneGrrdabbufFromCamacq: out std_logic;
-
-			avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
-
-			dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
 			strbDGrrdabbufFromCamacq: out std_logic;
 
 			reqGrrdefbufFromCamacq: out std_logic;
@@ -381,39 +382,52 @@ architecture Top of Top is
 			btnReset: in std_logic;
 			reqReset: out std_logic;
 
-			stateGetTixVArtyState: in std_logic_vector(7 downto 0);
+			reqInvCamacqSetGrrd: out std_logic;
+			ackInvCamacqSetGrrd: in std_logic;
 
-			stepGetInfoTixVState: in std_logic_vector(7 downto 0);
-			stepGetInfoAngle: in std_logic_vector(15 downto 0);
+			camacqSetGrrdRng: out std_logic_vector(7 downto 0);
+			camacqSetGrrdRedNotGray: out std_logic_vector(7 downto 0);
 
-			reqInvStepMoveto: out std_logic;
-			ackInvStepMoveto: in std_logic;
+			camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
+			camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
 
-			stepMovetoAngle: out std_logic_vector(15 downto 0);
-			stepMovetoTstep: out std_logic_vector(7 downto 0);
+			reqInvCamacqSetPvw: out std_logic;
+			ackInvCamacqSetPvw: in std_logic;
 
-			reqInvStepSet: out std_logic;
-			ackInvStepSet: in std_logic;
+			camacqSetPvwRng: out std_logic_vector(7 downto 0);
+			camacqSetPvwRawNotBin: out std_logic_vector(7 downto 0);
+			camacqSetPvwGrayNotRgb: out std_logic_vector(7 downto 0);
 
-			stepSetRng: out std_logic_vector(7 downto 0);
-			stepSetCcwNotCw: out std_logic_vector(7 downto 0);
-			stepSetTstep: out std_logic_vector(7 downto 0);
+			camacqGetPvwinfoTixVPvwbufstate: in std_logic_vector(7 downto 0);
+			camacqGetPvwinfoTkst: in std_logic_vector(31 downto 0);
 
-			reqInvStepZero: out std_logic;
-			ackInvStepZero: in std_logic;
+			reqInvCamifSetRng: out std_logic;
+			ackInvCamifSetRng: in std_logic;
 
-			tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
+			camifSetRngRng: out std_logic_vector(7 downto 0);
 
-			reqInvTkclksrcSetTkst: out std_logic;
-			ackInvTkclksrcSetTkst: in std_logic;
+			reqInvCamifSetReg: out std_logic;
+			ackInvCamifSetReg: in std_logic;
 
-			tkclksrcSetTkstTkst: out std_logic_vector(31 downto 0);
+			camifSetRegAddr: out std_logic_vector(15 downto 0);
+			camifSetRegVal: out std_logic_vector(7 downto 0);
 
-			reqInvLaserSet: out std_logic;
-			ackInvLaserSet: in std_logic;
+			reqInvCamifSetRegaddr: out std_logic;
+			ackInvCamifSetRegaddr: in std_logic;
 
-			laserSetL: out std_logic_vector(15 downto 0);
-			laserSetR: out std_logic_vector(15 downto 0);
+			camifSetRegaddrAddr: out std_logic_vector(15 downto 0);
+
+			reqInvCamifGetReg: out std_logic;
+			ackInvCamifGetReg: in std_logic;
+
+			camifGetRegVal: in std_logic_vector(7 downto 0);
+
+			reqInvCamifModReg: out std_logic;
+			ackInvCamifModReg: in std_logic;
+
+			camifModRegAddr: out std_logic_vector(15 downto 0);
+			camifModRegMask: out std_logic_vector(7 downto 0);
+			camifModRegVal: out std_logic_vector(7 downto 0);
 
 			reqInvFeatdetSet: out std_logic;
 			ackInvFeatdetSet: in std_logic;
@@ -445,52 +459,39 @@ architecture Top of Top is
 			reqInvFeatdetTriggerThd: out std_logic;
 			ackInvFeatdetTriggerThd: in std_logic;
 
-			reqInvCamifSetRng: out std_logic;
-			ackInvCamifSetRng: in std_logic;
+			reqInvLaserSet: out std_logic;
+			ackInvLaserSet: in std_logic;
 
-			camifSetRngRng: out std_logic_vector(7 downto 0);
+			laserSetL: out std_logic_vector(15 downto 0);
+			laserSetR: out std_logic_vector(15 downto 0);
 
-			reqInvCamifSetReg: out std_logic;
-			ackInvCamifSetReg: in std_logic;
+			stateGetTixVArtyState: in std_logic_vector(7 downto 0);
 
-			camifSetRegAddr: out std_logic_vector(15 downto 0);
-			camifSetRegVal: out std_logic_vector(7 downto 0);
+			stepGetInfoTixVState: in std_logic_vector(7 downto 0);
+			stepGetInfoAngle: in std_logic_vector(15 downto 0);
 
-			reqInvCamifSetRegaddr: out std_logic;
-			ackInvCamifSetRegaddr: in std_logic;
+			reqInvStepMoveto: out std_logic;
+			ackInvStepMoveto: in std_logic;
 
-			camifSetRegaddrAddr: out std_logic_vector(15 downto 0);
+			stepMovetoAngle: out std_logic_vector(15 downto 0);
+			stepMovetoTstep: out std_logic_vector(7 downto 0);
 
-			reqInvCamifGetReg: out std_logic;
-			ackInvCamifGetReg: in std_logic;
+			reqInvStepSet: out std_logic;
+			ackInvStepSet: in std_logic;
 
-			camifGetRegVal: in std_logic_vector(7 downto 0);
+			stepSetRng: out std_logic_vector(7 downto 0);
+			stepSetCcwNotCw: out std_logic_vector(7 downto 0);
+			stepSetTstep: out std_logic_vector(7 downto 0);
 
-			reqInvCamifModReg: out std_logic;
-			ackInvCamifModReg: in std_logic;
+			reqInvStepZero: out std_logic;
+			ackInvStepZero: in std_logic;
 
-			camifModRegAddr: out std_logic_vector(15 downto 0);
-			camifModRegMask: out std_logic_vector(7 downto 0);
-			camifModRegVal: out std_logic_vector(7 downto 0);
+			tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 
-			reqInvCamacqSetGrrd: out std_logic;
-			ackInvCamacqSetGrrd: in std_logic;
+			reqInvTkclksrcSetTkst: out std_logic;
+			ackInvTkclksrcSetTkst: in std_logic;
 
-			camacqSetGrrdRng: out std_logic_vector(7 downto 0);
-			camacqSetGrrdRedNotGray: out std_logic_vector(7 downto 0);
-
-			camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
-			camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
-
-			reqInvCamacqSetPvw: out std_logic;
-			ackInvCamacqSetPvw: in std_logic;
-
-			camacqSetPvwRng: out std_logic_vector(7 downto 0);
-			camacqSetPvwRawNotBin: out std_logic_vector(7 downto 0);
-			camacqSetPvwGrayNotRgb: out std_logic_vector(7 downto 0);
-
-			camacqGetPvwinfoTixVPvwbufstate: in std_logic_vector(7 downto 0);
-			camacqGetPvwinfoTkst: in std_logic_vector(31 downto 0);
+			tkclksrcSetTkstTkst: out std_logic_vector(31 downto 0);
 
 			reqFlgbufFromFeatdet: out std_logic;
 			ackFlgbufFromFeatdet: in std_logic;
@@ -501,25 +502,26 @@ architecture Top of Top is
 			dFlgbufFromFeatdet: in std_logic_vector(31 downto 0);
 			strbDFlgbufFromFeatdet: out std_logic;
 
+			reqPvwabufFromCamacq: out std_logic;
+			ackPvwabufFromCamacq: in std_logic;
+			dnePvwabufFromCamacq: out std_logic;
+
 			reqPvwbbufFromCamacq: out std_logic;
+
+			avllenPvwabufFromCamacq: in std_logic_vector(7 downto 0);
+
 			ackPvwbbufFromCamacq: in std_logic;
+
+			dPvwabufFromCamacq: in std_logic_vector(31 downto 0);
+
 			dnePvwbbufFromCamacq: out std_logic;
+
+			strbDPvwabufFromCamacq: out std_logic;
 
 			avllenPvwbbufFromCamacq: in std_logic_vector(7 downto 0);
 
 			dPvwbbufFromCamacq: in std_logic_vector(31 downto 0);
-
-			reqPvwabufFromCamacq: out std_logic;
-
 			strbDPvwbbufFromCamacq: out std_logic;
-
-			ackPvwabufFromCamacq: in std_logic;
-			dnePvwabufFromCamacq: out std_logic;
-
-			avllenPvwabufFromCamacq: in std_logic_vector(7 downto 0);
-
-			dPvwabufFromCamacq: in std_logic_vector(31 downto 0);
-			strbDPvwabufFromCamacq: out std_logic;
 
 			rdyRx: out std_logic;
 			enRx: in std_logic;
@@ -684,19 +686,18 @@ architecture Top of Top is
 	signal camacqGetPvwinfoTixVPvwbufstate: std_logic_vector(7 downto 0);
 	signal camacqGetPvwinfoTkst: std_logic_vector(31 downto 0);
 
-	signal avllenPvwbbufCamacqToHostif: std_logic_vector(7 downto 0);
-	signal avllenGrrdcdbufCamacqToFeatdet: std_logic_vector(3 downto 0);
-
-	signal dPvwbbufCamacqToHostif: std_logic_vector(31 downto 0);
-
-	signal dGrrdcdbufCamacqToFeatdet: std_logic_vector(7 downto 0);
-
 	signal avllenPvwabufCamacqToHostif: std_logic_vector(7 downto 0);
+	signal avllenGrrdcdbufCamacqToFeatdet: std_logic_vector(3 downto 0);
 	signal avllenGrrdabbufCamacqToFeatdet: std_logic_vector(3 downto 0);
+	signal avllenPvwbbufCamacqToHostif: std_logic_vector(7 downto 0);
 
 	signal dPvwabufCamacqToHostif: std_logic_vector(31 downto 0);
 
+	signal dGrrdcdbufCamacqToFeatdet: std_logic_vector(7 downto 0);
+
 	signal dGrrdabbufCamacqToFeatdet: std_logic_vector(7 downto 0);
+
+	signal dPvwbbufCamacqToHostif: std_logic_vector(31 downto 0);
 
 	signal avllenGrrdefbufCamacqToFeatdet: std_logic_vector(3 downto 0);
 
@@ -735,27 +736,12 @@ architecture Top of Top is
 	---- myHostif
 	signal commok: std_logic;
 
-	signal stepMovetoAngle: std_logic_vector(15 downto 0);
-	signal stepMovetoTstep: std_logic_vector(7 downto 0);
+	signal camacqSetGrrdRng: std_logic_vector(7 downto 0);
+	signal camacqSetGrrdRedNotGray: std_logic_vector(7 downto 0);
 
-	signal stepSetRng: std_logic_vector(7 downto 0);
-	signal stepSetCcwNotCw: std_logic_vector(7 downto 0);
-	signal stepSetTstep: std_logic_vector(7 downto 0);
-
-	signal tkclksrcSetTkstTkst: std_logic_vector(31 downto 0);
-
-	signal laserSetL: std_logic_vector(15 downto 0);
-	signal laserSetR: std_logic_vector(15 downto 0);
-
-	signal featdetSetRng: std_logic_vector(7 downto 0);
-	signal featdetSetThdNotCorner: std_logic_vector(7 downto 0);
-	signal featdetSetThdDeltaNotAbs: std_logic_vector(7 downto 0);
-
-	signal featdetSetCornerLinNotLog: std_logic_vector(7 downto 0);
-	signal featdetSetCornerThd: std_logic_vector(7 downto 0);
-
-	signal featdetSetThdLvlFirst: std_logic_vector(7 downto 0);
-	signal featdetSetThdLvlSecond: std_logic_vector(7 downto 0);
+	signal camacqSetPvwRng: std_logic_vector(7 downto 0);
+	signal camacqSetPvwRawNotBin: std_logic_vector(7 downto 0);
+	signal camacqSetPvwGrayNotRgb: std_logic_vector(7 downto 0);
 
 	signal camifSetRngRng: std_logic_vector(7 downto 0);
 
@@ -768,18 +754,33 @@ architecture Top of Top is
 	signal camifModRegMask: std_logic_vector(7 downto 0);
 	signal camifModRegVal: std_logic_vector(7 downto 0);
 
-	signal camacqSetGrrdRng: std_logic_vector(7 downto 0);
-	signal camacqSetGrrdRedNotGray: std_logic_vector(7 downto 0);
+	signal featdetSetRng: std_logic_vector(7 downto 0);
+	signal featdetSetThdNotCorner: std_logic_vector(7 downto 0);
+	signal featdetSetThdDeltaNotAbs: std_logic_vector(7 downto 0);
 
-	signal camacqSetPvwRng: std_logic_vector(7 downto 0);
-	signal camacqSetPvwRawNotBin: std_logic_vector(7 downto 0);
-	signal camacqSetPvwGrayNotRgb: std_logic_vector(7 downto 0);
+	signal featdetSetCornerLinNotLog: std_logic_vector(7 downto 0);
+	signal featdetSetCornerThd: std_logic_vector(7 downto 0);
+
+	signal featdetSetThdLvlFirst: std_logic_vector(7 downto 0);
+	signal featdetSetThdLvlSecond: std_logic_vector(7 downto 0);
+
+	signal laserSetL: std_logic_vector(15 downto 0);
+	signal laserSetR: std_logic_vector(15 downto 0);
+
+	signal stepMovetoAngle: std_logic_vector(15 downto 0);
+	signal stepMovetoTstep: std_logic_vector(7 downto 0);
+
+	signal stepSetRng: std_logic_vector(7 downto 0);
+	signal stepSetCcwNotCw: std_logic_vector(7 downto 0);
+	signal stepSetTstep: std_logic_vector(7 downto 0);
+
+	signal tkclksrcSetTkstTkst: std_logic_vector(31 downto 0);
 
 	signal strbDFlgbufFeatdetToHostif: std_logic;
 
-	signal strbDPvwbbufCamacqToHostif: std_logic;
-
 	signal strbDPvwabufCamacqToHostif: std_logic;
+
+	signal strbDPvwbbufCamacqToHostif: std_logic;
 
 	---- myMmcmMclk
 	signal mclk: std_logic;
@@ -799,41 +800,13 @@ architecture Top of Top is
 	signal tkclksrcGetTkstTkst: std_logic_vector(31 downto 0);
 
 	---- handshake
-	-- myHostif to myStep
-	signal reqInvStepMoveto: std_logic;
-	signal ackInvStepMoveto: std_logic;
+	-- myHostif to myCamacq
+	signal reqInvCamacqSetGrrd: std_logic;
+	signal ackInvCamacqSetGrrd: std_logic;
 
-	-- myHostif to myStep
-	signal reqInvStepSet: std_logic;
-	signal ackInvStepSet: std_logic;
-
-	-- myHostif to myStep
-	signal reqInvStepZero: std_logic;
-	signal ackInvStepZero: std_logic;
-
-	-- myHostif to myTkclksrc
-	signal reqInvTkclksrcSetTkst: std_logic;
-	signal ackInvTkclksrcSetTkst: std_logic;
-
-	-- myHostif to myLaser
-	signal reqInvLaserSet: std_logic;
-	signal ackInvLaserSet: std_logic;
-
-	-- myHostif to myFeatdet
-	signal reqInvFeatdetSet: std_logic;
-	signal ackInvFeatdetSet: std_logic;
-
-	-- myHostif to myFeatdet
-	signal reqInvFeatdetSetCorner: std_logic;
-	signal ackInvFeatdetSetCorner: std_logic;
-
-	-- myHostif to myFeatdet
-	signal reqInvFeatdetSetThd: std_logic;
-	signal ackInvFeatdetSetThd: std_logic;
-
-	-- myHostif to myFeatdet
-	signal reqInvFeatdetTriggerThd: std_logic;
-	signal ackInvFeatdetTriggerThd: std_logic;
+	-- myHostif to myCamacq
+	signal reqInvCamacqSetPvw: std_logic;
+	signal ackInvCamacqSetPvw: std_logic;
 
 	-- myHostif to myCamif
 	signal reqInvCamifSetRng: std_logic;
@@ -855,13 +828,41 @@ architecture Top of Top is
 	signal reqInvCamifModReg: std_logic;
 	signal ackInvCamifModReg: std_logic;
 
-	-- myHostif to myCamacq
-	signal reqInvCamacqSetGrrd: std_logic;
-	signal ackInvCamacqSetGrrd: std_logic;
+	-- myHostif to myFeatdet
+	signal reqInvFeatdetSet: std_logic;
+	signal ackInvFeatdetSet: std_logic;
 
-	-- myHostif to myCamacq
-	signal reqInvCamacqSetPvw: std_logic;
-	signal ackInvCamacqSetPvw: std_logic;
+	-- myHostif to myFeatdet
+	signal reqInvFeatdetSetCorner: std_logic;
+	signal ackInvFeatdetSetCorner: std_logic;
+
+	-- myHostif to myFeatdet
+	signal reqInvFeatdetSetThd: std_logic;
+	signal ackInvFeatdetSetThd: std_logic;
+
+	-- myHostif to myFeatdet
+	signal reqInvFeatdetTriggerThd: std_logic;
+	signal ackInvFeatdetTriggerThd: std_logic;
+
+	-- myHostif to myLaser
+	signal reqInvLaserSet: std_logic;
+	signal ackInvLaserSet: std_logic;
+
+	-- myHostif to myStep
+	signal reqInvStepMoveto: std_logic;
+	signal ackInvStepMoveto: std_logic;
+
+	-- myHostif to myStep
+	signal reqInvStepSet: std_logic;
+	signal ackInvStepSet: std_logic;
+
+	-- myHostif to myStep
+	signal reqInvStepZero: std_logic;
+	signal ackInvStepZero: std_logic;
+
+	-- myHostif to myTkclksrc
+	signal reqInvTkclksrcSetTkst: std_logic;
+	signal ackInvTkclksrcSetTkst: std_logic;
 
 	-- myHostif to myFeatdet
 	signal reqFlgbufFeatdetToHostif: std_logic;
@@ -869,24 +870,24 @@ architecture Top of Top is
 	signal dneFlgbufFeatdetToHostif: std_logic;
 
 	-- myHostif to myCamacq
-	signal reqPvwbbufCamacqToHostif: std_logic;
-	signal ackPvwbbufCamacqToHostif: std_logic;
-	signal dnePvwbbufCamacqToHostif: std_logic;
+	signal reqPvwabufCamacqToHostif: std_logic;
+	signal ackPvwabufCamacqToHostif: std_logic;
+	signal dnePvwabufCamacqToHostif: std_logic;
 
 	-- myFeatdet to myCamacq
 	signal reqGrrdcdbufCamacqToFeatdet: std_logic;
 	signal ackGrrdcdbufCamacqToFeatdet: std_logic;
 	signal dneGrrdcdbufCamacqToFeatdet: std_logic;
 
-	-- myHostif to myCamacq
-	signal reqPvwabufCamacqToHostif: std_logic;
-	signal ackPvwabufCamacqToHostif: std_logic;
-	signal dnePvwabufCamacqToHostif: std_logic;
-
 	-- myFeatdet to myCamacq
 	signal reqGrrdabbufCamacqToFeatdet: std_logic;
 	signal ackGrrdabbufCamacqToFeatdet: std_logic;
 	signal dneGrrdabbufCamacqToFeatdet: std_logic;
+
+	-- myHostif to myCamacq
+	signal reqPvwbbufCamacqToHostif: std_logic;
+	signal ackPvwbbufCamacqToHostif: std_logic;
+	signal dnePvwbbufCamacqToHostif: std_logic;
 
 	-- myFeatdet to myCamacq
 	signal reqGrrdefbufCamacqToFeatdet: std_logic;
@@ -1034,46 +1035,44 @@ begin
 
 			reqPvwbbufToHostif => reqPvwbbufCamacqToHostif,
 
-			reqPvwabufToHostif => reqPvwabufCamacqToHostif,
-
 			reqGrrdabbufToFeatdet => reqGrrdabbufCamacqToFeatdet,
 
 			reqGrrdcdbufToFeatdet => reqGrrdcdbufCamacqToFeatdet,
 
-			ackPvwbbufToHostif => ackPvwbbufCamacqToHostif,
-
+			reqPvwabufToHostif => reqPvwabufCamacqToHostif,
 			ackPvwabufToHostif => ackPvwabufCamacqToHostif,
-
-			ackGrrdcdbufToFeatdet => ackGrrdcdbufCamacqToFeatdet,
 
 			ackGrrdabbufToFeatdet => ackGrrdabbufCamacqToFeatdet,
 
+			ackGrrdcdbufToFeatdet => ackGrrdcdbufCamacqToFeatdet,
+
+			ackPvwbbufToHostif => ackPvwbbufCamacqToHostif,
 			dnePvwbbufToHostif => dnePvwbbufCamacqToHostif,
 
-			dneGrrdcdbufToFeatdet => dneGrrdcdbufCamacqToFeatdet,
-
 			dneGrrdabbufToFeatdet => dneGrrdabbufCamacqToFeatdet,
+
+			dneGrrdcdbufToFeatdet => dneGrrdcdbufCamacqToFeatdet,
 
 			dnePvwabufToHostif => dnePvwabufCamacqToHostif,
 
 			avllenPvwabufToHostif => avllenPvwabufCamacqToHostif,
 			avllenPvwbbufToHostif => avllenPvwbbufCamacqToHostif,
-			avllenGrrdcdbufToFeatdet => avllenGrrdcdbufCamacqToFeatdet,
 			avllenGrrdabbufToFeatdet => avllenGrrdabbufCamacqToFeatdet,
+			avllenGrrdcdbufToFeatdet => avllenGrrdcdbufCamacqToFeatdet,
 
-			dPvwabufToHostif => dPvwabufCamacqToHostif,
+			dPvwbbufToHostif => dPvwbbufCamacqToHostif,
 
 			dGrrdabbufToFeatdet => dGrrdabbufCamacqToFeatdet,
 
 			dGrrdcdbufToFeatdet => dGrrdcdbufCamacqToFeatdet,
 
-			dPvwbbufToHostif => dPvwbbufCamacqToHostif,
+			dPvwabufToHostif => dPvwabufCamacqToHostif,
 
-			strbDGrrdabbufToFeatdet => strbDGrrdabbufCamacqToFeatdet,
+			strbDGrrdcdbufToFeatdet => strbDGrrdcdbufCamacqToFeatdet,
 
 			strbDPvwabufToHostif => strbDPvwabufCamacqToHostif,
 
-			strbDGrrdcdbufToFeatdet => strbDGrrdcdbufCamacqToFeatdet,
+			strbDGrrdabbufToFeatdet => strbDGrrdabbufCamacqToFeatdet,
 
 			strbDPvwbbufToHostif => strbDPvwbbufCamacqToHostif,
 
@@ -1202,6 +1201,9 @@ begin
 			reset => reset,
 			mclk => mclk,
 
+			camacqGetGrrdinfoTixVGrrdbufstate => camacqGetGrrdinfoTixVGrrdbufstate,
+			camacqGetGrrdinfoTkst => camacqGetGrrdinfoTkst,
+
 			reqInvSet => reqInvFeatdetSet,
 			ackInvSet => ackInvFeatdetSet,
 
@@ -1232,9 +1234,6 @@ begin
 			reqInvTriggerThd => reqInvFeatdetTriggerThd,
 			ackInvTriggerThd => ackInvFeatdetTriggerThd,
 
-			camacqGetGrrdinfoTixVGrrdbufstate => camacqGetGrrdinfoTixVGrrdbufstate,
-			camacqGetGrrdinfoTkst => camacqGetGrrdinfoTkst,
-
 			reqFlgbufToHostif => reqFlgbufFeatdetToHostif,
 			ackFlgbufToHostif => ackFlgbufFeatdetToHostif,
 			dneFlgbufToHostif => dneFlgbufFeatdetToHostif,
@@ -1243,27 +1242,29 @@ begin
 
 			dFlgbufToHostif => dFlgbufFeatdetToHostif,
 
+			reqGrrdabbufFromCamacq => reqGrrdabbufCamacqToFeatdet,
+
 			reqGrrdcdbufFromCamacq => reqGrrdcdbufCamacqToFeatdet,
 
 			strbDFlgbufToHostif => strbDFlgbufFeatdetToHostif,
 
 			ackGrrdcdbufFromCamacq => ackGrrdcdbufCamacqToFeatdet,
+
+			ackGrrdabbufFromCamacq => ackGrrdabbufCamacqToFeatdet,
+
 			dneGrrdcdbufFromCamacq => dneGrrdcdbufCamacqToFeatdet,
 
+			dneGrrdabbufFromCamacq => dneGrrdabbufCamacqToFeatdet,
+
 			avllenGrrdcdbufFromCamacq => avllenGrrdcdbufCamacqToFeatdet,
+			avllenGrrdabbufFromCamacq => avllenGrrdabbufCamacqToFeatdet,
 
 			dGrrdcdbufFromCamacq => dGrrdcdbufCamacqToFeatdet,
 
-			reqGrrdabbufFromCamacq => reqGrrdabbufCamacqToFeatdet,
+			dGrrdabbufFromCamacq => dGrrdabbufCamacqToFeatdet,
 
 			strbDGrrdcdbufFromCamacq => strbDGrrdcdbufCamacqToFeatdet,
 
-			ackGrrdabbufFromCamacq => ackGrrdabbufCamacqToFeatdet,
-			dneGrrdabbufFromCamacq => dneGrrdabbufCamacqToFeatdet,
-
-			avllenGrrdabbufFromCamacq => avllenGrrdabbufCamacqToFeatdet,
-
-			dGrrdabbufFromCamacq => dGrrdabbufCamacqToFeatdet,
 			strbDGrrdabbufFromCamacq => strbDGrrdabbufCamacqToFeatdet,
 
 			reqGrrdefbufFromCamacq => reqGrrdefbufCamacqToFeatdet,
@@ -1301,39 +1302,52 @@ begin
 			btnReset => btn1_sig,
 			reqReset => reqReset,
 
-			stateGetTixVArtyState => stateGetTixVArtyState,
+			reqInvCamacqSetGrrd => reqInvCamacqSetGrrd,
+			ackInvCamacqSetGrrd => ackInvCamacqSetGrrd,
 
-			stepGetInfoTixVState => stepGetInfoTixVState,
-			stepGetInfoAngle => stepGetInfoAngle,
+			camacqSetGrrdRng => camacqSetGrrdRng,
+			camacqSetGrrdRedNotGray => camacqSetGrrdRedNotGray,
 
-			reqInvStepMoveto => reqInvStepMoveto,
-			ackInvStepMoveto => ackInvStepMoveto,
+			camacqGetGrrdinfoTixVGrrdbufstate => camacqGetGrrdinfoTixVGrrdbufstate,
+			camacqGetGrrdinfoTkst => camacqGetGrrdinfoTkst,
 
-			stepMovetoAngle => stepMovetoAngle,
-			stepMovetoTstep => stepMovetoTstep,
+			reqInvCamacqSetPvw => reqInvCamacqSetPvw,
+			ackInvCamacqSetPvw => ackInvCamacqSetPvw,
 
-			reqInvStepSet => reqInvStepSet,
-			ackInvStepSet => ackInvStepSet,
+			camacqSetPvwRng => camacqSetPvwRng,
+			camacqSetPvwRawNotBin => camacqSetPvwRawNotBin,
+			camacqSetPvwGrayNotRgb => camacqSetPvwGrayNotRgb,
 
-			stepSetRng => stepSetRng,
-			stepSetCcwNotCw => stepSetCcwNotCw,
-			stepSetTstep => stepSetTstep,
+			camacqGetPvwinfoTixVPvwbufstate => camacqGetPvwinfoTixVPvwbufstate,
+			camacqGetPvwinfoTkst => camacqGetPvwinfoTkst,
 
-			reqInvStepZero => reqInvStepZero,
-			ackInvStepZero => ackInvStepZero,
+			reqInvCamifSetRng => reqInvCamifSetRng,
+			ackInvCamifSetRng => ackInvCamifSetRng,
 
-			tkclksrcGetTkstTkst => tkclksrcGetTkstTkst,
+			camifSetRngRng => camifSetRngRng,
 
-			reqInvTkclksrcSetTkst => reqInvTkclksrcSetTkst,
-			ackInvTkclksrcSetTkst => ackInvTkclksrcSetTkst,
+			reqInvCamifSetReg => reqInvCamifSetReg,
+			ackInvCamifSetReg => ackInvCamifSetReg,
 
-			tkclksrcSetTkstTkst => tkclksrcSetTkstTkst,
+			camifSetRegAddr => camifSetRegAddr,
+			camifSetRegVal => camifSetRegVal,
 
-			reqInvLaserSet => reqInvLaserSet,
-			ackInvLaserSet => ackInvLaserSet,
+			reqInvCamifSetRegaddr => reqInvCamifSetRegaddr,
+			ackInvCamifSetRegaddr => ackInvCamifSetRegaddr,
 
-			laserSetL => laserSetL,
-			laserSetR => laserSetR,
+			camifSetRegaddrAddr => camifSetRegaddrAddr,
+
+			reqInvCamifGetReg => reqInvCamifGetReg,
+			ackInvCamifGetReg => ackInvCamifGetReg,
+
+			camifGetRegVal => camifGetRegVal,
+
+			reqInvCamifModReg => reqInvCamifModReg,
+			ackInvCamifModReg => ackInvCamifModReg,
+
+			camifModRegAddr => camifModRegAddr,
+			camifModRegMask => camifModRegMask,
+			camifModRegVal => camifModRegVal,
 
 			reqInvFeatdetSet => reqInvFeatdetSet,
 			ackInvFeatdetSet => ackInvFeatdetSet,
@@ -1365,52 +1379,39 @@ begin
 			reqInvFeatdetTriggerThd => reqInvFeatdetTriggerThd,
 			ackInvFeatdetTriggerThd => ackInvFeatdetTriggerThd,
 
-			reqInvCamifSetRng => reqInvCamifSetRng,
-			ackInvCamifSetRng => ackInvCamifSetRng,
+			reqInvLaserSet => reqInvLaserSet,
+			ackInvLaserSet => ackInvLaserSet,
 
-			camifSetRngRng => camifSetRngRng,
+			laserSetL => laserSetL,
+			laserSetR => laserSetR,
 
-			reqInvCamifSetReg => reqInvCamifSetReg,
-			ackInvCamifSetReg => ackInvCamifSetReg,
+			stateGetTixVArtyState => stateGetTixVArtyState,
 
-			camifSetRegAddr => camifSetRegAddr,
-			camifSetRegVal => camifSetRegVal,
+			stepGetInfoTixVState => stepGetInfoTixVState,
+			stepGetInfoAngle => stepGetInfoAngle,
 
-			reqInvCamifSetRegaddr => reqInvCamifSetRegaddr,
-			ackInvCamifSetRegaddr => ackInvCamifSetRegaddr,
+			reqInvStepMoveto => reqInvStepMoveto,
+			ackInvStepMoveto => ackInvStepMoveto,
 
-			camifSetRegaddrAddr => camifSetRegaddrAddr,
+			stepMovetoAngle => stepMovetoAngle,
+			stepMovetoTstep => stepMovetoTstep,
 
-			reqInvCamifGetReg => reqInvCamifGetReg,
-			ackInvCamifGetReg => ackInvCamifGetReg,
+			reqInvStepSet => reqInvStepSet,
+			ackInvStepSet => ackInvStepSet,
 
-			camifGetRegVal => camifGetRegVal,
+			stepSetRng => stepSetRng,
+			stepSetCcwNotCw => stepSetCcwNotCw,
+			stepSetTstep => stepSetTstep,
 
-			reqInvCamifModReg => reqInvCamifModReg,
-			ackInvCamifModReg => ackInvCamifModReg,
+			reqInvStepZero => reqInvStepZero,
+			ackInvStepZero => ackInvStepZero,
 
-			camifModRegAddr => camifModRegAddr,
-			camifModRegMask => camifModRegMask,
-			camifModRegVal => camifModRegVal,
+			tkclksrcGetTkstTkst => tkclksrcGetTkstTkst,
 
-			reqInvCamacqSetGrrd => reqInvCamacqSetGrrd,
-			ackInvCamacqSetGrrd => ackInvCamacqSetGrrd,
+			reqInvTkclksrcSetTkst => reqInvTkclksrcSetTkst,
+			ackInvTkclksrcSetTkst => ackInvTkclksrcSetTkst,
 
-			camacqSetGrrdRng => camacqSetGrrdRng,
-			camacqSetGrrdRedNotGray => camacqSetGrrdRedNotGray,
-
-			camacqGetGrrdinfoTixVGrrdbufstate => camacqGetGrrdinfoTixVGrrdbufstate,
-			camacqGetGrrdinfoTkst => camacqGetGrrdinfoTkst,
-
-			reqInvCamacqSetPvw => reqInvCamacqSetPvw,
-			ackInvCamacqSetPvw => ackInvCamacqSetPvw,
-
-			camacqSetPvwRng => camacqSetPvwRng,
-			camacqSetPvwRawNotBin => camacqSetPvwRawNotBin,
-			camacqSetPvwGrayNotRgb => camacqSetPvwGrayNotRgb,
-
-			camacqGetPvwinfoTixVPvwbufstate => camacqGetPvwinfoTixVPvwbufstate,
-			camacqGetPvwinfoTkst => camacqGetPvwinfoTkst,
+			tkclksrcSetTkstTkst => tkclksrcSetTkstTkst,
 
 			reqFlgbufFromFeatdet => reqFlgbufFeatdetToHostif,
 			ackFlgbufFromFeatdet => ackFlgbufFeatdetToHostif,
@@ -1421,25 +1422,26 @@ begin
 			dFlgbufFromFeatdet => dFlgbufFeatdetToHostif,
 			strbDFlgbufFromFeatdet => strbDFlgbufFeatdetToHostif,
 
+			reqPvwabufFromCamacq => reqPvwabufCamacqToHostif,
+			ackPvwabufFromCamacq => ackPvwabufCamacqToHostif,
+			dnePvwabufFromCamacq => dnePvwabufCamacqToHostif,
+
 			reqPvwbbufFromCamacq => reqPvwbbufCamacqToHostif,
+
+			avllenPvwabufFromCamacq => avllenPvwabufCamacqToHostif,
+
 			ackPvwbbufFromCamacq => ackPvwbbufCamacqToHostif,
+
+			dPvwabufFromCamacq => dPvwabufCamacqToHostif,
+
 			dnePvwbbufFromCamacq => dnePvwbbufCamacqToHostif,
+
+			strbDPvwabufFromCamacq => strbDPvwabufCamacqToHostif,
 
 			avllenPvwbbufFromCamacq => avllenPvwbbufCamacqToHostif,
 
 			dPvwbbufFromCamacq => dPvwbbufCamacqToHostif,
-
-			reqPvwabufFromCamacq => reqPvwabufCamacqToHostif,
-
 			strbDPvwbbufFromCamacq => strbDPvwbbufCamacqToHostif,
-
-			ackPvwabufFromCamacq => ackPvwabufCamacqToHostif,
-			dnePvwabufFromCamacq => dnePvwabufCamacqToHostif,
-
-			avllenPvwabufFromCamacq => avllenPvwabufCamacqToHostif,
-
-			dPvwabufFromCamacq => dPvwabufCamacqToHostif,
-			strbDPvwabufFromCamacq => strbDPvwabufCamacqToHostif,
 
 			rdyRx => rdyRx,
 			enRx => enRx,

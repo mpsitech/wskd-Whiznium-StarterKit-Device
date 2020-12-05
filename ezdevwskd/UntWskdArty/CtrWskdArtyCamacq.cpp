@@ -1,10 +1,11 @@
 /**
 	* \file CtrWskdArtyCamacq.cpp
 	* camacq controller (implementation)
-	* \author Catherine Johnson
-	* \date created: 17 Oct 2020
-	* \date modified: 17 Oct 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Catherine Johnson (auto-generation)
+	* \date created: 1 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "CtrWskdArtyCamacq.h"
 
@@ -277,4 +278,8 @@ void CtrWskdArtyCamacq::getPvwinfo(
 
 	delete cmd;
 };
+
+
+
+
 

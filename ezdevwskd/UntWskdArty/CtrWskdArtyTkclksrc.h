@@ -1,10 +1,11 @@
 /**
 	* \file CtrWskdArtyTkclksrc.h
 	* tkclksrc controller (declarations)
-	* \author Catherine Johnson
-	* \date created: 17 Oct 2020
-	* \date modified: 17 Oct 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Catherine Johnson (auto-generation)
+	* \date created: 1 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef CTRWSKDARTYTKCLKSRC_H
 #define CTRWSKDARTYTKCLKSRC_H
@@ -58,4 +59,8 @@ public:
 };
 
 #endif
+
+
+
+
 

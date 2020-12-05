@@ -1,8 +1,9 @@
 # file Arty.xdc
 # Digilent Arty Z7 pin mapping and constraints
-# author Catherine Johnson
-# date created: 17 Oct 2020
-# modified: 17 Oct 2020
+# copyright: (C) 2017-2020 MPSI Technologies GmbH
+# author: Catherine Johnson (auto-generation)
+# date created: 1 Dec 2020
+# IP header --- ABOVE
 
 # bank34 3.3V
 set_property PACKAGE_PIN Y18 [get_ports d2];
@@ -48,6 +49,7 @@ set_property PACKAGE_PIN M18 [get_ports step2];
 set_property PACKAGE_PIN K18 [get_ports step4];
 
 # banks
+set_property IOSTANDARD LVCMOS33 [get_ports -of_objects [get_iobanks 0]];
 set_property IOSTANDARD LVCMOS33 [get_ports -of_objects [get_iobanks 34]];
 set_property IOSTANDARD LVCMOS33 [get_ports -of_objects [get_iobanks 35]];
 
@@ -55,4 +57,5 @@ set_property IOSTANDARD LVCMOS33 [get_ports -of_objects [get_iobanks 35]];
 # clocks
 # a clock by the name of clk_fpga_0 is generated automatically with the correct timing
 # IP clks --- END
+
 
