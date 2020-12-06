@@ -227,8 +227,3 @@ void CtrWskdArtyStep::zero(
 
 	delete cmd;
 };
-
-
-
-
-

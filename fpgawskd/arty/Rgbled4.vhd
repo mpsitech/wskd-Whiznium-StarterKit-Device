@@ -243,5 +243,3 @@ begin
 	-- IP impl.oth.cust --- INSERT
 
 end Rgbled4;
-
-

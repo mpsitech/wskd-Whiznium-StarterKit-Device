@@ -82,5 +82,3 @@ begin
 	end process;
 
 end Debounce_v1_0;
-
-

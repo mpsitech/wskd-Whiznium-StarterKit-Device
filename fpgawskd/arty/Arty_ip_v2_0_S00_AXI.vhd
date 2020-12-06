@@ -809,5 +809,3 @@ begin
 	end process;
 
 end Arty_ip_v2_0_S00_AXI;
-
-

@@ -396,8 +396,3 @@ void UntWskdArty::readPvwbbufFromCamacq(
 
 	delete bufxf;
 };
-
-
-
-
-

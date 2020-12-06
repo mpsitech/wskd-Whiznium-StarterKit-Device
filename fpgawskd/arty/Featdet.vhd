@@ -75,10 +75,9 @@ entity Featdet is
 		avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
 		avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
 
-		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
-
 		dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
 
+		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
 		strbDGrrdcdbufFromCamacq: out std_logic;
 
 		strbDGrrdabbufFromCamacq: out std_logic;
@@ -3284,5 +3283,3 @@ begin
 	-- IP impl.oth.cust --- IEND
 
 end Featdet;
-
-

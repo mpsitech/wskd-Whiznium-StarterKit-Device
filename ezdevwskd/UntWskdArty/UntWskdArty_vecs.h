@@ -63,8 +63,3 @@ namespace VecWWskdArtyBuffer {
 };
 
 #endif
-
-
-
-
-

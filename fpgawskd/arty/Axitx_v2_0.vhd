@@ -152,5 +152,3 @@ begin
 	end process;
 
 end Axitx_v2_0;
-
-

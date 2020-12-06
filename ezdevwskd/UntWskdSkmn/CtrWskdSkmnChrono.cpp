@@ -105,8 +105,3 @@ void CtrWskdSkmnChrono::getTst(
 
 	delete cmd;
 };
-
-
-
-
-

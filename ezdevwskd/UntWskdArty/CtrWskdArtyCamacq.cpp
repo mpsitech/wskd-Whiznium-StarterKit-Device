@@ -278,8 +278,3 @@ void CtrWskdArtyCamacq::getPvwinfo(
 
 	delete cmd;
 };
-
-
-
-
-

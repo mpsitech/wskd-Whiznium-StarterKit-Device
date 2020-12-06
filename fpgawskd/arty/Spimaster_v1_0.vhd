@@ -222,5 +222,3 @@ begin
 	end process;
 
 end Spimaster_v1_0;
-
-

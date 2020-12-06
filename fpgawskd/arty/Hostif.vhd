@@ -1509,5 +1509,3 @@ begin
 	end process;
 
 end Hostif;
-
-

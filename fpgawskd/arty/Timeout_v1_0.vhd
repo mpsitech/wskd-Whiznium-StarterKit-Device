@@ -88,5 +88,3 @@ begin
 	end process;
 
 end Timeout_v1_0;
-
-

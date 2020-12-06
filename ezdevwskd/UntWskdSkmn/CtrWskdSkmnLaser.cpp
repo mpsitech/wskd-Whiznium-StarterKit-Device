@@ -182,8 +182,3 @@ void CtrWskdSkmnLaser::shift(
 
 	delete cmd;
 };
-
-
-
-
-

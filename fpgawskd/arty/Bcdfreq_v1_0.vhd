@@ -149,5 +149,3 @@ begin
 	end process;
 
 end Bcdfreq_v1_0;
-
-

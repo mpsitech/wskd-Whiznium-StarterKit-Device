@@ -100,5 +100,3 @@ begin
 	end process;
 
 end Tkclksrc;
-
-

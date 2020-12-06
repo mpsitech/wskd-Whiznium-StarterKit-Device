@@ -10,17 +10,12 @@
 #ifndef DEVWSKD_H
 #define DEVWSKD_H
 
-#define WSKD_VERSION "1.0.0"
+#define WSKD_VERSION "1.0.1"
 #define WSKD_VERSION_MAJOR 1
 #define WSKD_VERSION_MINOR 0
-#define WSKD_VERSION_SUB 0
+#define WSKD_VERSION_SUB 1
 
 #include "UntWskdArty.h"
 #include "UntWskdSkmn.h"
 
 #endif
-
-
-
-
-

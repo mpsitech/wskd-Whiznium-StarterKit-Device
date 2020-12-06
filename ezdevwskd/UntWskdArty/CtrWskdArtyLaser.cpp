@@ -109,8 +109,3 @@ void CtrWskdArtyLaser::set(
 
 	delete cmd;
 };
-
-
-
-
-

@@ -224,8 +224,3 @@ void CtrWskdSkmnStep::zero(
 
 	delete cmd;
 };
-
-
-
-
-

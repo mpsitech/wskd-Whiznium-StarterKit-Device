@@ -105,8 +105,3 @@ void CtrWskdArtyState::get(
 
 	delete cmd;
 };
-
-
-
-
-

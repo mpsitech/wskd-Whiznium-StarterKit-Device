@@ -140,5 +140,3 @@ begin
 	end process;
 
 end Crc8005_32_v1_0;
-
-

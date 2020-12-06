@@ -94,5 +94,3 @@ begin
 	-- IP impl --- END
 
 end Spbram_v1_0_size4kB;
-
-

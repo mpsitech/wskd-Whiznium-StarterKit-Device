@@ -133,8 +133,3 @@ void VecWWskdSkmnBuffer::fillFeed(
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
-
-
-
-
-

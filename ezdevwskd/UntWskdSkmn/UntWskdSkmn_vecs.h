@@ -58,8 +58,3 @@ namespace VecWWskdSkmnBuffer {
 };
 
 #endif
-
-
-
-
-

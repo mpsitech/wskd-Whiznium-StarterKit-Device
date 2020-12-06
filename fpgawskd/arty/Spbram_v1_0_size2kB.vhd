@@ -53,5 +53,3 @@ begin
 		);
 
 end Spbram_v1_0_size2kB;
-
-

@@ -169,8 +169,3 @@ Cmd* UntWskdSkmn::getNewCmd(
 
 	return cmd;
 };
-
-
-
-
-

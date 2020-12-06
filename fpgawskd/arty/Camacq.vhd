@@ -62,20 +62,19 @@ entity Camacq is
 
 		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
 		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
-		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
 		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
+		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
+
+		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 
 		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
 
 		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
-		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
-
 		dPvwabufToHostif: out std_logic_vector(31 downto 0);
+		strbDPvwabufToHostif: in std_logic;
 
 		strbDGrrdcdbufToFeatdet: in std_logic;
-
-		strbDPvwabufToHostif: in std_logic;
 
 		strbDGrrdabbufToFeatdet: in std_logic;
 
@@ -3942,5 +3941,3 @@ begin
 	-- IP impl.oth.cust --- IEND
 
 end Camacq;
-
-

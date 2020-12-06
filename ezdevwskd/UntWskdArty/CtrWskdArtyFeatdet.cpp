@@ -332,8 +332,3 @@ void CtrWskdArtyFeatdet::triggerThd(
 
 	delete cmd;
 };
-
-
-
-
-

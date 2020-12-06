@@ -146,20 +146,19 @@ architecture Top of Top is
 
 			avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
 			avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
-			avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
 			avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
+			avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
+
+			dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 
 			dPvwbbufToHostif: out std_logic_vector(31 downto 0);
 
 			dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
-			dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
-
 			dPvwabufToHostif: out std_logic_vector(31 downto 0);
+			strbDPvwabufToHostif: in std_logic;
 
 			strbDGrrdcdbufToFeatdet: in std_logic;
-
-			strbDPvwabufToHostif: in std_logic;
 
 			strbDGrrdabbufToFeatdet: in std_logic;
 
@@ -338,10 +337,9 @@ architecture Top of Top is
 			avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
 			avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
 
-			dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
-
 			dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
 
+			dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
 			strbDGrrdcdbufFromCamacq: out std_logic;
 
 			strbDGrrdabbufFromCamacq: out std_logic;
@@ -1057,20 +1055,19 @@ begin
 
 			avllenPvwabufToHostif => avllenPvwabufCamacqToHostif,
 			avllenPvwbbufToHostif => avllenPvwbbufCamacqToHostif,
-			avllenGrrdabbufToFeatdet => avllenGrrdabbufCamacqToFeatdet,
 			avllenGrrdcdbufToFeatdet => avllenGrrdcdbufCamacqToFeatdet,
+			avllenGrrdabbufToFeatdet => avllenGrrdabbufCamacqToFeatdet,
+
+			dGrrdcdbufToFeatdet => dGrrdcdbufCamacqToFeatdet,
 
 			dPvwbbufToHostif => dPvwbbufCamacqToHostif,
 
 			dGrrdabbufToFeatdet => dGrrdabbufCamacqToFeatdet,
 
-			dGrrdcdbufToFeatdet => dGrrdcdbufCamacqToFeatdet,
-
 			dPvwabufToHostif => dPvwabufCamacqToHostif,
+			strbDPvwabufToHostif => strbDPvwabufCamacqToHostif,
 
 			strbDGrrdcdbufToFeatdet => strbDGrrdcdbufCamacqToFeatdet,
-
-			strbDPvwabufToHostif => strbDPvwabufCamacqToHostif,
 
 			strbDGrrdabbufToFeatdet => strbDGrrdabbufCamacqToFeatdet,
 
@@ -1259,10 +1256,9 @@ begin
 			avllenGrrdcdbufFromCamacq => avllenGrrdcdbufCamacqToFeatdet,
 			avllenGrrdabbufFromCamacq => avllenGrrdabbufCamacqToFeatdet,
 
-			dGrrdcdbufFromCamacq => dGrrdcdbufCamacqToFeatdet,
-
 			dGrrdabbufFromCamacq => dGrrdabbufCamacqToFeatdet,
 
+			dGrrdcdbufFromCamacq => dGrrdcdbufCamacqToFeatdet,
 			strbDGrrdcdbufFromCamacq => strbDGrrdcdbufCamacqToFeatdet,
 
 			strbDGrrdabbufFromCamacq => strbDGrrdabbufCamacqToFeatdet,
@@ -1635,5 +1631,3 @@ begin
 	-- IP impl.oth.cust --- IEND
 
 end Top;
-
-

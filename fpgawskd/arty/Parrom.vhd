@@ -100,5 +100,3 @@ begin
 	-- IP impl.oth.cust --- INSERT
 
 end Parrom;
-
-

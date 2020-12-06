@@ -148,5 +148,3 @@ begin
 	end process;
 
 end Axirx_v2_0;
-
-

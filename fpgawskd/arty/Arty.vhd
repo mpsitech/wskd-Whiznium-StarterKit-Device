@@ -77,5 +77,3 @@ package Arty is
 	constant tixVTkclksrcCommandGetTkst: std_logic_vector(7 downto 0) := x"00";
 	constant tixVTkclksrcCommandSetTkst: std_logic_vector(7 downto 0) := x"01";
 end Arty;
-
-

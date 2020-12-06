@@ -3,7 +3,7 @@
 # checkout script for Wskd embedded system code, release fpgawskd_any
 # copyright: (C) 2017-2020 MPSI Technologies GmbH
 # author: Catherine Johnson (auto-generation)
-# date created: 5 Dec 2020
+# date created: 6 Dec 2020
 # IP header --- ABOVE
 
 if [ -z ${FPGAROOT+x} ]; then
@@ -32,4 +32,3 @@ do
 		cp ../../wskd/"$var"/*.vhd $FPGAROOT/"$var"/"$var".srcs/sources_1/imports/"$var"/
 	fi
 done
-

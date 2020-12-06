@@ -132,8 +132,3 @@ void CtrWskdArtyTkclksrc::setTkst(
 
 	delete cmd;
 };
-
-
-
-
-

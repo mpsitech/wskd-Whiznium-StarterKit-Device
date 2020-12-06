@@ -254,5 +254,3 @@ begin
 	-- IP impl.oth.cust --- INSERT
 
 end Arty_ip_v1_0;
-
-
