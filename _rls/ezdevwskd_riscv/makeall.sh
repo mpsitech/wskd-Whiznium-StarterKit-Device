@@ -1,9 +1,9 @@
 #!/bin/bash
 # file makeall.sh
-# make script for Wskd device access library, release ezdevwskd_riscv(ubuntu cross-compilation)
+# make script for Wskd device access library, release ezdevwskd_riscv (ubuntu cross-compilation)
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Catherine Johnson (auto-generation)
-# date created: 6 Dec 2020
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 20 Feb 2021
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then

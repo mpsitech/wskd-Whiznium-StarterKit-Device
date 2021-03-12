@@ -68,15 +68,15 @@ public:
 public:
 	Sbecore::utinyint getTixVControllerBySref(const std::string& sref);
 	std::string getSrefByTixVController(const Sbecore::utinyint tixVController);
-	void fillFeedFController(Sbecore::Xmlio::Feed& feed);
+	void fillFeedFController(Sbecore::Feed& feed);
 
 	Sbecore::utinyint getTixWBufferBySref(const std::string& sref);
 	std::string getSrefByTixWBuffer(const Sbecore::utinyint tixWBuffer);
-	void fillFeedFBuffer(Sbecore::Xmlio::Feed& feed);
+	void fillFeedFBuffer(Sbecore::Feed& feed);
 
 	Sbecore::utinyint getTixVCommandBySref(const Sbecore::utinyint tixVController, const std::string& sref);
 	std::string getSrefByTixVCommand(const Sbecore::utinyint tixVController, const Sbecore::utinyint tixVCommand);
-	void fillFeedFCommand(const Sbecore::utinyint tixVController, Sbecore::Xmlio::Feed& feed);
+	void fillFeedFCommand(const Sbecore::utinyint tixVController, Sbecore::Feed& feed);
 
 	Dbecore::Bufxf* getNewBufxf(const Sbecore::utinyint tixWBuffer, const size_t reqlen, unsigned char* buf);
 	Dbecore::Cmd* getNewCmd(const Sbecore::utinyint tixVController, const Sbecore::utinyint tixVCommand);

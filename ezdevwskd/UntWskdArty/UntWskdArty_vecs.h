@@ -27,7 +27,7 @@ namespace VecVWskdArtyController {
 	Sbecore::utinyint getTix(const std::string& sref);
 	std::string getSref(const Sbecore::utinyint tix);
 
-	void fillFeed(Sbecore::Xmlio::Feed& feed);
+	void fillFeed(Sbecore::Feed& feed);
 };
 
 /**
@@ -43,7 +43,7 @@ namespace VecVWskdArtyState {
 
 	std::string getTitle(const Sbecore::utinyint tix);
 
-	void fillFeed(Sbecore::Xmlio::Feed& feed);
+	void fillFeed(Sbecore::Feed& feed);
 };
 
 /**
@@ -59,7 +59,7 @@ namespace VecWWskdArtyBuffer {
 	Sbecore::utinyint getTix(const std::string& sref);
 	std::string getSref(const Sbecore::utinyint tix);
 
-	void fillFeed(Sbecore::Xmlio::Feed& feed);
+	void fillFeed(Sbecore::Feed& feed);
 };
 
 #endif
