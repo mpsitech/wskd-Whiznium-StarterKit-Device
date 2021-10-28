@@ -262,7 +262,7 @@ architecture Top of Top is
 
 	component Debounce_v1_0 is
 		generic (
-			invert: bool := false;
+			invert: boolean := false;
 			tdead: natural range 1 to 10000 := 100
 		);
 		port (
@@ -1548,7 +1548,7 @@ begin
 			elsif stateRst=stateRstRun then
 				if reqResetFromHostif='1' or reqResetBtn1='1' then
 					i := 0;
-					stateReset <= stateRstReset;
+					stateRst <= stateRstReset;
 				end if;
 			end if;
 		end if;

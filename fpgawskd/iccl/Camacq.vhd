@@ -3952,7 +3952,7 @@ begin
 
 	
 	-- IP impl.oth.cust --- IBEGIN
-	nmclk <= not mclk;
+	mclkn <= not mclk;
 
 	--strb_dbg <= strbFrame & strbRow960 & strbRow768 & strbCol1280N9 & strbCol1280 & strbCol1024N3;
 	strb_dbg <= strbFrame & strbRow192 & strbRow768 & strbDPvwbinrgbGnBl & strbDPvwbinrgbRd & strbDPvwbingrayGr;

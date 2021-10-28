@@ -373,8 +373,6 @@ begin
 	------------------------------------------------------------------------
 
 	
-	-- IP impl.oth.cust --- IBEGIN
-    sdaE_dbg <= sda_sig;
-	-- IP impl.oth.cust --- IEND
+	-- IP impl.oth.cust --- INSERT
 
 end I2c;

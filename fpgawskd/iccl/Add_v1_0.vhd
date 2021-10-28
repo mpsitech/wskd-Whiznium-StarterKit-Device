@@ -40,9 +40,9 @@ begin
 		elsif rising_edge(mclk) then
 			if ce='1' then
 				if not signNotUnsign then
-					s <= std_logic_vector(resize(unsigned(a), wA) + resize(unsigned(b), wB));
+					s <= std_logic_vector(resize(unsigned(a), wS) + resize(unsigned(b), wS));
 				else
-					s <= std_logic_vector(resize(signed(a), wA) + resize(signed(b), wB));
+					s <= std_logic_vector(resize(signed(a), wS) + resize(signed(b), wS));
 				end if;
 			end if;
 		end if;

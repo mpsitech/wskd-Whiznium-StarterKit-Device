@@ -111,7 +111,7 @@ architecture Featdet of Featdet is
 
 	component Add_v1_0 is
 		generic (
-			signNotUnsign: _bool := false;
+			signNotUnsign: boolean := false;
 
 			wA: natural range 1 to 128 := 8;
 			wB: natural range 1 to 128 := 8;
@@ -130,7 +130,7 @@ architecture Featdet of Featdet is
 
 	component Sub_v1_0 is
 		generic (
-			signNotUnsign: _bool := false;
+			signNotUnsign: boolean := false;
 
 			wA: natural range 1 to 128 := 8;
 			wB: natural range 1 to 128 := 8;
@@ -189,7 +189,7 @@ architecture Featdet of Featdet is
 
 	component Mult_v1_0 is
 		generic (
-			signNotUnsign: _bool := false;
+			signNotUnsign: boolean := false;
 
 			wA: natural range 1 to 128 := 8;
 			wB: natural range 1 to 128 := 8;
@@ -494,7 +494,7 @@ architecture Featdet of Featdet is
 	signal colsumXA2: std_logic_vector(18 downto 0);
 
 	---- myColsumXB
-	signal colsumXB: std_logic_vector(20 downto 0);
+	signal colsumXB: std_logic_vector(19 downto 0);
 
 	---- myColsumXC
 	signal colsumXC: std_logic_vector(20 downto 0);
@@ -506,7 +506,7 @@ architecture Featdet of Featdet is
 	signal colsumXYA2: std_logic_vector(18 downto 0);
 
 	---- myColsumXYB
-	signal colsumXYB: std_logic_vector(20 downto 0);
+	signal colsumXYB: std_logic_vector(19 downto 0);
 
 	---- myColsumXYC
 	signal colsumXYC: std_logic_vector(20 downto 0);
@@ -518,7 +518,7 @@ architecture Featdet of Featdet is
 	signal colsumYA2: std_logic_vector(18 downto 0);
 
 	---- myColsumYB
-	signal colsumYB: std_logic_vector(20 downto 0);
+	signal colsumYB: std_logic_vector(19 downto 0);
 
 	---- myColsumYC
 	signal colsumYC: std_logic_vector(20 downto 0);
@@ -636,8 +636,8 @@ begin
 			wS => 19
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => xsqr(89 downto 72),
@@ -654,8 +654,8 @@ begin
 			wS => 19
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => xsqr(53 downto 36),
@@ -672,8 +672,8 @@ begin
 			wS => 20
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumXA1,
@@ -690,8 +690,8 @@ begin
 			wS => 21
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumXB,
@@ -708,8 +708,8 @@ begin
 			wS => 19
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => xy(89 downto 72),
@@ -726,8 +726,8 @@ begin
 			wS => 19
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => xy(53 downto 36),
@@ -744,8 +744,8 @@ begin
 			wS => 20
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumXYA1,
@@ -762,8 +762,8 @@ begin
 			wS => 21
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumXYB,
@@ -780,8 +780,8 @@ begin
 			wS => 19
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => ysqr(89 downto 72),
@@ -798,8 +798,8 @@ begin
 			wS => 19
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => ysqr(53 downto 36),
@@ -816,8 +816,8 @@ begin
 			wS => 20
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumYA1,
@@ -834,8 +834,8 @@ begin
 			wS => 21
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumYB,
@@ -852,8 +852,8 @@ begin
 			wD => 47
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => termI,
@@ -946,8 +946,8 @@ begin
 			wD => 48
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => diffI_IIp1,
@@ -964,8 +964,8 @@ begin
 			wS => 24
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumX,
@@ -982,8 +982,8 @@ begin
 			wS => 23
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumXC,
@@ -1000,8 +1000,8 @@ begin
 			wS => 22
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumX(104 downto 84),
@@ -1018,8 +1018,8 @@ begin
 			wS => 22
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumX(62 downto 42),
@@ -1036,8 +1036,8 @@ begin
 			wS => 23
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumXA,
@@ -1054,8 +1054,8 @@ begin
 			wS => 23
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumXYC,
@@ -1072,8 +1072,8 @@ begin
 			wS => 22
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumXY(104 downto 84),
@@ -1090,8 +1090,8 @@ begin
 			wS => 22
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumXY(62 downto 42),
@@ -1108,8 +1108,8 @@ begin
 			wS => 23
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumXYA,
@@ -1126,8 +1126,8 @@ begin
 			wS => 23
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumYC,
@@ -1144,8 +1144,8 @@ begin
 			wS => 22
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumY(104 downto 84),
@@ -1162,8 +1162,8 @@ begin
 			wS => 22
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => colsumY(62 downto 42),
@@ -1180,8 +1180,8 @@ begin
 			wS => 23
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumYA,
@@ -1198,8 +1198,8 @@ begin
 			wP => 46
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumX,
@@ -1216,8 +1216,8 @@ begin
 			wP => 46
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumXY,
@@ -1234,8 +1234,8 @@ begin
 			wP => 48
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => sumIII,
@@ -1252,8 +1252,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(44 downto 36),
@@ -1270,8 +1270,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(35 downto 27),
@@ -1288,8 +1288,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(26 downto 18),
@@ -1306,8 +1306,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(17 downto 9),
@@ -1324,8 +1324,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(8 downto 0),
@@ -1342,8 +1342,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(44 downto 36),
@@ -1360,8 +1360,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(35 downto 27),
@@ -1378,8 +1378,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(26 downto 18),
@@ -1396,8 +1396,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(17 downto 9),
@@ -1414,8 +1414,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dx(8 downto 0),
@@ -1432,8 +1432,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dy(44 downto 36),
@@ -1450,8 +1450,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dy(35 downto 27),
@@ -1468,8 +1468,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dy(26 downto 18),
@@ -1486,8 +1486,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dy(17 downto 9),
@@ -1504,8 +1504,8 @@ begin
 			wP => 18
 		)
 		port map (
-			reset => open,
-			mclk => open,
+			reset => reset,
+			mclk => mclk,
 			ce => ceScore,
 
 			a => dy(8 downto 0),
@@ -1558,25 +1558,25 @@ begin
 				if ceScore='1' then
 					-- eabcd
 					if abcde=0 then
-						colsumX((4-4+1)*21-1 downto (4-4)*21) <= colsumXB;
-						colsumY((4-4+1)*21-1 downto (4-4)*21) <= colsumYB;
-						colsumXY((4-4+1)*21-1 downto (4-4)*21) <= colsumXYB;
+						colsumX((4-4+1)*21-1 downto (4-4)*21) <= colsumXC;
+						colsumY((4-4+1)*21-1 downto (4-4)*21) <= colsumYC;
+						colsumXY((4-4+1)*21-1 downto (4-4)*21) <= colsumXYC;
 					elsif abcde=1 then
-						colsumX((4-0+1)*21-1 downto (4-0)*21) <= colsumXB;
-						colsumY((4-0+1)*21-1 downto (4-0)*21) <= colsumYB;
-						colsumXY((4-0+1)*21-1 downto (4-0)*21) <= colsumXYB;
+						colsumX((4-0+1)*21-1 downto (4-0)*21) <= colsumXC;
+						colsumY((4-0+1)*21-1 downto (4-0)*21) <= colsumYC;
+						colsumXY((4-0+1)*21-1 downto (4-0)*21) <= colsumXYC;
 					elsif abcde=2 then
-						colsumX((4-1+1)*21-1 downto (4-1)*21) <= colsumXB;
-						colsumY((4-1+1)*21-1 downto (4-1)*21) <= colsumYB;
-						colsumXY((4-1+1)*21-1 downto (4-1)*21) <= colsumXYB;
+						colsumX((4-1+1)*21-1 downto (4-1)*21) <= colsumXC;
+						colsumY((4-1+1)*21-1 downto (4-1)*21) <= colsumYC;
+						colsumXY((4-1+1)*21-1 downto (4-1)*21) <= colsumXYC;
 					elsif abcde=3 then
-						colsumX((4-2+1)*21-1 downto (4-2)*21) <= colsumXB;
-						colsumY((4-2+1)*21-1 downto (4-2)*21) <= colsumYB;
-						colsumXY((4-2+1)*21-1 downto (4-2)*21) <= colsumXYB;
+						colsumX((4-2+1)*21-1 downto (4-2)*21) <= colsumXC;
+						colsumY((4-2+1)*21-1 downto (4-2)*21) <= colsumYC;
+						colsumXY((4-2+1)*21-1 downto (4-2)*21) <= colsumXYC;
 					elsif abcde=4 then
-						colsumX((4-3+1)*21-1 downto (4-3)*21) <= colsumXB;
-						colsumY((4-3+1)*21-1 downto (4-3)*21) <= colsumYB;
-						colsumXY((4-3+1)*21-1 downto (4-3)*21) <= colsumXYB;
+						colsumX((4-3+1)*21-1 downto (4-3)*21) <= colsumXC;
+						colsumY((4-3+1)*21-1 downto (4-3)*21) <= colsumYC;
+						colsumXY((4-3+1)*21-1 downto (4-3)*21) <= colsumXYC;
 					end if;
 				end if;
 				-- IP impl.copy.run --- IEND
@@ -2413,38 +2413,23 @@ begin
 			elsif stateFwd=stateFwdRun then
 				-- IP impl.fwd.run --- IBEGIN
 				if ceScore='1' then
-					xsqr3p1 <= xsqr(71 downto 54);
-					xsqr3p2 <= xsqr3p1;
-
 					xsqr4p1 <= xsqr(89 downto 72);
 					xsqr4p2 <= xsqr4p1;
 
 					colsumX4p1 <= colsumX(104 downto 84);
 					colsumX4p2 <= colsumX4p1;
-					colsumX4p3 <= colsumX4p2;
-					colsumX4p4 <= colsumX4p3;
-
-					ysqr3p1 <= ysqr(71 downto 54);
-					ysqr3p2 <= ysqr3p1;
 
 					ysqr4p1 <= ysqr(89 downto 72);
 					ysqr4p2 <= ysqr4p1;
 
 					colsumY4p1 <= colsumY(104 downto 84);
 					colsumY4p2 <= colsumY4p1;
-					colsumY4p3 <= colsumY4p2;
-					colsumY4p4 <= colsumY4p3;
-
-					xy3p1 <= xy(71 downto 54);
-					xy3p2 <= xy3p1;
 
 					xy4p1 <= xy(89 downto 72);
 					xy4p2 <= xy4p1;
 
 					colsumXY4p1 <= colsumXY(104 downto 84);
 					colsumXY4p2 <= colsumXY4p1;
-					colsumXY4p3 <= colsumXY4p2;
-					colsumXY4p4 <= colsumXY4p3;
 
 					diffI_IIp1 <= diffI_II;
 				end if;
@@ -3673,7 +3658,7 @@ begin
 
 	
 	-- IP impl.oth.cust --- IBEGIN
-	nmclk <= not mclk;
+	mclkn <= not mclk;
 
 	strb_dbg <= ceScore & strbDStream & strbDwrThd & strbDrdThd;
 	-- IP impl.oth.cust --- IEND
