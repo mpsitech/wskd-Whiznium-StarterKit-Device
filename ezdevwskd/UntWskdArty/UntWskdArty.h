@@ -30,8 +30,8 @@
 class UntWskdArty : public UntWskd {
 
 public:
-	static constexpr unsigned int sizeRxbuf = 6;
-	static constexpr unsigned int sizeTxbuf = 8;
+	static constexpr size_t sizeRxbuf = 8;
+	static constexpr size_t sizeTxbuf = 7;
 
 public:
 	UntWskdArty();
@@ -66,20 +66,20 @@ public:
 	void flush();
 
 public:
-	Sbecore::utinyint getTixVControllerBySref(const std::string& sref);
-	std::string getSrefByTixVController(const Sbecore::utinyint tixVController);
+	uint8_t getTixVControllerBySref(const std::string& sref);
+	std::string getSrefByTixVController(const uint8_t tixVController);
 	void fillFeedFController(Sbecore::Feed& feed);
 
-	Sbecore::utinyint getTixWBufferBySref(const std::string& sref);
-	std::string getSrefByTixWBuffer(const Sbecore::utinyint tixWBuffer);
+	uint8_t getTixWBufferBySref(const std::string& sref);
+	std::string getSrefByTixWBuffer(const uint8_t tixWBuffer);
 	void fillFeedFBuffer(Sbecore::Feed& feed);
 
-	Sbecore::utinyint getTixVCommandBySref(const Sbecore::utinyint tixVController, const std::string& sref);
-	std::string getSrefByTixVCommand(const Sbecore::utinyint tixVController, const Sbecore::utinyint tixVCommand);
-	void fillFeedFCommand(const Sbecore::utinyint tixVController, Sbecore::Feed& feed);
+	uint8_t getTixVCommandBySref(const uint8_t tixVController, const std::string& sref);
+	std::string getSrefByTixVCommand(const uint8_t tixVController, const uint8_t tixVCommand);
+	void fillFeedFCommand(const uint8_t tixVController, Sbecore::Feed& feed);
 
-	Dbecore::Bufxf* getNewBufxf(const Sbecore::utinyint tixWBuffer, const size_t reqlen, unsigned char* buf);
-	Dbecore::Cmd* getNewCmd(const Sbecore::utinyint tixVController, const Sbecore::utinyint tixVCommand);
+	Dbecore::Bufxf* getNewBufxf(const uint8_t tixWBuffer, const size_t reqlen, unsigned char* buf);
+	Dbecore::Cmd* getNewCmd(const uint8_t tixVController, const uint8_t tixVCommand);
 
 	Dbecore::Bufxf* getNewBufxfFlgbufFromFeatdet(const size_t reqlen, unsigned char* buf);
 	void readFlgbufFromFeatdet(const size_t reqlen, unsigned char*& data, size_t& datalen);

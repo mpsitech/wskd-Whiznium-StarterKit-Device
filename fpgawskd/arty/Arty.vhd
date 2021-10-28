@@ -47,6 +47,7 @@ package Arty is
 	constant tixWArtyBufferFlgbufFeatdetToHostif: std_logic_vector(7 downto 0) := x"04";
 	constant tixWArtyBufferPvwabufCamacqToHostif: std_logic_vector(7 downto 0) := x"08";
 	constant tixWArtyBufferPvwbbufCamacqToHostif: std_logic_vector(7 downto 0) := x"10";
+
 	constant tixVCamacqCommandSetGrrd: std_logic_vector(7 downto 0) := x"00";
 	constant tixVCamacqCommandGetGrrdinfo: std_logic_vector(7 downto 0) := x"01";
 	constant tixVCamacqCommandSetPvw: std_logic_vector(7 downto 0) := x"02";

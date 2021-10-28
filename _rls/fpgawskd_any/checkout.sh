@@ -2,8 +2,8 @@
 # file checkout.sh
 # checkout script for Wskd embedded system code, release fpgawskd_any
 # copyright: (C) 2017-2020 MPSI Technologies GmbH
-# author: Catherine Johnson (auto-generation)
-# date created: 6 Dec 2020
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 if [ -z ${FPGAROOT+x} ]; then
@@ -16,7 +16,7 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ "$1" = "all" ]; then
-	unts=("arty")
+	unts=("arty" "iccl" "mcep")
 else
 	unts=("$@")
 fi;

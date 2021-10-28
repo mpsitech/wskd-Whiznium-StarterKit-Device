@@ -9,9 +9,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library unisim;
-use unisim.vcomponents.all;
-
 use work.Dbecore.all;
 use work.Arty.all;
 
@@ -38,7 +35,9 @@ entity I2c is
 		recv: out std_logic_vector(7 downto 0);
 
 		scl: out std_logic;
-		sda: inout std_logic
+		sda: inout std_logic;
+
+		stateXfer_dbg: out std_logic_vector(7 downto 0)
 	);
 end I2c;
 
@@ -47,6 +46,15 @@ architecture I2c of I2c is
 	------------------------------------------------------------------------
 	-- component declarations
 	------------------------------------------------------------------------
+
+	component IOBUF is
+		port (
+			O: out std_logic;
+			IO: inout std_logic;
+			I: in std_logic;
+			T: in std_logic
+		);
+	end component;
 
 	------------------------------------------------------------------------
 	-- signal declarations
@@ -105,6 +113,20 @@ begin
 	scl_sig <= '0' when (stateXfer=stateXferBitA or stateXfer=stateXferAckA or stateXfer=stateXferRestart
 				 or stateXfer=stateXferStopA) else '1';
 	scl <= scl_sig;
+
+	stateXfer_dbg <= x"00" when stateXfer=stateXferInit
+				else x"10" when stateXfer=stateXferStartA
+				else x"11" when stateXfer=stateXferStartB
+				else x"20" when stateXfer=stateXferBitA
+				else x"21" when stateXfer=stateXferBitB
+				else x"30" when stateXfer=stateXferAckA
+				else x"31" when stateXfer=stateXferAckB
+				else x"40" when stateXfer=stateXferRestart
+				else x"50" when stateXfer=stateXferStopA
+				else x"51" when stateXfer=stateXferStopB
+				else x"52" when stateXfer=stateXferStopC
+				else x"60" when stateXfer=stateXferDone
+				else (others => '1');
 	-- IP impl.xfer.wiring --- END
 
 	-- IP impl.xfer.rising --- BEGIN

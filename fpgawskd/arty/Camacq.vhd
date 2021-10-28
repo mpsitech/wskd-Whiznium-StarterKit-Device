@@ -16,7 +16,6 @@ entity Camacq is
 	port (
 		reset: in std_logic;
 		mclk: in std_logic;
-		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 		btnPhase: in std_logic;
 
 		reqInvSetGrrd: in std_logic;
@@ -38,56 +37,53 @@ entity Camacq is
 		getPvwinfoTixVPvwbufstate: out std_logic_vector(7 downto 0);
 		getPvwinfoTkst: out std_logic_vector(31 downto 0);
 
-		reqPvwbbufToHostif: in std_logic;
-
-		reqGrrdabbufToFeatdet: in std_logic;
+		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 
 		reqGrrdcdbufToFeatdet: in std_logic;
 
-		reqPvwabufToHostif: in std_logic;
-		ackPvwabufToHostif: out std_logic;
-
-		ackGrrdabbufToFeatdet: out std_logic;
+		reqGrrdabbufToFeatdet: in std_logic;
 
 		ackGrrdcdbufToFeatdet: out std_logic;
 
-		ackPvwbbufToHostif: out std_logic;
-		dnePvwbbufToHostif: in std_logic;
-
-		dneGrrdabbufToFeatdet: in std_logic;
+		ackGrrdabbufToFeatdet: out std_logic;
 
 		dneGrrdcdbufToFeatdet: in std_logic;
 
-		dnePvwabufToHostif: in std_logic;
-
-		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
-		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
-		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
+		dneGrrdabbufToFeatdet: in std_logic;
 		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
 
-		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
-
-		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
+		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
 
 		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
-		dPvwabufToHostif: out std_logic_vector(31 downto 0);
-		strbDPvwabufToHostif: in std_logic;
-
+		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 		strbDGrrdcdbufToFeatdet: in std_logic;
 
 		strbDGrrdabbufToFeatdet: in std_logic;
 
-		strbDPvwbbufToHostif: in std_logic;
-
 		reqGrrdefbufToFeatdet: in std_logic;
 		ackGrrdefbufToFeatdet: out std_logic;
 		dneGrrdefbufToFeatdet: in std_logic;
-
 		avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
 
 		dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
 		strbDGrrdefbufToFeatdet: in std_logic;
+
+		reqPvwabufToHostif: in std_logic;
+		ackPvwabufToHostif: out std_logic;
+		dnePvwabufToHostif: in std_logic;
+		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
+
+		dPvwabufToHostif: out std_logic_vector(31 downto 0);
+		strbDPvwabufToHostif: in std_logic;
+
+		reqPvwbbufToHostif: in std_logic;
+		ackPvwbbufToHostif: out std_logic;
+		dnePvwbbufToHostif: in std_logic;
+		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
+
+		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
+		strbDPvwbbufToHostif: in std_logic;
 
 		pclk: in std_logic;
 		href: in std_logic;
@@ -108,6 +104,7 @@ entity Camacq is
 		cntRiseB_dbg: out std_logic_vector(7 downto 0);
 
 		strb_dbg: out std_logic_vector(5 downto 0);
+
 		stateAlign_dbg: out std_logic_vector(7 downto 0);
 		stateGrrd_dbg: out std_logic_vector(7 downto 0);
 		stateGrrdabbufB_dbg: out std_logic_vector(7 downto 0);
@@ -181,7 +178,7 @@ architecture Camacq of Camacq is
 		);
 	end component;
 
-	component Dpbram_v8_4_size58kB is
+	component Dpbram_size58kB is
 		port (
 			clkA: in std_logic;
 
@@ -629,7 +626,7 @@ architecture Camacq of Camacq is
 	signal ackPvwbufBToPvwbufBbufClear: std_logic;
 
 	---- other
-	signal nmclk: std_logic;
+	signal mclkn: std_logic;
 	-- IP sigs.oth.cust --- INSERT
 
 begin
@@ -664,7 +661,7 @@ begin
 
 	myEvenbuf : Spbram_v1_0_size4kB
 		port map (
-			clk => nmclk,
+			clk => mclkn,
 
 			en => enEvenbuf,
 			we => weEvenbuf,
@@ -685,7 +682,7 @@ begin
 			drdA => open,
 			dwrA => dwrGrrdbuf,
 
-			clkB => nmclk,
+			clkB => mclkn,
 
 			enB => enGrrdabbufB,
 			weB => '0',
@@ -706,7 +703,7 @@ begin
 			drdA => open,
 			dwrA => dwrGrrdbuf,
 
-			clkB => nmclk,
+			clkB => mclkn,
 
 			enB => enGrrdcdbufB,
 			weB => '0',
@@ -727,7 +724,7 @@ begin
 			drdA => open,
 			dwrA => dwrGrrdbuf,
 
-			clkB => nmclk,
+			clkB => mclkn,
 
 			enB => enGrrdefbufB,
 			weB => '0',
@@ -737,7 +734,7 @@ begin
 			dwrB => (others => '0')
 		);
 
-	myPvwabuf : Dpbram_v8_4_size58kB
+	myPvwabuf : Dpbram_size58kB
 		port map (
 			clkA => mclk,
 
@@ -758,7 +755,7 @@ begin
 			dinB => (others => '0')
 		);
 
-	myPvwbbuf : Dpbram_v8_4_size58kB
+	myPvwbbuf : Dpbram_size58kB
 		port map (
 			clkA => mclk,
 
@@ -781,7 +778,7 @@ begin
 
 	myRawgraybuf : Spbram_v1_0_size2kB
 		port map (
-			clk => nmclk,
+			clk => mclkn,
 
 			en => enRawgraybuf,
 			we => weRawgraybuf,

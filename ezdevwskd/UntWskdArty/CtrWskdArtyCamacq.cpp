@@ -18,7 +18,7 @@ using namespace Dbecore;
  class CtrWskdArtyCamacq::VecVCommand
  ******************************************************************************/
 
-utinyint CtrWskdArtyCamacq::VecVCommand::getTix(
+uint8_t CtrWskdArtyCamacq::VecVCommand::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -32,7 +32,7 @@ utinyint CtrWskdArtyCamacq::VecVCommand::getTix(
 };
 
 string CtrWskdArtyCamacq::VecVCommand::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == SETGRRD) return("setGrrd");
 	else if (tix == GETGRRDINFO) return("getGrrdinfo");
@@ -47,7 +47,7 @@ void CtrWskdArtyCamacq::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {SETGRRD,GETGRRDINFO,SETPVW,GETPVWINFO};
+	std::set<uint8_t> items = {SETGRRD,GETGRRDINFO,SETPVW,GETPVWINFO};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -56,7 +56,7 @@ void CtrWskdArtyCamacq::VecVCommand::fillFeed(
  class CtrWskdArtyCamacq::VecVGrrdbufstate
  ******************************************************************************/
 
-utinyint CtrWskdArtyCamacq::VecVGrrdbufstate::getTix(
+uint8_t CtrWskdArtyCamacq::VecVGrrdbufstate::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -71,7 +71,7 @@ utinyint CtrWskdArtyCamacq::VecVGrrdbufstate::getTix(
 };
 
 string CtrWskdArtyCamacq::VecVGrrdbufstate::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == IDLE) return("idle");
 	else if (tix == EMPTY) return("empty");
@@ -87,7 +87,7 @@ void CtrWskdArtyCamacq::VecVGrrdbufstate::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {IDLE,EMPTY,STREAM,PAUSE,ENDFR};
+	std::set<uint8_t> items = {IDLE,EMPTY,STREAM,PAUSE,ENDFR};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -96,7 +96,7 @@ void CtrWskdArtyCamacq::VecVGrrdbufstate::fillFeed(
  class CtrWskdArtyCamacq::VecVPvwbufstate
  ******************************************************************************/
 
-utinyint CtrWskdArtyCamacq::VecVPvwbufstate::getTix(
+uint8_t CtrWskdArtyCamacq::VecVPvwbufstate::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -110,7 +110,7 @@ utinyint CtrWskdArtyCamacq::VecVPvwbufstate::getTix(
 };
 
 string CtrWskdArtyCamacq::VecVPvwbufstate::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == IDLE) return("idle");
 	else if (tix == EMPTY) return("empty");
@@ -125,7 +125,7 @@ void CtrWskdArtyCamacq::VecVPvwbufstate::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {IDLE,EMPTY,ABUF,BBUF};
+	std::set<uint8_t> items = {IDLE,EMPTY,ABUF,BBUF};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -139,14 +139,14 @@ CtrWskdArtyCamacq::CtrWskdArtyCamacq(
 		) : CtrWskd(unt) {
 };
 
-utinyint CtrWskdArtyCamacq::getTixVCommandBySref(
+uint8_t CtrWskdArtyCamacq::getTixVCommandBySref(
 			const string& sref
 		) {
 	return VecVCommand::getTix(sref);
 };
 
 string CtrWskdArtyCamacq::getSrefByTixVCommand(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	return VecVCommand::getSref(tixVCommand);
 };
@@ -158,7 +158,7 @@ void CtrWskdArtyCamacq::fillFeedFCommand(
 };
 
 Cmd* CtrWskdArtyCamacq::getNewCmd(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	Cmd* cmd = NULL;
 
@@ -201,20 +201,20 @@ Cmd* CtrWskdArtyCamacq::getNewCmdGetGrrdinfo() {
 	Cmd* cmd = new Cmd(0x01, VecVCommand::GETGRRDINFO, Cmd::VecVRettype::STATSNG);
 
 	cmd->addParRet("tixVGrrdbufstate", Par::VecVType::TIX, CtrWskdArtyCamacq::VecVGrrdbufstate::getTix, CtrWskdArtyCamacq::VecVGrrdbufstate::getSref, CtrWskdArtyCamacq::VecVGrrdbufstate::fillFeed);
-	cmd->addParRet("tkst", Par::VecVType::UINT);
+	cmd->addParRet("tkst", Par::VecVType::UINT32);
 
 	return cmd;
 };
 
 void CtrWskdArtyCamacq::getGrrdinfo(
-			utinyint& tixVGrrdbufstate
-			, uint& tkst
+			uint8_t& tixVGrrdbufstate
+			, uint32_t& tkst
 		) {
 	Cmd* cmd = getNewCmdGetGrrdinfo();
 
 	if (unt->runCmd(cmd)) {
 		tixVGrrdbufstate = cmd->parsRet["tixVGrrdbufstate"].getTix();
-		tkst = cmd->parsRet["tkst"].getUint();
+		tkst = cmd->parsRet["tkst"].getUint32();
 	} else {
 		delete cmd;
 		throw DbeException("error running getGrrdinfo");
@@ -257,20 +257,20 @@ Cmd* CtrWskdArtyCamacq::getNewCmdGetPvwinfo() {
 	Cmd* cmd = new Cmd(0x01, VecVCommand::GETPVWINFO, Cmd::VecVRettype::STATSNG);
 
 	cmd->addParRet("tixVPvwbufstate", Par::VecVType::TIX, CtrWskdArtyCamacq::VecVPvwbufstate::getTix, CtrWskdArtyCamacq::VecVPvwbufstate::getSref, CtrWskdArtyCamacq::VecVPvwbufstate::fillFeed);
-	cmd->addParRet("tkst", Par::VecVType::UINT);
+	cmd->addParRet("tkst", Par::VecVType::UINT32);
 
 	return cmd;
 };
 
 void CtrWskdArtyCamacq::getPvwinfo(
-			utinyint& tixVPvwbufstate
-			, uint& tkst
+			uint8_t& tixVPvwbufstate
+			, uint32_t& tkst
 		) {
 	Cmd* cmd = getNewCmdGetPvwinfo();
 
 	if (unt->runCmd(cmd)) {
 		tixVPvwbufstate = cmd->parsRet["tixVPvwbufstate"].getTix();
-		tkst = cmd->parsRet["tkst"].getUint();
+		tkst = cmd->parsRet["tkst"].getUint32();
 	} else {
 		delete cmd;
 		throw DbeException("error running getPvwinfo");

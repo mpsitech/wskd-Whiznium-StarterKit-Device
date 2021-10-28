@@ -21,14 +21,28 @@ using namespace Dbecore;
 UntWskd::UntWskd()
 		:
 			mAccess("mAccess", "UntWskd", "UntWskd")
+			, rwmHist("rwmHist", "UntWskd", "UntWskd")
 		{
 	initdone = false;;
 
 	txburst = false;
-	rxtxdump = false;
 
-	Nretry = 0;
-	to = 0;
+	rxtxdump = false;
+	histNotDump = false;
+	histlimit = 100;
+
+	NRetry = 3;
+
+	bufxfLengthBlockNotByte = false;
+
+	wordlen = 1;
+
+	dtDecode = 0;
+
+	timeoutDev = 10000;
+
+	timeoutRx = 1000;
+	timeoutRxWord = 1;
 
 	rxbuf = NULL;
 	txbuf = NULL;
@@ -71,9 +85,9 @@ bool UntWskd::runBufxf(
 	else success = runBufxfFromBuf(bufxf);
 
 	if (!success) {
-		// wait for FPGA system to time out (10ms+)
+		// wait for device to time out
 		deltat.tv_sec = 0;
-		deltat.tv_nsec = 11 * 1000000;
+		deltat.tv_nsec = 1000 * timeoutDev;
 
 		nanosleep(&deltat, NULL);
 	};
@@ -96,7 +110,7 @@ bool UntWskd::runBufxfFromBuf(
 	setBuffer(bufxf->tixWBuffer);
 	setController(0x00);
 	setCommand(0x00);
-	setLength(bufxf->reqlen/256); // expect reqlen to be a multiple of 256; neither reqlen nor length include CRC bytes
+	setLength((bufxfLengthBlockNotByte) ? bufxf->reqlen/256 : bufxf->reqlen); // neither reqlen nor length include CRC bytes
 
 	crc.reset();
 	crc.includeBytes(txbuf, 1+1+1+2);
@@ -105,7 +119,10 @@ bool UntWskd::runBufxfFromBuf(
 
 	success = tx(txbuf, 1+1+1+2+2);
 
-	if (success) success = rx(bufxf->data, bufxf->reqlen+2);
+	if (success) {
+		flush();
+		success = rx(bufxf->data, bufxf->reqlen+2);
+	};
 
 	if (success) bufxf->ptr = bufxf->reqlen;
 
@@ -131,6 +148,8 @@ bool UntWskd::runBufxfToBuf(
 		) {
 	bool success = false;
 
+	timespec deltat;
+
 	if (!initdone) return false;
 	lockAccess("runBufxfToBuf");
 
@@ -141,7 +160,7 @@ bool UntWskd::runBufxfToBuf(
 	setBuffer(bufxf->tixWBuffer);
 	setController(0x00);
 	setCommand(0x00);
-	setLength(bufxf->reqlen/256);
+	setLength((bufxfLengthBlockNotByte) ? bufxf->reqlen/256 : bufxf->reqlen);
 
 	crc.reset();
 	crc.includeBytes(txbuf, 1+1+1+2);
@@ -167,11 +186,21 @@ bool UntWskd::runBufxfToBuf(
 			crc.finalize();
 			setCrc(crc.crc, &(bufxf->data[bufxf->reqlen]));
 
+			if (dtDecode > 0) {
+				deltat.tv_sec = 0;
+				deltat.tv_nsec = 1000 * dtDecode;
+
+				nanosleep(&deltat, NULL);
+			};
+
 			success = tx(bufxf->data, bufxf->reqlen+2);
 		};
 	};
 
-	if (success) success = rx(rxbuf, 2); // expect CRC of empty buffer (0xAAAA)
+	if (success) {
+		flush();
+		success = rx(rxbuf, 2); // expect CRC of empty buffer (0xAAAA)
+	};
 
 	if (success) success = ((rxbuf[0] == 0xAA) && (rxbuf[1] == 0xAA));
 
@@ -190,15 +219,15 @@ bool UntWskd::runCmd(
 	if (!initdone) return false;
 	lockAccess("runCmd");
 
-	for (unsigned int i = 0; i < Nretry; i++) {
+	for (unsigned int i = 0; i < NRetry; i++) {
 		if (cmd->parsInv.empty() && !cmd->parsRet.empty()) success = runCmdVoidToRet(cmd);
 		else success = runCmdInvToVoid(cmd); // allow voidToVoid as well
 
 		if (success) break;
 
-		// wait for FPGA system to time out (10ms+)
+		// wait for device to time out
 		deltat.tv_sec = 0;
-		deltat.tv_nsec = 11 * 1000000;
+		deltat.tv_nsec = 1000 * timeoutDev;
 
 		nanosleep(&deltat, NULL);
 	};
@@ -212,6 +241,8 @@ bool UntWskd::runCmdInvToVoid(
 			Cmd* cmd
 		) {
 	bool success;
+
+	timespec deltat;
 
 	unsigned char* buf = NULL;
 	size_t buflen;
@@ -250,11 +281,21 @@ bool UntWskd::runCmdInvToVoid(
 			if (buf) memcpy(txbuf, buf, buflen);
 			setCrc(crc.crc, &(txbuf[invBuflen]));
 
+			if (dtDecode > 0) {
+				deltat.tv_sec = 0;
+				deltat.tv_nsec = 1000 * dtDecode;
+
+				nanosleep(&deltat, NULL);
+			};
+
 			success = tx(txbuf, invBuflen+2);
 		};
 	};
 
-	if (success) success = rx(rxbuf, 2); // expect CRC of empty buffer (0xAAAA)
+	if (success) {
+		flush();
+		success = rx(rxbuf, 2); // expect CRC of empty buffer (0xAAAA)
+	};
 
 	if (success) success = ((rxbuf[0] == 0xAA) && (rxbuf[1] == 0xAA));
 
@@ -286,11 +327,13 @@ bool UntWskd::runCmdVoidToRet(
 
 	success = tx(txbuf, 1+1+1+2+2);
 
-	if (success) success = rx(rxbuf, retBuflen+2);
+	if (success) {
+		flush();
+		success = rx(rxbuf, retBuflen+2);
+	};
 
 	if (success) {
 		// received CRC bytes odd bits are bit-inverted
-/*
 		rxbuf[retBuflen] = (rxbuf[retBuflen] & 0x55) | (~(rxbuf[retBuflen]) & 0xAA);
 		rxbuf[retBuflen+1] = (rxbuf[retBuflen+1] & 0x55) | (~(rxbuf[retBuflen+1]) & 0xAA);
 
@@ -299,9 +342,7 @@ bool UntWskd::runCmdVoidToRet(
 		crc.finalize();
 
 		success = (crc.crc == 0x0000);
-*/
 
-		// preliniary fix while FPGA can't handle 32bit-based CRC calculation during tx
 		success = ((rxbuf[retBuflen] == 0xAA) && (rxbuf[retBuflen+1] == 0xAA));
 	};
 
@@ -310,22 +351,36 @@ bool UntWskd::runCmdVoidToRet(
 	return success;
 };
 
+timespec UntWskd::calcTimeout(
+			const size_t length
+		) {
+	unsigned long us;
+	timespec deltat;
+
+	us = (length * timeoutRxWord) / wordlen + timeoutRx;
+
+	deltat.tv_sec = us / 1000000;
+	deltat.tv_nsec = 1000 * (us%1000000);
+
+	return deltat;
+};
+
 void UntWskd::setBuffer(
-			const utinyint tixWBuffer
+			const uint8_t tixWBuffer
 		) {
 	// txbuf byte 0
 	txbuf[0] = tixWBuffer;
 };
 
 void UntWskd::setController(
-			const utinyint tixVController
+			const uint8_t tixVController
 		) {
 	// txbuf byte 1
 	txbuf[1] = tixVController;
 };
 
 void UntWskd::setCommand(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	// txbuf byte 2
 	txbuf[2] = tixVCommand;
@@ -385,14 +440,14 @@ bool UntWskd::tx(
 void UntWskd::flush() {
 };
 
-utinyint UntWskd::getTixVControllerBySref(
+uint8_t UntWskd::getTixVControllerBySref(
 			const string& sref
 		) {
 	return 0;
 };
 
 string UntWskd::getSrefByTixVController(
-			const utinyint tixVController
+			const uint8_t tixVController
 		) {
 	return("");
 };
@@ -402,14 +457,14 @@ void UntWskd::fillFeedFController(
 		) {
 };
 
-utinyint UntWskd::getTixWBufferBySref(
+uint8_t UntWskd::getTixWBufferBySref(
 			const string& sref
 		) {
 	return 0;
 };
 
 string UntWskd::getSrefByTixWBuffer(
-			const utinyint tixWBuffer
+			const uint8_t tixWBuffer
 		) {
 	return("");
 };
@@ -419,43 +474,43 @@ void UntWskd::fillFeedFBuffer(
 		) {
 };
 
-utinyint UntWskd::getTixVCommandBySref(
-			const utinyint tixVController
+uint8_t UntWskd::getTixVCommandBySref(
+			const uint8_t tixVController
 			, const string& sref
 		) {
 	return 0;
 };
 
 string UntWskd::getSrefByTixVCommand(
-			const utinyint tixVController
-			, const utinyint tixVCommand
+			const uint8_t tixVController
+			, const uint8_t tixVCommand
 		) {
 	return("");
 };
 
 void UntWskd::fillFeedFCommand(
-			const utinyint tixVController
+			const uint8_t tixVController
 			, Feed& feed
 		) {
 };
 
 Bufxf* UntWskd::getNewBufxf(
-			const utinyint tixWBuffer
+			const uint8_t tixWBuffer
 			, const size_t reqlen
 		) {
 	return NULL;
 };
 
 Cmd* UntWskd::getNewCmd(
-			const utinyint tixVController
-			, const utinyint tixVCommand
+			const uint8_t tixVController
+			, const uint8_t tixVCommand
 		) {
 	return NULL;
 };
 
 string UntWskd::getCmdTemplate(
-			const utinyint tixVController
-			, const utinyint tixVCommand
+			const uint8_t tixVController
+			, const uint8_t tixVCommand
 			, const bool invretNotInv
 		) {
 	string retval;
@@ -478,6 +533,47 @@ string UntWskd::getCmdTemplate(
 	};
 
 	return retval;
+};
+
+void UntWskd::clearHist() {
+	rwmHist.wlock("UntWskd", "clearHist");
+
+	hist.clear();
+
+	rwmHist.wunlock("UntWskd", "clearHist");
+};
+
+void UntWskd::appendToHist(
+			const string& s
+		) {
+	rwmHist.wlock("UntWskd", "appendToHist");
+
+	while (hist.size() > histlimit) hist.pop_front();
+	hist.push_back(s);
+
+	rwmHist.wunlock("UntWskd", "appendToHist");
+};
+
+void UntWskd::appendToLastInHist(
+			const string& s
+		) {
+	rwmHist.wlock("UntWskd", "appendToLastInHist");
+
+	if (!hist.empty()) hist.back() += s;
+
+	rwmHist.wunlock("UntWskd", "appendToLastInHist");
+};
+
+void UntWskd::copyHist(
+			vector<string>& vec
+			, const bool append
+		) {
+	rwmHist.rlock("UntWskd", "copyHist");
+
+	if (!append) vec.clear();
+	for (auto it = hist.begin(); it != hist.end(); it++) vec.push_back(*it);
+
+	rwmHist.runlock("UntWskd", "copyHist");
 };
 
 /******************************************************************************

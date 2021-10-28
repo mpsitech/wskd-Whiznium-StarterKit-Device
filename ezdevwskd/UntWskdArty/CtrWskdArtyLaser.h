@@ -26,10 +26,10 @@ public:
 	class VecVCommand {
 
 	public:
-		static const Sbecore::utinyint SET = 0x00;
+		static constexpr uint8_t SET = 0x00;
 
-		static Sbecore::utinyint getTix(const std::string& sref);
-		static std::string getSref(const Sbecore::utinyint tix);
+		static uint8_t getTix(const std::string& sref);
+		static std::string getSref(const uint8_t tix);
 
 		static void fillFeed(Sbecore::Feed& feed);
 	};
@@ -38,17 +38,17 @@ public:
 	CtrWskdArtyLaser(UntWskd* unt);
 
 public:
-	static const Sbecore::utinyint tixVController = 0x04;
+	static const uint8_t tixVController = 0x04;
 
 public:
-	static Sbecore::utinyint getTixVCommandBySref(const std::string& sref);
-	static std::string getSrefByTixVCommand(const Sbecore::utinyint tixVCommand);
+	static uint8_t getTixVCommandBySref(const std::string& sref);
+	static std::string getSrefByTixVCommand(const uint8_t tixVCommand);
 	static void fillFeedFCommand(Sbecore::Feed& feed);
 
-	static Dbecore::Cmd* getNewCmd(const Sbecore::utinyint tixVCommand);
+	static Dbecore::Cmd* getNewCmd(const uint8_t tixVCommand);
 
 	static Dbecore::Cmd* getNewCmdSet();
-	void set(const Sbecore::usmallint l, const Sbecore::usmallint r);
+	void set(const uint16_t l, const uint16_t r);
 
 };
 

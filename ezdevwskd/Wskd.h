@@ -10,12 +10,10 @@
 #ifndef WSKD_H
 #define WSKD_H
 
+#include <list>
 #include <string>
 
-#include <sbecore/Mttypes.h>
-
 #include <dbecore/Bufxf.h>
-#include <dbecore/Cmd.h>
 #include <dbecore/Crc.h>
 
 /**
@@ -41,9 +39,11 @@ public:
 	bool runCmdInvToVoid(Dbecore::Cmd* cmd);
 	bool runCmdVoidToRet(Dbecore::Cmd* cmd);
 
-	void setBuffer(const Sbecore::utinyint tixWBuffer);
-	void setController(const Sbecore::utinyint tixVController);
-	void setCommand(const Sbecore::utinyint tixVCommand);
+	timespec calcTimeout(const size_t length);
+
+	void setBuffer(const uint8_t tixWBuffer);
+	void setController(const uint8_t tixVController);
+	void setCommand(const uint8_t tixVCommand);
 	void setLength(const size_t length);
 	void setCrc(const unsigned short crc, unsigned char* ptr = NULL);
 
@@ -53,36 +53,57 @@ public:
 
 	virtual void flush();
 
-	virtual Sbecore::utinyint getTixVControllerBySref(const std::string& sref);
-	virtual std::string getSrefByTixVController(const Sbecore::utinyint tixVController);
+	virtual uint8_t getTixVControllerBySref(const std::string& sref);
+	virtual std::string getSrefByTixVController(const uint8_t tixVController);
 	virtual void fillFeedFController(Sbecore::Feed& feed);
 
-	virtual Sbecore::utinyint getTixWBufferBySref(const std::string& sref);
-	virtual std::string getSrefByTixWBuffer(const Sbecore::utinyint tixWBuffer);
+	virtual uint8_t getTixWBufferBySref(const std::string& sref);
+	virtual std::string getSrefByTixWBuffer(const uint8_t tixWBuffer);
 	virtual void fillFeedFBuffer(Sbecore::Feed& feed);
 
-	virtual Sbecore::utinyint getTixVCommandBySref(const Sbecore::utinyint tixVController, const std::string& sref);
-	virtual std::string getSrefByTixVCommand(const Sbecore::utinyint tixVController, const Sbecore::utinyint tixVCommand);
-	virtual void fillFeedFCommand(const Sbecore::utinyint tixVController, Sbecore::Feed& feed);
+	virtual uint8_t getTixVCommandBySref(const uint8_t tixVController, const std::string& sref);
+	virtual std::string getSrefByTixVCommand(const uint8_t tixVController, const uint8_t tixVCommand);
+	virtual void fillFeedFCommand(const uint8_t tixVController, Sbecore::Feed& feed);
 
-	virtual Dbecore::Bufxf* getNewBufxf(const Sbecore::utinyint tixWBuffer, const size_t reqlen);
-	virtual Dbecore::Cmd* getNewCmd(const Sbecore::utinyint tixVController, const Sbecore::utinyint tixVCommand);
+	virtual Dbecore::Bufxf* getNewBufxf(const uint8_t tixWBuffer, const size_t reqlen);
+	virtual Dbecore::Cmd* getNewCmd(const uint8_t tixVController, const uint8_t tixVCommand);
 
-	std::string getCmdTemplate(const Sbecore::utinyint tixVController, const Sbecore::utinyint tixVCommand, const bool invretNotInv = false);
+	std::string getCmdTemplate(const uint8_t tixVController, const uint8_t tixVCommand, const bool invretNotInv = false);
+
+	void clearHist();
+	void appendToHist(const std::string& s);
+	void appendToLastInHist(const std::string& s);
+	void copyHist(std::vector<std::string>& vec, const bool append = false);
 
 public:
 	bool initdone;
 
 	bool txburst;
-	bool rxtxdump;
 
-	unsigned int Nretry;
-	unsigned int to;
+	bool rxtxdump;
+	bool histNotDump;
+	unsigned int histlimit;
+
+	unsigned int NRetry;
+
+	bool bufxfLengthBlockNotByte;
+
+	unsigned int wordlen;
+
+	unsigned int dtDecode; // in µs
+
+	unsigned int timeoutDev; // in µs
+
+	unsigned int timeoutRx; // in µs
+	unsigned int timeoutRxWord; // in µs
 
 	unsigned char* rxbuf;
 	unsigned char* txbuf;
 
 	Sbecore::Mutex mAccess;
+
+	Sbecore::Rwmutex rwmHist;
+	std::list<std::string> hist;
 };
 
 /**

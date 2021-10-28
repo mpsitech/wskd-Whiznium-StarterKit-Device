@@ -18,7 +18,7 @@ using namespace Dbecore;
  class CtrWskdArtyStep::VecVCommand
  ******************************************************************************/
 
-utinyint CtrWskdArtyStep::VecVCommand::getTix(
+uint8_t CtrWskdArtyStep::VecVCommand::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -32,7 +32,7 @@ utinyint CtrWskdArtyStep::VecVCommand::getTix(
 };
 
 string CtrWskdArtyStep::VecVCommand::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == GETINFO) return("getInfo");
 	else if (tix == MOVETO) return("moveto");
@@ -47,7 +47,7 @@ void CtrWskdArtyStep::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {GETINFO,MOVETO,SET,ZERO};
+	std::set<uint8_t> items = {GETINFO,MOVETO,SET,ZERO};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -56,7 +56,7 @@ void CtrWskdArtyStep::VecVCommand::fillFeed(
  class CtrWskdArtyStep::VecVState
  ******************************************************************************/
 
-utinyint CtrWskdArtyStep::VecVState::getTix(
+uint8_t CtrWskdArtyStep::VecVState::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -68,7 +68,7 @@ utinyint CtrWskdArtyStep::VecVState::getTix(
 };
 
 string CtrWskdArtyStep::VecVState::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == IDLE) return("idle");
 	else if (tix == MOVE) return("move");
@@ -81,7 +81,7 @@ void CtrWskdArtyStep::VecVState::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {IDLE,MOVE};
+	std::set<uint8_t> items = {IDLE,MOVE};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -95,14 +95,14 @@ CtrWskdArtyStep::CtrWskdArtyStep(
 		) : CtrWskd(unt) {
 };
 
-utinyint CtrWskdArtyStep::getTixVCommandBySref(
+uint8_t CtrWskdArtyStep::getTixVCommandBySref(
 			const string& sref
 		) {
 	return VecVCommand::getTix(sref);
 };
 
 string CtrWskdArtyStep::getSrefByTixVCommand(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	return VecVCommand::getSref(tixVCommand);
 };
@@ -114,7 +114,7 @@ void CtrWskdArtyStep::fillFeedFCommand(
 };
 
 Cmd* CtrWskdArtyStep::getNewCmd(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	Cmd* cmd = NULL;
 
@@ -130,20 +130,20 @@ Cmd* CtrWskdArtyStep::getNewCmdGetInfo() {
 	Cmd* cmd = new Cmd(0x06, VecVCommand::GETINFO, Cmd::VecVRettype::STATSNG);
 
 	cmd->addParRet("tixVState", Par::VecVType::TIX, CtrWskdArtyStep::VecVState::getTix, CtrWskdArtyStep::VecVState::getSref, CtrWskdArtyStep::VecVState::fillFeed);
-	cmd->addParRet("angle", Par::VecVType::USMALLINT);
+	cmd->addParRet("angle", Par::VecVType::UINT16);
 
 	return cmd;
 };
 
 void CtrWskdArtyStep::getInfo(
-			utinyint& tixVState
-			, usmallint& angle
+			uint8_t& tixVState
+			, uint16_t& angle
 		) {
 	Cmd* cmd = getNewCmdGetInfo();
 
 	if (unt->runCmd(cmd)) {
 		tixVState = cmd->parsRet["tixVState"].getTix();
-		angle = cmd->parsRet["angle"].getUsmallint();
+		angle = cmd->parsRet["angle"].getUint16();
 	} else {
 		delete cmd;
 		throw DbeException("error running getInfo");
@@ -155,20 +155,20 @@ void CtrWskdArtyStep::getInfo(
 Cmd* CtrWskdArtyStep::getNewCmdMoveto() {
 	Cmd* cmd = new Cmd(0x06, VecVCommand::MOVETO, Cmd::VecVRettype::VOID);
 
-	cmd->addParInv("angle", Par::VecVType::USMALLINT);
-	cmd->addParInv("Tstep", Par::VecVType::UTINYINT);
+	cmd->addParInv("angle", Par::VecVType::UINT16);
+	cmd->addParInv("Tstep", Par::VecVType::UINT8);
 
 	return cmd;
 };
 
 void CtrWskdArtyStep::moveto(
-			const usmallint angle
-			, const utinyint Tstep
+			const uint16_t angle
+			, const uint8_t Tstep
 		) {
 	Cmd* cmd = getNewCmdMoveto();
 
-	cmd->parsInv["angle"].setUsmallint(angle);
-	cmd->parsInv["Tstep"].setUtinyint(Tstep);
+	cmd->parsInv["angle"].setUint16(angle);
+	cmd->parsInv["Tstep"].setUint8(Tstep);
 
 	if (unt->runCmd(cmd)) {
 	} else {
@@ -184,7 +184,7 @@ Cmd* CtrWskdArtyStep::getNewCmdSet() {
 
 	cmd->addParInv("rng", Par::VecVType::_BOOL);
 	cmd->addParInv("ccwNotCw", Par::VecVType::_BOOL);
-	cmd->addParInv("Tstep", Par::VecVType::UTINYINT);
+	cmd->addParInv("Tstep", Par::VecVType::UINT8);
 
 	return cmd;
 };
@@ -192,13 +192,13 @@ Cmd* CtrWskdArtyStep::getNewCmdSet() {
 void CtrWskdArtyStep::set(
 			const bool rng
 			, const bool ccwNotCw
-			, const utinyint Tstep
+			, const uint8_t Tstep
 		) {
 	Cmd* cmd = getNewCmdSet();
 
 	cmd->parsInv["rng"].setBool(rng);
 	cmd->parsInv["ccwNotCw"].setBool(ccwNotCw);
-	cmd->parsInv["Tstep"].setUtinyint(Tstep);
+	cmd->parsInv["Tstep"].setUint8(Tstep);
 
 	if (unt->runCmd(cmd)) {
 	} else {

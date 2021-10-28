@@ -18,7 +18,7 @@ using namespace Dbecore;
  class CtrWskdArtyLaser::VecVCommand
  ******************************************************************************/
 
-utinyint CtrWskdArtyLaser::VecVCommand::getTix(
+uint8_t CtrWskdArtyLaser::VecVCommand::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -29,7 +29,7 @@ utinyint CtrWskdArtyLaser::VecVCommand::getTix(
 };
 
 string CtrWskdArtyLaser::VecVCommand::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == SET) return("set");
 
@@ -41,7 +41,7 @@ void CtrWskdArtyLaser::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {SET};
+	std::set<uint8_t> items = {SET};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -55,14 +55,14 @@ CtrWskdArtyLaser::CtrWskdArtyLaser(
 		) : CtrWskd(unt) {
 };
 
-utinyint CtrWskdArtyLaser::getTixVCommandBySref(
+uint8_t CtrWskdArtyLaser::getTixVCommandBySref(
 			const string& sref
 		) {
 	return VecVCommand::getTix(sref);
 };
 
 string CtrWskdArtyLaser::getSrefByTixVCommand(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	return VecVCommand::getSref(tixVCommand);
 };
@@ -74,7 +74,7 @@ void CtrWskdArtyLaser::fillFeedFCommand(
 };
 
 Cmd* CtrWskdArtyLaser::getNewCmd(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	Cmd* cmd = NULL;
 
@@ -86,20 +86,20 @@ Cmd* CtrWskdArtyLaser::getNewCmd(
 Cmd* CtrWskdArtyLaser::getNewCmdSet() {
 	Cmd* cmd = new Cmd(0x04, VecVCommand::SET, Cmd::VecVRettype::VOID);
 
-	cmd->addParInv("l", Par::VecVType::USMALLINT);
-	cmd->addParInv("r", Par::VecVType::USMALLINT);
+	cmd->addParInv("l", Par::VecVType::UINT16);
+	cmd->addParInv("r", Par::VecVType::UINT16);
 
 	return cmd;
 };
 
 void CtrWskdArtyLaser::set(
-			const usmallint l
-			, const usmallint r
+			const uint16_t l
+			, const uint16_t r
 		) {
 	Cmd* cmd = getNewCmdSet();
 
-	cmd->parsInv["l"].setUsmallint(l);
-	cmd->parsInv["r"].setUsmallint(r);
+	cmd->parsInv["l"].setUint16(l);
+	cmd->parsInv["r"].setUint16(r);
 
 	if (unt->runCmd(cmd)) {
 	} else {

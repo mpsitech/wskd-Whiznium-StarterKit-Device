@@ -28,14 +28,14 @@ public:
 	class VecVCommand {
 
 	public:
-		static const Sbecore::utinyint SETRNG = 0x00;
-		static const Sbecore::utinyint SETREG = 0x01;
-		static const Sbecore::utinyint SETREGADDR = 0x02;
-		static const Sbecore::utinyint GETREG = 0x03;
-		static const Sbecore::utinyint MODREG = 0x04;
+		static constexpr uint8_t SETRNG = 0x00;
+		static constexpr uint8_t SETREG = 0x01;
+		static constexpr uint8_t SETREGADDR = 0x02;
+		static constexpr uint8_t GETREG = 0x03;
+		static constexpr uint8_t MODREG = 0x04;
 
-		static Sbecore::utinyint getTix(const std::string& sref);
-		static std::string getSref(const Sbecore::utinyint tix);
+		static uint8_t getTix(const std::string& sref);
+		static std::string getSref(const uint8_t tix);
 
 		static void fillFeed(Sbecore::Feed& feed);
 	};
@@ -44,29 +44,29 @@ public:
 	CtrWskdArtyCamif(UntWskd* unt);
 
 public:
-	static const Sbecore::utinyint tixVController = 0x02;
+	static const uint8_t tixVController = 0x02;
 
 public:
-	static Sbecore::utinyint getTixVCommandBySref(const std::string& sref);
-	static std::string getSrefByTixVCommand(const Sbecore::utinyint tixVCommand);
+	static uint8_t getTixVCommandBySref(const std::string& sref);
+	static std::string getSrefByTixVCommand(const uint8_t tixVCommand);
 	static void fillFeedFCommand(Sbecore::Feed& feed);
 
-	static Dbecore::Cmd* getNewCmd(const Sbecore::utinyint tixVCommand);
+	static Dbecore::Cmd* getNewCmd(const uint8_t tixVCommand);
 
 	static Dbecore::Cmd* getNewCmdSetRng();
 	void setRng(const bool rng);
 
 	static Dbecore::Cmd* getNewCmdSetReg();
-	void setReg(const Sbecore::usmallint addr, const Sbecore::utinyint val);
+	void setReg(const uint16_t addr, const uint8_t val);
 
 	static Dbecore::Cmd* getNewCmdSetRegaddr();
-	void setRegaddr(const Sbecore::usmallint addr);
+	void setRegaddr(const uint16_t addr);
 
 	static Dbecore::Cmd* getNewCmdGetReg();
-	void getReg(Sbecore::utinyint& val);
+	void getReg(uint8_t& val);
 
 	static Dbecore::Cmd* getNewCmdModReg();
-	void modReg(const Sbecore::usmallint addr, const Sbecore::utinyint mask, const Sbecore::utinyint val);
+	void modReg(const uint16_t addr, const uint8_t mask, const uint8_t val);
 
 };
 

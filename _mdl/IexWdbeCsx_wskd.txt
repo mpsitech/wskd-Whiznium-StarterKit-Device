@@ -1,0 +1,447 @@
+IexWdbeCsx v1.1.9
+ImeIMUnit.sref
+arty
+	ImeIMVector1.srefIxVBasetype	sref	srefsKOption
+	tixlin	VecVWskdArtyState	filfed
+		ImeIMVectoritem1.sref	Title	Comment
+		nc	offline
+		ready	ready
+		active	streaming
+		ImeIMVectoritem1.end
+	ImeIMVector1.end
+	ImeIMModule.hsrefSupRefWdbeMModule	sref
+	arty_ip_AXI;top	camacq
+		ImeIMController.
+		
+			ImeIMVector2.srefIxVBasetype	sref	srefsKOption
+			tixlin	VecVWskdArtyCamacqGrrdbufstate	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				empty
+				stream
+				pause
+				endfr
+				ImeIMVectoritem2.end
+			tixlin	VecVWskdArtyCamacqPvwbufstate	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				empty
+				abuf
+				bbuf
+				ImeIMVectoritem2.end
+			ImeIMVector2.end
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	setGrrd	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				redNotGray	_bool			fls8
+				ImeIAMCommandInvpar2.end
+			0	getGrrdinfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVGrrdbufstate	tix	VecVWskdArtyCamacqGrrdbufstate
+				tkst	uint32
+				ImeIAMCommandRetpar2.end
+			0	setPvw	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				rawNotBin	_bool			fls8
+				grayNotRgb	_bool			fls8
+				ImeIAMCommandInvpar2.end
+			0	getPvwinfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVPvwbufstate	tix	VecVWskdArtyCamacqPvwbufstate
+				tkst	uint32
+				ImeIAMCommandRetpar2.end
+			ImeIMCommand2.end
+			ImeIRMCommandMController.srefRefWdbeMCommand	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal
+			tkclksrc.getTkst
+			ImeIRMCommandMController.end
+		ImeIMController.end
+	arty_ip_AXI;top	camif
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	setRng	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				ImeIAMCommandInvpar2.end
+			0	setReg	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				addr	uint16
+				val	uint8
+				ImeIAMCommandInvpar2.end
+			0	setRegaddr	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				addr	uint16
+				ImeIAMCommandInvpar2.end
+			0	getReg	immsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				val	uint8
+				ImeIAMCommandRetpar2.end
+			0	modReg	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				addr	uint16
+				mask	uint8
+				val	uint8
+				ImeIAMCommandInvpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+	arty_ip_AXI;top	featdet
+		ImeIMController.
+		
+			ImeIMVector2.srefIxVBasetype	sref	srefsKOption
+			tixlin	VecVWskdArtyFeatdetFlgbufstate	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				empty
+				full
+				ImeIMVectoritem2.end
+			tixlin	VecVWskdArtyFeatdetThdstate	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				waitfirst
+				waitsecond
+				done
+				ImeIMVectoritem2.end
+			ImeIMVector2.end
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	set	void				handled by op, with reset
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				thdNotCorner	_bool			fls8
+				thdDeltaNotAbs	_bool			fls8
+				ImeIAMCommandInvpar2.end
+			0	getInfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVFlgbufstate	tix	VecVWskdArtyFeatdetFlgbufstate		managed by flgbufB
+				tixVThdstate	tix	VecVWskdArtyFeatdetThdstate		managed by flg
+				tkst	uint32			managed by flg
+				ImeIAMCommandRetpar2.end
+			0	getCornerinfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				shift	uint8			managed by imdstream
+				scoreMin	uint8
+				scoreMax	uint8
+				ImeIAMCommandRetpar2.end
+			0	setCorner	void				handled by op, no reset
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				linNotLog	_bool
+				thd	uint8
+				ImeIAMCommandInvpar2.end
+			0	setThd	void				handled by op, no reset
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				lvlFirst	uint8
+				lvlSecond	uint8
+				ImeIAMCommandInvpar2.end
+			0	triggerThd	void
+			ImeIMCommand2.end
+			ImeIRMCommandMController.srefRefWdbeMCommand	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal
+			camacq.getGrrdinfo
+			ImeIRMCommandMController.end
+		ImeIMController.end
+	arty_ip_AXI;top	laser
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	set	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				l	uint16					DAC value
+				r	uint16					DAC value
+				ImeIAMCommandInvpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+	arty_ip_AXI;top	state
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	get	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVArtyState	tix	VecVWskdArtyState
+				ImeIAMCommandRetpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+	arty_ip_AXI;top	step
+		ImeIMController.
+		
+			ImeIMVector2.srefIxVBasetype	sref	srefsKOption
+			tixlin	VecVWskdArtyStepState	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				move
+				ImeIMVectoritem2.end
+			ImeIMVector2.end
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	getInfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVState	tix	VecVWskdArtyStepState
+				angle	uint16			in stepper motor steps (4096 per rev.)
+				ImeIAMCommandRetpar2.end
+			0	moveto	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				angle	uint16			0		in stepper motor steps (4096 per rev.)
+				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				ImeIAMCommandInvpar2.end
+			0	set	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				ccwNotCw	_bool			fls8
+				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				ImeIAMCommandInvpar2.end
+			0	zero	void
+			ImeIMCommand2.end
+		ImeIMController.end
+	ImeIMModule.end
+iccl
+	ImeIMVector1.srefIxVBasetype	sref	srefsKOption
+	tixlin	VecVWskdIcclState	filfed
+		ImeIMVectoritem1.sref	Title	Comment
+		nc	offline
+		ready	ready
+		active	streaming
+		ImeIMVectoritem1.end
+	ImeIMVector1.end
+	ImeIMModule.hsrefSupRefWdbeMModule	sref
+	iccl_ip_AXI;top	camacq
+		ImeIMController.
+		
+			ImeIMVector2.srefIxVBasetype	sref	srefsKOption
+			tixlin	VecVWskdIcclCamacqGrrdbufstate	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				empty
+				stream
+				pause
+				endfr
+				ImeIMVectoritem2.end
+			tixlin	VecVWskdIcclCamacqPvwbufstate	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				empty
+				abuf
+				bbuf
+				ImeIMVectoritem2.end
+			ImeIMVector2.end
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	setGrrd	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				redNotGray	_bool			fls8
+				ImeIAMCommandInvpar2.end
+			0	getGrrdinfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVGrrdbufstate	tix	VecVWskdIcclCamacqGrrdbufstate
+				tkst	uint32
+				ImeIAMCommandRetpar2.end
+			0	setPvw	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				rawNotBin	_bool			fls8
+				grayNotRgb	_bool			fls8
+				ImeIAMCommandInvpar2.end
+			0	getPvwinfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVPvwbufstate	tix	VecVWskdIcclCamacqPvwbufstate
+				tkst	uint32
+				ImeIAMCommandRetpar2.end
+			ImeIMCommand2.end
+			ImeIRMCommandMController.srefRefWdbeMCommand	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal
+			tkclksrc.getTkst
+			ImeIRMCommandMController.end
+		ImeIMController.end
+	iccl_ip_AXI;top	camif
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	setRng	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				ImeIAMCommandInvpar2.end
+			0	setReg	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				addr	uint16
+				val	uint8
+				ImeIAMCommandInvpar2.end
+			0	setRegaddr	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				addr	uint16
+				ImeIAMCommandInvpar2.end
+			0	getReg	immsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				val	uint8
+				ImeIAMCommandRetpar2.end
+			0	modReg	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				addr	uint16
+				mask	uint8
+				val	uint8
+				ImeIAMCommandInvpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+	iccl_ip_AXI;top	featdet
+		ImeIMController.
+		
+			ImeIMVector2.srefIxVBasetype	sref	srefsKOption
+			tixlin	VecVWskdIcclFeatdetFlgbufstate	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				empty
+				full
+				ImeIMVectoritem2.end
+			tixlin	VecVWskdIcclFeatdetThdstate	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				waitfirst
+				waitsecond
+				done
+				ImeIMVectoritem2.end
+			ImeIMVector2.end
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	set	void				handled by op, with reset
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				thdNotCorner	_bool			fls8
+				thdDeltaNotAbs	_bool			fls8
+				ImeIAMCommandInvpar2.end
+			0	getInfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVFlgbufstate	tix	VecVWskdIcclFeatdetFlgbufstate		managed by flgbufB
+				tixVThdstate	tix	VecVWskdIcclFeatdetThdstate		managed by flg
+				tkst	uint32			managed by flg
+				ImeIAMCommandRetpar2.end
+			0	getCornerinfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				shift	uint8			managed by imdstream
+				scoreMin	uint8
+				scoreMax	uint8
+				ImeIAMCommandRetpar2.end
+			0	setCorner	void				handled by op, no reset
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				linNotLog	_bool
+				thd	uint8
+				ImeIAMCommandInvpar2.end
+			0	setThd	void				handled by op, no reset
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				lvlFirst	uint8
+				lvlSecond	uint8
+				ImeIAMCommandInvpar2.end
+			0	triggerThd	void
+			ImeIMCommand2.end
+			ImeIRMCommandMController.srefRefWdbeMCommand	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal
+			camacq.getGrrdinfo
+			ImeIRMCommandMController.end
+		ImeIMController.end
+	iccl_ip_AXI;top	laser
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	set	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				l	uint16					DAC value
+				r	uint16					DAC value
+				ImeIAMCommandInvpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+	iccl_ip_AXI;top	state
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	get	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVIcclState	tix	VecVWskdIcclState
+				ImeIAMCommandRetpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+	iccl_ip_AXI;top	step
+		ImeIMController.
+		
+			ImeIMVector2.srefIxVBasetype	sref	srefsKOption
+			tixlin	VecVWskdIcclStepState	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				move
+				ImeIMVectoritem2.end
+			ImeIMVector2.end
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	getInfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVState	tix	VecVWskdIcclStepState
+				angle	uint16			in stepper motor steps (4096 per rev.)
+				ImeIAMCommandRetpar2.end
+			0	moveto	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				angle	uint16			0		in stepper motor steps (4096 per rev.)
+				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				ImeIAMCommandInvpar2.end
+			0	set	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				ccwNotCw	_bool			fls8
+				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				ImeIAMCommandInvpar2.end
+			0	zero	void
+			ImeIMCommand2.end
+		ImeIMController.end
+	ImeIMModule.end
+ubdk
+	ImeIMVector1.srefIxVBasetype	sref	srefsKOption
+	tixlin	VecVWskdUbdkState	filfed
+		ImeIMVectoritem1.sref	Title	Comment
+		nc	offline
+		ready	ready
+		active	turntable in motion
+		ImeIMVectoritem1.end
+	ImeIMVector1.end
+	ImeIMModule.hsrefSupRefWdbeMModule	sref
+		laser
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	set	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				l	uint16					DAC value
+				r	uint16					DAC value
+				ImeIAMCommandInvpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+		state
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	get	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVUbdkState	tix	VecVWskdUbdkState
+				ImeIAMCommandRetpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+		step
+		ImeIMController.
+		
+			ImeIMVector2.srefIxVBasetype	sref	srefsKOption
+			tixlin	VecVWskdUbdkStepState	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				move
+				ImeIMVectoritem2.end
+			ImeIMVector2.end
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	getInfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVState	tix	VecVWskdUbdkStepState
+				angle	uint16			in stepper motor steps (4096 per rev.)
+				ImeIAMCommandRetpar2.end
+			0	moveto	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				angle	uint16			0		in stepper motor steps (4096 per rev.)
+				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				ImeIAMCommandInvpar2.end
+			0	set	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				ccwNotCw	_bool			fls8
+				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				ImeIAMCommandInvpar2.end
+			0	zero	void
+			ImeIMCommand2.end
+		ImeIMController.end
+	ImeIMModule.end
+ImeIMUnit.end

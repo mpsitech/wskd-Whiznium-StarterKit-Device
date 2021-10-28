@@ -1,0 +1,948 @@
+IexWdbeMdl v1.1.14
+ImeIMUnit.srefIxVBasetype	srefSilRefWdbeMUnit	sref	Title	Easy	srefKToolch	Comment
+fpga	xc7z010-1clg400	arty	Digilent Arty Z7	true	viv
+	ImeIMModule.srefIxVBasetype	hsrefSupRefWdbeMModule	srefTplRefWdbeMModule	sref	Comment
+	wrp		zynq_ip_AXI_v2_0	arty_ip_AXI
+	top	arty_ip_AXI	top_xlnx_v1_0	top
+		ImeIAMModulePar.x1SrefKKey	Val
+		fExtclk	100000
+		extresetNNotP	true
+		ImeIAMModulePar.end
+		ImeIMGeneric.sref	Defval
+		fMclk	50000
+		ImeIMGeneric.end
+	oth	arty_ip_AXI;top	bcdfreq_v1_0	bcdfreqDbg0
+	oth	arty_ip_AXI;top	bcdfreq_v1_0	bcdfreqDbg1
+	oth	arty_ip_AXI;top	bcdfreq_v1_0	bcdfreqDbg2
+	oth	arty_ip_AXI;top	bcdfreq_v1_0	bcdfreqDbg3
+	oth	arty_ip_AXI;top	bcdfreq_v1_0	bcdfreqDbg4
+	oth	arty_ip_AXI;top	bcdfreq_v1_0	bcdfreqDbg5
+	oth	arty_ip_AXI;top	debounce_v1_0	debounceBtn0
+	oth	arty_ip_AXI;top	debounce_v1_0	debounceBtn1
+	oth	arty_ip_AXI;top		rgbled4
+	oth	arty_ip_AXI;top		rgbled5
+	ehostif	arty_ip_AXI;top	axihostif_Easy_v2_0	hostif
+	ectr	arty_ip_AXI;top		camacq	frame acquisition from OV5640
+	oth	arty_ip_AXI;top;camacq	spbram_v1_0	bingraybuf	8x8 pixel binning gray buffer (256 pixels @ 16 bits)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;camacq	spbram_v1_0	binrgbbuf	8x8 pixel binning RGB buffer (3x 160 pixels @ 16 bits)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;camacq	spbram_v1_0	evenbuf	even row GRGR buffer at cropped size (2560 pixels)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	4
+		ImeIAMModulePar.end
+	imbuf	arty_ip_AXI;top;camacq	dpbram_v1_0	grrdabbuf	gray / red two-line AB-buffer at reduced size (2x 1024 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		arty_ip_AXI;top;featdet	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		strm	8	2048..2048
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	imbuf	arty_ip_AXI;top;camacq	dpbram_v1_0	grrdcdbuf	gray / red two-line CD-buffer at reduced size (2x 1024 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		arty_ip_AXI;top;featdet	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		strm	8	2048..2048
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	imbuf	arty_ip_AXI;top;camacq	dpbram_v1_0	grrdefbuf	gray / red two-line EF-buffer at reduced size (2x 1024 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		arty_ip_AXI;top;featdet	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		strm	8	2048..2048
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	imbuf	arty_ip_AXI;top;camacq	dpbram_xlnx_v8_4	pvwabuf	preview image A-buffer, RGB / gray at minimal size (160 pixels x 120 pixels vs. 256 pixels x 192 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		arty_ip_AXI;top;hostif	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		sngatmt	32	12288..14400	2
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	58
+		ImeIAMModulePar.end
+	imbuf	arty_ip_AXI;top;camacq	dpbram_xlnx_v8_4	pvwbbuf	preview image B-buffer, RGB / gray at minimal size (160 pixels x 120 pixels vs. 256 pixels x 192 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		arty_ip_AXI;top;hostif	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		sngatmt	32	12288..14400	2
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	58
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;camacq	spbram_v1_0	rawgraybuf	even row gray buffer (256 pixels @ 16 bits)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	ectr	arty_ip_AXI;top		camif	camera control (OV5640 via I2C)
+	oth	arty_ip_AXI;top;camif		i2c
+	mnfprim	arty_ip_AXI;top;camif;i2c	IOBUF	iobuf
+	oth	arty_ip_AXI;top;camif		parrom	OV5640 register initialization parameters ROM
+	mnfprim	arty_ip_AXI;top;camif;parrom	RAMB16_S9	bram
+	ectr	arty_ip_AXI;top		featdet	feature detection
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xsqr0
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xsqr1
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xsqr2
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xsqr3
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xsqr4
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aPlusDPlusC	colsumXA
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	18
+		wSmdc	18
+		wSmdd	18
+		wSum	20
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aPlusDPlusC	colsumXB
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	18
+		wSmdc	20
+		wSmdd	18
+		wSum	21
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumXA
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	21
+		wSmdb	21
+		wSum	22
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumXB
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	21
+		wSmdb	21
+		wSum	22
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumXC
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	22
+		wSmdb	22
+		wSum	23
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumX
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	23
+		wSmdb	21
+		wSum	23
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	ysqr0
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	ysqr1
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	ysqr2
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	ysqr3
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	ysqr4
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aPlusDPlusC	colsumYA
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	18
+		wSmdc	18
+		wSmdd	18
+		wSum	20
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aPlusDPlusC	colsumYB
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	18
+		wSmdc	20
+		wSmdd	18
+		wSum	21
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumYA
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	21
+		wSmdb	21
+		wSum	22
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumYB
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	21
+		wSmdb	21
+		wSum	22
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumYC
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	22
+		wSmdb	22
+		wSum	23
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumY
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	23
+		wSmdb	21
+		wSum	23
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xy0
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xy1
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xy2
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xy3
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xy4
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	1
+		wFcta	9
+		wFctb	9
+		wProd	18
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aPlusDPlusC	colsumXYA
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	18
+		wSmdc	18
+		wSmdd	18
+		wSum	20
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aPlusDPlusC	colsumXYB
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	18
+		wSmdc	20
+		wSmdd	18
+		wSum	21
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumXYA
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	21
+		wSmdb	21
+		wSum	22
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumXYB
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	21
+		wSmdb	21
+		wSum	22
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumXYC
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	22
+		wSmdb	22
+		wSum	23
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumXY
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	23
+		wSmdb	21
+		wSum	23
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	add_xlnx_v12_0	sumIII
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wSmda	23
+		wSmdb	23
+		wSum	24
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	mult_xlnx_v12_0	termIII
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	4
+		wFcta	24
+		wFctb	24
+		wProd	48
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	mult_xlnx_v12_0	termII
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	4
+		wFcta	23
+		wFctb	23
+		wProd	46
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	mult_xlnx_v12_0	termI
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	4
+		wFcta	23
+		wFctb	23
+		wProd	46
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	sub_xlnx_v12_0	diffI_II
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wMnd	46
+		wSbd	46
+		wDiff	47
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	sub_xlnx_v12_0	r
+		ImeIAMModulePar.x1SrefKKey	Val
+		signNotUnsign	true
+		lat	2
+		wMnd	47
+		wSbd	44
+		wDiff	48
+		ImeIAMModulePar.end
+	imbuf	arty_ip_AXI;top;featdet	dpbram_xlnx_v8_4	flgbuf	flag buffer at reduced size (1024 pixels x 768 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		arty_ip_AXI;top;hostif	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		sngatmt	32	24576..24576	1
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	96
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	spbram_v1_0	imdabbuf	intermediate result two-line AB-buffer at reduced size (2x 1024 pixels)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	spbram_v1_0	imdcdbuf	intermediate result two-line CD-buffer at reduced size (2x 1024 pixels)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	oth	arty_ip_AXI;top;featdet	spbram_v1_0	imdefbuf	intermediate result two-line EF-buffer at reduced size (2x 1024 pixels)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	ectr	arty_ip_AXI;top		laser	line laser control (dual MAX5711 DAC via SPI)
+	oth	arty_ip_AXI;top;laser	spimaster_v1_0	spi
+		ImeIMGeneric.sref	Defval
+		cpol	0
+		cpha	1
+		fSclk	8333333
+		ImeIMGeneric.end
+	ectr	arty_ip_AXI;top		state	state monitor
+	ectr	arty_ip_AXI;top		step	stepper motor control (28BYJ-48 via ULN2003)
+	ectr	arty_ip_AXI;top	tkclksrc_Easy_v1_0	tkclksrc	10kHz clock source
+	ImeIMModule.end
+fpga	mpfs250t-fcvg484	iccl	Microchip PolarFire Soc Icicle kit	true	libero
+	ImeIMModule.srefIxVBasetype	hsrefSupRefWdbeMModule	srefTplRefWdbeMModule	sref	Comment
+	wrp		mpfs_ip_AXI_v1_0	iccl_ip_AXI
+	top	iccl_ip_AXI	top_mchp_v1_0	top
+		ImeIAMModulePar.x1SrefKKey	Val
+		fExtclk	125000
+		extresetNNotP	true
+		ImeIAMModulePar.end
+		ImeIMGeneric.sref	Defval
+		fMclk	50000
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top	bcdfreq_v1_0	bcdfreqDbg0
+	oth	iccl_ip_AXI;top	bcdfreq_v1_0	bcdfreqDbg1
+	oth	iccl_ip_AXI;top	debounce_v1_0	debounceBtn0
+		ImeIMGeneric.sref	Defval
+		invert	true
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top	debounce_v1_0	debounceBtn1
+		ImeIMGeneric.sref	Defval
+		invert	true
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top		rgbled4
+	oth	iccl_ip_AXI;top		rgbled5
+	ehostif	iccl_ip_AXI;top	axihostif_Easy_v2_0	hostif
+	ectr	iccl_ip_AXI;top		camacq	frame acquisition from OV5640
+	oth	iccl_ip_AXI;top;camacq	dpsram_mchp_v1_0	bingraybuf	8x8 pixel binning gray buffer (256 pixels @ 16 bits)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	oth	iccl_ip_AXI;top;camacq	dpsram_mchp_v1_0	binrgbbuf	8x8 pixel binning RGB buffer (3x 160 pixels @ 16 bits)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	oth	iccl_ip_AXI;top;camacq	dpsram_mchp_v1_0	evenbuf	even row GRGR buffer at cropped size (2560 pixels)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	4
+		pVsN	n
+		ImeIAMModulePar.end
+	imbuf	iccl_ip_AXI;top;camacq	tpsram_mchp_v1_0	grrdabbuf	gray / red two-line AB-buffer at reduced size (2x 1024 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		iccl_ip_AXI;top;featdet	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		strm	8	2048..2048
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		rPVsN	n
+		wPVsN	p
+		ImeIAMModulePar.end
+	imbuf	iccl_ip_AXI;top;camacq	tpsram_mchp_v1_0	grrdcdbuf	gray / red two-line CD-buffer at reduced size (2x 1024 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		iccl_ip_AXI;top;featdet	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		strm	8	2048..2048
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		rPVsN	n
+		wPVsN	p
+		ImeIAMModulePar.end
+	imbuf	iccl_ip_AXI;top;camacq	tpsram_mchp_v1_0	grrdefbuf	gray / red two-line EF-buffer at reduced size (2x 1024 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		iccl_ip_AXI;top;featdet	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		strm	8	2048..2048
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		rPVsN	n
+		wPVsN	p
+		ImeIAMModulePar.end
+	imbuf	iccl_ip_AXI;top;camacq	tpsram_mchp_v1_0	pvwabuf	preview image A-buffer, RGB / gray at minimal size (160 pixels x 120 pixels vs. 256 pixels x 192 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		iccl_ip_AXI;top;hostif	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		sngatmt	32	12288..14400	2
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	58
+		ImeIAMModulePar.end
+	imbuf	iccl_ip_AXI;top;camacq	tpsram_mchp_v1_0	pvwbbuf	preview image B-buffer, RGB / gray at minimal size (160 pixels x 120 pixels vs. 256 pixels x 192 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		iccl_ip_AXI;top;hostif	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		sngatmt	32	12288..14400	2
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	58
+		ImeIAMModulePar.end
+	oth	iccl_ip_AXI;top;camacq	dpsram_mchp_v1_0	rawgraybuf	even row gray buffer (256 pixels @ 16 bits)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		pVsN	n
+		ImeIAMModulePar.end
+	ectr	iccl_ip_AXI;top		camif	camera control (OV5640 via I2C)
+	oth	iccl_ip_AXI;top;camif		i2c
+	mnfprim	iccl_ip_AXI;top;camif;i2c	BIBUF	iobuf
+	oth	iccl_ip_AXI;top;camif	dpsram_mchp_v1_0	parrom	OV5640 register initialization parameters ROM
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		file	parrom.hex
+		ImeIAMModulePar.end
+	ectr	iccl_ip_AXI;top		featdet	feature detection
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xsqr0
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xsqr1
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xsqr2
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xsqr3
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xsqr4
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumXA1
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	18
+		wB	18
+		wS	19
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumXA2
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	18
+		wB	18
+		wS	19
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumXB
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	19
+		wB	19
+		wS	20
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumXC
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	20
+		wB	18
+		wS	21
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumXA
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	21
+		wB	21
+		wS	22
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumXB
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	21
+		wB	21
+		wS	22
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumXC
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	22
+		wB	22
+		wS	23
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumX
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	23
+		wB	21
+		wS	23
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	ysqr0
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	ysqr1
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	ysqr2
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	ysqr3
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	ysqr4
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumYA1
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	18
+		wB	18
+		wS	19
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumYA2
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	18
+		wB	18
+		wS	19
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumYB
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	19
+		wB	19
+		wS	20
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumYC
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	20
+		wB	18
+		wS	21
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumYA
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	21
+		wB	21
+		wS	22
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumYB
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	21
+		wB	21
+		wS	22
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumYC
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	22
+		wB	22
+		wS	23
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumY
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	23
+		wB	21
+		wS	23
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xy0
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xy1
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xy2
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xy3
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	xy4
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	9
+		wB	9
+		wP	18
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumXYA1
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	18
+		wB	18
+		wS	19
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumXYA2
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	18
+		wB	18
+		wS	19
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumXYB
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	19
+		wB	19
+		wS	20
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	colsumXYC
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	20
+		wB	18
+		wS	21
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumXYA
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	21
+		wB	21
+		wS	22
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumXYB
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	21
+		wB	21
+		wS	22
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumXYC
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	22
+		wB	22
+		wS	23
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumXY
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	23
+		wB	21
+		wS	23
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	add_v1_0	sumIII
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	23
+		wB	23
+		wS	24
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	termIII
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	24
+		wB	24
+		wP	48
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	termII
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	23
+		wB	23
+		wP	46
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	mult_v1_0	termI
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	23
+		wB	23
+		wP	46
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	sub_v1_0	diffI_II
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	46
+		wB	46
+		wD	47
+		ImeIMGeneric.end
+	oth	iccl_ip_AXI;top;featdet	sub_v1_0	r
+		ImeIMGeneric.sref	Defval
+		signNotUnsign	true
+		wA	47
+		wB	44
+		wD	48
+		ImeIMGeneric.end
+	imbuf	iccl_ip_AXI;top;featdet	dpsram_mchp_v1_0	flgbuf	flag buffer at reduced size (1024 pixels x 768 pixels)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		iccl_ip_AXI;top;hostif	snk
+		ImeIRMModuleMModule.end
+		ImeIMImbuf.srefIxVRotype	Width	Minmax	Prio
+		sngatmt	32	24576..24576	1
+		ImeIMImbuf.end
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	96
+		ImeIAMModulePar.end
+	oth	iccl_ip_AXI;top;featdet	dpsram_mchp_v1_0	imdabbuf	intermediate result two-line AB-buffer at reduced size (2x 1024 pixels)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	oth	iccl_ip_AXI;top;featdet	dpsram_mchp_v1_0	imdcdbuf	intermediate result two-line CD-buffer at reduced size (2x 1024 pixels)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	oth	iccl_ip_AXI;top;featdet	dpsram_mchp_v1_0	imdefbuf	intermediate result two-line EF-buffer at reduced size (2x 1024 pixels)
+		ImeIAMModulePar.x1SrefKKey	Val
+		size	2
+		ImeIAMModulePar.end
+	ectr	iccl_ip_AXI;top		laser	line laser control (dual MAX5711 DAC via SPI)
+	oth	iccl_ip_AXI;top;laser	spimaster_v1_0	spi
+		ImeIMGeneric.sref	Defval
+		cpol	0
+		cpha	1
+		fSclk	8333333
+		ImeIMGeneric.end
+	ectr	iccl_ip_AXI;top		state	state monitor
+	ectr	iccl_ip_AXI;top		step	stepper motor control (28BYJ-48 via ULN2003)
+	ectr	iccl_ip_AXI;top	tkclksrc_Easy_v1_0	tkclksrc	10kHz clock source
+	ImeIMModule.end
+fpga	5cseba6u23c7n	mcep	Aries Cyclone V evaluation platform	true	quartus
+mcu	efm8ub10f16g-c-qfn28	ubdk	SiLabs EFM8UB10 Development Kit	true	splcty
+	ImeIMPeripheral.sref
+	tmr0
+	usb0
+	spi0
+	pca0
+	ImeIMPeripheral.end
+	ImeIMModule.srefIxVBasetype	hsrefSupRefWdbeMModule	srefTplRefWdbeMModule	sref	Comment
+	ectr		hhstsrc_Easy_v1_0_Mcu	chrono	chronometer based on 100Hz clock
+		ImeIAMModulePar.x1SrefKKey	Val
+		div	10
+		ImeIAMModulePar.end
+		ImeIRMModuleMPeripheral.srefRefWdbeMPeripheral
+		tmr0
+		ImeIRMModuleMPeripheral.end
+	ectr			disp	display control (SHARP 128x128 via SPI)
+		ImeIRMModuleMPeripheral.srefRefWdbeMPeripheral
+		spi0
+		ImeIRMModuleMPeripheral.end
+	ehostif		usbhostif_Easy_v1_0_Mcu	hostif	USB host interface
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		chrono	hhstsrc
+		usbrxtx	rxtx
+		ImeIRMModuleMModule.end
+		ImeIRMModuleMPeripheral.srefRefWdbeMPeripheral
+		usb0
+		ImeIRMModuleMPeripheral.end
+	ectr			laser	line laser control (dual MAX5711 DAC via SPI)
+		ImeIRMModuleMPeripheral.srefRefWdbeMPeripheral
+		spi0
+		ImeIRMModuleMPeripheral.end
+	oth			mutex	mutually exclusive access for SPI
+	ectr			state	state monitor
+	ectr			step	stepper motor control (NEMA17 via DRV8834)
+		ImeIRMModuleMPeripheral.srefRefWdbeMPeripheral
+		pca0
+		ImeIRMModuleMPeripheral.end
+	oth		usbrxtx_slbs_v1_0_Mcu	usbrxtx	USB transceiver (host)
+		ImeIRMModuleMModule.hsrefCorRefWdbeMModule	srefKFunction
+		hostif	mgmt
+		ImeIRMModuleMModule.end
+	ImeIMModule.end
+ImeIMUnit.end

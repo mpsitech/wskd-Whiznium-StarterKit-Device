@@ -18,7 +18,7 @@ using namespace Dbecore;
  class CtrWskdArtyFeatdet::VecVCommand
  ******************************************************************************/
 
-utinyint CtrWskdArtyFeatdet::VecVCommand::getTix(
+uint8_t CtrWskdArtyFeatdet::VecVCommand::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -34,7 +34,7 @@ utinyint CtrWskdArtyFeatdet::VecVCommand::getTix(
 };
 
 string CtrWskdArtyFeatdet::VecVCommand::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == SET) return("set");
 	else if (tix == GETINFO) return("getInfo");
@@ -51,7 +51,7 @@ void CtrWskdArtyFeatdet::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {SET,GETINFO,GETCORNERINFO,SETCORNER,SETTHD,TRIGGERTHD};
+	std::set<uint8_t> items = {SET,GETINFO,GETCORNERINFO,SETCORNER,SETTHD,TRIGGERTHD};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -60,7 +60,7 @@ void CtrWskdArtyFeatdet::VecVCommand::fillFeed(
  class CtrWskdArtyFeatdet::VecVFlgbufstate
  ******************************************************************************/
 
-utinyint CtrWskdArtyFeatdet::VecVFlgbufstate::getTix(
+uint8_t CtrWskdArtyFeatdet::VecVFlgbufstate::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -73,7 +73,7 @@ utinyint CtrWskdArtyFeatdet::VecVFlgbufstate::getTix(
 };
 
 string CtrWskdArtyFeatdet::VecVFlgbufstate::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == IDLE) return("idle");
 	else if (tix == EMPTY) return("empty");
@@ -87,7 +87,7 @@ void CtrWskdArtyFeatdet::VecVFlgbufstate::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {IDLE,EMPTY,FULL};
+	std::set<uint8_t> items = {IDLE,EMPTY,FULL};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -96,7 +96,7 @@ void CtrWskdArtyFeatdet::VecVFlgbufstate::fillFeed(
  class CtrWskdArtyFeatdet::VecVThdstate
  ******************************************************************************/
 
-utinyint CtrWskdArtyFeatdet::VecVThdstate::getTix(
+uint8_t CtrWskdArtyFeatdet::VecVThdstate::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -110,7 +110,7 @@ utinyint CtrWskdArtyFeatdet::VecVThdstate::getTix(
 };
 
 string CtrWskdArtyFeatdet::VecVThdstate::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == IDLE) return("idle");
 	else if (tix == WAITFIRST) return("waitfirst");
@@ -125,7 +125,7 @@ void CtrWskdArtyFeatdet::VecVThdstate::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {IDLE,WAITFIRST,WAITSECOND,DONE};
+	std::set<uint8_t> items = {IDLE,WAITFIRST,WAITSECOND,DONE};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -139,14 +139,14 @@ CtrWskdArtyFeatdet::CtrWskdArtyFeatdet(
 		) : CtrWskd(unt) {
 };
 
-utinyint CtrWskdArtyFeatdet::getTixVCommandBySref(
+uint8_t CtrWskdArtyFeatdet::getTixVCommandBySref(
 			const string& sref
 		) {
 	return VecVCommand::getTix(sref);
 };
 
 string CtrWskdArtyFeatdet::getSrefByTixVCommand(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	return VecVCommand::getSref(tixVCommand);
 };
@@ -158,7 +158,7 @@ void CtrWskdArtyFeatdet::fillFeedFCommand(
 };
 
 Cmd* CtrWskdArtyFeatdet::getNewCmd(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	Cmd* cmd = NULL;
 
@@ -207,22 +207,22 @@ Cmd* CtrWskdArtyFeatdet::getNewCmdGetInfo() {
 
 	cmd->addParRet("tixVFlgbufstate", Par::VecVType::TIX, CtrWskdArtyFeatdet::VecVFlgbufstate::getTix, CtrWskdArtyFeatdet::VecVFlgbufstate::getSref, CtrWskdArtyFeatdet::VecVFlgbufstate::fillFeed);
 	cmd->addParRet("tixVThdstate", Par::VecVType::TIX, CtrWskdArtyFeatdet::VecVThdstate::getTix, CtrWskdArtyFeatdet::VecVThdstate::getSref, CtrWskdArtyFeatdet::VecVThdstate::fillFeed);
-	cmd->addParRet("tkst", Par::VecVType::UINT);
+	cmd->addParRet("tkst", Par::VecVType::UINT32);
 
 	return cmd;
 };
 
 void CtrWskdArtyFeatdet::getInfo(
-			utinyint& tixVFlgbufstate
-			, utinyint& tixVThdstate
-			, uint& tkst
+			uint8_t& tixVFlgbufstate
+			, uint8_t& tixVThdstate
+			, uint32_t& tkst
 		) {
 	Cmd* cmd = getNewCmdGetInfo();
 
 	if (unt->runCmd(cmd)) {
 		tixVFlgbufstate = cmd->parsRet["tixVFlgbufstate"].getTix();
 		tixVThdstate = cmd->parsRet["tixVThdstate"].getTix();
-		tkst = cmd->parsRet["tkst"].getUint();
+		tkst = cmd->parsRet["tkst"].getUint32();
 	} else {
 		delete cmd;
 		throw DbeException("error running getInfo");
@@ -234,24 +234,24 @@ void CtrWskdArtyFeatdet::getInfo(
 Cmd* CtrWskdArtyFeatdet::getNewCmdGetCornerinfo() {
 	Cmd* cmd = new Cmd(0x03, VecVCommand::GETCORNERINFO, Cmd::VecVRettype::STATSNG);
 
-	cmd->addParRet("shift", Par::VecVType::UTINYINT);
-	cmd->addParRet("scoreMin", Par::VecVType::UTINYINT);
-	cmd->addParRet("scoreMax", Par::VecVType::UTINYINT);
+	cmd->addParRet("shift", Par::VecVType::UINT8);
+	cmd->addParRet("scoreMin", Par::VecVType::UINT8);
+	cmd->addParRet("scoreMax", Par::VecVType::UINT8);
 
 	return cmd;
 };
 
 void CtrWskdArtyFeatdet::getCornerinfo(
-			utinyint& shift
-			, utinyint& scoreMin
-			, utinyint& scoreMax
+			uint8_t& shift
+			, uint8_t& scoreMin
+			, uint8_t& scoreMax
 		) {
 	Cmd* cmd = getNewCmdGetCornerinfo();
 
 	if (unt->runCmd(cmd)) {
-		shift = cmd->parsRet["shift"].getUtinyint();
-		scoreMin = cmd->parsRet["scoreMin"].getUtinyint();
-		scoreMax = cmd->parsRet["scoreMax"].getUtinyint();
+		shift = cmd->parsRet["shift"].getUint8();
+		scoreMin = cmd->parsRet["scoreMin"].getUint8();
+		scoreMax = cmd->parsRet["scoreMax"].getUint8();
 	} else {
 		delete cmd;
 		throw DbeException("error running getCornerinfo");
@@ -264,19 +264,19 @@ Cmd* CtrWskdArtyFeatdet::getNewCmdSetCorner() {
 	Cmd* cmd = new Cmd(0x03, VecVCommand::SETCORNER, Cmd::VecVRettype::VOID);
 
 	cmd->addParInv("linNotLog", Par::VecVType::_BOOL);
-	cmd->addParInv("thd", Par::VecVType::UTINYINT);
+	cmd->addParInv("thd", Par::VecVType::UINT8);
 
 	return cmd;
 };
 
 void CtrWskdArtyFeatdet::setCorner(
 			const bool linNotLog
-			, const utinyint thd
+			, const uint8_t thd
 		) {
 	Cmd* cmd = getNewCmdSetCorner();
 
 	cmd->parsInv["linNotLog"].setBool(linNotLog);
-	cmd->parsInv["thd"].setUtinyint(thd);
+	cmd->parsInv["thd"].setUint8(thd);
 
 	if (unt->runCmd(cmd)) {
 	} else {
@@ -290,20 +290,20 @@ void CtrWskdArtyFeatdet::setCorner(
 Cmd* CtrWskdArtyFeatdet::getNewCmdSetThd() {
 	Cmd* cmd = new Cmd(0x03, VecVCommand::SETTHD, Cmd::VecVRettype::VOID);
 
-	cmd->addParInv("lvlFirst", Par::VecVType::UTINYINT);
-	cmd->addParInv("lvlSecond", Par::VecVType::UTINYINT);
+	cmd->addParInv("lvlFirst", Par::VecVType::UINT8);
+	cmd->addParInv("lvlSecond", Par::VecVType::UINT8);
 
 	return cmd;
 };
 
 void CtrWskdArtyFeatdet::setThd(
-			const utinyint lvlFirst
-			, const utinyint lvlSecond
+			const uint8_t lvlFirst
+			, const uint8_t lvlSecond
 		) {
 	Cmd* cmd = getNewCmdSetThd();
 
-	cmd->parsInv["lvlFirst"].setUtinyint(lvlFirst);
-	cmd->parsInv["lvlSecond"].setUtinyint(lvlSecond);
+	cmd->parsInv["lvlFirst"].setUint8(lvlFirst);
+	cmd->parsInv["lvlSecond"].setUint8(lvlSecond);
 
 	if (unt->runCmd(cmd)) {
 	} else {

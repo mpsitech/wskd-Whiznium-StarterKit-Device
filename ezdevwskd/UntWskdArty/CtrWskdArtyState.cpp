@@ -18,7 +18,7 @@ using namespace Dbecore;
  class CtrWskdArtyState::VecVCommand
  ******************************************************************************/
 
-utinyint CtrWskdArtyState::VecVCommand::getTix(
+uint8_t CtrWskdArtyState::VecVCommand::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -29,7 +29,7 @@ utinyint CtrWskdArtyState::VecVCommand::getTix(
 };
 
 string CtrWskdArtyState::VecVCommand::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == GET) return("get");
 
@@ -41,7 +41,7 @@ void CtrWskdArtyState::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {GET};
+	std::set<uint8_t> items = {GET};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -55,14 +55,14 @@ CtrWskdArtyState::CtrWskdArtyState(
 		) : CtrWskd(unt) {
 };
 
-utinyint CtrWskdArtyState::getTixVCommandBySref(
+uint8_t CtrWskdArtyState::getTixVCommandBySref(
 			const string& sref
 		) {
 	return VecVCommand::getTix(sref);
 };
 
 string CtrWskdArtyState::getSrefByTixVCommand(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	return VecVCommand::getSref(tixVCommand);
 };
@@ -74,7 +74,7 @@ void CtrWskdArtyState::fillFeedFCommand(
 };
 
 Cmd* CtrWskdArtyState::getNewCmd(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	Cmd* cmd = NULL;
 
@@ -92,7 +92,7 @@ Cmd* CtrWskdArtyState::getNewCmdGet() {
 };
 
 void CtrWskdArtyState::get(
-			utinyint& tixVArtyState
+			uint8_t& tixVArtyState
 		) {
 	Cmd* cmd = getNewCmdGet();
 

@@ -14,10 +14,11 @@ use work.Arty.all;
 
 entity Top is
 	generic (
-		fExtclk: natural range 1 to 1000000 := 100000;
 		fMclk: natural range 1 to 1000000 := 50000
 	);
 	port (
+		extresetn: in std_logic;
+		extclk: in std_logic;
 		sw: in std_logic_vector(1 downto 0);
 		led: out std_logic_vector(3 downto 0);
 		dbg0: out std_logic;
@@ -61,7 +62,6 @@ entity Top is
 		cs1: out std_logic;
 		sclk: out std_logic;
 		mosi: out std_logic;
-		extclk: in std_logic;
 		led4_r: out std_logic;
 		led4_g: out std_logic;
 		led4_b: out std_logic;
@@ -100,7 +100,6 @@ architecture Top of Top is
 		port (
 			reset: in std_logic;
 			mclk: in std_logic;
-			tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 			btnPhase: in std_logic;
 
 			reqInvSetGrrd: in std_logic;
@@ -122,56 +121,53 @@ architecture Top of Top is
 			getPvwinfoTixVPvwbufstate: out std_logic_vector(7 downto 0);
 			getPvwinfoTkst: out std_logic_vector(31 downto 0);
 
-			reqPvwbbufToHostif: in std_logic;
-
-			reqGrrdabbufToFeatdet: in std_logic;
+			tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 
 			reqGrrdcdbufToFeatdet: in std_logic;
 
-			reqPvwabufToHostif: in std_logic;
-			ackPvwabufToHostif: out std_logic;
-
-			ackGrrdabbufToFeatdet: out std_logic;
+			reqGrrdabbufToFeatdet: in std_logic;
 
 			ackGrrdcdbufToFeatdet: out std_logic;
 
-			ackPvwbbufToHostif: out std_logic;
-			dnePvwbbufToHostif: in std_logic;
-
-			dneGrrdabbufToFeatdet: in std_logic;
+			ackGrrdabbufToFeatdet: out std_logic;
 
 			dneGrrdcdbufToFeatdet: in std_logic;
 
-			dnePvwabufToHostif: in std_logic;
-
-			avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
-			avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
-			avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
+			dneGrrdabbufToFeatdet: in std_logic;
 			avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
 
-			dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
-
-			dPvwbbufToHostif: out std_logic_vector(31 downto 0);
+			avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
 
 			dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
-			dPvwabufToHostif: out std_logic_vector(31 downto 0);
-			strbDPvwabufToHostif: in std_logic;
-
+			dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 			strbDGrrdcdbufToFeatdet: in std_logic;
 
 			strbDGrrdabbufToFeatdet: in std_logic;
 
-			strbDPvwbbufToHostif: in std_logic;
-
 			reqGrrdefbufToFeatdet: in std_logic;
 			ackGrrdefbufToFeatdet: out std_logic;
 			dneGrrdefbufToFeatdet: in std_logic;
-
 			avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
 
 			dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
 			strbDGrrdefbufToFeatdet: in std_logic;
+
+			reqPvwabufToHostif: in std_logic;
+			ackPvwabufToHostif: out std_logic;
+			dnePvwabufToHostif: in std_logic;
+			avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
+
+			dPvwabufToHostif: out std_logic_vector(31 downto 0);
+			strbDPvwabufToHostif: in std_logic;
+
+			reqPvwbbufToHostif: in std_logic;
+			ackPvwbbufToHostif: out std_logic;
+			dnePvwbbufToHostif: in std_logic;
+			avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
+
+			dPvwbbufToHostif: out std_logic_vector(31 downto 0);
+			strbDPvwbbufToHostif: in std_logic;
 
 			pclk: in std_logic;
 			href: in std_logic;
@@ -192,6 +188,7 @@ architecture Top of Top is
 			cntRiseB_dbg: out std_logic_vector(7 downto 0);
 
 			strb_dbg: out std_logic_vector(5 downto 0);
+
 			stateAlign_dbg: out std_logic_vector(7 downto 0);
 			stateGrrd_dbg: out std_logic_vector(7 downto 0);
 			stateGrrdabbufB_dbg: out std_logic_vector(7 downto 0);
@@ -262,6 +259,7 @@ architecture Top of Top is
 
 	component Debounce_v1_0 is
 		generic (
+			invert: bool := false;
 			tdead: natural range 1 to 10000 := 100
 		);
 		port (
@@ -316,32 +314,33 @@ architecture Top of Top is
 			ackFlgbufToHostif: out std_logic;
 			dneFlgbufToHostif: in std_logic;
 
-			avllenFlgbufToHostif: out std_logic_vector(8 downto 0);
-
-			dFlgbufToHostif: out std_logic_vector(31 downto 0);
-
-			reqGrrdabbufFromCamacq: out std_logic;
-
 			reqGrrdcdbufFromCamacq: out std_logic;
 
-			strbDFlgbufToHostif: in std_logic;
+			avllenFlgbufToHostif: out std_logic_vector(8 downto 0);
 
 			ackGrrdcdbufFromCamacq: in std_logic;
 
-			ackGrrdabbufFromCamacq: in std_logic;
+			reqGrrdabbufFromCamacq: out std_logic;
+
+			dFlgbufToHostif: out std_logic_vector(31 downto 0);
 
 			dneGrrdcdbufFromCamacq: out std_logic;
 
-			dneGrrdabbufFromCamacq: out std_logic;
+			ackGrrdabbufFromCamacq: in std_logic;
+
+			strbDFlgbufToHostif: in std_logic;
 
 			avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
+
+			dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
+
+			dneGrrdabbufFromCamacq: out std_logic;
+
+			strbDGrrdcdbufFromCamacq: out std_logic;
+
 			avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
 
 			dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
-
-			dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
-			strbDGrrdcdbufFromCamacq: out std_logic;
-
 			strbDGrrdabbufFromCamacq: out std_logic;
 
 			reqGrrdefbufFromCamacq: out std_logic;
@@ -354,6 +353,7 @@ architecture Top of Top is
 			strbDGrrdefbufFromCamacq: out std_logic;
 
 			strb_dbg: out std_logic_vector(3 downto 0);
+
 			stateCopy_dbg: out std_logic_vector(7 downto 0);
 			stateCorner_dbg: out std_logic_vector(7 downto 0);
 			stateExp_dbg: out std_logic_vector(7 downto 0);
@@ -376,8 +376,6 @@ architecture Top of Top is
 			mclk: in std_logic;
 			tkclk: in std_logic;
 			commok: out std_logic;
-
-			btnReset: in std_logic;
 			reqReset: out std_logic;
 
 			reqInvCamacqSetGrrd: out std_logic;
@@ -504,17 +502,14 @@ architecture Top of Top is
 			ackPvwabufFromCamacq: in std_logic;
 			dnePvwabufFromCamacq: out std_logic;
 
-			reqPvwbbufFromCamacq: out std_logic;
-
 			avllenPvwabufFromCamacq: in std_logic_vector(7 downto 0);
 
-			ackPvwbbufFromCamacq: in std_logic;
-
 			dPvwabufFromCamacq: in std_logic_vector(31 downto 0);
-
-			dnePvwbbufFromCamacq: out std_logic;
-
 			strbDPvwabufFromCamacq: out std_logic;
+
+			reqPvwbbufFromCamacq: out std_logic;
+			ackPvwbbufFromCamacq: in std_logic;
+			dnePvwbbufFromCamacq: out std_logic;
 
 			avllenPvwbbufFromCamacq: in std_logic_vector(7 downto 0);
 
@@ -564,8 +559,8 @@ architecture Top of Top is
 	component Mmcm_div2 is
 		port (
 			reset: in std_logic;
-			clk_out1: out std_logic;
-			clk_in1: in std_logic
+			clk_in1: in std_logic;
+			clk_out1: out std_logic
 		);
 	end component;
 
@@ -577,7 +572,11 @@ architecture Top of Top is
 			rgb: in std_logic_vector(23 downto 0);
 			r: out std_logic;
 			g: out std_logic;
-			b: out std_logic
+			b: out std_logic;
+
+			stateBlue_dbg: out std_logic_vector(7 downto 0);
+			stateGreen_dbg: out std_logic_vector(7 downto 0);
+			stateRed_dbg: out std_logic_vector(7 downto 0)
 		);
 	end component;
 
@@ -589,7 +588,11 @@ architecture Top of Top is
 			rgb: in std_logic_vector(23 downto 0);
 			r: out std_logic;
 			g: out std_logic;
-			b: out std_logic
+			b: out std_logic;
+
+			stateBlue_dbg: out std_logic_vector(7 downto 0);
+			stateGreen_dbg: out std_logic_vector(7 downto 0);
+			stateRed_dbg: out std_logic_vector(7 downto 0)
 		);
 	end component;
 
@@ -677,6 +680,8 @@ architecture Top of Top is
 
 	signal reset: std_logic;
 
+	-- IP sigs.rst.cust --- INSERT
+
 	---- myCamacq
 	signal camacqGetGrrdinfoTixVGrrdbufstate: std_logic_vector(7 downto 0);
 	signal camacqGetGrrdinfoTkst: std_logic_vector(31 downto 0);
@@ -684,22 +689,24 @@ architecture Top of Top is
 	signal camacqGetPvwinfoTixVPvwbufstate: std_logic_vector(7 downto 0);
 	signal camacqGetPvwinfoTkst: std_logic_vector(31 downto 0);
 
-	signal avllenPvwabufCamacqToHostif: std_logic_vector(7 downto 0);
 	signal avllenGrrdcdbufCamacqToFeatdet: std_logic_vector(3 downto 0);
 	signal avllenGrrdabbufCamacqToFeatdet: std_logic_vector(3 downto 0);
-	signal avllenPvwbbufCamacqToHostif: std_logic_vector(7 downto 0);
-
-	signal dPvwabufCamacqToHostif: std_logic_vector(31 downto 0);
 
 	signal dGrrdcdbufCamacqToFeatdet: std_logic_vector(7 downto 0);
 
 	signal dGrrdabbufCamacqToFeatdet: std_logic_vector(7 downto 0);
 
-	signal dPvwbbufCamacqToHostif: std_logic_vector(31 downto 0);
-
 	signal avllenGrrdefbufCamacqToFeatdet: std_logic_vector(3 downto 0);
 
 	signal dGrrdefbufCamacqToFeatdet: std_logic_vector(7 downto 0);
+
+	signal avllenPvwabufCamacqToHostif: std_logic_vector(7 downto 0);
+
+	signal dPvwabufCamacqToHostif: std_logic_vector(31 downto 0);
+
+	signal avllenPvwbbufCamacqToHostif: std_logic_vector(7 downto 0);
+
+	signal dPvwbbufCamacqToHostif: std_logic_vector(31 downto 0);
 
 	---- myCamif
 	signal camrng: std_logic;
@@ -708,9 +715,6 @@ architecture Top of Top is
 
 	---- myDebounceBtn0
 	signal btn0_sig: std_logic;
-
-	---- myDebounceBtn1
-	signal btn1_sig: std_logic;
 
 	---- myFeatdet
 	signal featdetGetInfoTixVFlgbufstate: std_logic_vector(7 downto 0);
@@ -798,9 +802,15 @@ architecture Top of Top is
 	signal tkclksrcGetTkstTkst: std_logic_vector(31 downto 0);
 
 	---- handshake
+	-- myHostif to (many)
+	signal reqResetFromHostif: std_logic;
+
 	-- myHostif to myCamacq
 	signal reqInvCamacqSetGrrd: std_logic;
 	signal ackInvCamacqSetGrrd: std_logic;
+
+	-- myDebounceBtn1 to (many)
+	signal reqResetBtn1: std_logic;
 
 	-- myHostif to myCamacq
 	signal reqInvCamacqSetPvw: std_logic;
@@ -862,16 +872,6 @@ architecture Top of Top is
 	signal reqInvTkclksrcSetTkst: std_logic;
 	signal ackInvTkclksrcSetTkst: std_logic;
 
-	-- myHostif to myFeatdet
-	signal reqFlgbufFeatdetToHostif: std_logic;
-	signal ackFlgbufFeatdetToHostif: std_logic;
-	signal dneFlgbufFeatdetToHostif: std_logic;
-
-	-- myHostif to myCamacq
-	signal reqPvwabufCamacqToHostif: std_logic;
-	signal ackPvwabufCamacqToHostif: std_logic;
-	signal dnePvwabufCamacqToHostif: std_logic;
-
 	-- myFeatdet to myCamacq
 	signal reqGrrdcdbufCamacqToFeatdet: std_logic;
 	signal ackGrrdcdbufCamacqToFeatdet: std_logic;
@@ -882,22 +882,27 @@ architecture Top of Top is
 	signal ackGrrdabbufCamacqToFeatdet: std_logic;
 	signal dneGrrdabbufCamacqToFeatdet: std_logic;
 
-	-- myHostif to myCamacq
-	signal reqPvwbbufCamacqToHostif: std_logic;
-	signal ackPvwbbufCamacqToHostif: std_logic;
-	signal dnePvwbbufCamacqToHostif: std_logic;
+	-- myHostif to myFeatdet
+	signal reqFlgbufFeatdetToHostif: std_logic;
+	signal ackFlgbufFeatdetToHostif: std_logic;
+	signal dneFlgbufFeatdetToHostif: std_logic;
 
 	-- myFeatdet to myCamacq
 	signal reqGrrdefbufCamacqToFeatdet: std_logic;
 	signal ackGrrdefbufCamacqToFeatdet: std_logic;
 	signal dneGrrdefbufCamacqToFeatdet: std_logic;
 
+	-- myHostif to myCamacq
+	signal reqPvwabufCamacqToHostif: std_logic;
+	signal ackPvwabufCamacqToHostif: std_logic;
+	signal dnePvwabufCamacqToHostif: std_logic;
+
+	-- myHostif to myCamacq
+	signal reqPvwbbufCamacqToHostif: std_logic;
+	signal ackPvwbbufCamacqToHostif: std_logic;
+	signal dnePvwbbufCamacqToHostif: std_logic;
+
 	---- other
-	signal reqReset: std_logic := '0';
-
-	signal btn2_sig: std_logic;
-	signal btn3_sig: std_logic;
-
 	signal rgb5: std_logic_vector(23 downto 0);
 	signal camacqStrb_dbg: std_logic_vector(5 downto 0);
 	signal featdetStrb_dbg: std_logic_vector(3 downto 0);
@@ -1009,7 +1014,6 @@ begin
 		port map (
 			reset => reset,
 			mclk => mclk,
-			tkclksrcGetTkstTkst => tkclksrcGetTkstTkst,
 			btnPhase => btn0_sig,
 
 			reqInvSetGrrd => reqInvCamacqSetGrrd,
@@ -1031,56 +1035,53 @@ begin
 			getPvwinfoTixVPvwbufstate => camacqGetPvwinfoTixVPvwbufstate,
 			getPvwinfoTkst => camacqGetPvwinfoTkst,
 
-			reqPvwbbufToHostif => reqPvwbbufCamacqToHostif,
-
-			reqGrrdabbufToFeatdet => reqGrrdabbufCamacqToFeatdet,
+			tkclksrcGetTkstTkst => tkclksrcGetTkstTkst,
 
 			reqGrrdcdbufToFeatdet => reqGrrdcdbufCamacqToFeatdet,
 
-			reqPvwabufToHostif => reqPvwabufCamacqToHostif,
-			ackPvwabufToHostif => ackPvwabufCamacqToHostif,
-
-			ackGrrdabbufToFeatdet => ackGrrdabbufCamacqToFeatdet,
+			reqGrrdabbufToFeatdet => reqGrrdabbufCamacqToFeatdet,
 
 			ackGrrdcdbufToFeatdet => ackGrrdcdbufCamacqToFeatdet,
 
-			ackPvwbbufToHostif => ackPvwbbufCamacqToHostif,
-			dnePvwbbufToHostif => dnePvwbbufCamacqToHostif,
-
-			dneGrrdabbufToFeatdet => dneGrrdabbufCamacqToFeatdet,
+			ackGrrdabbufToFeatdet => ackGrrdabbufCamacqToFeatdet,
 
 			dneGrrdcdbufToFeatdet => dneGrrdcdbufCamacqToFeatdet,
 
-			dnePvwabufToHostif => dnePvwabufCamacqToHostif,
-
-			avllenPvwabufToHostif => avllenPvwabufCamacqToHostif,
-			avllenPvwbbufToHostif => avllenPvwbbufCamacqToHostif,
-			avllenGrrdcdbufToFeatdet => avllenGrrdcdbufCamacqToFeatdet,
+			dneGrrdabbufToFeatdet => dneGrrdabbufCamacqToFeatdet,
 			avllenGrrdabbufToFeatdet => avllenGrrdabbufCamacqToFeatdet,
 
-			dGrrdcdbufToFeatdet => dGrrdcdbufCamacqToFeatdet,
-
-			dPvwbbufToHostif => dPvwbbufCamacqToHostif,
+			avllenGrrdcdbufToFeatdet => avllenGrrdcdbufCamacqToFeatdet,
 
 			dGrrdabbufToFeatdet => dGrrdabbufCamacqToFeatdet,
 
-			dPvwabufToHostif => dPvwabufCamacqToHostif,
-			strbDPvwabufToHostif => strbDPvwabufCamacqToHostif,
-
+			dGrrdcdbufToFeatdet => dGrrdcdbufCamacqToFeatdet,
 			strbDGrrdcdbufToFeatdet => strbDGrrdcdbufCamacqToFeatdet,
 
 			strbDGrrdabbufToFeatdet => strbDGrrdabbufCamacqToFeatdet,
 
-			strbDPvwbbufToHostif => strbDPvwbbufCamacqToHostif,
-
 			reqGrrdefbufToFeatdet => reqGrrdefbufCamacqToFeatdet,
 			ackGrrdefbufToFeatdet => ackGrrdefbufCamacqToFeatdet,
 			dneGrrdefbufToFeatdet => dneGrrdefbufCamacqToFeatdet,
-
 			avllenGrrdefbufToFeatdet => avllenGrrdefbufCamacqToFeatdet,
 
 			dGrrdefbufToFeatdet => dGrrdefbufCamacqToFeatdet,
 			strbDGrrdefbufToFeatdet => strbDGrrdefbufCamacqToFeatdet,
+
+			reqPvwabufToHostif => reqPvwabufCamacqToHostif,
+			ackPvwabufToHostif => ackPvwabufCamacqToHostif,
+			dnePvwabufToHostif => dnePvwabufCamacqToHostif,
+			avllenPvwabufToHostif => avllenPvwabufCamacqToHostif,
+
+			dPvwabufToHostif => dPvwabufCamacqToHostif,
+			strbDPvwabufToHostif => strbDPvwabufCamacqToHostif,
+
+			reqPvwbbufToHostif => reqPvwbbufCamacqToHostif,
+			ackPvwbbufToHostif => ackPvwbbufCamacqToHostif,
+			dnePvwbbufToHostif => dnePvwbbufCamacqToHostif,
+			avllenPvwbbufToHostif => avllenPvwbbufCamacqToHostif,
+
+			dPvwbbufToHostif => dPvwbbufCamacqToHostif,
+			strbDPvwbbufToHostif => strbDPvwbbufCamacqToHostif,
 
 			pclk => pclk,
 			href => href,
@@ -1101,6 +1102,7 @@ begin
 			cntRiseB_dbg => bcddbg3,
 
 			strb_dbg => camacqStrb_dbg,
+
 			stateAlign_dbg => open,
 			stateGrrd_dbg => open,
 			stateGrrdabbufB_dbg => open,
@@ -1169,6 +1171,7 @@ begin
 
 	myDebounceBtn0 : Debounce_v1_0
 		generic map (
+			invert => false,
 			tdead => 100
 		)
 		port map (
@@ -1182,6 +1185,7 @@ begin
 
 	myDebounceBtn1 : Debounce_v1_0
 		generic map (
+			invert => false,
 			tdead => 100
 		)
 		port map (
@@ -1190,7 +1194,7 @@ begin
 			tkclk => tkclk,
 
 			noisy => btn1,
-			clean => btn1_sig
+			clean => reqResetBtn1
 		);
 
 	myFeatdet : Featdet
@@ -1235,32 +1239,33 @@ begin
 			ackFlgbufToHostif => ackFlgbufFeatdetToHostif,
 			dneFlgbufToHostif => dneFlgbufFeatdetToHostif,
 
-			avllenFlgbufToHostif => avllenFlgbufFeatdetToHostif,
-
-			dFlgbufToHostif => dFlgbufFeatdetToHostif,
-
-			reqGrrdabbufFromCamacq => reqGrrdabbufCamacqToFeatdet,
-
 			reqGrrdcdbufFromCamacq => reqGrrdcdbufCamacqToFeatdet,
 
-			strbDFlgbufToHostif => strbDFlgbufFeatdetToHostif,
+			avllenFlgbufToHostif => avllenFlgbufFeatdetToHostif,
 
 			ackGrrdcdbufFromCamacq => ackGrrdcdbufCamacqToFeatdet,
 
-			ackGrrdabbufFromCamacq => ackGrrdabbufCamacqToFeatdet,
+			reqGrrdabbufFromCamacq => reqGrrdabbufCamacqToFeatdet,
+
+			dFlgbufToHostif => dFlgbufFeatdetToHostif,
 
 			dneGrrdcdbufFromCamacq => dneGrrdcdbufCamacqToFeatdet,
 
-			dneGrrdabbufFromCamacq => dneGrrdabbufCamacqToFeatdet,
+			ackGrrdabbufFromCamacq => ackGrrdabbufCamacqToFeatdet,
+
+			strbDFlgbufToHostif => strbDFlgbufFeatdetToHostif,
 
 			avllenGrrdcdbufFromCamacq => avllenGrrdcdbufCamacqToFeatdet,
+
+			dGrrdcdbufFromCamacq => dGrrdcdbufCamacqToFeatdet,
+
+			dneGrrdabbufFromCamacq => dneGrrdabbufCamacqToFeatdet,
+
+			strbDGrrdcdbufFromCamacq => strbDGrrdcdbufCamacqToFeatdet,
+
 			avllenGrrdabbufFromCamacq => avllenGrrdabbufCamacqToFeatdet,
 
 			dGrrdabbufFromCamacq => dGrrdabbufCamacqToFeatdet,
-
-			dGrrdcdbufFromCamacq => dGrrdcdbufCamacqToFeatdet,
-			strbDGrrdcdbufFromCamacq => strbDGrrdcdbufCamacqToFeatdet,
-
 			strbDGrrdabbufFromCamacq => strbDGrrdabbufCamacqToFeatdet,
 
 			reqGrrdefbufFromCamacq => reqGrrdefbufCamacqToFeatdet,
@@ -1273,6 +1278,7 @@ begin
 			strbDGrrdefbufFromCamacq => strbDGrrdefbufCamacqToFeatdet,
 
 			strb_dbg => featdetStrb_dbg,
+
 			stateCopy_dbg => open,
 			stateCorner_dbg => open,
 			stateExp_dbg => open,
@@ -1294,9 +1300,7 @@ begin
 			mclk => mclk,
 			tkclk => tkclk,
 			commok => commok,
-
-			btnReset => btn1_sig,
-			reqReset => reqReset,
+			reqReset => reqResetFromHostif,
 
 			reqInvCamacqSetGrrd => reqInvCamacqSetGrrd,
 			ackInvCamacqSetGrrd => ackInvCamacqSetGrrd,
@@ -1422,17 +1426,14 @@ begin
 			ackPvwabufFromCamacq => ackPvwabufCamacqToHostif,
 			dnePvwabufFromCamacq => dnePvwabufCamacqToHostif,
 
-			reqPvwbbufFromCamacq => reqPvwbbufCamacqToHostif,
-
 			avllenPvwabufFromCamacq => avllenPvwabufCamacqToHostif,
 
-			ackPvwbbufFromCamacq => ackPvwbbufCamacqToHostif,
-
 			dPvwabufFromCamacq => dPvwabufCamacqToHostif,
-
-			dnePvwbbufFromCamacq => dnePvwbbufCamacqToHostif,
-
 			strbDPvwabufFromCamacq => strbDPvwabufCamacqToHostif,
+
+			reqPvwbbufFromCamacq => reqPvwbbufCamacqToHostif,
+			ackPvwbbufFromCamacq => ackPvwbbufCamacqToHostif,
+			dnePvwbbufFromCamacq => dnePvwbbufCamacqToHostif,
 
 			avllenPvwbbufFromCamacq => avllenPvwbbufCamacqToHostif,
 
@@ -1480,8 +1481,8 @@ begin
 	myMmcmMclk : Mmcm_div2
 		port map (
 			reset => '0',
-			clk_out1 => mclk,
-			clk_in1 => extclk
+			clk_in1 => extclk,
+			clk_out1 => mclk
 		);
 
 	myRgbled4 : Rgbled4
@@ -1492,7 +1493,11 @@ begin
 			rgb => rgb4,
 			r => led4_r,
 			g => led4_g,
-			b => led4_b
+			b => led4_b,
+
+			stateBlue_dbg => open,
+			stateGreen_dbg => open,
+			stateRed_dbg => open
 		);
 
 	myRgbled5 : Rgbled5
@@ -1503,7 +1508,11 @@ begin
 			rgb => rgb5,
 			r => led5_r,
 			g => led5_g,
-			b => led5_b
+			b => led5_b,
+
+			stateBlue_dbg => open,
+			stateGreen_dbg => open,
+			stateRed_dbg => open
 		);
 
 	myState : State
@@ -1582,22 +1591,36 @@ begin
 	reset <= '1' when stateRst=stateRstReset else '0';
 	-- IP impl.rst.wiring --- END
 
-	process (reqReset, mclk)
-		variable i: natural range 0 to 16 := 0;
+	-- IP impl.rst.rising --- BEGIN
+	process (extresetn, mclk, stateRst)
+		-- IP impl.rst.vars --- BEGIN
+		constant imax: natural := 16;
+		variable i: natural range 0 to imax := 0;
+		-- IP impl.rst.vars --- END
+
 	begin
-		if reqReset='1' then
-			i := 0;
+		if extresetn='0' then
 			stateRst <= stateRstReset;
+
+			i := 0;
+
 		elsif rising_edge(mclk) then
 			if stateRst=stateRstReset then
 				i := i + 1;
-				if i=16 then
-					i := 0;
+
+				if i=imax then
 					stateRst <= stateRstRun;
+				end if;
+
+			elsif stateRst=stateRstRun then
+				if reqResetFromHostif='1' or reqResetBtn1='1' then
+					i := 0;
+					stateReset <= stateRstReset;
 				end if;
 			end if;
 		end if;
 	end process;
+	-- IP impl.rst.rising --- END
 
 	------------------------------------------------------------------------
 	-- implementation: other 

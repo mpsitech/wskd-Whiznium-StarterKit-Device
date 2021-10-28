@@ -18,7 +18,7 @@ using namespace Dbecore;
  class CtrWskdArtyCamif::VecVCommand
  ******************************************************************************/
 
-utinyint CtrWskdArtyCamif::VecVCommand::getTix(
+uint8_t CtrWskdArtyCamif::VecVCommand::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -33,7 +33,7 @@ utinyint CtrWskdArtyCamif::VecVCommand::getTix(
 };
 
 string CtrWskdArtyCamif::VecVCommand::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == SETRNG) return("setRng");
 	else if (tix == SETREG) return("setReg");
@@ -49,7 +49,7 @@ void CtrWskdArtyCamif::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {SETRNG,SETREG,SETREGADDR,GETREG,MODREG};
+	std::set<uint8_t> items = {SETRNG,SETREG,SETREGADDR,GETREG,MODREG};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -63,14 +63,14 @@ CtrWskdArtyCamif::CtrWskdArtyCamif(
 		) : CtrWskd(unt) {
 };
 
-utinyint CtrWskdArtyCamif::getTixVCommandBySref(
+uint8_t CtrWskdArtyCamif::getTixVCommandBySref(
 			const string& sref
 		) {
 	return VecVCommand::getTix(sref);
 };
 
 string CtrWskdArtyCamif::getSrefByTixVCommand(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	return VecVCommand::getSref(tixVCommand);
 };
@@ -82,7 +82,7 @@ void CtrWskdArtyCamif::fillFeedFCommand(
 };
 
 Cmd* CtrWskdArtyCamif::getNewCmd(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	Cmd* cmd = NULL;
 
@@ -122,20 +122,20 @@ void CtrWskdArtyCamif::setRng(
 Cmd* CtrWskdArtyCamif::getNewCmdSetReg() {
 	Cmd* cmd = new Cmd(0x02, VecVCommand::SETREG, Cmd::VecVRettype::VOID);
 
-	cmd->addParInv("addr", Par::VecVType::USMALLINT);
-	cmd->addParInv("val", Par::VecVType::UTINYINT);
+	cmd->addParInv("addr", Par::VecVType::UINT16);
+	cmd->addParInv("val", Par::VecVType::UINT8);
 
 	return cmd;
 };
 
 void CtrWskdArtyCamif::setReg(
-			const usmallint addr
-			, const utinyint val
+			const uint16_t addr
+			, const uint8_t val
 		) {
 	Cmd* cmd = getNewCmdSetReg();
 
-	cmd->parsInv["addr"].setUsmallint(addr);
-	cmd->parsInv["val"].setUtinyint(val);
+	cmd->parsInv["addr"].setUint16(addr);
+	cmd->parsInv["val"].setUint8(val);
 
 	if (unt->runCmd(cmd)) {
 	} else {
@@ -149,17 +149,17 @@ void CtrWskdArtyCamif::setReg(
 Cmd* CtrWskdArtyCamif::getNewCmdSetRegaddr() {
 	Cmd* cmd = new Cmd(0x02, VecVCommand::SETREGADDR, Cmd::VecVRettype::VOID);
 
-	cmd->addParInv("addr", Par::VecVType::USMALLINT);
+	cmd->addParInv("addr", Par::VecVType::UINT16);
 
 	return cmd;
 };
 
 void CtrWskdArtyCamif::setRegaddr(
-			const usmallint addr
+			const uint16_t addr
 		) {
 	Cmd* cmd = getNewCmdSetRegaddr();
 
-	cmd->parsInv["addr"].setUsmallint(addr);
+	cmd->parsInv["addr"].setUint16(addr);
 
 	if (unt->runCmd(cmd)) {
 	} else {
@@ -173,18 +173,18 @@ void CtrWskdArtyCamif::setRegaddr(
 Cmd* CtrWskdArtyCamif::getNewCmdGetReg() {
 	Cmd* cmd = new Cmd(0x02, VecVCommand::GETREG, Cmd::VecVRettype::IMMSNG);
 
-	cmd->addParRet("val", Par::VecVType::UTINYINT);
+	cmd->addParRet("val", Par::VecVType::UINT8);
 
 	return cmd;
 };
 
 void CtrWskdArtyCamif::getReg(
-			utinyint& val
+			uint8_t& val
 		) {
 	Cmd* cmd = getNewCmdGetReg();
 
 	if (unt->runCmd(cmd)) {
-		val = cmd->parsRet["val"].getUtinyint();
+		val = cmd->parsRet["val"].getUint8();
 	} else {
 		delete cmd;
 		throw DbeException("error running getReg");
@@ -196,23 +196,23 @@ void CtrWskdArtyCamif::getReg(
 Cmd* CtrWskdArtyCamif::getNewCmdModReg() {
 	Cmd* cmd = new Cmd(0x02, VecVCommand::MODREG, Cmd::VecVRettype::VOID);
 
-	cmd->addParInv("addr", Par::VecVType::USMALLINT);
-	cmd->addParInv("mask", Par::VecVType::UTINYINT);
-	cmd->addParInv("val", Par::VecVType::UTINYINT);
+	cmd->addParInv("addr", Par::VecVType::UINT16);
+	cmd->addParInv("mask", Par::VecVType::UINT8);
+	cmd->addParInv("val", Par::VecVType::UINT8);
 
 	return cmd;
 };
 
 void CtrWskdArtyCamif::modReg(
-			const usmallint addr
-			, const utinyint mask
-			, const utinyint val
+			const uint16_t addr
+			, const uint8_t mask
+			, const uint8_t val
 		) {
 	Cmd* cmd = getNewCmdModReg();
 
-	cmd->parsInv["addr"].setUsmallint(addr);
-	cmd->parsInv["mask"].setUtinyint(mask);
-	cmd->parsInv["val"].setUtinyint(val);
+	cmd->parsInv["addr"].setUint16(addr);
+	cmd->parsInv["mask"].setUint8(mask);
+	cmd->parsInv["val"].setUint8(val);
 
 	if (unt->runCmd(cmd)) {
 	} else {

@@ -16,16 +16,16 @@
 	* VecVWskdArtyController
 	*/
 namespace VecVWskdArtyController {
-	const Sbecore::utinyint CAMACQ = 0x01;
-	const Sbecore::utinyint CAMIF = 0x02;
-	const Sbecore::utinyint FEATDET = 0x03;
-	const Sbecore::utinyint LASER = 0x04;
-	const Sbecore::utinyint STATE = 0x05;
-	const Sbecore::utinyint STEP = 0x06;
-	const Sbecore::utinyint TKCLKSRC = 0x07;
+	constexpr uint8_t CAMACQ = 0x01;
+	constexpr uint8_t CAMIF = 0x02;
+	constexpr uint8_t FEATDET = 0x03;
+	constexpr uint8_t LASER = 0x04;
+	constexpr uint8_t STATE = 0x05;
+	constexpr uint8_t STEP = 0x06;
+	constexpr uint8_t TKCLKSRC = 0x07;
 
-	Sbecore::utinyint getTix(const std::string& sref);
-	std::string getSref(const Sbecore::utinyint tix);
+	uint8_t getTix(const std::string& sref);
+	std::string getSref(const uint8_t tix);
 
 	void fillFeed(Sbecore::Feed& feed);
 };
@@ -34,14 +34,14 @@ namespace VecVWskdArtyController {
 	* VecVWskdArtyState
 	*/
 namespace VecVWskdArtyState {
-	const Sbecore::utinyint NC = 0x00;
-	const Sbecore::utinyint READY = 0x01;
-	const Sbecore::utinyint ACTIVE = 0x02;
+	constexpr uint8_t NC = 0x00;
+	constexpr uint8_t READY = 0x01;
+	constexpr uint8_t ACTIVE = 0x02;
 
-	Sbecore::utinyint getTix(const std::string& sref);
-	std::string getSref(const Sbecore::utinyint tix);
+	uint8_t getTix(const std::string& sref);
+	std::string getSref(const uint8_t tix);
 
-	std::string getTitle(const Sbecore::utinyint tix);
+	std::string getTitle(const uint8_t tix);
 
 	void fillFeed(Sbecore::Feed& feed);
 };
@@ -50,14 +50,14 @@ namespace VecVWskdArtyState {
 	* VecWWskdArtyBuffer
 	*/
 namespace VecWWskdArtyBuffer {
-	const Sbecore::utinyint CMDRETTOHOSTIF = 0x01;
-	const Sbecore::utinyint HOSTIFTOCMDINV = 0x02;
-	const Sbecore::utinyint FLGBUFFEATDETTOHOSTIF = 0x04;
-	const Sbecore::utinyint PVWABUFCAMACQTOHOSTIF = 0x08;
-	const Sbecore::utinyint PVWBBUFCAMACQTOHOSTIF = 0x10;
+	constexpr uint8_t CMDRETTOHOSTIF = 0x01;
+	constexpr uint8_t HOSTIFTOCMDINV = 0x02;
+	constexpr uint8_t FLGBUFFEATDETTOHOSTIF = 0x04;
+	constexpr uint8_t PVWABUFCAMACQTOHOSTIF = 0x08;
+	constexpr uint8_t PVWBBUFCAMACQTOHOSTIF = 0x10;
 
-	Sbecore::utinyint getTix(const std::string& sref);
-	std::string getSref(const Sbecore::utinyint tix);
+	uint8_t getTix(const std::string& sref);
+	std::string getSref(const uint8_t tix);
 
 	void fillFeed(Sbecore::Feed& feed);
 };

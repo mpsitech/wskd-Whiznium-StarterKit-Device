@@ -17,7 +17,7 @@ using namespace Xmlio;
  namespace VecVWskdArtyController
  ******************************************************************************/
 
-utinyint VecVWskdArtyController::getTix(
+uint8_t VecVWskdArtyController::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -34,7 +34,7 @@ utinyint VecVWskdArtyController::getTix(
 };
 
 string VecVWskdArtyController::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == CAMACQ) return("camacq");
 	else if (tix == CAMIF) return("camif");
@@ -52,7 +52,7 @@ void VecVWskdArtyController::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {CAMACQ,CAMIF,FEATDET,LASER,STATE,STEP,TKCLKSRC};
+	std::set<uint8_t> items = {CAMACQ,CAMIF,FEATDET,LASER,STATE,STEP,TKCLKSRC};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -61,7 +61,7 @@ void VecVWskdArtyController::fillFeed(
  namespace VecVWskdArtyState
  ******************************************************************************/
 
-utinyint VecVWskdArtyState::getTix(
+uint8_t VecVWskdArtyState::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -74,7 +74,7 @@ utinyint VecVWskdArtyState::getTix(
 };
 
 string VecVWskdArtyState::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == NC) return("nc");
 	else if (tix == READY) return("ready");
@@ -84,7 +84,7 @@ string VecVWskdArtyState::getSref(
 };
 
 string VecVWskdArtyState::getTitle(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == NC) return("offline");
 	else if (tix == READY) return("ready");
@@ -98,7 +98,7 @@ void VecVWskdArtyState::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {NC,READY,ACTIVE};
+	std::set<uint8_t> items = {NC,READY,ACTIVE};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getTitle(*it));
 };
@@ -107,7 +107,7 @@ void VecVWskdArtyState::fillFeed(
  namespace VecWWskdArtyBuffer
  ******************************************************************************/
 
-utinyint VecWWskdArtyBuffer::getTix(
+uint8_t VecWWskdArtyBuffer::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -122,7 +122,7 @@ utinyint VecWWskdArtyBuffer::getTix(
 };
 
 string VecWWskdArtyBuffer::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == CMDRETTOHOSTIF) return("cmdretToHostif");
 	else if (tix == HOSTIFTOCMDINV) return("hostifToCmdinv");
@@ -138,7 +138,7 @@ void VecWWskdArtyBuffer::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {CMDRETTOHOSTIF,HOSTIFTOCMDINV,FLGBUFFEATDETTOHOSTIF,PVWABUFCAMACQTOHOSTIF,PVWBBUFCAMACQTOHOSTIF};
+	std::set<uint8_t> items = {CMDRETTOHOSTIF,HOSTIFTOCMDINV,FLGBUFFEATDETTOHOSTIF,PVWABUFCAMACQTOHOSTIF,PVWBBUFCAMACQTOHOSTIF};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };

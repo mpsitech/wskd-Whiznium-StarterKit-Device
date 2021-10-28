@@ -18,8 +18,6 @@ entity Hostif is
 		mclk: in std_logic;
 		tkclk: in std_logic;
 		commok: out std_logic;
-
-		btnReset: in std_logic;
 		reqReset: out std_logic;
 
 		reqInvCamacqSetGrrd: out std_logic;
@@ -146,17 +144,14 @@ entity Hostif is
 		ackPvwabufFromCamacq: in std_logic;
 		dnePvwabufFromCamacq: out std_logic;
 
-		reqPvwbbufFromCamacq: out std_logic;
-
 		avllenPvwabufFromCamacq: in std_logic_vector(7 downto 0);
 
-		ackPvwbbufFromCamacq: in std_logic;
-
 		dPvwabufFromCamacq: in std_logic_vector(31 downto 0);
-
-		dnePvwbbufFromCamacq: out std_logic;
-
 		strbDPvwabufFromCamacq: out std_logic;
+
+		reqPvwbbufFromCamacq: out std_logic;
+		ackPvwbbufFromCamacq: in std_logic;
+		dnePvwbbufFromCamacq: out std_logic;
 
 		avllenPvwbbufFromCamacq: in std_logic_vector(7 downto 0);
 
@@ -505,7 +500,7 @@ begin
 	------------------------------------------------------------------------
 
 	commok <= commok_sig;
-	reqReset <= (reqReset_sig or btnReset);
+	reqReset <= reqReset_sig;
 
 	-- tx/ret command
 	reqInvCamifGetReg <= '1' when (stateOp=stateOpVoidinv and opbuf(ixOpbufController)=tixVArtyControllerCamif and opbuf(ixOpbufCommand)=tixVCamifCommandGetReg) else '0';
@@ -837,7 +832,7 @@ begin
 			elsif stateOp=stateOpRxopE then
 				length := opbuf(ixOpbufLength) & opbuf(ixOpbufLength+1);
 
-				if opbuf(ixOpbufBuffer)=tixW&Untsref;BufferCmdretToHostif then
+				if opbuf(ixOpbufBuffer)=tixWArtyBufferCmdretToHostif then
 					-- length: 2 bytes of CRC included, but excluded from CRC calculation
 					if length(1 downto 0)="00" then
 						lsb := "01";
@@ -885,7 +880,7 @@ begin
 						stateOp <= stateOpIdle;
 					end if;
 
-				elsif opbuf(ixOpbufBuffer)=tixW&Untsref;BufferHostifToCmdinv then
+				elsif opbuf(ixOpbufBuffer)=tixWArtyBufferHostifToCmdinv then
 					if ( (opbuf(ixOpbufController)=tixVArtyControllerCamacq and (opbuf(ixOpbufCommand)=tixVCamacqCommandSetGrrd or opbuf(ixOpbufCommand)=tixVCamacqCommandSetPvw))
 								or (opbuf(ixOpbufController)=tixVArtyControllerCamif and (opbuf(ixOpbufCommand)=tixVCamifCommandSetRng or opbuf(ixOpbufCommand)=tixVCamifCommandSetReg or opbuf(ixOpbufCommand)=tixVCamifCommandSetRegaddr or opbuf(ixOpbufCommand)=tixVCamifCommandModReg))
 								or (opbuf(ixOpbufController)=tixVArtyControllerFeatdet and (opbuf(ixOpbufCommand)=tixVFeatdetCommandSet or opbuf(ixOpbufCommand)=tixVFeatdetCommandSetCorner or opbuf(ixOpbufCommand)=tixVFeatdetCommandSetThd or opbuf(ixOpbufCommand)=tixVFeatdetCommandTriggerThd))

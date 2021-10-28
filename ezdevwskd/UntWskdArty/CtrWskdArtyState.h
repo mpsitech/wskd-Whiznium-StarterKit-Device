@@ -30,10 +30,10 @@ public:
 	class VecVCommand {
 
 	public:
-		static const Sbecore::utinyint GET = 0x00;
+		static constexpr uint8_t GET = 0x00;
 
-		static Sbecore::utinyint getTix(const std::string& sref);
-		static std::string getSref(const Sbecore::utinyint tix);
+		static uint8_t getTix(const std::string& sref);
+		static std::string getSref(const uint8_t tix);
 
 		static void fillFeed(Sbecore::Feed& feed);
 	};
@@ -42,17 +42,17 @@ public:
 	CtrWskdArtyState(UntWskd* unt);
 
 public:
-	static const Sbecore::utinyint tixVController = 0x05;
+	static const uint8_t tixVController = 0x05;
 
 public:
-	static Sbecore::utinyint getTixVCommandBySref(const std::string& sref);
-	static std::string getSrefByTixVCommand(const Sbecore::utinyint tixVCommand);
+	static uint8_t getTixVCommandBySref(const std::string& sref);
+	static std::string getSrefByTixVCommand(const uint8_t tixVCommand);
 	static void fillFeedFCommand(Sbecore::Feed& feed);
 
-	static Dbecore::Cmd* getNewCmd(const Sbecore::utinyint tixVCommand);
+	static Dbecore::Cmd* getNewCmd(const uint8_t tixVCommand);
 
 	static Dbecore::Cmd* getNewCmdGet();
-	void get(Sbecore::utinyint& tixVArtyState);
+	void get(uint8_t& tixVArtyState);
 
 };
 

@@ -18,7 +18,7 @@ using namespace Dbecore;
  class CtrWskdArtyTkclksrc::VecVCommand
  ******************************************************************************/
 
-utinyint CtrWskdArtyTkclksrc::VecVCommand::getTix(
+uint8_t CtrWskdArtyTkclksrc::VecVCommand::getTix(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
@@ -30,7 +30,7 @@ utinyint CtrWskdArtyTkclksrc::VecVCommand::getTix(
 };
 
 string CtrWskdArtyTkclksrc::VecVCommand::getSref(
-			const utinyint tix
+			const uint8_t tix
 		) {
 	if (tix == GETTKST) return("getTkst");
 	else if (tix == SETTKST) return("setTkst");
@@ -43,7 +43,7 @@ void CtrWskdArtyTkclksrc::VecVCommand::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<utinyint> items = {GETTKST,SETTKST};
+	std::set<uint8_t> items = {GETTKST,SETTKST};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };
@@ -57,14 +57,14 @@ CtrWskdArtyTkclksrc::CtrWskdArtyTkclksrc(
 		) : CtrWskd(unt) {
 };
 
-utinyint CtrWskdArtyTkclksrc::getTixVCommandBySref(
+uint8_t CtrWskdArtyTkclksrc::getTixVCommandBySref(
 			const string& sref
 		) {
 	return VecVCommand::getTix(sref);
 };
 
 string CtrWskdArtyTkclksrc::getSrefByTixVCommand(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	return VecVCommand::getSref(tixVCommand);
 };
@@ -76,7 +76,7 @@ void CtrWskdArtyTkclksrc::fillFeedFCommand(
 };
 
 Cmd* CtrWskdArtyTkclksrc::getNewCmd(
-			const utinyint tixVCommand
+			const uint8_t tixVCommand
 		) {
 	Cmd* cmd = NULL;
 
@@ -89,18 +89,18 @@ Cmd* CtrWskdArtyTkclksrc::getNewCmd(
 Cmd* CtrWskdArtyTkclksrc::getNewCmdGetTkst() {
 	Cmd* cmd = new Cmd(0x07, VecVCommand::GETTKST, Cmd::VecVRettype::STATSNG);
 
-	cmd->addParRet("tkst", Par::VecVType::UINT);
+	cmd->addParRet("tkst", Par::VecVType::UINT32);
 
 	return cmd;
 };
 
 void CtrWskdArtyTkclksrc::getTkst(
-			uint& tkst
+			uint32_t& tkst
 		) {
 	Cmd* cmd = getNewCmdGetTkst();
 
 	if (unt->runCmd(cmd)) {
-		tkst = cmd->parsRet["tkst"].getUint();
+		tkst = cmd->parsRet["tkst"].getUint32();
 	} else {
 		delete cmd;
 		throw DbeException("error running getTkst");
@@ -112,17 +112,17 @@ void CtrWskdArtyTkclksrc::getTkst(
 Cmd* CtrWskdArtyTkclksrc::getNewCmdSetTkst() {
 	Cmd* cmd = new Cmd(0x07, VecVCommand::SETTKST, Cmd::VecVRettype::VOID);
 
-	cmd->addParInv("tkst", Par::VecVType::UINT);
+	cmd->addParInv("tkst", Par::VecVType::UINT32);
 
 	return cmd;
 };
 
 void CtrWskdArtyTkclksrc::setTkst(
-			const uint tkst
+			const uint32_t tkst
 		) {
 	Cmd* cmd = getNewCmdSetTkst();
 
-	cmd->parsInv["tkst"].setUint(tkst);
+	cmd->parsInv["tkst"].setUint32(tkst);
 
 	if (unt->runCmd(cmd)) {
 	} else {

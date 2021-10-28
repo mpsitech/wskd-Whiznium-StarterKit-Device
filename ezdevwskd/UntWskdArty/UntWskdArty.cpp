@@ -42,7 +42,7 @@ void UntWskdArty::init(
 	// IP init.cust --- IBEGIN
 	path = _path;
 
-	Nretry = 5;
+	NRetry = 5;
 
 	const size_t sizeRxbuf = 1024;
 	rxbuf = new unsigned char[sizeRxbuf];
@@ -86,6 +86,8 @@ bool UntWskdArty::rx(
 		) {
 	bool retval = (reqlen == 0);
 
+	// requirement: receive data from device observing history / rxtxdump settings
+
 	// IP rx --- IBEGIN
 	if (reqlen != 0) {
 		fd_set fds;
@@ -103,7 +105,7 @@ bool UntWskdArty::rx(
 		FD_SET(fd, &fds);
 
 		timeout.tv_sec = 0;
-		timeout.tv_usec = to;
+		timeout.tv_usec = timeoutRx;
 
 		if (rxtxdump) {
 			if (!histNotDump) cout << "rx ";
@@ -156,6 +158,8 @@ bool UntWskdArty::tx(
 		) {
 	bool retval = (reqlen == 0);
 
+	// requirement: transmit data to device observing history / rxtxdump settings
+
 	// IP tx --- IBEGIN
 	if (reqlen != 0) {
 		size_t nleft;
@@ -197,14 +201,14 @@ void UntWskdArty::flush() {
 	// IP flush --- INSERT
 };
 
-utinyint UntWskdArty::getTixVControllerBySref(
+uint8_t UntWskdArty::getTixVControllerBySref(
 			const string& sref
 		) {
 	return VecVWskdArtyController::getTix(sref);
 };
 
 string UntWskdArty::getSrefByTixVController(
-			const utinyint tixVController
+			const uint8_t tixVController
 		) {
 	return VecVWskdArtyController::getSref(tixVController);
 };
@@ -215,14 +219,14 @@ void UntWskdArty::fillFeedFController(
 	VecVWskdArtyController::fillFeed(feed);
 };
 
-utinyint UntWskdArty::getTixWBufferBySref(
+uint8_t UntWskdArty::getTixWBufferBySref(
 			const string& sref
 		) {
 	return VecWWskdArtyBuffer::getTix(sref);
 };
 
 string UntWskdArty::getSrefByTixWBuffer(
-			const utinyint tixWBuffer
+			const uint8_t tixWBuffer
 		) {
 	return VecWWskdArtyBuffer::getSref(tixWBuffer);
 };
@@ -233,11 +237,11 @@ void UntWskdArty::fillFeedFBuffer(
 	VecWWskdArtyBuffer::fillFeed(feed);
 };
 
-utinyint UntWskdArty::getTixVCommandBySref(
-			const utinyint tixVController
+uint8_t UntWskdArty::getTixVCommandBySref(
+			const uint8_t tixVController
 			, const string& sref
 		) {
-	utinyint tixVCommand = 0;
+	uint8_t tixVCommand = 0;
 
 	if (tixVController == VecVWskdArtyController::CAMACQ) tixVCommand = VecVWskdArtyCamacqCommand::getTix(sref);
 	else if (tixVController == VecVWskdArtyController::CAMIF) tixVCommand = VecVWskdArtyCamifCommand::getTix(sref);
@@ -251,8 +255,8 @@ utinyint UntWskdArty::getTixVCommandBySref(
 };
 
 string UntWskdArty::getSrefByTixVCommand(
-			const utinyint tixVController
-			, const utinyint tixVCommand
+			const uint8_t tixVController
+			, const uint8_t tixVCommand
 		) {
 	string sref;
 
@@ -268,7 +272,7 @@ string UntWskdArty::getSrefByTixVCommand(
 };
 
 void UntWskdArty::fillFeedFCommand(
-			const utinyint tixVController
+			const uint8_t tixVController
 			, Feed& feed
 		) {
 	feed.clear();
@@ -283,7 +287,7 @@ void UntWskdArty::fillFeedFCommand(
 };
 
 Bufxf* UntWskdArty::getNewBufxf(
-			const utinyint tixWBuffer
+			const uint8_t tixWBuffer
 			, const size_t reqlen
 			, unsigned char* buf
 		) {
@@ -297,8 +301,8 @@ Bufxf* UntWskdArty::getNewBufxf(
 };
 
 Cmd* UntWskdArty::getNewCmd(
-			const utinyint tixVController
-			, const utinyint tixVCommand
+			const uint8_t tixVController
+			, const uint8_t tixVCommand
 		) {
 	Cmd* cmd = NULL;
 

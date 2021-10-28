@@ -90,7 +90,9 @@ architecture Camif of Camif is
 			recv: out std_logic_vector(7 downto 0);
 
 			scl: out std_logic;
-			sda: inout std_logic
+			sda: inout std_logic;
+
+			stateXfer_dbg: out std_logic_vector(7 downto 0)
 		);
 	end component;
 
@@ -191,7 +193,9 @@ begin
 			recv => i2cRecv,
 
 			scl => scl,
-			sda => sda
+			sda => sda,
+
+			stateXfer_dbg => open
 		);
 
 	myParrom : Parrom

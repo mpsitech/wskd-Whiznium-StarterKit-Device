@@ -54,32 +54,33 @@ entity Featdet is
 		ackFlgbufToHostif: out std_logic;
 		dneFlgbufToHostif: in std_logic;
 
-		avllenFlgbufToHostif: out std_logic_vector(8 downto 0);
-
-		dFlgbufToHostif: out std_logic_vector(31 downto 0);
-
-		reqGrrdabbufFromCamacq: out std_logic;
-
 		reqGrrdcdbufFromCamacq: out std_logic;
 
-		strbDFlgbufToHostif: in std_logic;
+		avllenFlgbufToHostif: out std_logic_vector(8 downto 0);
 
 		ackGrrdcdbufFromCamacq: in std_logic;
 
-		ackGrrdabbufFromCamacq: in std_logic;
+		reqGrrdabbufFromCamacq: out std_logic;
+
+		dFlgbufToHostif: out std_logic_vector(31 downto 0);
 
 		dneGrrdcdbufFromCamacq: out std_logic;
 
-		dneGrrdabbufFromCamacq: out std_logic;
+		ackGrrdabbufFromCamacq: in std_logic;
+
+		strbDFlgbufToHostif: in std_logic;
 
 		avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
+
+		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
+
+		dneGrrdabbufFromCamacq: out std_logic;
+
+		strbDGrrdcdbufFromCamacq: out std_logic;
+
 		avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
 
 		dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
-
-		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
-		strbDGrrdcdbufFromCamacq: out std_logic;
-
 		strbDGrrdabbufFromCamacq: out std_logic;
 
 		reqGrrdefbufFromCamacq: out std_logic;
@@ -92,6 +93,7 @@ entity Featdet is
 		strbDGrrdefbufFromCamacq: out std_logic;
 
 		strb_dbg: out std_logic_vector(3 downto 0);
+
 		stateCopy_dbg: out std_logic_vector(7 downto 0);
 		stateCorner_dbg: out std_logic_vector(7 downto 0);
 		stateExp_dbg: out std_logic_vector(7 downto 0);
@@ -136,7 +138,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Sub_v12_0_a46b46s47 is
+	component Sub_a46b46s47 is
 		port (
 			clk: in std_logic;
 			ce: in std_logic;
@@ -146,7 +148,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Dpbram_v8_4_size96kB is
+	component Dpbram_size96kB is
 		port (
 			clkA: in std_logic;
 
@@ -181,7 +183,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Sub_v12_0_a47b44s48 is
+	component Sub_a47b44s48 is
 		port (
 			clk: in std_logic;
 			ce: in std_logic;
@@ -191,7 +193,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Add_v12_0_a23b23s24 is
+	component Add_a23b23s24 is
 		port (
 			clk: in std_logic;
 			ce: in std_logic;
@@ -201,7 +203,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Add_v12_0_a23b21s23 is
+	component Add_a23b21s23 is
 		port (
 			clk: in std_logic;
 			ce: in std_logic;
@@ -211,7 +213,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Add_v12_0_a21b21s22 is
+	component Add_a21b21s22 is
 		port (
 			clk: in std_logic;
 			ce: in std_logic;
@@ -221,7 +223,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Add_v12_0_a22b22s23 is
+	component Add_a22b22s23 is
 		port (
 			clk: in std_logic;
 			ce: in std_logic;
@@ -231,7 +233,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Mult_v12_0_a23b23p46 is
+	component Mult_a23b23p46 is
 		port (
 			clk: in std_logic;
 			ce: in std_logic;
@@ -241,7 +243,7 @@ architecture Featdet of Featdet is
 		);
 	end component;
 
-	component Mult_v12_0_a24b24p48 is
+	component Mult_a24b24p48 is
 		port (
 			clk: in std_logic;
 			ce: in std_logic;
@@ -661,7 +663,7 @@ architecture Featdet of Featdet is
 	signal ackFlgbufBToFlgbufClear: std_logic;
 
 	---- other
-	signal nmclk: std_logic;
+	signal mclkn: std_logic;
 	signal xsqr: std_logic_vector(89 downto 0); -- 5x 18bits, set by modules xsqr0 to xsqr4
 	signal ysqr: std_logic_vector(89 downto 0); -- 5x 18bits, set by modules ysqr0 to ysqr4
 	signal xy: std_logic_vector(89 downto 0); -- 5x 18bits, set by modules xy0 to xy4
@@ -739,7 +741,7 @@ begin
 			p => colsumYB
 		);
 
-	myDiffI_II : Sub_v12_0_a46b46s47
+	myDiffI_II : Sub_a46b46s47
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -748,9 +750,9 @@ begin
 			s => diffI_II
 		);
 
-	myFlgbuf : Dpbram_v8_4_size96kB
+	myFlgbuf : Dpbram_size96kB
 		port map (
-			clkA => nmclk,
+			clkA => mclkn,
 
 			enA => enFlgbuf,
 			weA => weFlgbuf,
@@ -805,7 +807,7 @@ begin
 			dwr => dwrImdefbuf
 		);
 
-	myR : Sub_v12_0_a47b44s48
+	myR : Sub_a47b44s48
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -814,7 +816,7 @@ begin
 			s => r
 		);
 
-	mySumIII : Add_v12_0_a23b23s24
+	mySumIII : Add_a23b23s24
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -823,7 +825,7 @@ begin
 			s => sumIII
 		);
 
-	mySumX : Add_v12_0_a23b21s23
+	mySumX : Add_a23b21s23
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -832,7 +834,7 @@ begin
 			s => sumX
 		);
 
-	mySumXA : Add_v12_0_a21b21s22
+	mySumXA : Add_a21b21s22
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -841,7 +843,7 @@ begin
 			s => sumXA
 		);
 
-	mySumXB : Add_v12_0_a21b21s22
+	mySumXB : Add_a21b21s22
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -850,7 +852,7 @@ begin
 			s => sumXB
 		);
 
-	mySumXC : Add_v12_0_a22b22s23
+	mySumXC : Add_a22b22s23
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -859,7 +861,7 @@ begin
 			s => sumXC
 		);
 
-	mySumXY : Add_v12_0_a23b21s23
+	mySumXY : Add_a23b21s23
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -868,7 +870,7 @@ begin
 			s => sumXY
 		);
 
-	mySumXYA : Add_v12_0_a21b21s22
+	mySumXYA : Add_a21b21s22
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -877,7 +879,7 @@ begin
 			s => sumXYA
 		);
 
-	mySumXYB : Add_v12_0_a21b21s22
+	mySumXYB : Add_a21b21s22
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -886,7 +888,7 @@ begin
 			s => sumXYB
 		);
 
-	mySumXYC : Add_v12_0_a22b22s23
+	mySumXYC : Add_a22b22s23
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -895,7 +897,7 @@ begin
 			s => sumXYC
 		);
 
-	mySumY : Add_v12_0_a23b21s23
+	mySumY : Add_a23b21s23
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -904,7 +906,7 @@ begin
 			s => sumY
 		);
 
-	mySumYA : Add_v12_0_a21b21s22
+	mySumYA : Add_a21b21s22
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -913,7 +915,7 @@ begin
 			s => sumYA
 		);
 
-	mySumYB : Add_v12_0_a21b21s22
+	mySumYB : Add_a21b21s22
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -922,7 +924,7 @@ begin
 			s => sumYB
 		);
 
-	mySumYC : Add_v12_0_a22b22s23
+	mySumYC : Add_a22b22s23
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -931,7 +933,7 @@ begin
 			s => sumYC
 		);
 
-	myTermI : Mult_v12_0_a23b23p46
+	myTermI : Mult_a23b23p46
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -940,7 +942,7 @@ begin
 			p => termI
 		);
 
-	myTermII : Mult_v12_0_a23b23p46
+	myTermII : Mult_a23b23p46
 		port map (
 			clk => mclk,
 			ce => ceScore,
@@ -949,7 +951,7 @@ begin
 			p => termII
 		);
 
-	myTermIII : Mult_v12_0_a24b24p48
+	myTermIII : Mult_a24b24p48
 		port map (
 			clk => mclk,
 			ce => ceScore,
