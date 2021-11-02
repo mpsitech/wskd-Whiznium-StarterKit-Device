@@ -103,17 +103,17 @@ void UntWskdUbdk::init(
 	tcflush(fd, TCIOFLUSH);
 	if (tcsetattr(fd, TCSANOW, &term) != 0) throw DbeException("error setting terminal attributes");
 
-	if (ioctl(fd, TIOCGSERIAL, &ss) == -1) throw DbeException("error getting serial struct");
+//	if (ioctl(fd, TIOCGSERIAL, &ss) == -1) throw DbeException("error getting serial struct");
 
-	cout << "ss.baud_base=" << ss.baud_base << endl; // should be 60'000'000
+//	cout << "ss.baud_base=" << ss.baud_base << endl; // should be 60'000'000
 
-	ss.flags &= ~ASYNC_SPD_MASK;
-	ss.flags |= ASYNC_SPD_CUST;
+//	ss.flags &= ~ASYNC_SPD_MASK;
+//	ss.flags |= ASYNC_SPD_CUST;
 
-	int div = ss.baud_base / bpsRx; // down to 12 or up to 5MHz works
-	ss.custom_divisor = div; // set to 10Mbps or 1MByte/s ; for 640*480*14/8=537.6kByte/s FLIR => more than 1 image per second
+//	int div = ss.baud_base / bpsRx; // down to 12 or up to 5MHz works
+//	ss.custom_divisor = div; // set to 10Mbps or 1MByte/s ; for 640*480*14/8=537.6kByte/s FLIR => more than 1 image per second
 
-	if (ioctl(fd, TIOCSSERIAL, &ss) == -1) throw DbeException("error setting serial struct");
+//	if (ioctl(fd, TIOCSSERIAL, &ss) == -1) throw DbeException("error setting serial struct");
 #endif
 	// IP init.cust --- IEND
 
