@@ -9,6 +9,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library unisim;
+use unisim.vcomponents.all;
+
 use work.Dbecore.all;
 use work.Arty.all;
 
@@ -46,15 +49,6 @@ architecture I2c of I2c is
 	------------------------------------------------------------------------
 	-- component declarations
 	------------------------------------------------------------------------
-
-	component IOBUF is
-		port (
-			O: out std_logic;
-			IO: inout std_logic;
-			I: in std_logic;
-			T: in std_logic
-		);
-	end component;
 
 	------------------------------------------------------------------------
 	-- signal declarations

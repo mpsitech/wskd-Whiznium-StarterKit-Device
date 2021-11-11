@@ -2592,7 +2592,7 @@ arty
 	ImeIMModule.end
 iccl
 	ImeIMBank.srefIxWdbeVIop	sref	srefKVoltstd
-	retrupd	bank0	_3v3
+	retrupd	bank0	_1v8
 		ImeICPin.iref
 		1
 		2
@@ -4514,6 +4514,8 @@ iccl
 		ImeIMProcess.end
 	iccl_ip_AXI;top;featdet	xsqr0
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[44..36]
 		retrupd	0		b								dx[44..36]
@@ -4521,6 +4523,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xsqr1
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[35..27]
 		retrupd	0		b								dx[35..27]
@@ -4528,6 +4532,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xsqr2
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[26..18]
 		retrupd	0		b								dx[26..18]
@@ -4535,6 +4541,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xsqr3
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[17..9]
 		retrupd	0		b								dx[17..9]
@@ -4542,6 +4550,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xsqr4
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[8..0]
 		retrupd	0		b								dx[8..0]
@@ -4549,6 +4559,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumXA1
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								xsqr[89..72]
 		retrupd	0		b								xsqr[71..54]
@@ -4556,6 +4568,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumXA2
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								xsqr[53..36]
 		retrupd	0		b								xsqr[35..18]
@@ -4563,6 +4577,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumXB
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumXA1
 		retrupd	0		b								colsumXA2
@@ -4570,6 +4586,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumXC
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumXB
 		retrupd	0		b								xsqr4p2
@@ -4577,6 +4595,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumXA
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumX[104..84]
 		retrupd	0		b								colsumX[83..63]
@@ -4584,6 +4604,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumXB
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumX[62..42]
 		retrupd	0		b								colsumX[41..21]
@@ -4591,6 +4613,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumXC
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumXA
 		retrupd	0		b								sumXB
@@ -4598,6 +4622,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumX
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumXC
 		retrupd	0		b								colsumX4p2
@@ -4605,6 +4631,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	ysqr0
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dy[44..36]
 		retrupd	0		b								dy[44..36]
@@ -4612,6 +4640,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	ysqr1
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dy[35..27]
 		retrupd	0		b								dy[35..27]
@@ -4619,6 +4649,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	ysqr2
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dy[26..18]
 		retrupd	0		b								dy[26..18]
@@ -4626,6 +4658,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	ysqr3
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dy[17..9]
 		retrupd	0		b								dy[17..9]
@@ -4633,6 +4667,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	ysqr4
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dy[8..0]
 		retrupd	0		b								dy[8..0]
@@ -4640,6 +4676,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumYA1
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								ysqr[89..72]
 		retrupd	0		b								ysqr[71..54]
@@ -4647,6 +4685,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumYA2
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								ysqr[53..36]
 		retrupd	0		b								ysqr[35..18]
@@ -4654,6 +4694,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumYB
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumYA1
 		retrupd	0		b								colsumYA2
@@ -4661,6 +4703,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumYC
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumYB
 		retrupd	0		b								ysqr4p2
@@ -4668,6 +4712,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumYA
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumY[104..84]
 		retrupd	0		b								colsumY[83..63]
@@ -4675,6 +4721,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumYB
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumY[62..42]
 		retrupd	0		b								colsumY[41..21]
@@ -4682,6 +4730,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumYC
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumYA
 		retrupd	0		b								sumYB
@@ -4689,6 +4739,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumY
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumYC
 		retrupd	0		b								colsumY4p2
@@ -4696,6 +4748,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xy0
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[44..36]
 		retrupd	0		b								dy[44..36]
@@ -4703,6 +4757,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xy1
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[35..27]
 		retrupd	0		b								dy[35..27]
@@ -4710,6 +4766,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xy2
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[26..18]
 		retrupd	0		b								dy[26..18]
@@ -4717,6 +4775,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xy3
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[17..9]
 		retrupd	0		b								dy[17..9]
@@ -4724,6 +4784,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	xy4
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								dx[8..0]
 		retrupd	0		b								dy[8..0]
@@ -4731,6 +4793,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumXYA1
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								xy[89..72]
 		retrupd	0		b								xy[71..54]
@@ -4738,6 +4802,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumXYA2
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								xy[53..36]
 		retrupd	0		b								xy[35..18]
@@ -4745,6 +4811,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumXYB
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumXYA1
 		retrupd	0		b								colsumXYA2
@@ -4752,6 +4820,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	colsumXYC
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumXYB
 		retrupd	0		b								xy4p2
@@ -4759,6 +4829,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumXYA
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumXY[104..84]
 		retrupd	0		b								colsumXY[83..63]
@@ -4766,6 +4838,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumXYB
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								colsumXY[62..42]
 		retrupd	0		b								colsumXY[41..21]
@@ -4773,6 +4847,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumXYC
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumXYA
 		retrupd	0		b								sumXYB
@@ -4780,6 +4856,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumXY
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumXYC
 		retrupd	0		b								colsumXY4p2
@@ -4787,6 +4865,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	sumIII
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumX
 		retrupd	0		b								sumY
@@ -4794,6 +4874,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	termIII
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumIII
 		retrupd	0		b								sumIII
@@ -4801,6 +4883,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	termII
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumXY
 		retrupd	0		b								sumXY
@@ -4808,6 +4892,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	termI
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								sumX
 		retrupd	0		b								sumY
@@ -4815,6 +4901,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	diffI_II
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								termI
 		retrupd	0		b								termII
@@ -4822,6 +4910,8 @@ iccl
 		ImeIMPort.end
 	iccl_ip_AXI;top;featdet	r
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
 		retrupd	0		ce								ceScore
 		retrupd	0		a								diffI_IIp1
 		retrupd	0		b								termIIIk
@@ -5112,7 +5202,7 @@ ubdk
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
 		retr	0	p0.0
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
-				nslp		NEED TO EXCHANGE THESE PHYSICALLY
+				nslp
 			ImeIJMPinSref.end
 		retr	0	p0.1
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
@@ -5131,7 +5221,7 @@ ubdk
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
 		retr	0	p1.0
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
-			spi0	mosi		NEED TO EXCHANGE THESE PHYSICALLY
+			spi0	mosi
 			ImeIJMPinSref.end
 		retr	0	p1.1
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
@@ -5164,8 +5254,15 @@ ubdk
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
 				cs0
 			ImeIJMPinSref.end
+		retr	0	p2.3
+			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
+				dispen
+			ImeIJMPinSref.end
 		ImeIMPin.end
 	ImeIMBank.end
+	ImeIMInterrupt1.sref	Comment
+	TIMER0_IRQn
+	ImeIMInterrupt1.end
 	ImeICSignal1.iref
 	1
 	2
@@ -5177,8 +5274,13 @@ ubdk
 	hshk	2	mutex	ackLaserToMutexLock
 	ImeIMSignal1.end
 	ImeIMModule.hsrefSupRefWdbeMModule	sref
+		chrono
+		ImeIMSensitivity1.srefSrcIxVTbl	srefSrcUref
+		int	TIMER0_IRQn
+		ImeIMSensitivity1.end
 		disp
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		ins	0	rtepin	dispen	out	sl	1			dispen
 		ins	0	rtepin	dispcs	out	sl	1			dispcs
 		ImeIMPort.end
 		laser
@@ -5189,6 +5291,36 @@ ubdk
 		ins	1	rtepin	cs0	out	sl	1			cs0
 		ins	1	rtepin	cs1	out	sl	1			cs1
 		ImeIMPort.end
+		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
+		op			false		false	main operation
+			ImeIMFsm.
+			
+				ImeICFsmstate.iref
+				1
+				ImeICFsmstate.end
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				1	prepA	false
+				1	prepB	false
+				1	prepC	false
+				0	init	false
+				0	idle	false
+				0	setLeft	false
+				0	setRight	false
+				0	inv	false
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		ImeIMProcess.end
+		mutex
+		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
+		op			false		false	main operation
+			ImeIMFsm.
+			
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	idle	false
+				0	locked	false
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		ImeIMProcess.end
 		state
 		ImeICPort.iref
 		1

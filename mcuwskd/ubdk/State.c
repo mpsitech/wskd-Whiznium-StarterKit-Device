@@ -17,7 +17,7 @@
  constants and variables
  ******************************************************************************/
 
-struct ShrdatState shrdatState; // IP shrdat --- LINE
+xdata struct ShrdatState shrdatState = {0}; // IP shrdat --- RLINE
 
 // IP vars.oth --- INSERT
 

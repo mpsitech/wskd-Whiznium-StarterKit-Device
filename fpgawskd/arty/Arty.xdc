@@ -55,5 +55,4 @@ set_property IOSTANDARD LVCMOS33 [get_ports -of_objects [get_iobanks 35]];
 
 # IP clks --- BEGIN
 # clocks
-# a clock by the name of clk_fpga_0 is generated automatically with the correct timing
 # IP clks --- END

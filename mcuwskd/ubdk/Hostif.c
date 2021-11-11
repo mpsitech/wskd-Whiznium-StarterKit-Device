@@ -15,7 +15,7 @@
  constants and variables
  ******************************************************************************/
 
-struct ShrdatHostif shrdatHostif; // IP shrdat --- LINE
+xdata struct ShrdatHostif shrdatHostif = {0}; // IP shrdat --- RLINE
 
 // --- main operation (op)
 enum StateOp {
@@ -57,6 +57,9 @@ bool hostifRun() {
 
 	static uint16_t crc;
 	static uint16_t i, icrc;
+
+	const uint16_t wait_max = WAITUS(5000UL); // 5ms wait before tx
+	uint16_t wait;
 	// IP hostifRun.vars --- END
 
 	UNSET_SENSITIVE_HOSTIF();
@@ -66,7 +69,12 @@ bool hostifRun() {
 	// IP hostifRun.op --- BEGIN
 	switch (stateOp) {
 		case stateOpInit:
-			// IP syncrst --- INSERT
+			// IP syncrst --- IBEGIN
+			flags.reqHostifToUsbrxtxSend = 0;
+			SET_EVT_reqHostifToUsbrxtxSend();
+			flags.reqHostifToUsbrxtxRecv = 0;
+			SET_EVT_reqHostifToUsbrxtxRecv();
+			// IP syncrst --- IEND
 
 			stateOp = stateOpIdle;
 
@@ -155,10 +163,12 @@ bool hostifRun() {
 			crcReset(&crc);
 			for (i = 0; i < icrc; i++) crcIncludeByte(&crc, buf[i]);
 
-			crcFinalize(&crc, false);
+			crcFinalize(&crc, true);
 			memcpy(&(buf[icrc]), &crc, 2);
 
 			shrdatUsbrxtx.ptrBuf = buf;
+
+			for (wait = 0; wait < wait_max; wait++) {};
 
 			flags.reqHostifToUsbrxtxSend = 1;
 			SET_EVT_reqHostifToUsbrxtxSend();
@@ -274,6 +284,8 @@ bool hostifRun() {
 
 			shrdatUsbrxtx.len = 2;
 			shrdatUsbrxtx.ptrBuf = buf;
+
+			for (wait = 0; wait < wait_max; wait++) {};
 
 			flags.reqHostifToUsbrxtxSend = 1;
 			SET_EVT_reqHostifToUsbrxtxSend();

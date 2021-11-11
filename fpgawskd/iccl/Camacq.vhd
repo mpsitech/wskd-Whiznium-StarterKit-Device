@@ -18,6 +18,8 @@ entity Camacq is
 		mclk: in std_logic;
 		btnPhase: in std_logic;
 
+		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
+
 		reqInvSetGrrd: in std_logic;
 		ackInvSetGrrd: out std_logic;
 
@@ -37,8 +39,6 @@ entity Camacq is
 		getPvwinfoTixVPvwbufstate: out std_logic_vector(7 downto 0);
 		getPvwinfoTkst: out std_logic_vector(31 downto 0);
 
-		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
-
 		reqGrrdabbufToFeatdet: in std_logic;
 		ackGrrdabbufToFeatdet: out std_logic;
 		dneGrrdabbufToFeatdet: in std_logic;
@@ -49,40 +49,41 @@ entity Camacq is
 
 		reqGrrdcdbufToFeatdet: in std_logic;
 		ackGrrdcdbufToFeatdet: out std_logic;
-		dneGrrdcdbufToFeatdet: in std_logic;
-		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
-
-		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
-		strbDGrrdcdbufToFeatdet: in std_logic;
 
 		reqGrrdefbufToFeatdet: in std_logic;
-		ackGrrdefbufToFeatdet: out std_logic;
-		dneGrrdefbufToFeatdet: in std_logic;
-		avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
+
+		dneGrrdcdbufToFeatdet: in std_logic;
 
 		reqPvwabufToHostif: in std_logic;
 
-		dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
+		ackGrrdefbufToFeatdet: out std_logic;
+
+		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
 
 		ackPvwabufToHostif: out std_logic;
 
-		strbDGrrdefbufToFeatdet: in std_logic;
+		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
 
-		reqPvwbbufToHostif: in std_logic;
+		dneGrrdefbufToFeatdet: in std_logic;
 
 		dnePvwabufToHostif: in std_logic;
 
-		ackPvwbbufToHostif: out std_logic;
+		strbDGrrdcdbufToFeatdet: in std_logic;
+
+		avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
 
 		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
 
-		dnePvwbbufToHostif: in std_logic;
+		dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
+		strbDGrrdefbufToFeatdet: in std_logic;
 
 		dPvwabufToHostif: out std_logic_vector(31 downto 0);
-
-		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
-
 		strbDPvwabufToHostif: in std_logic;
+
+		reqPvwbbufToHostif: in std_logic;
+		ackPvwbbufToHostif: out std_logic;
+		dnePvwbbufToHostif: in std_logic;
+		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
 
 		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
 		strbDPvwbbufToHostif: in std_logic;
@@ -1571,7 +1572,7 @@ begin
 	enGrrdefbufB <= '1' when (strbDGrrdefbufToFeatdet='0' and stateGrrdefbufB=stateGrrdefbufBReadA) else '0';
 	ackGrrdefbufToFeatdet <= ackGrrdefbufToFeatdet_sig;
 
-  aGrrdefbufB_vec <= std_logic_vector(to_unsigned(aGrrdefbufB, 11));
+	aGrrdefbufB_vec <= std_logic_vector(to_unsigned(aGrrdefbufB, 11));
 
 	stateGrrdefbufB_dbg <= x"00" when stateGrrdefbufB=stateGrrdefbufBInit
 				else x"10" when stateGrrdefbufB=stateGrrdefbufBReady

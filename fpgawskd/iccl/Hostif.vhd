@@ -20,24 +20,39 @@ entity Hostif is
 		commok: out std_logic;
 		reqReset: out std_logic;
 
-		reqInvCamacqSetGrrd: out std_logic;
-		ackInvCamacqSetGrrd: in std_logic;
+		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 
-		camacqSetGrrdRng: out std_logic_vector(7 downto 0);
-		camacqSetGrrdRedNotGray: out std_logic_vector(7 downto 0);
+		reqInvTkclksrcSetTkst: out std_logic;
+		ackInvTkclksrcSetTkst: in std_logic;
 
-		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
-		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
+		tkclksrcSetTkstTkst: out std_logic_vector(31 downto 0);
 
-		reqInvCamacqSetPvw: out std_logic;
-		ackInvCamacqSetPvw: in std_logic;
+		stateGetTixVIcclState: in std_logic_vector(7 downto 0);
 
-		camacqSetPvwRng: out std_logic_vector(7 downto 0);
-		camacqSetPvwRawNotBin: out std_logic_vector(7 downto 0);
-		camacqSetPvwGrayNotRgb: out std_logic_vector(7 downto 0);
+		stepGetInfoTixVState: in std_logic_vector(7 downto 0);
+		stepGetInfoAngle: in std_logic_vector(15 downto 0);
 
-		camacqGetPvwinfoTixVPvwbufstate: in std_logic_vector(7 downto 0);
-		camacqGetPvwinfoTkst: in std_logic_vector(31 downto 0);
+		reqInvStepMoveto: out std_logic;
+		ackInvStepMoveto: in std_logic;
+
+		stepMovetoAngle: out std_logic_vector(15 downto 0);
+		stepMovetoTstep: out std_logic_vector(7 downto 0);
+
+		reqInvStepSet: out std_logic;
+		ackInvStepSet: in std_logic;
+
+		stepSetRng: out std_logic_vector(7 downto 0);
+		stepSetCcwNotCw: out std_logic_vector(7 downto 0);
+		stepSetTstep: out std_logic_vector(7 downto 0);
+
+		reqInvStepZero: out std_logic;
+		ackInvStepZero: in std_logic;
+
+		reqInvLaserSet: out std_logic;
+		ackInvLaserSet: in std_logic;
+
+		laserSetL: out std_logic_vector(15 downto 0);
+		laserSetR: out std_logic_vector(15 downto 0);
 
 		reqInvCamifSetRng: out std_logic;
 		ackInvCamifSetRng: in std_logic;
@@ -97,55 +112,37 @@ entity Hostif is
 		reqInvFeatdetTriggerThd: out std_logic;
 		ackInvFeatdetTriggerThd: in std_logic;
 
-		reqInvLaserSet: out std_logic;
-		ackInvLaserSet: in std_logic;
+		reqInvCamacqSetGrrd: out std_logic;
+		ackInvCamacqSetGrrd: in std_logic;
 
-		laserSetL: out std_logic_vector(15 downto 0);
-		laserSetR: out std_logic_vector(15 downto 0);
+		camacqSetGrrdRng: out std_logic_vector(7 downto 0);
+		camacqSetGrrdRedNotGray: out std_logic_vector(7 downto 0);
 
-		stateGetTixVIcclState: in std_logic_vector(7 downto 0);
+		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
+		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
 
-		stepGetInfoTixVState: in std_logic_vector(7 downto 0);
-		stepGetInfoAngle: in std_logic_vector(15 downto 0);
+		reqInvCamacqSetPvw: out std_logic;
+		ackInvCamacqSetPvw: in std_logic;
 
-		reqInvStepMoveto: out std_logic;
-		ackInvStepMoveto: in std_logic;
+		camacqSetPvwRng: out std_logic_vector(7 downto 0);
+		camacqSetPvwRawNotBin: out std_logic_vector(7 downto 0);
+		camacqSetPvwGrayNotRgb: out std_logic_vector(7 downto 0);
 
-		stepMovetoAngle: out std_logic_vector(15 downto 0);
-		stepMovetoTstep: out std_logic_vector(7 downto 0);
-
-		reqInvStepSet: out std_logic;
-		ackInvStepSet: in std_logic;
-
-		stepSetRng: out std_logic_vector(7 downto 0);
-		stepSetCcwNotCw: out std_logic_vector(7 downto 0);
-		stepSetTstep: out std_logic_vector(7 downto 0);
-
-		reqInvStepZero: out std_logic;
-		ackInvStepZero: in std_logic;
-
-		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
-
-		reqInvTkclksrcSetTkst: out std_logic;
-		ackInvTkclksrcSetTkst: in std_logic;
-
-		tkclksrcSetTkstTkst: out std_logic_vector(31 downto 0);
+		camacqGetPvwinfoTixVPvwbufstate: in std_logic_vector(7 downto 0);
+		camacqGetPvwinfoTkst: in std_logic_vector(31 downto 0);
 
 		reqPvwabufFromCamacq: out std_logic;
 		ackPvwabufFromCamacq: in std_logic;
 		dnePvwabufFromCamacq: out std_logic;
 
-		reqPvwbbufFromCamacq: out std_logic;
-
 		avllenPvwabufFromCamacq: in std_logic_vector(7 downto 0);
 
-		ackPvwbbufFromCamacq: in std_logic;
-
 		dPvwabufFromCamacq: in std_logic_vector(31 downto 0);
-
-		dnePvwbbufFromCamacq: out std_logic;
-
 		strbDPvwabufFromCamacq: out std_logic;
+
+		reqPvwbbufFromCamacq: out std_logic;
+		ackPvwbbufFromCamacq: in std_logic;
+		dnePvwbbufFromCamacq: out std_logic;
 
 		avllenPvwbbufFromCamacq: in std_logic_vector(7 downto 0);
 
@@ -334,12 +331,17 @@ architecture Hostif of Hostif is
 	signal strbCrcd: std_logic;
 	signal torestart: std_logic;
 
-	signal camacqSetGrrdRng_sig: std_logic_vector(7 downto 0);
-	signal camacqSetGrrdRedNotGray_sig: std_logic_vector(7 downto 0);
+	signal tkclksrcSetTkstTkst_sig: std_logic_vector(31 downto 0);
 
-	signal camacqSetPvwRng_sig: std_logic_vector(7 downto 0);
-	signal camacqSetPvwRawNotBin_sig: std_logic_vector(7 downto 0);
-	signal camacqSetPvwGrayNotRgb_sig: std_logic_vector(7 downto 0);
+	signal stepMovetoAngle_sig: std_logic_vector(15 downto 0);
+	signal stepMovetoTstep_sig: std_logic_vector(7 downto 0);
+
+	signal stepSetRng_sig: std_logic_vector(7 downto 0);
+	signal stepSetCcwNotCw_sig: std_logic_vector(7 downto 0);
+	signal stepSetTstep_sig: std_logic_vector(7 downto 0);
+
+	signal laserSetL_sig: std_logic_vector(15 downto 0);
+	signal laserSetR_sig: std_logic_vector(15 downto 0);
 
 	signal camifSetRngRng_sig: std_logic_vector(7 downto 0);
 
@@ -362,17 +364,12 @@ architecture Hostif of Hostif is
 	signal featdetSetThdLvlFirst_sig: std_logic_vector(7 downto 0);
 	signal featdetSetThdLvlSecond_sig: std_logic_vector(7 downto 0);
 
-	signal laserSetL_sig: std_logic_vector(15 downto 0);
-	signal laserSetR_sig: std_logic_vector(15 downto 0);
+	signal camacqSetGrrdRng_sig: std_logic_vector(7 downto 0);
+	signal camacqSetGrrdRedNotGray_sig: std_logic_vector(7 downto 0);
 
-	signal stepMovetoAngle_sig: std_logic_vector(15 downto 0);
-	signal stepMovetoTstep_sig: std_logic_vector(7 downto 0);
-
-	signal stepSetRng_sig: std_logic_vector(7 downto 0);
-	signal stepSetCcwNotCw_sig: std_logic_vector(7 downto 0);
-	signal stepSetTstep_sig: std_logic_vector(7 downto 0);
-
-	signal tkclksrcSetTkstTkst_sig: std_logic_vector(31 downto 0);
+	signal camacqSetPvwRng_sig: std_logic_vector(7 downto 0);
+	signal camacqSetPvwRawNotBin_sig: std_logic_vector(7 downto 0);
+	signal camacqSetPvwGrayNotRgb_sig: std_logic_vector(7 downto 0);
 
 	---- myCrc
 	signal crc: std_logic_vector(15 downto 0);
@@ -580,12 +577,17 @@ begin
 	avllenRxbuf <= 0;
 
 	-- IP impl.op.wiring --- BEGIN
-	camacqSetGrrdRng <= camacqSetGrrdRng_sig;
-	camacqSetGrrdRedNotGray <= camacqSetGrrdRedNotGray_sig;
+	tkclksrcSetTkstTkst <= tkclksrcSetTkstTkst_sig;
 
-	camacqSetPvwRng <= camacqSetPvwRng_sig;
-	camacqSetPvwRawNotBin <= camacqSetPvwRawNotBin_sig;
-	camacqSetPvwGrayNotRgb <= camacqSetPvwGrayNotRgb_sig;
+	stepMovetoAngle <= stepMovetoAngle_sig;
+	stepMovetoTstep <= stepMovetoTstep_sig;
+
+	stepSetRng <= stepSetRng_sig;
+	stepSetCcwNotCw <= stepSetCcwNotCw_sig;
+	stepSetTstep <= stepSetTstep_sig;
+
+	laserSetL <= laserSetL_sig;
+	laserSetR <= laserSetR_sig;
 
 	camifSetRngRng <= camifSetRngRng_sig;
 
@@ -608,17 +610,12 @@ begin
 	featdetSetThdLvlFirst <= featdetSetThdLvlFirst_sig;
 	featdetSetThdLvlSecond <= featdetSetThdLvlSecond_sig;
 
-	laserSetL <= laserSetL_sig;
-	laserSetR <= laserSetR_sig;
+	camacqSetGrrdRng <= camacqSetGrrdRng_sig;
+	camacqSetGrrdRedNotGray <= camacqSetGrrdRedNotGray_sig;
 
-	stepMovetoAngle <= stepMovetoAngle_sig;
-	stepMovetoTstep <= stepMovetoTstep_sig;
-
-	stepSetRng <= stepSetRng_sig;
-	stepSetCcwNotCw <= stepSetCcwNotCw_sig;
-	stepSetTstep <= stepSetTstep_sig;
-
-	tkclksrcSetTkstTkst <= tkclksrcSetTkstTkst_sig;
+	camacqSetPvwRng <= camacqSetPvwRng_sig;
+	camacqSetPvwRawNotBin <= camacqSetPvwRawNotBin_sig;
+	camacqSetPvwGrayNotRgb <= camacqSetPvwGrayNotRgb_sig;
 	-- IP impl.op.wiring --- END
 
 	reqCrc <= '1' when (stateOp=stateOpRxopA or stateOp=stateOpRxopB or stateOp=stateOpRxopC or stateOp=stateOpRxopD or stateOp=stateOpRxopE
@@ -717,11 +714,14 @@ begin
 			dRxbuf <= (others => '0');
 			strbDRxbuf <= '0';
 
-			camacqSetGrrdRng_sig <= fls8;
-			camacqSetGrrdRedNotGray_sig <= fls8;
-			camacqSetPvwRng_sig <= fls8;
-			camacqSetPvwRawNotBin_sig <= fls8;
-			camacqSetPvwGrayNotRgb_sig <= fls8;
+			tkclksrcSetTkstTkst_sig <= (others => '0');
+			stepMovetoAngle_sig <= (others => '0');
+			stepMovetoTstep_sig <= x"96";
+			stepSetRng_sig <= fls8;
+			stepSetCcwNotCw_sig <= fls8;
+			stepSetTstep_sig <= x"96";
+			laserSetL_sig <= (others => '0');
+			laserSetR_sig <= (others => '0');
 			camifSetRngRng_sig <= fls8;
 			camifSetRegAddr_sig <= (others => '0');
 			camifSetRegVal_sig <= (others => '0');
@@ -736,14 +736,11 @@ begin
 			featdetSetCornerThd_sig <= (others => '0');
 			featdetSetThdLvlFirst_sig <= (others => '0');
 			featdetSetThdLvlSecond_sig <= (others => '0');
-			laserSetL_sig <= (others => '0');
-			laserSetR_sig <= (others => '0');
-			stepMovetoAngle_sig <= (others => '0');
-			stepMovetoTstep_sig <= x"96";
-			stepSetRng_sig <= fls8;
-			stepSetCcwNotCw_sig <= fls8;
-			stepSetTstep_sig <= x"96";
-			tkclksrcSetTkstTkst_sig <= (others => '0');
+			camacqSetGrrdRng_sig <= fls8;
+			camacqSetGrrdRedNotGray_sig <= fls8;
+			camacqSetPvwRng_sig <= fls8;
+			camacqSetPvwRawNotBin_sig <= fls8;
+			camacqSetPvwGrayNotRgb_sig <= fls8;
 
 		elsif rising_edge(mclk) then
 			if stateOp=stateOpIdle then

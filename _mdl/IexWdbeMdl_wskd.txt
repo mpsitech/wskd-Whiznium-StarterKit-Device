@@ -1,6 +1,6 @@
 IexWdbeMdl v1.1.14
 ImeIMUnit.srefIxVBasetype	srefSilRefWdbeMUnit	sref	Title	Easy	srefKToolch	Comment
-fpga	xc7z010-1clg400	arty	Digilent Arty Z7	true	viv
+fpga	xc7z010-1clg400	arty	Digilent Arty Z7	true	vivado
 	ImeIMModule.srefIxVBasetype	hsrefSupRefWdbeMModule	srefTplRefWdbeMModule	sref	Comment
 	wrp		zynq_ip_AXI_v2_0	arty_ip_AXI
 	top	arty_ip_AXI	top_xlnx_v1_0	top

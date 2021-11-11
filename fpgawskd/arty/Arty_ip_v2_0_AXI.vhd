@@ -307,10 +307,10 @@ begin
 	S_AXI_RRESP	<= axi_rresp;
 	S_AXI_RVALID	<= axi_rvalid;
 
-	process (S_AXI_ACLK)
+	process (extclk)
 	begin
-		if rising_edge(S_AXI_ACLK) then
-			if S_AXI_ARESETN='0' then
+		if rising_edge(extclk) then
+			if extresetn='0' then
 				axi_awready <= '0';
 			else
 				if (axi_awready='0' and S_AXI_AWVALID='1' and S_AXI_WVALID='1') then
@@ -322,10 +322,10 @@ begin
 		end if;
 	end process;
 
-	process (S_AXI_ACLK)
+	process (extclk)
 	begin
-		if rising_edge(S_AXI_ACLK) then
-			if S_AXI_ARESETN='0' then
+		if rising_edge(extclk) then
+			if extresetn='0' then
 				axi_awaddr <= (others => '0');
 			else
 				if (axi_awready='0' and S_AXI_AWVALID='1' and S_AXI_WVALID='1') then
@@ -335,10 +335,10 @@ begin
 		end if;
 	end process;
 
-	process (S_AXI_ACLK)
+	process (extclk)
 	begin
-		if rising_edge(S_AXI_ACLK) then
-			if S_AXI_ARESETN='0' then
+		if rising_edge(extclk) then
+			if extresetn='0' then
 				axi_wready <= '0';
 			else
 				if (axi_wready='0' and S_AXI_WVALID='1' and S_AXI_AWVALID='1') then
@@ -352,11 +352,11 @@ begin
 
 	slv_reg_wren <= axi_wready and S_AXI_WVALID and axi_awready and S_AXI_AWVALID;
 
-	process (S_AXI_ACLK)
+	process (extclk)
 		variable loc_addr: std_logic_vector(OPT_MEM_ADDR_BITS downto 0);
 	begin
-		if rising_edge(S_AXI_ACLK) then
-			if S_AXI_ARESETN='0' then
+		if rising_edge(extclk) then
+			if extresetn='0' then
 				slv_reg0 <= (others => '0');
 				slv_reg1 <= (others => '0');
 				slv_reg2 <= (others => '0');
@@ -400,10 +400,10 @@ begin
 		end if;
 	end process;
 
-	process (S_AXI_ACLK)
+	process (extclk)
 	begin
-		if rising_edge(S_AXI_ACLK) then
-			if S_AXI_ARESETN='0' then
+		if rising_edge(extclk) then
+			if extresetn='0' then
 				axi_bvalid <= '0';
 				axi_bresp <= "00";
 			else
@@ -417,10 +417,10 @@ begin
 		end if;
 	end process;
 
-	process (S_AXI_ACLK)
+	process (extclk)
 	begin
-		if rising_edge(S_AXI_ACLK) then
-			if S_AXI_ARESETN='0' then
+		if rising_edge(extclk) then
+			if extresetn='0' then
 				slv_reg_ld <= '0';
 				axi_arready <= '0';
 				axi_araddr <= (others => '1');
@@ -439,10 +439,10 @@ begin
 		end if;
 	end process;
 
-	process (S_AXI_ACLK)
+	process (extclk)
 	begin
-		if rising_edge(S_AXI_ACLK) then
-			if S_AXI_ARESETN='0' then
+		if rising_edge(extclk) then
+			if extresetn='0' then
 				axi_rvalid <= '0';
 				axi_rresp	<= "00";
 			else
@@ -486,15 +486,15 @@ begin
 		else "101100" when stateOp=stateOpRdE
 		else "111111";
 
-	process (S_AXI_ARESETN, S_AXI_ACLK)
+	process (extresetn, extclk)
 		variable loc_waddr: std_logic_vector(OPT_MEM_ADDR_BITS downto 0);
 		variable loc_raddr: std_logic_vector(OPT_MEM_ADDR_BITS downto 0);
 
 		variable rdy: boolean;
 
 	begin
-		if rising_edge(S_AXI_ACLK) then
-			if S_AXI_ARESETN='0' then
+		if rising_edge(extclk) then
+			if extresetn='0' then
 				stateOp <= stateOpInit;
 				enRx <= '0';
 				enTx <= '0';
@@ -736,12 +736,12 @@ begin
 
 	strbTx <= '1' when stateStrb=stateStrbTx else '0';
 
-	process (S_AXI_ARESETN, S_AXI_ACLK)
+	process (extresetn, extclk)
 		variable i: natural range 0 to 4;
 	begin
-		if S_AXI_ARESETN='0' then
+		if extresetn='0' then
 			stateStrb <= stateStrbIdle;
-		elsif rising_edge(S_AXI_ACLK) then
+		elsif rising_edge(extclk) then
 			if stateStrb=stateStrbIdle then
 				if reqOpToStrbRx='1' then
 					i := 0;
@@ -774,15 +774,15 @@ begin
 
 	timeout <= '1' when (stateTo=stateToDone and reqOpToToRestart='0') else '0';
 
-	process (S_AXI_ARESETN, S_AXI_ACLK, stateTo)
+	process (extresetn, extclk, stateTo)
 		constant twait: natural := 10000; -- in axiclk clocks ; for 50MHz, 10000 eq. 200us, 100000 eq. 2ms
 		variable i: natural range 0 to twait;
 
 	begin
-		if S_AXI_ARESETN='0' then
+		if extresetn='0' then
 			stateTo <= stateToInit;
 
-		elsif rising_edge(S_AXI_ACLK) then
+		elsif rising_edge(extclk) then
 			if (reqOpToToRestart='1' or stateTo=stateToInit) then
 				i := 0;
 

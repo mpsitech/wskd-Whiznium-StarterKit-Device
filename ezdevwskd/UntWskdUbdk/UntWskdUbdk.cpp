@@ -47,6 +47,7 @@ void UntWskdUbdk::init(
 
 	NRetry = 3;
 	timeoutRx = 25000; // in us; used in rx read() regardless of device configuration
+	timeoutRxWord = (10 * 1000000) / bpsRx; // 10 bits per word
 
 ///
 	const size_t sizeRxbuf = 1024;
@@ -151,7 +152,9 @@ bool UntWskdUbdk::rx(
 #ifdef __linux__
 	if (reqlen != 0) {
 		fd_set fds;
-		timeval timeout;
+
+		timeval timeout, timeout_save;
+
 		int s;
 
 		size_t nleft;
@@ -164,8 +167,8 @@ bool UntWskdUbdk::rx(
 		FD_ZERO(&fds);
 		FD_SET(fd, &fds);
 
-		timeout.tv_sec = 0;
-		timeout.tv_usec = timeoutRx + timeoutRxWord * reqlen; // timeout includes the transfer itself!
+		timeout_save.tv_sec = (timeoutRx + timeoutRxWord * reqlen) / 1000000;
+		timeout_save.tv_usec = (timeoutRx + timeoutRxWord * reqlen) % 1000000; // timeout includes the transfer itself!
 
 		if (rxtxdump) {
 			if (!histNotDump) cout << "rx ";
@@ -176,6 +179,7 @@ bool UntWskdUbdk::rx(
 		en = 0;
 
 		while (nleft > 0) {
+			timeout = timeout_save;
 			s = select(fd+1, &fds, NULL, NULL, &timeout);
 
 			if (s > 0) {
@@ -189,6 +193,7 @@ bool UntWskdUbdk::rx(
 			} else if (s == 0) {
 				en = ETIMEDOUT;
 				break;
+
 			} else {
 				en = errno;
 			};

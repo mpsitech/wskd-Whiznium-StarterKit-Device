@@ -3,7 +3,7 @@
 # checkout script for Wskd embedded system code, release fpgawskd_any
 # copyright: (C) 2017-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 11 Nov 2021
 # IP header --- ABOVE
 
 if [ -z ${FPGAROOT+x} ]; then

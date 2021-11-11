@@ -18,6 +18,8 @@ void stepInit(void);
 
 bool stepRun(void);
 
-// IP oth --- INSERT
+// IP oth --- IBEGIN
+void updateAngle(uint32_t* ptrDHhst);
+// IP oth --- IEND
 
 #endif

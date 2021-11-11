@@ -15,7 +15,7 @@
  constants and variables
  ******************************************************************************/
 
-struct ShrdatUsbrxtx shrdatUsbrxtx; // IP shrdat --- LINE
+xdata struct ShrdatUsbrxtx shrdatUsbrxtx = {0}; // IP shrdat --- RLINE
 
 enum StateOp {
 	stateOpInit,
@@ -53,7 +53,16 @@ bool usbrxtxRun() {
 	// IP usbrxtxRun.op --- BEGIN
 	switch (stateOp) {
 		case stateOpInit:
-			// IP syncrst --- INSERT
+			// IP syncrst --- IBEGIN
+			flags.ackHostifToUsbrxtxSend = 0;
+			SET_EVT_ackHostifToUsbrxtxSend();
+			flags.dneHostifToUsbrxtxSend = 0;
+			SET_EVT_dneHostifToUsbrxtxSend();
+			flags.ackHostifToUsbrxtxRecv = 0;
+			SET_EVT_ackHostifToUsbrxtxRecv();
+			flags.dneHostifToUsbrxtxRecv = 0;
+			SET_EVT_dneHostifToUsbrxtxRecv();
+			// IP syncrst --- IEND
 
 			stateOp = stateOpIdle;
 
@@ -135,6 +144,8 @@ void VCP_Callback() {
 			SET_EVT_dneHostifToUsbrxtxRecv();
 
 			SET_SENSITIVE_USBRXTX();
+
+			run();
 		};
 
 	} else if (source & TX_COMPLETE) {
@@ -143,6 +154,8 @@ void VCP_Callback() {
 			SET_EVT_dneHostifToUsbrxtxSend();
 
 			SET_SENSITIVE_USBRXTX();
+
+			run();
 		};
 	};
 }

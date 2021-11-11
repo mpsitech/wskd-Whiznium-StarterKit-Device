@@ -9,6 +9,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library unisim;
+use unisim.vcomponents.all;
+
 use work.Dbecore.all;
 use work.Arty.all;
 
@@ -29,23 +32,6 @@ architecture Parrom of Parrom is
 	-- component declarations
 	------------------------------------------------------------------------
 
-	component RAMB16_S9 is
-		generic (
-			WRITE_MODE: string := "WRITE_FIRST"
-		);
-		port (
-			DO: out std_logic_vector(7 downto 0);
-			DOP: out std_logic_vector(0 downto 0);
-			ADDR: in std_logic_vector(10 downto 0);
-			CLK: in std_logic;
-			DI: in std_logic_vector(7 downto 0);
-			DIP: in std_logic_vector(0 downto 0);
-			EN: in std_logic;
-			SSR: in std_logic;
-			WE: in std_logic
-		);
-	end component;
-
 	------------------------------------------------------------------------
 	-- signal declarations
 	------------------------------------------------------------------------
@@ -61,8 +47,8 @@ begin
 
 	myBram : RAMB16_S9
 		generic map (
-			INIT_00 => x"003630360001083100033730001A343000FF183000FF17300003033100420830",
 			WRITE_MODE => "WRITE_FIRST",
+			INIT_00 => x"003630360001083100033730001A343000FF183000FF17300003033100420830",
 			INIT_01 => x"0001173700781537005A033700A0043700E021360012333600E23236000E3136",
 			INIT_02 => x"003301360008003600123137000A01390010063900020539001A053700600B37",
 			INIT_03 => x"00133536007C193A0000183A0043133A00501C4700201B370052203600602D30",

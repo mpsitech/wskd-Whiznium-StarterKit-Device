@@ -18,6 +18,8 @@ entity Camacq is
 		mclk: in std_logic;
 		btnPhase: in std_logic;
 
+		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
+
 		reqInvSetGrrd: in std_logic;
 		ackInvSetGrrd: out std_logic;
 
@@ -37,19 +39,18 @@ entity Camacq is
 		getPvwinfoTixVPvwbufstate: out std_logic_vector(7 downto 0);
 		getPvwinfoTkst: out std_logic_vector(31 downto 0);
 
-		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
+		reqGrrdabbufToFeatdet: in std_logic;
 
 		reqGrrdcdbufToFeatdet: in std_logic;
 
-		reqGrrdabbufToFeatdet: in std_logic;
+		ackGrrdabbufToFeatdet: out std_logic;
 
 		ackGrrdcdbufToFeatdet: out std_logic;
 
-		ackGrrdabbufToFeatdet: out std_logic;
+		dneGrrdabbufToFeatdet: in std_logic;
 
 		dneGrrdcdbufToFeatdet: in std_logic;
 
-		dneGrrdabbufToFeatdet: in std_logic;
 		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
 
 		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
@@ -57,22 +58,30 @@ entity Camacq is
 		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
 		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
-		strbDGrrdcdbufToFeatdet: in std_logic;
 
 		strbDGrrdabbufToFeatdet: in std_logic;
 
+		strbDGrrdcdbufToFeatdet: in std_logic;
+
 		reqGrrdefbufToFeatdet: in std_logic;
+
+		reqPvwabufToHostif: in std_logic;
+
 		ackGrrdefbufToFeatdet: out std_logic;
+
+		ackPvwabufToHostif: out std_logic;
+
 		dneGrrdefbufToFeatdet: in std_logic;
+
+		dnePvwabufToHostif: in std_logic;
+
 		avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
 
 		dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
-		strbDGrrdefbufToFeatdet: in std_logic;
 
-		reqPvwabufToHostif: in std_logic;
-		ackPvwabufToHostif: out std_logic;
-		dnePvwabufToHostif: in std_logic;
 		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
+
+		strbDGrrdefbufToFeatdet: in std_logic;
 
 		dPvwabufToHostif: out std_logic_vector(31 downto 0);
 		strbDPvwabufToHostif: in std_logic;
@@ -3930,7 +3939,7 @@ begin
 
 	
 	-- IP impl.oth.cust --- IBEGIN
-	nmclk <= not mclk;
+	mclkn <= not mclk;
 
 	--strb_dbg <= strbFrame & strbRow960 & strbRow768 & strbCol1280N9 & strbCol1280 & strbCol1024N3;
 	strb_dbg <= strbFrame & strbRow192 & strbRow768 & strbDPvwbinrgbGnBl & strbDPvwbinrgbRd & strbDPvwbingrayGr;

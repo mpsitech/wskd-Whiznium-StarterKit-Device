@@ -17,7 +17,8 @@
  constants and variables
  ******************************************************************************/
 
-struct ShrdatChrono shrdatChrono;
+xdata struct ShrdatChrono shrdatChrono = {0}; // IP shrdat --- RLINE
+
 #define DIV 10
 
 /******************************************************************************
@@ -57,7 +58,7 @@ bool chronoRun() {
 
 		SET_EVT_ackInvChronoSetHhst();
 
-	} else if (false) { // IP chronoRun.trigger --- LINE
+	} else if (IS_SET_EVT_isrTIMER0()) { // IP chronoRun.trigger --- RLINE
 		i++;
 		if (i == DIV) {
 			i = 0;

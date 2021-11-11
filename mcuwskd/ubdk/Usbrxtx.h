@@ -19,5 +19,6 @@ void usbrxtxInit(void);
 bool usbrxtxRun(void);
 
 //void VCP_Callback(); // declared in VCPXpress.h
+extern void run(void); // unit's main loop
 
 #endif
