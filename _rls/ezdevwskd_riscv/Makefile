@@ -2,7 +2,7 @@
 # make file for Wskd device access library, release ezdevwskd_riscv (ubuntu cross-compilation)
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 11 Nov 2021
+# date created: 24 Dec 2021
 # IP header --- ABOVE
 
 BUILDROOT = ${WHIZSDKROOT}/build
@@ -22,6 +22,7 @@ PCHS = DevWskd.h.gch
 OBJS = Wskd.o
 OBJS +=
 OBJS += UntWskdArty.o UntWskdArty_vecs.o CtrWskdArtyCamacq.o CtrWskdArtyCamif.o CtrWskdArtyFeatdet.o CtrWskdArtyLaser.o CtrWskdArtyState.o CtrWskdArtyStep.o CtrWskdArtyTkclksrc.o
+OBJS += UntWskdCleb.o UntWskdCleb_vecs.o CtrWskdClebLaser.o CtrWskdClebState.o CtrWskdClebStep.o CtrWskdClebTkclksrc.o
 OBJS += UntWskdIccl.o UntWskdIccl_vecs.o CtrWskdIcclCamacq.o CtrWskdIcclCamif.o CtrWskdIcclFeatdet.o CtrWskdIcclLaser.o CtrWskdIcclState.o CtrWskdIcclStep.o CtrWskdIcclTkclksrc.o
 OBJS += UntWskdMcep.o UntWskdMcep_vecs.o
 OBJS += UntWskdUbdk.o UntWskdUbdk_vecs.o CtrWskdUbdkChrono.o CtrWskdUbdkDisp.o CtrWskdUbdkLaser.o CtrWskdUbdkState.o CtrWskdUbdkStep.o

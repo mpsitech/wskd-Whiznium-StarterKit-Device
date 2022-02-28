@@ -174,18 +174,80 @@ arty
 			0	getInfo	statsng
 				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
 				tixVState	tix	VecVWskdArtyStepState
-				angle	uint16			in stepper motor steps (4096 per rev.)
+				angle	uint16			in stepper motor steps (1000 per rev.)
 				ImeIAMCommandRetpar2.end
 			0	moveto	void
 				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
-				angle	uint16			0		in stepper motor steps (4096 per rev.)
-				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				angle	uint16			0		in stepper motor steps (1000 per rev.)
+				Tstep	uint8			60		in tkclk clocks: rps = 10000 / (Tstep * 200 * 5)
 				ImeIAMCommandInvpar2.end
 			0	set	void
 				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
 				rng	_bool			fls8
 				ccwNotCw	_bool			fls8
-				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				Tstep	uint8			60		in tkclk clocks: rps = 10000 / (Tstep * 200 * 5)
+				ImeIAMCommandInvpar2.end
+			0	zero	void
+			ImeIMCommand2.end
+		ImeIMController.end
+	ImeIMModule.end
+cleb
+	ImeIMVector1.srefIxVBasetype	sref	srefsKOption
+	tixlin	VecVWskdClebState	filfed
+		ImeIMVectoritem1.sref	Title	Comment
+		nc	offline
+		ready	ready
+		active	streaming
+		ImeIMVectoritem1.end
+	ImeIMVector1.end
+	ImeIMModule.hsrefSupRefWdbeMModule	sref
+	top	laser
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	set	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				l	uint16					DAC value
+				r	uint16					DAC value
+				ImeIAMCommandInvpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+	top	state
+		ImeIMController.
+		
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	get	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVClebState	tix	VecVWskdClebState
+				ImeIAMCommandRetpar2.end
+			ImeIMCommand2.end
+		ImeIMController.end
+	top	step
+		ImeIMController.
+		
+			ImeIMVector2.srefIxVBasetype	sref	srefsKOption
+			tixlin	VecVWskdClebStepState	filfed;notit
+				ImeIMVectoritem2.sref	Title	Comment
+				idle
+				move
+				ImeIMVectoritem2.end
+			ImeIMVector2.end
+			ImeIMCommand2.refNum	sref	srefIxVRettype	srefIvrRefWdbeMSignal	srefRvrRefWdbeMSignal	srefRerRefWdbeMSignal	Comment
+			0	getInfo	statsng
+				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
+				tixVState	tix	VecVWskdClebStepState
+				angle	uint16			in stepper motor steps (1000 per rev.)
+				ImeIAMCommandRetpar2.end
+			0	moveto	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				angle	uint16			0		in stepper motor steps (1000 per rev.)
+				Tstep	uint8			60		in tkclk clocks: rps = 10000 / (Tstep * 200 * 5)
+				ImeIAMCommandInvpar2.end
+			0	set	void
+				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
+				rng	_bool			fls8
+				ccwNotCw	_bool			fls8
+				Tstep	uint8			60		in tkclk clocks: rps = 10000 / (Tstep * 200 * 5)
 				ImeIAMCommandInvpar2.end
 			0	zero	void
 			ImeIMCommand2.end
@@ -365,18 +427,18 @@ iccl
 			0	getInfo	statsng
 				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
 				tixVState	tix	VecVWskdIcclStepState
-				angle	uint16			in stepper motor steps (4096 per rev.)
+				angle	uint16			in stepper motor steps (1000 per rev.)
 				ImeIAMCommandRetpar2.end
 			0	moveto	void
 				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
-				angle	uint16			0		in stepper motor steps (4096 per rev.)
-				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				angle	uint16			0		in stepper motor steps (1000 per rev.)
+				Tstep	uint8			60		in tkclk clocks: rps = 10000 / (Tstep * 200 * 5)
 				ImeIAMCommandInvpar2.end
 			0	set	void
 				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
 				rng	_bool			fls8
 				ccwNotCw	_bool			fls8
-				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				Tstep	uint8			60		in tkclk clocks: rps = 10000 / (Tstep * 200 * 5)
 				ImeIAMCommandInvpar2.end
 			0	zero	void
 			ImeIMCommand2.end
@@ -427,18 +489,18 @@ ubdk
 			0	getInfo	statsng
 				ImeIAMCommandRetpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Comment
 				tixVState	tix	VecVWskdUbdkStepState
-				angle	uint16			in stepper motor steps (4096 per rev.)
+				angle	uint16			in stepper motor steps (1000 per rev.)
 				ImeIAMCommandRetpar2.end
 			0	moveto	void
 				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
-				angle	uint16			0		in stepper motor steps (4096 per rev.)
-				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				angle	uint16			0		in stepper motor steps (1000 per rev.)
+				Tstep	uint8			60		in tkclk clocks: rps = 10000 / (Tstep * 200 * 5)
 				ImeIAMCommandInvpar2.end
 			0	set	void
 				ImeIAMCommandInvpar2.sref	srefIxWdbeVPartype	srefRefWdbeMVector	Length	Defval	srefRefWdbeMVectoritem	Comment
 				rng	_bool			fls8
 				ccwNotCw	_bool			fls8
-				Tstep	uint8			150		in tkclk clocks: rps = 10000 / (Tstep * 64 * 64)
+				Tstep	uint8			60		in tkclk clocks: rps = 10000 / (Tstep * 200 * 5)
 				ImeIAMCommandInvpar2.end
 			0	zero	void
 			ImeIMCommand2.end

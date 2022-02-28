@@ -342,8 +342,6 @@ bool UntWskd::runCmdVoidToRet(
 		crc.finalize();
 
 		success = (crc.crc == 0x0000);
-
-		success = ((rxbuf[retBuflen] == 0xAA) && (rxbuf[retBuflen+1] == 0xAA));
 	};
 
 	if (success) cmd->bufToParsRet(rxbuf, retBuflen);

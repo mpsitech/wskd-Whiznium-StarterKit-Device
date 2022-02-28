@@ -22,7 +22,11 @@ fpga	xc7z010-1clg400	arty	Digilent Arty Z7	true	vivado
 	oth	arty_ip_AXI;top		rgbled4
 	oth	arty_ip_AXI;top		rgbled5
 	ehostif	arty_ip_AXI;top	axihostif_Easy_v2_0	hostif
-	ectr	arty_ip_AXI;top		camacq	frame acquisition from OV5640
+	ectr	arty_ip_AXI;top		camacq	frame acquisition from IMX335
+	oth	arty_ip_AXI;top;camacq	selectio_xlnx_v5_1_mipirx	mipirx
+		ImeIAMModulePar.x1SrefKKey	Val
+		nLane	2
+		ImeIAMModulePar.end
 	oth	arty_ip_AXI;top;camacq	spbram_v1_0	bingraybuf	8x8 pixel binning gray buffer (256 pixels @ 16 bits)
 		ImeIAMModulePar.x1SrefKKey	Val
 		size	2
@@ -89,10 +93,10 @@ fpga	xc7z010-1clg400	arty	Digilent Arty Z7	true	vivado
 		ImeIAMModulePar.x1SrefKKey	Val
 		size	2
 		ImeIAMModulePar.end
-	ectr	arty_ip_AXI;top		camif	camera control (OV5640 via I2C)
+	ectr	arty_ip_AXI;top		camif	camera control (IMX335 via I2C)
 	oth	arty_ip_AXI;top;camif		i2c
 	mnfprim	arty_ip_AXI;top;camif;i2c	IOBUF	iobuf
-	oth	arty_ip_AXI;top;camif		parrom	OV5640 register initialization parameters ROM
+	oth	arty_ip_AXI;top;camif		parrom	IMX335 register initialization parameters ROM
 	mnfprim	arty_ip_AXI;top;camif;parrom	RAMB16_S9	bram
 	ectr	arty_ip_AXI;top		featdet	feature detection
 	oth	arty_ip_AXI;top;featdet	dsp48_xlnx_v3_0_aMultB	xsqr0
@@ -435,7 +439,7 @@ fpga	xc7z010-1clg400	arty	Digilent Arty Z7	true	vivado
 		ImeIAMModulePar.x1SrefKKey	Val
 		size	2
 		ImeIAMModulePar.end
-	ectr	arty_ip_AXI;top		laser	line laser control (dual MAX5711 DAC via SPI)
+	ectr	arty_ip_AXI;top		laser	line laser control (MAX5721 dual DAC via SPI)
 	oth	arty_ip_AXI;top;laser	spimaster_v1_0	spi
 		ImeIMGeneric.sref	Defval
 		cpol	0
@@ -443,8 +447,40 @@ fpga	xc7z010-1clg400	arty	Digilent Arty Z7	true	vivado
 		fSclk	8333333
 		ImeIMGeneric.end
 	ectr	arty_ip_AXI;top		state	state monitor
-	ectr	arty_ip_AXI;top		step	stepper motor control (28BYJ-48 via ULN2003)
+	ectr	arty_ip_AXI;top		step	stepper motor control (NEMA17 via DRV8834)
+	mnfprim	arty_ip_AXI;top;step	IOBUF	iobufM0
 	ectr	arty_ip_AXI;top	tkclksrc_Easy_v1_0	tkclksrc	10kHz clock source
+	ImeIMModule.end
+fpga	lifcl-40-9bg400c	cleb	Lattice CrossLink-NX Evaluation Board	true	radiant
+	ImeIMModule.srefIxVBasetype	hsrefSupRefWdbeMModule	srefTplRefWdbeMModule	sref	Comment
+	top		top_lttc_v1_0	top
+		ImeIAMModulePar.x1SrefKKey	Val
+		fExtclk	100000
+		extresetNNotP	true
+		ImeIAMModulePar.end
+		ImeIMGeneric.sref	Defval
+		fMclk	50000
+		ImeIMGeneric.end
+	oth	top	bcdfreq_v1_0	bcdfreqDbg0
+	oth	top	bcdfreq_v1_0	bcdfreqDbg1
+	oth	top	debounce_v1_0	debounceBtn0
+	oth	top	debounce_v1_0	debounceBtn1
+	oth	top	debounce_v1_0	debounceBtn2
+	oth	top	debounce_v1_0	debounceBtn3
+	oth	top		rgbled4
+	oth	top		rgbled5
+	ehostif	top	uarthostif_Easy_v1_0	hostif	connection to host via FT2232H
+	ectr	top		laser	line laser control (MAX5721 dual DAC via SPI)
+	oth	top;laser	spimaster_v1_0	spi
+		ImeIMGeneric.sref	Defval
+		cpol	0
+		cpha	1
+		fSclk	8333333
+		ImeIMGeneric.end
+	ectr	top		state	state monitor
+	ectr	top		step	stepper motor control (NEMA17 via DRV8834)
+	mnfprim	top;step	BB	bbM0
+	ectr	top	tkclksrc_Easy_v1_0	tkclksrc	10kHz clock source
 	ImeIMModule.end
 fpga	mpfs250t-fcvg484	iccl	Microchip PolarFire Soc Icicle kit	true	libero
 	ImeIMModule.srefIxVBasetype	hsrefSupRefWdbeMModule	srefTplRefWdbeMModule	sref	Comment
@@ -470,7 +506,24 @@ fpga	mpfs250t-fcvg484	iccl	Microchip PolarFire Soc Icicle kit	true	libero
 	oth	iccl_ip_AXI;top		rgbled4
 	oth	iccl_ip_AXI;top		rgbled5
 	ehostif	iccl_ip_AXI;top	axihostif_Easy_v2_0	hostif
-	ectr	iccl_ip_AXI;top		camacq	frame acquisition from OV5640
+	ectr	iccl_ip_AXI;top		camacq	frame acquisition from IMX335
+	oth	iccl_ip_AXI;top;camacq	iod_mchp_v1_0_mipirx	mipirx
+		ImeIAMModulePar.x1SrefKKey	Val
+		nLane	4
+		ImeIAMModulePar.end
+	oth	iccl_ip_AXI;top;camacq	ccc_mchp_v1_0	mipipll
+		ImeIAMModulePar.x1SrefKKey	Val
+		div	6
+		ImeIAMModulePar.end
+	oth	iccl_ip_AXI;top;camacq	mipidec_mchp_v1_0	mipidec
+		ImeIAMModulePar.x1SrefKKey	Val
+		g_DATATYPE	RAW-12
+		g_LANE_WIDTH	4
+		g_NUM_OF_PIXELS	4
+		fMipi	594
+		fCamclk	148.5
+		fParclk	99
+		ImeIAMModulePar.end
 	oth	iccl_ip_AXI;top;camacq	dpsram_mchp_v1_0	bingraybuf	8x8 pixel binning gray buffer (256 pixels @ 16 bits)
 		ImeIAMModulePar.x1SrefKKey	Val
 		size	2
@@ -545,10 +598,10 @@ fpga	mpfs250t-fcvg484	iccl	Microchip PolarFire Soc Icicle kit	true	libero
 		size	2
 		pVsN	n
 		ImeIAMModulePar.end
-	ectr	iccl_ip_AXI;top		camif	camera control (OV5640 via I2C)
+	ectr	iccl_ip_AXI;top		camif	camera control (IMX335 via I2C)
 	oth	iccl_ip_AXI;top;camif		i2c
 	mnfprim	iccl_ip_AXI;top;camif;i2c	BIBUF	iobuf
-	oth	iccl_ip_AXI;top;camif	dpsram_mchp_v1_0	parrom	OV5640 register initialization parameters ROM
+	oth	iccl_ip_AXI;top;camif	dpsram_mchp_v1_0	parrom	IMX335 register initialization parameters ROM
 		ImeIAMModulePar.x1SrefKKey	Val
 		size	2
 		file	parrom.hex
@@ -891,7 +944,7 @@ fpga	mpfs250t-fcvg484	iccl	Microchip PolarFire Soc Icicle kit	true	libero
 		ImeIAMModulePar.x1SrefKKey	Val
 		size	2
 		ImeIAMModulePar.end
-	ectr	iccl_ip_AXI;top		laser	line laser control (dual MAX5711 DAC via SPI)
+	ectr	iccl_ip_AXI;top		laser	line laser control (MAX5721 dual DAC via SPI)
 	oth	iccl_ip_AXI;top;laser	spimaster_v1_0	spi
 		ImeIMGeneric.sref	Defval
 		cpol	0
@@ -899,7 +952,8 @@ fpga	mpfs250t-fcvg484	iccl	Microchip PolarFire Soc Icicle kit	true	libero
 		fSclk	8333333
 		ImeIMGeneric.end
 	ectr	iccl_ip_AXI;top		state	state monitor
-	ectr	iccl_ip_AXI;top		step	stepper motor control (28BYJ-48 via ULN2003)
+	ectr	iccl_ip_AXI;top		step	stepper motor control (NEMA17 via DRV8834)
+	mnfprim	iccl_ip_AXI;top;step	BIBUF	iobufM0
 	ectr	iccl_ip_AXI;top	tkclksrc_Easy_v1_0	tkclksrc	10kHz clock source
 	ImeIMModule.end
 fpga	5cseba6u23c7n	mcep	Aries Cyclone V evaluation platform	true	quartus

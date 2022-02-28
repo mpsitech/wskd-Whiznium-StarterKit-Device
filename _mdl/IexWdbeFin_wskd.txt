@@ -3,33 +3,37 @@ ImeIMUnit.sref
 arty
 	ImeIMBank.srefIxWdbeVIop	sref	srefKVoltstd
 	retrupd	bank34	_3v3
-		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location	Arty/Cora	Arty/Cora Schematic	Cable-based
-		retrupd	0	step1	N18	J3[0]	CK_IO8	d2
-		retrupd	0	step3	U15	J3[4]	CK_IO10	d4
-		retrupd	0	sclk	U14	J4[0]	CK_IO0	d8
-		retrupd	0	mosi	V13	J4[2]	CK_IO1	d9
-		retrupd	0	dbg0	T14	J4[4]	CK_IO2	xclk
-		retrupd	0	dbg1	T15	J4[6]	CK_IO3	pclk
-		retrupd	0	dbg2	V17	J4[8]	CK_IO4	href
-		retrupd	0	dbg3	V18	J4[10]	CK_IO5	vsync
-		retrupd	0	dbg4	R17	J4[12]	CK_IO6
-		retrupd	0	dbg5	R14	J4[14]	CK_IO7
-		retrupd	0	d2	Y18	JA[0]	JA1_P	step1
-		retrupd	0	d3	U18	JA[1]	JA3_P	cs0
-		retrupd	0	d4	Y19	JA[2]	JA1_N	step2
-		retrupd	0	d5	U19	JA[3]	JA3_N	cs1
-		retrupd	0	d6	Y16	JA[4]	JA2_P	step3
-		retrupd	0	d7	W18	JA[5]	JA4_P	sclk
-		retrupd	0	d8	Y17	JA[6]	JA2_N	step4
-		retrupd	0	d9	W19	JA[7]	JA4_N	mosi
-		retrupd	0	xclk	W14	JB[0]	JB1_P	rst
-		retrupd	0	pclk	V16	JB[1]	JB3_P	pwdn
-		retrupd	0	href	Y14	JB[2]	JB1_N	sioc
-		retrupd	0	vsync	W16	JB[3]	JB3_N	siod
-		retrupd	0	rst	T11	JB[4]	JB2_P
-		retrupd	0	pwdn	V12	JB[5]	JB4_P
-		retrupd	0	sioc	T10	JB[6]	JB2_N
-		retrupd	0	siod	W13	JB[7]	JB4_N
+		ImeICPin.iref
+		1
+		2
+		3
+		4
+		5
+		6
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	1	dbg0	T14
+		retrupd	1	dbg1	T15
+		retrupd	1	dbg2	V17
+		retrupd	1	dbg3	V18
+		retrupd	1	dbg4	R17
+		retrupd	1	dbg5	R14
+		retrupd	2	csi_clk_p	Y18
+		retrupd	3	csi_d0_p	U18
+		retrupd	2	csi_clk_n	Y19
+		retrupd	3	csi_d0_n	U19
+		retrupd	4	csi_d1_p	Y16
+		retrupd	5	scl	W18
+		retrupd	4	csi_d1_n	Y17
+		retrupd	5	sda	W19
+		retrupd	6	cs	W14
+		retrupd	6	sclk	V16
+		retrupd	6	mosi	Y14
+		retrupd	0	nslp	W16
+		retrupd	0	m0	T11
+		retrupd	0	dir	V12
+		retrupd	0	step	T10
+		retrupd	0	trig	W13
 		ImeIMPin.end
 	retrupd	bank35	_3v3
 		ImeICPin.iref
@@ -46,11 +50,6 @@ arty
 		retrupd	2	led5_r	M15
 		retrupd	0	btn0	D20
 		retrupd	0	btn1	D19
-		retrupd	0	crypto_sda	J15
-		retrupd	0	step2	M18	J3[2]	CK_IO9	d3
-		retrupd	0	step4	K18	J3[6]	CK_IO11	d5
-		retrupd	0	cs0	J18	J3[8]	CK_IO12	d6
-		retrupd	0	cs1	G15	J3[10]	CK_IO13	d7
 		ImeIMPin.end
 	ImeIMBank.end
 	ImeIMModule.hsrefSupRefWdbeMModule	sref
@@ -71,7 +70,7 @@ arty
 		hshk	0	mdl	debounceBtn1	reqResetBtn1	false	sl	1					false
 		oth	0	mdl	state	rgb4	false	slvdn	24					false
 		oth	0	void		rgb5	false	slvdn	24					false
-		oth	0	void		camacqStrb_dbg	false	slvdn	6					false
+		oth	0	void		camacqRxclk_dbg	false	slvdn	6					false
 		oth	0	void		featdetStrb_dbg	false	slvdn	4					false
 		oth	1	void		bcddbg0	false	slvdn	8					false
 		oth	1	void		bcddbg1	false	slvdn	8					false
@@ -258,23 +257,13 @@ arty
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
 		ins	0	reset	reset	in	sl	1					reset
 		ins	0	clk	mclk	in	sl	1					mclk
-		ins	1	rtepin	pclk	in	sl	1			pclk
-		ins	1	rtepin	href	in	sl	1			href
-		ins	1	rtepin	vsync	in	sl	1			vsync
-		ins	2	rtepin	d2	in	sl	1			d2
-		ins	2	rtepin	d3	in	sl	1			d3
-		ins	2	rtepin	d4	in	sl	1			d4
-		ins	2	rtepin	d5	in	sl	1			d5
-		ins	2	rtepin	d6	in	sl	1			d6
-		ins	2	rtepin	d7	in	sl	1			d7
-		ins	2	rtepin	d8	in	sl	1			d8
-		ins	2	rtepin	d9	in	sl	1			d9
-		ins	0	rtetop	btnPhase	in	sl	1					btn0_sig
-		ins	3	dbg	cntFallA_dbg	out	slvdn	8					bcddbg0
-		ins	3	dbg	cntRiseA_dbg	out	slvdn	8					bcddbg1
-		ins	3	dbg	cntFallB_dbg	out	slvdn	8					bcddbg2
-		ins	3	dbg	cntRiseB_dbg	out	slvdn	8					bcddbg3
-		ins	0	dbg	strb_dbg	out	slvdn	6					camacqStrb_dbg
+		ins	1	rtepin	csi_clk_p	in	sl	1			csi_clk_p
+		ins	1	rtepin	csi_clk_n	in	sl	1			csi_clk_n
+		ins	2	rtepin	csi_d0_p	in	sl	1			csi_d0_p
+		ins	2	rtepin	csi_d0_n	in	sl	1			csi_d0_n
+		ins	3	rtepin	csi_d1_p	in	sl	1			csi_d1_p
+		ins	3	rtepin	csi_d1_n	in	sl	1			csi_d1_n
+		ins	0	dbg	rxclk_dbg	out	sl	1					camacqRxclk_dbg
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
@@ -319,18 +308,8 @@ arty
 		40
 		41
 		42
-		43
-		44
-		45
 		ImeICSignal2.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
-		oth	0	prc	align	cntmax	true	nat					8	false
-		oth	45	prc	align	cntFallA	false	nat		0..cntmax			0	false
-		oth	45	prc	align	cntRiseA	false	nat		0..cntmax			0	false
-		oth	45	prc	align	cntFallB	false	nat		0..cntmax			0	false
-		oth	45	prc	align	cntRiseB	false	nat		0..cntmax			0	false
-		oth	0	prc	align	phase	false	phase_t					phaseFallA	false
-		oth	0	prc	align	pclk_shift	false	sl	1				0	false
 		oprt	1	prc	grrd	tixVGrrdbufstate	false	slvdn	8				tixVGrrdbufstateIdle	false	getGrrdinfoTixVGrrdbufstate
 		oprt	1	prc	grrd	grrdTkst	false	slvdn	32				0	false	getGrrdinfoTkst
 		oth	0	prc	grrd	grrdbuf	false	grrdbuf_t					grrdbufAb	false
@@ -366,149 +345,117 @@ arty
 		oth	0	prc	op	grrdRedNotGray	false	sl	1				0	false
 		oth	0	prc	op	pvwrun	false	sl	1				0	false
 		oth	0	prc	op	pvwacc	false	pvwacc_t					pvwaccBinrgb	false
-		oth	11	prc	pvw	pvwTkstA	false	slvdn	32				0	false
-		oth	11	prc	pvw	pvwTkstB	false	slvdn	32				0	false
+		oth	9	prc	pvw	pvwTkstA	false	slvdn	32				0	false
+		oth	9	prc	pvw	pvwTkstB	false	slvdn	32				0	false
 		oth	0	prc	pvw	pvwLatestBNotA	false	sl	1				0	false
-		oth	12	prc	pvw	enPvwabuf	false	sl	1		pvwabufLock=lockPvw and state(storeA..D)	1	0	false
-		oth	12	prc	pvw	enPvwbbuf	false	sl	1		pvwbbufLock=lockPvw and state(storeA..D)	1	0	false
-		oth	13	prc	pvw	aPvwbuf_vec	false	slvdn	16					false
-		oth	13	prc	pvw	aPvwbuf	false	nat		0..57600			0	false
+		oth	10	prc	pvw	enPvwabuf	false	sl	1		pvwabufLock=lockPvw and state(storeA..D)	1	0	false
+		oth	10	prc	pvw	enPvwbbuf	false	sl	1		pvwbbufLock=lockPvw and state(storeA..D)	1	0	false
+		oth	11	prc	pvw	aPvwbuf_vec	false	slvdn	16					false
+		oth	11	prc	pvw	aPvwbuf	false	nat		0..57600			0	false
 		oth	0	prc	pvw	dwrPvwbuf	false	slvdn	8				0	false
-		oth	14	prc	pvw	pvwbingrayrun	false	sl	1		pvwacc=pvwaccBingray and state(ready;storeA..D)	1	0	false
-		oth	14	prc	pvw	pvwbinrgbrun	false	sl	1		pvwacc=pvwaccBinrgb and state(ready;storeA..D)	1	0	false
-		oth	14	prc	pvw	pvwrawgrayrun	false	sl	1		pvwacc=pvwaccRawgray and state(ready;storeA..D)	1	0	false
-		oth	14	prc	pvw	pvwrawrgbrun	false	sl	1		pvwacc=pvwaccRawrgb and state(ready;storeA..D)	1	0	false
-		oth	15	prc	pvwbingray	dPvwbingrayGr	false	slvdn	8				0	false
-		strb	15	prc	pvwbingray	strbDPvwbingrayGr	false	sl	1				0	false
+		oth	12	prc	pvw	pvwbingrayrun	false	sl	1		pvwacc=pvwaccBingray and state(ready;storeA..D)	1	0	false
+		oth	12	prc	pvw	pvwbinrgbrun	false	sl	1		pvwacc=pvwaccBinrgb and state(ready;storeA..D)	1	0	false
+		oth	12	prc	pvw	pvwrawgrayrun	false	sl	1		pvwacc=pvwaccRawgray and state(ready;storeA..D)	1	0	false
+		oth	12	prc	pvw	pvwrawrgbrun	false	sl	1		pvwacc=pvwaccRawrgb and state(ready;storeA..D)	1	0	false
+		oth	13	prc	pvwbingray	dPvwbingrayGr	false	slvdn	8				0	false
+		strb	13	prc	pvwbingray	strbDPvwbingrayGr	false	sl	1				0	false
 		oth	0	prc	pvwbingray	enBingraybuf	false	sl	1		state(LASB..C)	1	0	false
 		oth	0	prc	pvwbingray	weBingraybuf	false	sl	1				0	false
-		oth	16	prc	pvwbingray	aBingraybuf_vec	false	slvdn	11					false
-		oth	16	prc	pvwbingray	aBingraybuf	false	nat		0..2048			0	false
+		oth	14	prc	pvwbingray	aBingraybuf_vec	false	slvdn	11					false
+		oth	14	prc	pvwbingray	aBingraybuf	false	nat		0..2048			0	false
 		oth	0	prc	pvwbingray	dwrBingraybuf	false	slvdn	8				0	false
-		oth	17	prc	pvwbinrgb	dPvwbinrgbRd	false	slvdn	8				0	false
-		strb	17	prc	pvwbinrgb	strbDPvwbinrgbRd	false	sl	1				0	false
-		oth	18	prc	pvwbinrgb	dPvwbinrgbGn	false	slvdn	8				0	false
-		oth	18	prc	pvwbinrgb	dPvwbinrgbBl	false	slvdn	8				0	false
-		strb	18	prc	pvwbinrgb	strbDPvwbinrgbGnBl	false	sl	1				0	false
+		oth	15	prc	pvwbinrgb	dPvwbinrgbRd	false	slvdn	8				0	false
+		strb	15	prc	pvwbinrgb	strbDPvwbinrgbRd	false	sl	1				0	false
+		oth	16	prc	pvwbinrgb	dPvwbinrgbGn	false	slvdn	8				0	false
+		oth	16	prc	pvwbinrgb	dPvwbinrgbBl	false	slvdn	8				0	false
+		strb	16	prc	pvwbinrgb	strbDPvwbinrgbGnBl	false	sl	1				0	false
 		oth	0	prc	pvwbinrgb	enBinrgbbuf	false	sl	1		state(LASB..C)	1	0	false
 		oth	0	prc	pvwbinrgb	weBinrgbbuf	false	sl	1				0	false
-		oth	19	prc	pvwbinrgb	aBinrgbbuf_vec	false	slvdn	11					false
-		oth	19	prc	pvwbinrgb	aBinrgbbuf	false	nat		0..2048			0	false
+		oth	17	prc	pvwbinrgb	aBinrgbbuf_vec	false	slvdn	11					false
+		oth	17	prc	pvwbinrgb	aBinrgbbuf	false	nat		0..2048			0	false
 		oth	0	prc	pvwbinrgb	dwrBinrgbbuf	false	slvdn	8				0	false
-		oth	20	prc	pvwbuf	pvwabufLock	false	lock_t					lockIdle	false
-		oth	20	prc	pvwbuf	pvwabufFull	false	sl	1				0	false
-		oth	21	prc	pvwbuf	pvwbbufLock	false	lock_t					lockIdle	false
-		oth	21	prc	pvwbuf	pvwbbufFull	false	sl	1				0	false
-		oth	22	prc	pvwbufB	enPvwabufB	false	sl	1		pvwabufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false
-		oth	22	prc	pvwbufB	enPvwbbufB	false	sl	1		pvwbbufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false
-		oth	23	prc	pvwbufB	aPvwbufB_vec	false	slvdn	14					false
-		oth	23	prc	pvwbufB	aPvwbufB	false	nat		0..14400			0	false
-		oprt	24	prc	pvwbufB	tixVPvwbufstate	false	slvdn	8				tixVPvwbufstateIdle	false	getPvwinfoTixVPvwbufstate
-		oth	24	prc	pvwbufB	pvwtkst	false	slvdn	32				0	false	getPvwinfoTkst
-		oth	25	prc	pvwbufB	ackPvwbufToHostif	false	sl	1				0	false
-		oprt	25	prc	pvwbufB	ackPvwabufToHostif	false	sl	1		pvwabufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwabufToHostif
-		oprt	25	prc	pvwbufB	ackPvwbbufToHostif	false	sl	1		pvwbbufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwbbufToHostif
-		oth	26	prc	pvwrawgray	dPvwrawgrayGr	false	slvdn	8				0	false
-		strb	26	prc	pvwrawgray	strbDPvwrawgrayGr	false	sl	1				0	false
+		oth	18	prc	pvwbuf	pvwabufLock	false	lock_t					lockIdle	false
+		oth	18	prc	pvwbuf	pvwabufFull	false	sl	1				0	false
+		oth	19	prc	pvwbuf	pvwbbufLock	false	lock_t					lockIdle	false
+		oth	19	prc	pvwbuf	pvwbbufFull	false	sl	1				0	false
+		oth	20	prc	pvwbufB	enPvwabufB	false	sl	1		pvwabufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false
+		oth	20	prc	pvwbufB	enPvwbbufB	false	sl	1		pvwbbufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false
+		oth	21	prc	pvwbufB	aPvwbufB_vec	false	slvdn	14					false
+		oth	21	prc	pvwbufB	aPvwbufB	false	nat		0..14400			0	false
+		oprt	22	prc	pvwbufB	tixVPvwbufstate	false	slvdn	8				tixVPvwbufstateIdle	false	getPvwinfoTixVPvwbufstate
+		oth	22	prc	pvwbufB	pvwtkst	false	slvdn	32				0	false	getPvwinfoTkst
+		oth	23	prc	pvwbufB	ackPvwbufToHostif	false	sl	1				0	false
+		oprt	23	prc	pvwbufB	ackPvwabufToHostif	false	sl	1		pvwabufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwabufToHostif
+		oprt	23	prc	pvwbufB	ackPvwbbufToHostif	false	sl	1		pvwbbufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwbbufToHostif
+		oth	24	prc	pvwrawgray	dPvwrawgrayGr	false	slvdn	8				0	false
+		strb	24	prc	pvwrawgray	strbDPvwrawgrayGr	false	sl	1				0	false
 		oth	0	prc	pvwrawgray	enRawgraybuf	false	sl	1		state(LASA..D)	1	0	false
 		oth	0	prc	pvwrawgray	weRawgraybuf	false	sl	1				0	false
-		oth	27	prc	pvwrawgray	aRawgraybuf_vec	false	slvdn	11					false
-		oth	27	prc	pvwrawgray	aRawgraybuf	false	nat		0..2048			0	false
+		oth	25	prc	pvwrawgray	aRawgraybuf_vec	false	slvdn	11					false
+		oth	25	prc	pvwrawgray	aRawgraybuf	false	nat		0..2048			0	false
 		oth	0	prc	pvwrawgray	dwrRawgraybuf	false	slvdn	8				0	false
-		oth	28	prc	pvwrawrgb	dPvwrawrgbRd	false	slvdn	8				0	false
-		strb	28	prc	pvwrawrgb	strbDPvwrawrgbRd	false	sl	1				0	false
-		oth	29	prc	pvwrawrgb	dPvwrawrgbGn	false	slvdn	8				0	false
-		oth	29	prc	pvwrawrgb	dPvwrawrgbBl	false	slvdn	8				0	false
-		strb	29	prc	pvwrawrgb	strbDPvwrawrgbGnBl	false	sl	1				0	false
-		oth	38	prc	sample	vsync_sig	false	sl	1				0	false
-		oth	38	prc	sample	vsync_shift	false	sl	1				0	false
-		oth	44	prc	sample	href_sig	false	sl	1				0	false
-		oth	44	prc	sample	href_shift	false	sl	1				0	false
-		oth	39	prc	sample	d	false	slvdn	8				0	false
-		oth	39	prc	sample	d_shift	false	slvdn	8				0	false
-		oth	40	prc	tag	rowmax	true	nat					1944	false
-		oth	40	prc	tag	row	false	nat		0..rowmax			0	false
-		oth	41	prc	tag	row120	true	nat					852	false		skiprow (1944 - 240) / 2
-		oth	41	prc	tag	row192	true	nat					780	false		skiprow (1944 - 384) / 2
-		oth	41	prc	tag	row768	true	nat					204	false		skiprow (1944 - 1536) / 2
-		oth	41	prc	tag	row960	true	nat					12	false		skiprow (1944 - 1920) / 2
-		oth	42	prc	tag	colmax	true	nat					2592	false
-		oth	42	prc	tag	col	false	nat		0..colmax			0	false
-		oth	43	prc	tag	col160N1	true	nat					1135	false		skipcol (2592 - 320) / 2 - 1
-		oth	43	prc	tag	col256N3	true	nat					1037	false		skipcol (2592 - 512) / 2 - 3
-		oth	43	prc	tag	col1024N3	true	nat					269	false		skipcol (2592 - 2048) / 2 - 3
-		oth	43	prc	tag	col1024N9	true	nat					263	false		skipcol (2592 - 2048) / 2 - 9
-		oth	43	prc	tag	col1280	true	nat					16	false		skipcol (2592 - 2560) / 2
-		oth	43	prc	tag	col1280N9	true	nat					7	false		skipcol (2592 - 2560) / 2 - 9
+		oth	26	prc	pvwrawrgb	dPvwrawrgbRd	false	slvdn	8				0	false
+		strb	26	prc	pvwrawrgb	strbDPvwrawrgbRd	false	sl	1				0	false
+		oth	27	prc	pvwrawrgb	dPvwrawrgbGn	false	slvdn	8				0	false
+		oth	27	prc	pvwrawrgb	dPvwrawrgbBl	false	slvdn	8				0	false
+		strb	27	prc	pvwrawrgb	strbDPvwrawrgbGnBl	false	sl	1				0	false
+		oth	28	prc	sample	csid	false	slvdn	16				0	false
+		oth	28	prc	sample	csidn	false	slvdn	16				0	false
+		oth	0	prc	sample	d	false	slvdn	8				0	false
+		oth	29	prc	tag	rowmax	true	nat					1944	false
+		oth	29	prc	tag	row	false	nat		0..rowmax			0	false
+		oth	30	prc	tag	row120	true	nat					852	false		skiprow (1944 - 240) / 2
+		oth	30	prc	tag	row192	true	nat					780	false		skiprow (1944 - 384) / 2
+		oth	30	prc	tag	row768	true	nat					204	false		skiprow (1944 - 1536) / 2
+		oth	30	prc	tag	row960	true	nat					12	false		skiprow (1944 - 1920) / 2
+		oth	31	prc	tag	colmax	true	nat					2592	false
+		oth	31	prc	tag	col	false	nat		0..colmax			0	false
+		oth	32	prc	tag	col160N1	true	nat					1135	false		skipcol (2592 - 320) / 2 - 1
+		oth	32	prc	tag	col256N3	true	nat					1037	false		skipcol (2592 - 512) / 2 - 3
+		oth	32	prc	tag	col1024N3	true	nat					269	false		skipcol (2592 - 2048) / 2 - 3
+		oth	32	prc	tag	col1024N9	true	nat					263	false		skipcol (2592 - 2048) / 2 - 9
+		oth	32	prc	tag	col1280	true	nat					16	false		skipcol (2592 - 2560) / 2
+		oth	32	prc	tag	col1280N9	true	nat					7	false		skipcol (2592 - 2560) / 2 - 9
 		strb	0	prc	tag	strbFrame	false	sl	1		state(frameB) and !vsync_sig	1	0	false
-		strb	9	prc	tag	strbRow120	false	sl	1		state(rowB) and href_sig and row=row120	1	0	false
-		strb	9	prc	tag	strbRow192	false	sl	1		state(rowB) and href_sig and row=row192	1	0	false
-		strb	9	prc	tag	strbRow768	false	sl	1		state(rowB) and href_sig and row=row768	1	0	false
-		strb	9	prc	tag	strbRow960	false	sl	1		state(rowB) and href_sig and row=row960	1	0	false
-		strb	10	prc	tag	strbCol160N1	false	sl	1		state(colA) and col=col160N1	1	0	false
-		strb	10	prc	tag	strbCol256N3	false	sl	1		state(colA) and col=col256N3	1	0	false
-		strb	10	prc	tag	strbCol1024N3	false	sl	1		state(colA) and col=col1024N3	1	0	false
-		strb	10	prc	tag	strbCol1024N9	false	sl	1		state(colA) and col=col1024N9	1	0	false
-		strb	10	prc	tag	strbCol1280	false	sl	1		state(colA) and col=col1280	1	0	false
-		strb	10	prc	tag	strbCol1280N9	false	sl	1		state(colA) and col=col1280N9	1	0	false
+		strb	33	prc	tag	strbRow120	false	sl	1		state(rowB) and href_sig and row=row120	1	0	false
+		strb	33	prc	tag	strbRow192	false	sl	1		state(rowB) and href_sig and row=row192	1	0	false
+		strb	33	prc	tag	strbRow768	false	sl	1		state(rowB) and href_sig and row=row768	1	0	false
+		strb	33	prc	tag	strbRow960	false	sl	1		state(rowB) and href_sig and row=row960	1	0	false
+		strb	34	prc	tag	strbCol160N1	false	sl	1		state(colA) and col=col160N1	1	0	false
+		strb	34	prc	tag	strbCol256N3	false	sl	1		state(colA) and col=col256N3	1	0	false
+		strb	34	prc	tag	strbCol1024N3	false	sl	1		state(colA) and col=col1024N3	1	0	false
+		strb	34	prc	tag	strbCol1024N9	false	sl	1		state(colA) and col=col1024N9	1	0	false
+		strb	34	prc	tag	strbCol1280	false	sl	1		state(colA) and col=col1280	1	0	false
+		strb	34	prc	tag	strbCol1280N9	false	sl	1		state(colA) and col=col1280N9	1	0	false
+		clk	0	mdl	mipirx	rxclk	false	sl	1					false
+		oth	0	mdl	mipirx	rxd	false	slvdn	16					false
 		oth	0	mdl	bingraybuf	drdBingraybuf	false	slvdn	8					false
 		oth	0	mdl	binrgbbuf	drdBinrgbbuf	false	slvdn	8					false
 		oth	0	mdl	evenbuf	drdEvenbuf	false	slvdn	8					false
 		oth	0	mdl	rawgraybuf	drdRawgraybuf	false	slvdn	8					false
 		oth	0	void		mclkn	false	sl	1					false
-		hshk	30	prc	pvw	reqPvwToPvwbufAbufLock	false	sl	1				0	false
-		hshk	30	prc	pvwbuf	ackPvwToPvwbufAbufLock	false	sl	1				0	false
-		hshk	30	prc	pvwbuf	dnyPvwToPvwbufAbufLock	false	sl	1				0	false
-		hshk	31	prc	pvw	reqPvwToPvwbufAbufSetFull	false	sl	1				0	false
-		hshk	31	prc	pvwbuf	ackPvwToPvwbufAbufSetFull	false	sl	1				0	false
-		hshk	32	prc	pvw	reqPvwToPvwbufBbufLock	false	sl	1				0	false
-		hshk	32	prc	pvwbuf	ackPvwToPvwbufBbufLock	false	sl	1				0	false
-		hshk	32	prc	pvwbuf	dnyPvwToPvwbufBbufLock	false	sl	1				0	false
-		hshk	33	prc	pvw	reqPvwToPvwbufBbufSetFull	false	sl	1				0	false
-		hshk	33	prc	pvwbuf	ackPvwToPvwbufBbufSetFull	false	sl	1				0	false
-		hshk	34	prc	pvwbufB	reqPvwbufBToPvwbufAbufLock	false	sl	1				0	false
-		hshk	34	prc	pvwbuf	ackPvwbufBToPvwbufAbufLock	false	sl	1				0	false
-		hshk	34	prc	pvwbuf	dnyPvwbufBToPvwbufAbufLock	false	sl	1				0	false
-		hshk	35	prc	pvwbufB	reqPvwbufBToPvwbufAbufClear	false	sl	1				0	false
-		hshk	35	prc	pvwbuf	ackPvwbufBToPvwbufAbufClear	false	sl	1				0	false
-		hshk	36	prc	pvwbufB	reqPvwbufBToPvwbufBbufLock	false	sl	1				0	false
-		hshk	36	prc	pvwbuf	ackPvwbufBToPvwbufBbufLock	false	sl	1				0	false
-		hshk	36	prc	pvwbuf	dnyPvwbufBToPvwbufBbufLock	false	sl	1				0	false
-		hshk	37	prc	pvwbufB	reqPvwbufBToPvwbufBbufClear	false	sl	1				0	false
-		hshk	37	prc	pvwbuf	ackPvwbufBToPvwbufBbufClear	false	sl	1				0	false
+		hshk	35	prc	pvw	reqPvwToPvwbufAbufLock	false	sl	1				0	false
+		hshk	35	prc	pvwbuf	ackPvwToPvwbufAbufLock	false	sl	1				0	false
+		hshk	35	prc	pvwbuf	dnyPvwToPvwbufAbufLock	false	sl	1				0	false
+		hshk	36	prc	pvw	reqPvwToPvwbufAbufSetFull	false	sl	1				0	false
+		hshk	36	prc	pvwbuf	ackPvwToPvwbufAbufSetFull	false	sl	1				0	false
+		hshk	37	prc	pvw	reqPvwToPvwbufBbufLock	false	sl	1				0	false
+		hshk	37	prc	pvwbuf	ackPvwToPvwbufBbufLock	false	sl	1				0	false
+		hshk	37	prc	pvwbuf	dnyPvwToPvwbufBbufLock	false	sl	1				0	false
+		hshk	38	prc	pvw	reqPvwToPvwbufBbufSetFull	false	sl	1				0	false
+		hshk	38	prc	pvwbuf	ackPvwToPvwbufBbufSetFull	false	sl	1				0	false
+		hshk	39	prc	pvwbufB	reqPvwbufBToPvwbufAbufLock	false	sl	1				0	false
+		hshk	39	prc	pvwbuf	ackPvwbufBToPvwbufAbufLock	false	sl	1				0	false
+		hshk	39	prc	pvwbuf	dnyPvwbufBToPvwbufAbufLock	false	sl	1				0	false
+		hshk	40	prc	pvwbufB	reqPvwbufBToPvwbufAbufClear	false	sl	1				0	false
+		hshk	40	prc	pvwbuf	ackPvwbufBToPvwbufAbufClear	false	sl	1				0	false
+		hshk	41	prc	pvwbufB	reqPvwbufBToPvwbufBbufLock	false	sl	1				0	false
+		hshk	41	prc	pvwbuf	ackPvwbufBToPvwbufBbufLock	false	sl	1				0	false
+		hshk	41	prc	pvwbuf	dnyPvwbufBToPvwbufBbufLock	false	sl	1				0	false
+		hshk	42	prc	pvwbufB	reqPvwbufBToPvwbufBbufClear	false	sl	1				0	false
+		hshk	42	prc	pvwbuf	ackPvwbufBToPvwbufBbufClear	false	sl	1				0	false
 		ImeIMSignal2.end
 		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
-		align	mclk	reset	true	state(init) or (!grrdrun and !pvwrun)	false	pixel clock alignment
-			ImeIAVKeylistKey.sref	Title	Comment
-			phase_t	(phaseFallA, phaseRiseA, phaseFallB, phaseRiseB)	phaseFallA
-			ImeIAVKeylistKey.end
-			ImeIMFsm.
-			
-				ImeICFsmstate.iref
-				1
-				ImeICFsmstate.end
-				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
-				0	init	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					countA	grrdrun or pvwrun	start
-					init	else
-					ImeIAMFsmstateStep.end
-				1	countA	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					countB		countA
-					ImeIAMFsmstateStep.end
-				1	countB	true
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					countC	i=cntmax
-					countA	else
-					ImeIAMFsmstateStep.end
-				1	countC	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					run		countC
-					ImeIAMFsmstateStep.end
-				0	run	false
-				ImeIMFsmstate.end
-			ImeIMFsm.end
 		grrd	mclk	reset	false	state(init) or !grrdrun	false	gray/red operation, also managing grrd{ab/cd/ef}buf
 			ImeIAVKeylistKey.sref	Title	Comment
 			grrdbuf_t	(grrdbufAb, grrdbufCd, grrdbufEf)	grrdbufAb
@@ -1006,28 +953,7 @@ arty
 					ImeIAMFsmstateStep.end
 				ImeIMFsmstate.end
 			ImeIMFsm.end
-		sample	mclk	reset	true	state(init) or (!grrdrun and !pvwrun)		camera data sampling at every other rising or falling mclk edge
-			ImeIMFsm.
-			
-				ImeICFsmstate.iref
-				1
-				ImeICFsmstate.end
-				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
-				0	init	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					runA	grrdrun or pvwrun
-					init	else
-					ImeIAMFsmstateStep.end
-				1	runA	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					runB		runA
-					ImeIAMFsmstateStep.end
-				1	runB	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					runA		runB
-					ImeIAMFsmstateStep.end
-				ImeIMFsmstate.end
-			ImeIMFsm.end
+		sample	mclk	reset				currently only rearranges lanes
 		tag	mclk	reset	false	state(init) or (!grrdrun and !pvwrun)	false	camera frame tagging
 			ImeIMFsm.
 			
@@ -1071,6 +997,18 @@ arty
 				ImeIMFsmstate.end
 			ImeIMFsm.end
 		ImeIMProcess.end
+	arty_ip_AXI;top;camacq	mipirx
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		clk_in_p			1			csi_clk_p
+		retrupd	0		clk_in_n			1			csi_clk_n
+		retrupd	0		data_in_from_pins_p			2					csid
+		retrupd	0		data_in_from_pins_n			2					csidn
+		retrupd	0		clk_reset			1				reset
+		retrupd	0		io_reset			1				reset
+		retrupd	0		bitslip			2		0
+		retrupd	0		clk_div_out			1					rxclk
+		retrupd	0		data_in_to_device			16					rxd
+		ImeIMPort.end
 	arty_ip_AXI;top;camacq	bingraybuf
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
 		retrupd	0		clk								mclk
@@ -1291,7 +1229,7 @@ arty
 		ins	0	fMclk	nat		1..1000000		fMclk	in kHz
 		ins	1	clkFastNotStd	sl	1		1		1Mbps/400kbps vs. 100kbps
 		ins	1	clkFastplusNotFast	sl	1		0		1Mbps vs. 400kbps
-		ins	0	devaddr	slvdn	8		01111000		0x3C left-shifted by one
+		ins	0	devaddr	slvdn	8		00110100		0x1A left-shifted by one
 		ImeIMGeneric.end
 		ImeICPort.iref
 		1
@@ -1307,8 +1245,8 @@ arty
 		ins	0	rtesup	regaddr	in	slvdn	16					i2cRegaddr
 		ins	0	rtesup	send	in	slvdn	8					i2cSend
 		ins	0	rtesup	recv	out	slvdn	8					i2cRecv
-		ins	2	rtepin	scl	out	sl	1			sioc
-		ins	2	rtepin	sda	inout	sl	1			siod
+		ins	2	rtepin	scl	out	sl	1			scl
+		ins	2	rtepin	sda	inout	sl	1			sda
 		ImeIMPort.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
 		oprt	0	prc	xfer	ack	false	sl	1		state(init)	1	0	true	ack
@@ -1403,37 +1341,17 @@ arty
 		ImeIMPort.end
 	arty_ip_AXI;top;camif;parrom	bram
 		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
-		ins	0	INIT_00	slvdn	256		x"003630360001083100033730001A343000FF183000FF17300003033100420830"
-		ins	0	INIT_01	slvdn	256		x"0001173700781537005A033700A0043700E021360012333600E23236000E3136"
-		ins	0	INIT_02	slvdn	256		x"003301360008003600123137000A01390010063900020539001A053700600B37"
-		ins	0	INIT_03	slvdn	256		x"00133536007C193A0000183A0043133A00501C4700201B370052203600602D30"
-		ins	0	INIT_04	slvdn	256		x"0000063C0098053C0028043C0034013C00DE6050000122360040343600033636"
-		ins	0	INIT_05	slvdn	256		x"00001238001011380000103800400B3C009C0A3C001C093C0000083C0007073C"
-		ins	0	INIT_06	slvdn	256		x"0000004300002E3000580E3000FF043000000030001A05400002014000640837"
-		ins	0	INIT_07	slvdn	256		x"0060113A00261E3A00301B3A0028103A00300F3A00A7005000000E4400051F50"
-		ins	0	INIT_08	slvdn	256		x"000C06580026055800120458000F0358000F0258001401580023005800141F3A"
-		ins	0	INIT_09	slvdn	256		x"00000E5800030D5800080C58000D0B5800080A58000509580005085800080758"
-		ins	0	INIT_0A	slvdn	256		x"0003165800011558000014580003135800071258000911580003105800000F58"
-		ins	0	INIT_0B	slvdn	256		x"00291E58000E1D5800081C5800061B5800051A5800081958000D185800081758"
-		ins	0	INIT_0C	slvdn	256		x"0008265800262558004624580028235800152258001121580011205800171F58"
-		ins	0	INIT_0D	slvdn	256		x"00062E5800242D5800242C5800222B5800242A58002629580064285800262758"
-		ins	0	INIT_0E	slvdn	256		x"0022365800223558002434580026335800243258004231580040305800222F58"
-		ins	0	INIT_0F	slvdn	256		x"00FF805100CE3D5800423C5800283B5800263A58002439580044385800263758"
-		ins	0	INIT_10	slvdn	256		x"0009885100098751000986510024855100258451001483510000825100F28151"
-		ins	0	INIT_11	slvdn	256		x"0046905100568F51003D8E5100428D5100B28C5100E08B5100548A5100758951"
-		ins	0	INIT_12	slvdn	256		x"00049851000197510003965100F0955100F09451007093510004925100F89151"
-		ins	0	INIT_13	slvdn	256		x"000881540001805400389E5100829D5100069C5100009B5100049A5100129951"
-		ins	0	INIT_14	slvdn	256		x"0091895400878854007D87540071865400658554005184540028835400148254"
-		ins	0	INIT_15	slvdn	256		x"001E8153001D905400EA8F5400DD8E5400CD8D5400B88C5400AA8B54009A8A54"
-		ins	0	INIT_16	slvdn	256		x"00108953006C8853007C875300888653007E8553000A845300088353005B8253"
-		ins	0	INIT_17	slvdn	256		x"00F88B5500008A550010895500108455004083550006805500988B5300018A53"
-		ins	0	INIT_18	slvdn	256		x"0008065300300553000804530000035300100253003001530008005300401D50"
-		ins	0	INIT_19	slvdn	256		x"00000000000208300000255000060C5300040B5300300A530008095300160753"
-		ins	0	INIT_20	slvdn	256		x"00000038001115380011143800062138004020380007073C0069363000713530"
-		ins	0	INIT_21	slvdn	256		x"000A0838009F073800070638003F0538000A0438000003380000023800000138"
-		ins	0	INIT_22	slvdn	256		x"0004133800B00F3800070E38001C0D38000B0C3800980B3800070A3800200938"
-		ins	0	INIT_23	slvdn	256		x"0002134700C30630001C02300006044000000C3700120937002B123600041836"
-		ins	0	INIT_24	slvdn	256		x"00462038000003350083015000012438002C374800200C4600370B46000C0744"
+		ins	0	INIT_00	slvdn	256		x"0094563000202E30003C2C3000041830002A0D30003B0C300000023000010030"
+		ins	0	INIT_01	slvdn	256		x"0000A131007E6A3100A0683100025A3100C64C3100004C300028763000C87430"
+		ins	0	INIT_02	slvdn	256		x"0001783600044C3600044A3600014836001816340005143400028A3200218832"
+		ins	0	INIT_03	slvdn	256		x"00031737000116370002153700021437000308370010063700317E3600317C36"
+		ins	0	INIT_04	slvdn	256		x"000031370089303700002F3700462E3700002D3700002C37003F1D37003D1C37"
+		ins	0	INIT_05	slvdn	256		x"00115F3700005E3700005D37000240370005353700FE34370001333700083237"
+		ins	0	INIT_06	slvdn	256		x"000F6E3700176D37001A6C37001B6B37001B6A37001B6937001B683700016037"
+		ins	0	INIT_07	slvdn	256		x"00017D3700087C3700007B3700897A3700007937004678370000773700007637"
+		ins	0	INIT_08	slvdn	256		x"000F883700A584370006833700F582370003813700D9803700027F3700237E37"
+		ins	0	INIT_09	slvdn	256		x"0043923700F5903700068F3700878E3700058D3700EB8C3700038B3700D98A37"
+		ins	0	INIT_0A	slvdn	256		x"000000000000000000000000000000000001003A0036B03700A19637007A9437"
 		ImeIMGeneric.end
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
 		retrupd	0		DO							drd
@@ -2381,32 +2299,38 @@ arty
 		retrupd	0		dwr								dwrImdefbuf
 		ImeIMPort.end
 	arty_ip_AXI;top	laser
-		ImeICPort.iref
-		1
-		ImeICPort.end
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
 		ins	0	reset	reset	in	sl	1					reset
 		ins	0	clk	mclk	in	sl	1					mclk
-		ins	1	rtepin	cs0	out	sl	1			cs0
-		ins	1	rtepin	cs1	out	sl	1			cs1
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
-		2
 		ImeICSignal2.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
 		oprt	0	prc	op	ackInvSet	false	sl	1					false	ackInvSet
-		oth	1	prc	op	cmdNotPrep	false	sl	1					false
-		oth	1	prc	op	rNotL	false	sl	1					false
 		oth	0	prc	op	spilen	false	slvdn	17				0	false
 		oth	0	prc	op	spisend	false	slvdn	8				0	false
-		hshk	2	prc	op	reqSpi	false	sl	1				0	false
-		hshk	2	mdl	spi	dneSpi	false	sl	1				0	false
+		hshk	1	prc	op	reqSpi	false	sl	1				0	false
+		hshk	1	mdl	spi	dneSpi	false	sl	1				0	false
 		strb	0	mdl	spi	strbSpisend	false	sl	1				0	false
-		oth	0	mdl	spi	nss	false	sl	1				0	false
 		ImeIMSignal2.end
 		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
 		op	mclk	reset	false	state(init)	false	main operation
+			ImeIAVKeylistKey.sref	Title	Comment
+			txbuf_t	array(0 to sizeTxbuf-1) of std_logic_vector(7 downto 0)
+			ImeIAVKeylistKey.end
+			ImeICVariable2.iref
+			1
+			2
+			ImeICVariable2.end
+			ImeIMVariable2.irefRefWdbeCVariable	sref	Const	Falling	srefWdbeKHdltype	Width	Minmax	Onval	Offval	Defon	Comment
+			1	sizeTxbuf	true	false	nat				2	false
+			1	txbuf	false	false	txbuf_t				(x"00",x"00")	false
+			0	bytecnt	false	false	nat		0..sizeTxbuf		0	false
+			2	imax	true	false	nat				fMclk*8/1000	false	8us
+			2	i	false	false	nat		0..imax		0	false
+			0	rNotL	false	false	_bool				false	false
+			ImeIMVariable2.end
 			ImeIMFsm.
 			
 				ImeICFsmstate.iref
@@ -2445,7 +2369,7 @@ arty
 					ImeIAMFsmstateStep.end
 				2	setA	false
 					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					setC	dneSpi	spioff	!rNotL	prepR
+					setC	dneSpi	spioff	not rNotL	prepR
 					inv	dneSpi	spioff	else
 					setB	!strbSpisend
 					ImeIAMFsmstateStep.end
@@ -2480,7 +2404,7 @@ arty
 		retrupd	0		len								spilen
 		retrupd	0		send								spisend
 		retrupd	0		strbSend								strbSpisend
-		retrupd	0		nss								nss
+		retrupd	0		nss						cs
 		retrupd	0		sclk						sclk
 		retrupd	0		mosi						mosi
 		retrupd	0		miso					0
@@ -2523,14 +2447,15 @@ arty
 		ins	0	reset	reset	in	sl	1					reset
 		ins	0	clk	mclk	in	sl	1					mclk
 		ins	0	clk	tkclk	in	sl	1					tkclk
-		ins	1	rtepin	step1	out	sl	1			step1
-		ins	1	rtepin	step2	out	sl	1			step2
-		ins	1	rtepin	step3	out	sl	1			step3
-		ins	1	rtepin	step4	out	sl	1			step4
+		ins	1	rtepin	nslp	out	sl	1			nslp
+		ins	1	rtepin	m0	inout	sl	1			m0
+		ins	1	rtepin	dir	out	sl	1			dir
+		ins	1	rtepin	step	out	sl	1			step
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
 		2
+		3
 		ImeICSignal2.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
 		oprt	1	prc	op	angle	false	nat		0..4095			0	false	getInfoAngle
@@ -2538,13 +2463,26 @@ arty
 		oprt	0	prc	op	ackInvMoveto	false	sl	1				0	false	ackInvMoveto
 		oprt	0	prc	op	ackInvSet	false	sl	1				0	false	ackInvSet
 		oprt	0	prc	op	ackInvZero	false	sl	1				0	false	ackInvZero
-		oprt	2	prc	op	step1	false	sl	1				0	false	step1
-		oprt	2	prc	op	step2	false	sl	1				0	false	step2
-		oprt	2	prc	op	step3	false	sl	1				0	false	step3
-		oprt	2	prc	op	step4	false	sl	1				0	false	step4
+		oth	2	prc	op	rng	false	sl	1				0	false
+		oprt	2	prc	op	nslp	false	sl	1		!rng	1	0	false	nslp
+		oprt	0	prc	op	ccwNotCw	false	sl	1				0	false	dir
+		oprt	0	prc	op	step	false	sl	1				0	false	step
+		oth	3	prc	op	m0_sig	false	sl	1				0	false
+		oth	3	prc	op	m0z	false	sl	1				0	false
 		ImeIMSignal2.end
 		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
 		op	mclk	reset	false	state(init) or (state(!inv) and (reqInvMoveto or reqInvSet or reqInvZero))	false	main operation
+			ImeICVariable2.iref
+			1
+			2
+			ImeICVariable2.end
+			ImeIMVariable2.irefRefWdbeCVariable	sref	Const	Falling	srefWdbeKHdltype	Width	Minmax	Onval	Offval	Defon	Comment
+			1	target	true	false	nat		0..1000		0	false
+			1	dAngle	false	false	int		-999..1000		0	false
+			0	Tstep	false	false	nat		0..255		0	false
+			2	targetNotSteady	true	false	_bool				false	false
+			2	atTarget	false	false	_bool				false	false
+			ImeIMVariable2.end
 			ImeIMFsm.
 			
 				ImeICFsmstate.iref
@@ -2580,7 +2518,468 @@ arty
 				ImeIMFsmstate.end
 			ImeIMFsm.end
 		ImeIMProcess.end
+	arty_ip_AXI;top;step	iobufM0
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		IO							m0
+		retrupd	0		I								m0_sig
+		retrupd	0		T								m0z
+		ImeIMPort.end
 	arty_ip_AXI;top	tkclksrc
+		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
+		retrupd	0	fMclk					fMclk
+		ImeIMGeneric.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		tkclk								tkclk
+		ImeIMPort.end
+	ImeIMModule.end
+cleb
+	ImeIMBank.srefIxWdbeVIop	sref	srefKVoltstd
+	retrupd	bank0	_3v3
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	0	btn2	E11	SW5
+		ImeIMPin.end
+	retrupd	bank1	_3v3
+		ImeICPin.iref
+		1
+		2
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	1	btn0	G15	SW3
+		retrupd	1	btn1	G14	SW2
+		retrupd	1	btn3	G19	SW4
+		retrupd	2	rxd	F18
+		retrupd	2	txd	F16
+		ImeIMPin.end
+	retrupd	bank2	_3v3
+		ImeICPin.iref
+		1
+		2
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	1	led4_r	W20	LED12 (yellow)
+		retrupd	1	led4_g	U20	LED10 (green)
+		retrupd	2	led5_r	V20	LED13 (yellow)
+		retrupd	2	led5_g	T20	LED11 (green)
+		ImeIMPin.end
+	retrupd	bank6	_3v3
+		ImeICPin.iref
+		1
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	1	dbg0	L6	RASP_IO02
+		retrupd	1	dbg1	L5	RASP_IO03
+		ImeIMPin.end
+	retrupd	bank7	_3v3
+		ImeICPin.iref
+		1
+		2
+		3
+		4
+		5
+		6
+		7
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	1	csi_clk_p	D10
+		retrupd	1	csi_clk_n	D9
+		retrupd	2	csi_d1_p	D7
+		retrupd	2	csi_d1_n	D8
+		retrupd	3	csi_d0_p	D6
+		retrupd	3	csi_d0_n	D5
+		retrupd	4	scl	D4
+		retrupd	4	sda	D3
+		retrupd	5	cs	E10
+		retrupd	5	mosi	E9
+		retrupd	0	m0	E7
+		retrupd	0	step	E8
+		retrupd	5	sclk	E4
+		retrupd	0	nslp	E3
+		retrupd	0	dir	E2
+		retrupd	0	trig	F1
+		retrupd	6	csi_d2_p	J2
+		retrupd	6	csi_d2_n	J1
+		retrupd	7	csi_d3_p	K2
+		retrupd	7	csi_d3_n	K1
+		retrupd	0	flsh	K3
+		retrupd	0	nflt	K4
+		ImeIMPin.end
+	retrupd	bankSd	_3v3
+		ImeICPin.iref
+		1
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	1	extclkp	C12	SD_REFCLKP
+		retrupd	1	extclkn	C11	SD_REFCLKN
+		ImeIMPin.end
+	ImeIMBank.end
+	ImeIMModule.hsrefSupRefWdbeMModule	sref
+		top
+		ImeICSignal2.iref
+		1
+		ImeICSignal2.end
+		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		oth	0	mdl	hostif	commok	false	sl	1					false
+		oth	0	void		camrng	false	sl	1					false
+		oth	0	mdl	tkclksrc	tkclk	false	sl	1					false
+		oth	0	mdl	debounceBtn0	btn0_sig	false	sl	1					false
+		hshk	0	mdl	debounceBtn1	reqResetBtn1	false	sl	1					false
+		oth	0	mdl	state	rgb4	false	slvdn	24					false
+		oth	0	void		rgb5	false	slvdn	24					false
+		oth	1	void		bcddbg0	false	slvdn	8					false
+		oth	1	void		bcddbg1	false	slvdn	8					false
+		ImeIMSignal2.end
+	top	bcdfreqDbg0
+		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
+		retrupd	0	fMclk					fMclk
+		ImeIMGeneric.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		high								bcddbg0[7..4]
+		retrupd	0		low								bcddbg0[3..0]
+		retrupd	0		freq						dbg0
+		ImeIMPort.end
+	top	bcdfreqDbg1
+		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
+		retrupd	0	fMclk					fMclk
+		ImeIMGeneric.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		high								bcddbg1[7..4]
+		retrupd	0		low								bcddbg1[3..0]
+		retrupd	0		freq						dbg1
+		ImeIMPort.end
+	top	debounceBtn0
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		tkclk								tkclk
+		retrupd	0		noisy						btn0
+		retrupd	0		clean								btn0_sig
+		ImeIMPort.end
+	top	debounceBtn1
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		tkclk								tkclk
+		retrupd	0		noisy						btn1
+		retrupd	0		clean								reqResetBtn1
+		ImeIMPort.end
+	top	rgbled4
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		ins	0	reset	reset	in	sl	1					reset
+		ins	0	clk	mclk	in	sl	1					mclk
+		ins	0	clk	tkclk	in	sl	1					tkclk
+		ins	0	rtetop	rgb	in	slvdn	24					rgb4
+		ins	0	rtepin	r	out	sl	1			led4_r
+		ins	0	rtepin	g	out	sl	1			led4_g
+		ins	0	rtepin	b	out	sl	1
+		ImeIMPort.end
+		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
+		red	tkclk	reset				red LED PWM
+			ImeIMFsm.
+			
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	on	false
+				0	off	false
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		green	tkclk	reset				green LED PWM
+			ImeIMFsm.
+			
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	on	false
+				0	off	false
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		blue	tkclk	reset				blue LED PWM
+			ImeIMFsm.
+			
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	on	false
+				0	off	false
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		ImeIMProcess.end
+	top	rgbled5
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		ins	0	reset	reset	in	sl	1					reset
+		ins	0	clk	mclk	in	sl	1					mclk
+		ins	0	clk	tkclk	in	sl	1					tkclk
+		ins	0	rtetop	rgb	in	slvdn	24					rgb5
+		ins	0	rtepin	r	out	sl	1			led5_r
+		ins	0	rtepin	g	out	sl	1			led5_g
+		ins	0	rtepin	b	out	sl	1
+		ImeIMPort.end
+		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
+		red	tkclk	reset				red LED PWM
+			ImeIMFsm.
+			
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	on	false
+				0	off	false
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		green	tkclk	reset				green LED PWM
+			ImeIMFsm.
+			
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	on	false
+				0	off	false
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		blue	tkclk	reset				blue LED PWM
+			ImeIMFsm.
+			
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	on	false
+				0	off	false
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		ImeIMProcess.end
+	top	hostif
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		tkclk								tkclk
+		retrupd	0		commok								commok
+		retrupd	0		rxd						rxd
+		retrupd	0		txd						txd
+		ImeIMPort.end
+	top	laser
+		ImeICPort.iref
+		1
+		ImeICPort.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		ins	0	reset	reset	in	sl	1					reset
+		ins	0	clk	mclk	in	sl	1					mclk
+		ImeIMPort.end
+		ImeICSignal2.iref
+		1
+		ImeICSignal2.end
+		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		oprt	0	prc	op	ackInvSet	false	sl	1					false	ackInvSet
+		oth	0	prc	op	spilen	false	slvdn	17				0	false
+		oth	0	prc	op	spisend	false	slvdn	8				0	false
+		hshk	1	prc	op	reqSpi	false	sl	1				0	false
+		hshk	1	mdl	spi	dneSpi	false	sl	1				0	false
+		strb	0	mdl	spi	strbSpisend	false	sl	1				0	false
+		ImeIMSignal2.end
+		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
+		op	mclk	reset	false	state(init)	false	main operation
+			ImeIAVKeylistKey.sref	Title	Comment
+			txbuf_t	array(0 to sizeTxbuf-1) of std_logic_vector(7 downto 0)
+			ImeIAVKeylistKey.end
+			ImeICVariable2.iref
+			1
+			2
+			ImeICVariable2.end
+			ImeIMVariable2.irefRefWdbeCVariable	sref	Const	Falling	srefWdbeKHdltype	Width	Minmax	Onval	Offval	Defon	Comment
+			1	sizeTxbuf	true	false	nat				2	false
+			1	txbuf	false	false	txbuf_t				(x"00",x"00")	false
+			0	bytecnt	false	false	nat		0..sizeTxbuf		0	false
+			2	imax	true	false	nat				fMclk*8/1000	false	8us
+			2	i	false	false	nat		0..imax		0	false
+			0	rNotL	false	false	_bool				false	false
+			ImeIMVariable2.end
+			ImeIMFsm.
+			
+				ImeICFsmstate.iref
+				1
+				2
+				ImeICFsmstate.end
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	init	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					prepC
+					ImeIAMFsmstateStep.end
+				1	prepA	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					wait	dneSpi	done
+					prepB	!strbSpisend
+					ImeIAMFsmstateStep.end
+				1	prepB	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					prepC		prepB
+					ImeIAMFsmstateStep.end
+				1	prepC	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					prepD		prepC
+					ImeIAMFsmstateStep.end
+				1	prepD	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					prepA	strbSpisend
+					ImeIAMFsmstateStep.end
+				0	wait	true
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					idle	i=imax	done
+					ImeIAMFsmstateStep.end
+				0	idle	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					setC	reqInvSet	prepL
+					ImeIAMFsmstateStep.end
+				2	setA	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					setC	dneSpi	spioff	not rNotL	prepR
+					inv	dneSpi	spioff	else
+					setB	!strbSpisend
+					ImeIAMFsmstateStep.end
+				2	setB	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					setC		setB
+					ImeIAMFsmstateStep.end
+				2	setC	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					setD		setC
+					ImeIAMFsmstateStep.end
+				2	setD	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					setA	strbSpisend
+					ImeIAMFsmstateStep.end
+				0	inv	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					idle	!reqInvSet
+					ImeIAMFsmstateStep.end
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		ImeIMProcess.end
+	top;laser	spi
+		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
+		retrupd	0	fMclk					fMclk
+		ImeIMGeneric.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		req								reqSpi
+		retrupd	0		dne								dneSpi
+		retrupd	0		len								spilen
+		retrupd	0		send								spisend
+		retrupd	0		strbSend								strbSpisend
+		retrupd	0		nss						cs
+		retrupd	0		sclk						sclk
+		retrupd	0		mosi						mosi
+		retrupd	0		miso					0
+		ImeIMPort.end
+	top	state
+		ImeICPort.iref
+		1
+		ImeICPort.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		ins	0	reset	reset	in	sl	1					reset
+		ins	0	clk	tkclk	in	sl	1					tkclk
+		ins	1	rtetop	commok	in	sl	1					commok
+		ins	1	rtetop	camrng	in	sl	1					camrng
+		ins	0	rtetop	rgb	out	slvdn	24					rgb4
+		ImeIMPort.end
+		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
+		led	tkclk	reset	false		false	LED control
+			ImeIMFsm.
+			
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	on	true
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					off	i=1000	prepOff
+					ImeIAMFsmstateStep.end
+				0	off	true
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					on	i=4000	prepOn
+					ImeIAMFsmstateStep.end
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		ImeIMProcess.end
+	top	step
+		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
+		ins	0	fMclk	nat		1..1000000	50000	fMclk	in kHz
+		ImeIMGeneric.end
+		ImeICPort.iref
+		1
+		ImeICPort.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		ins	0	reset	reset	in	sl	1					reset
+		ins	0	clk	mclk	in	sl	1					mclk
+		ins	0	clk	tkclk	in	sl	1					tkclk
+		ins	1	rtepin	nslp	out	sl	1			nslp
+		ins	1	rtepin	m0	inout	sl	1			m0
+		ins	1	rtepin	dir	out	sl	1			dir
+		ins	1	rtepin	step	out	sl	1			step
+		ins	1	rtepin	nflt	in	sl	1			nflt			iccl only
+		ImeIMPort.end
+		ImeICSignal2.iref
+		1
+		2
+		3
+		ImeICSignal2.end
+		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
+		oprt	1	prc	op	angle	false	nat		0..4095			0	false	getInfoAngle
+		oth	1	prc	op	angle_vec	false	slvdn	16					false
+		oprt	0	prc	op	ackInvMoveto	false	sl	1				0	false	ackInvMoveto
+		oprt	0	prc	op	ackInvSet	false	sl	1				0	false	ackInvSet
+		oprt	0	prc	op	ackInvZero	false	sl	1				0	false	ackInvZero
+		oth	2	prc	op	rng	false	sl	1				0	false
+		oprt	2	prc	op	nslp	false	sl	1		!rng	1	0	false	nslp
+		oprt	0	prc	op	ccwNotCw	false	sl	1				0	false	dir
+		oprt	0	prc	op	step	false	sl	1				0	false	step
+		oth	3	prc	op	m0_sig	false	sl	1				0	false
+		oth	3	prc	op	m0z	false	sl	1				0	false
+		ImeIMSignal2.end
+		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
+		op	mclk	reset	false	state(init) or (state(!inv) and (reqInvMoveto or reqInvSet or reqInvZero))	false	main operation
+			ImeICVariable2.iref
+			1
+			2
+			ImeICVariable2.end
+			ImeIMVariable2.irefRefWdbeCVariable	sref	Const	Falling	srefWdbeKHdltype	Width	Minmax	Onval	Offval	Defon	Comment
+			1	target	true	false	nat		0..1000		0	false
+			1	dAngle	false	false	int		-999..1000		0	false
+			0	Tstep	false	false	nat		0..255		0	false
+			2	targetNotSteady	true	false	_bool				false	false
+			2	atTarget	false	false	_bool				false	false
+			ImeIMVariable2.end
+			ImeIMFsm.
+			
+				ImeICFsmstate.iref
+				1
+				ImeICFsmstate.end
+				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
+				0	init	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					inv	reqInvMoveto	moveto
+					inv	reqInvSet	set
+					inv	reqInvZero	zero
+					ready	else
+					ImeIAMFsmstateStep.end
+				0	ready	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					runB	Tstep/=0		not targetNotSteady and rng	steady
+					runB	Tstep/=0		targetNotSteady and not atTarget	target
+					ready	Tstep/=0		else	hold
+					ImeIAMFsmstateStep.end
+				1	runA	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					runB	tkclk	runA
+					ImeIAMFsmstateStep.end
+				1	runB	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					ready	!tkclk	runB	targetNotSteady and target=angle	done
+					runA	!tkclk	runB	else
+					ImeIAMFsmstateStep.end
+				0	inv	false
+					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
+					init	(!reqInvMoveto and ackInvMoveto_sig) or (!reqInvSet and ackInvSet_sig) or (!reqInvZero and ackInvZero_sig)
+					ImeIAMFsmstateStep.end
+				ImeIMFsmstate.end
+			ImeIMFsm.end
+		ImeIMProcess.end
+	top;step	bbM0
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		B							m0
+		retrupd	0		I								m0_sig
+		retrupd	0		T								m0z
+		ImeIMPort.end
+	top	tkclksrc
 		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
 		retrupd	0	fMclk					fMclk
 		ImeIMGeneric.end
@@ -2615,34 +3014,33 @@ iccl
 		5
 		6
 		7
+		8
 		ImeICPin.end
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
-		retrupd	1	sioc	B8
-		retrupd	1	siod	A8
-		retrupd	0	xclk	C10
-		retrupd	2	pwdn	F16
-		retrupd	2	rst	D14
-		retrupd	3	pclk	A6
-		retrupd	3	href	H15
-		retrupd	3	vsync	G15
-		retrupd	4	d2	D8
-		retrupd	4	d3	D9
-		retrupd	4	d4	D6
-		retrupd	4	d5	B5
-		retrupd	4	d6	C6
-		retrupd	4	d7	B4
-		retrupd	4	d8	C5
-		retrupd	4	d9	C4
-		retrupd	5	step1	H17
-		retrupd	5	step2	G17
-		retrupd	5	step3	F11
-		retrupd	5	step4	G12
-		retrupd	6	cs0	H12
-		retrupd	6	cs1	H13
-		retrupd	6	sclk	E14
-		retrupd	6	mosi	D13
-		retrupd	7	dbg0	C9
-		retrupd	7	dbg1	A7
+		retrupd	1	csi_clk_p	C4
+		retrupd	1	csi_clk_n	B4
+		retrupd	2	csi_d1_p	D9
+		retrupd	2	csi_d1_n	D8
+		retrupd	3	csi_d0_p	C5
+		retrupd	3	csi_d0_n	B5
+		retrupd	4	scl	C6
+		retrupd	4	sda	D6
+		retrupd	5	cs	E14
+		retrupd	5	mosi	D14
+		retrupd	0	m0	G15
+		retrupd	0	step	H15
+		retrupd	5	sclk	D13
+		retrupd	0	nslp	G17
+		retrupd	0	dir	H17
+		retrupd	0	trig	H13
+		retrupd	6	csi_d2_p	C10
+		retrupd	6	csi_d2_n	C9
+		retrupd	7	csi_d3_p	H12
+		retrupd	7	csi_d3_n	G12
+		retrupd	0	flsh	F11
+		retrupd	0	nflt	F16
+		retrupd	8	dbg0	A6
+		retrupd	8	dbg1	A7
 		ImeIMPin.end
 	ImeIMBank.end
 	ImeIMModule.hsrefSupRefWdbeMModule	sref
@@ -2658,7 +3056,8 @@ iccl
 		hshk	0	mdl	debounceBtn1	reqResetBtn1	false	sl	1					false
 		oth	0	mdl	state	rgb4	false	slvdn	24					false
 		oth	0	void		rgb5	false	slvdn	24					false
-		oth	0	void		camacqStrb_dbg	false	slvdn	6					false
+		oth	0	void		camacqPixclk_dbg	false	sl	1					false
+		oth	0	void		camacqStrb_dbg	false	slvdn	4					false
 		oth	0	void		featdetStrb_dbg	false	slvdn	4					false
 		oth	1	void		bcddbg0	false	slvdn	8					false
 		oth	1	void		bcddbg1	false	slvdn	8					false
@@ -2795,27 +3194,24 @@ iccl
 		1
 		2
 		3
+		4
+		5
 		ImeICPort.end
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
 		ins	0	reset	reset	in	sl	1					reset
 		ins	0	clk	mclk	in	sl	1					mclk
-		ins	1	rtepin	pclk	in	sl	1			pclk
-		ins	1	rtepin	href	in	sl	1			href
-		ins	1	rtepin	vsync	in	sl	1			vsync
-		ins	2	rtepin	d2	in	sl	1			d2
-		ins	2	rtepin	d3	in	sl	1			d3
-		ins	2	rtepin	d4	in	sl	1			d4
-		ins	2	rtepin	d5	in	sl	1			d5
-		ins	2	rtepin	d6	in	sl	1			d6
-		ins	2	rtepin	d7	in	sl	1			d7
-		ins	2	rtepin	d8	in	sl	1			d8
-		ins	2	rtepin	d9	in	sl	1			d9
-		ins	0	rtetop	btnPhase	in	sl	1					btn0_sig
-		ins	3	dbg	cntFallA_dbg	out	slvdn	8					bcddbg0
-		ins	3	dbg	cntRiseA_dbg	out	slvdn	8					bcddbg1
-		ins	3	dbg	cntFallB_dbg	out	slvdn	8					bcddbg2
-		ins	3	dbg	cntRiseB_dbg	out	slvdn	8					bcddbg3
-		ins	0	dbg	strb_dbg	out	slvdn	6					camacqStrb_dbg
+		ins	1	rtepin	csi_clk_p	in	sl	1			csi_clk_p
+		ins	1	rtepin	csi_clk_n	in	sl	1			csi_clk_n
+		ins	2	rtepin	csi_d0_p	in	sl	1			csi_d0_p
+		ins	2	rtepin	csi_d0_n	in	sl	1			csi_d0_n
+		ins	3	rtepin	csi_d1_p	in	sl	1			csi_d1_p
+		ins	3	rtepin	csi_d1_n	in	sl	1			csi_d1_n
+		ins	4	rtepin	csi_d2_p	in	sl	1			csi_d2_p
+		ins	4	rtepin	csi_d2_n	in	sl	1			csi_d2_n
+		ins	5	rtepin	csi_d3_p	in	sl	1			csi_d3_p
+		ins	5	rtepin	csi_d3_n	in	sl	1			csi_d3_n
+		ins	0	dbg	pixclk_dbg	out	sl	1					camacqPixclk_dbg
+		ins	0	dbg	strb_dbg	out	slvdn	4					camacqStrb_dbg
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
@@ -2863,15 +3259,9 @@ iccl
 		43
 		44
 		45
+		46
 		ImeICSignal2.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
-		oth	0	prc	align	cntmax	true	nat					8	false
-		oth	45	prc	align	cntFallA	false	nat		0..cntmax			0	false
-		oth	45	prc	align	cntRiseA	false	nat		0..cntmax			0	false
-		oth	45	prc	align	cntFallB	false	nat		0..cntmax			0	false
-		oth	45	prc	align	cntRiseB	false	nat		0..cntmax			0	false
-		oth	0	prc	align	phase	false	phase_t					phaseFallA	false
-		oth	0	prc	align	pclk_shift	false	sl	1				0	false
 		oprt	1	prc	grrd	tixVGrrdbufstate	false	slvdn	8				tixVGrrdbufstateIdle	false	getGrrdinfoTixVGrrdbufstate
 		oprt	1	prc	grrd	grrdTkst	false	slvdn	32				0	false	getGrrdinfoTkst
 		oth	0	prc	grrd	grrdbuf	false	grrdbuf_t					grrdbufAb	false
@@ -2907,149 +3297,126 @@ iccl
 		oth	0	prc	op	grrdRedNotGray	false	sl	1				0	false
 		oth	0	prc	op	pvwrun	false	sl	1				0	false
 		oth	0	prc	op	pvwacc	false	pvwacc_t					pvwaccBinrgb	false
-		oth	11	prc	pvw	pvwTkstA	false	slvdn	32				0	false
-		oth	11	prc	pvw	pvwTkstB	false	slvdn	32				0	false
+		oth	9	prc	pvw	pvwTkstA	false	slvdn	32				0	false
+		oth	9	prc	pvw	pvwTkstB	false	slvdn	32				0	false
 		oth	0	prc	pvw	pvwLatestBNotA	false	sl	1				0	false
-		oth	12	prc	pvw	enPvwabuf	false	sl	1		pvwabufLock=lockPvw and state(storeA..D)	1	0	false
-		oth	12	prc	pvw	enPvwbbuf	false	sl	1		pvwbbufLock=lockPvw and state(storeA..D)	1	0	false
-		oth	13	prc	pvw	aPvwbuf_vec	false	slvdn	16					false
-		oth	13	prc	pvw	aPvwbuf	false	nat		0..57600			0	false
+		oth	10	prc	pvw	enPvwabuf	false	sl	1		pvwabufLock=lockPvw and state(storeA..D)	1	0	false
+		oth	10	prc	pvw	enPvwbbuf	false	sl	1		pvwbbufLock=lockPvw and state(storeA..D)	1	0	false
+		oth	11	prc	pvw	aPvwbuf_vec	false	slvdn	16					false
+		oth	11	prc	pvw	aPvwbuf	false	nat		0..57600			0	false
 		oth	0	prc	pvw	dwrPvwbuf	false	slvdn	8				0	false
-		oth	14	prc	pvw	pvwbingrayrun	false	sl	1		pvwacc=pvwaccBingray and state(ready;storeA..D)	1	0	false
-		oth	14	prc	pvw	pvwbinrgbrun	false	sl	1		pvwacc=pvwaccBinrgb and state(ready;storeA..D)	1	0	false
-		oth	14	prc	pvw	pvwrawgrayrun	false	sl	1		pvwacc=pvwaccRawgray and state(ready;storeA..D)	1	0	false
-		oth	14	prc	pvw	pvwrawrgbrun	false	sl	1		pvwacc=pvwaccRawrgb and state(ready;storeA..D)	1	0	false
-		oth	15	prc	pvwbingray	dPvwbingrayGr	false	slvdn	8				0	false
-		strb	15	prc	pvwbingray	strbDPvwbingrayGr	false	sl	1				0	false
+		oth	12	prc	pvw	pvwbingrayrun	false	sl	1		pvwacc=pvwaccBingray and state(ready;storeA..D)	1	0	false
+		oth	12	prc	pvw	pvwbinrgbrun	false	sl	1		pvwacc=pvwaccBinrgb and state(ready;storeA..D)	1	0	false
+		oth	12	prc	pvw	pvwrawgrayrun	false	sl	1		pvwacc=pvwaccRawgray and state(ready;storeA..D)	1	0	false
+		oth	12	prc	pvw	pvwrawrgbrun	false	sl	1		pvwacc=pvwaccRawrgb and state(ready;storeA..D)	1	0	false
+		oth	13	prc	pvwbingray	dPvwbingrayGr	false	slvdn	8				0	false
+		strb	13	prc	pvwbingray	strbDPvwbingrayGr	false	sl	1				0	false
 		oth	0	prc	pvwbingray	enBingraybuf	false	sl	1		state(LASB..C)	1	0	false
 		oth	0	prc	pvwbingray	weBingraybuf	false	sl	1				0	false
-		oth	16	prc	pvwbingray	aBingraybuf_vec	false	slvdn	11					false
-		oth	16	prc	pvwbingray	aBingraybuf	false	nat		0..2048			0	false
+		oth	14	prc	pvwbingray	aBingraybuf_vec	false	slvdn	11					false
+		oth	14	prc	pvwbingray	aBingraybuf	false	nat		0..2048			0	false
 		oth	0	prc	pvwbingray	dwrBingraybuf	false	slvdn	8				0	false
-		oth	17	prc	pvwbinrgb	dPvwbinrgbRd	false	slvdn	8				0	false
-		strb	17	prc	pvwbinrgb	strbDPvwbinrgbRd	false	sl	1				0	false
-		oth	18	prc	pvwbinrgb	dPvwbinrgbGn	false	slvdn	8				0	false
-		oth	18	prc	pvwbinrgb	dPvwbinrgbBl	false	slvdn	8				0	false
-		strb	18	prc	pvwbinrgb	strbDPvwbinrgbGnBl	false	sl	1				0	false
+		oth	15	prc	pvwbinrgb	dPvwbinrgbRd	false	slvdn	8				0	false
+		strb	15	prc	pvwbinrgb	strbDPvwbinrgbRd	false	sl	1				0	false
+		oth	16	prc	pvwbinrgb	dPvwbinrgbGn	false	slvdn	8				0	false
+		oth	16	prc	pvwbinrgb	dPvwbinrgbBl	false	slvdn	8				0	false
+		strb	16	prc	pvwbinrgb	strbDPvwbinrgbGnBl	false	sl	1				0	false
 		oth	0	prc	pvwbinrgb	enBinrgbbuf	false	sl	1		state(LASB..C)	1	0	false
 		oth	0	prc	pvwbinrgb	weBinrgbbuf	false	sl	1				0	false
-		oth	19	prc	pvwbinrgb	aBinrgbbuf_vec	false	slvdn	11					false
-		oth	19	prc	pvwbinrgb	aBinrgbbuf	false	nat		0..2048			0	false
+		oth	17	prc	pvwbinrgb	aBinrgbbuf_vec	false	slvdn	11					false
+		oth	17	prc	pvwbinrgb	aBinrgbbuf	false	nat		0..2048			0	false
 		oth	0	prc	pvwbinrgb	dwrBinrgbbuf	false	slvdn	8				0	false
-		oth	20	prc	pvwbuf	pvwabufLock	false	lock_t					lockIdle	false
-		oth	20	prc	pvwbuf	pvwabufFull	false	sl	1				0	false
-		oth	21	prc	pvwbuf	pvwbbufLock	false	lock_t					lockIdle	false
-		oth	21	prc	pvwbuf	pvwbbufFull	false	sl	1				0	false
-		oth	22	prc	pvwbufB	enPvwabufB	false	sl	1		pvwabufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false
-		oth	22	prc	pvwbufB	enPvwbbufB	false	sl	1		pvwbbufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false
-		oth	23	prc	pvwbufB	aPvwbufB_vec	false	slvdn	14					false
-		oth	23	prc	pvwbufB	aPvwbufB	false	nat		0..14400			0	false
-		oprt	24	prc	pvwbufB	tixVPvwbufstate	false	slvdn	8				tixVPvwbufstateIdle	false	getPvwinfoTixVPvwbufstate
-		oth	24	prc	pvwbufB	pvwtkst	false	slvdn	32				0	false	getPvwinfoTkst
-		oth	25	prc	pvwbufB	ackPvwbufToHostif	false	sl	1				0	false
-		oprt	25	prc	pvwbufB	ackPvwabufToHostif	false	sl	1		pvwabufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwabufToHostif
-		oprt	25	prc	pvwbufB	ackPvwbbufToHostif	false	sl	1		pvwbbufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwbbufToHostif
-		oth	26	prc	pvwrawgray	dPvwrawgrayGr	false	slvdn	8				0	false
-		strb	26	prc	pvwrawgray	strbDPvwrawgrayGr	false	sl	1				0	false
+		oth	18	prc	pvwbuf	pvwabufLock	false	lock_t					lockIdle	false
+		oth	18	prc	pvwbuf	pvwabufFull	false	sl	1				0	false
+		oth	19	prc	pvwbuf	pvwbbufLock	false	lock_t					lockIdle	false
+		oth	19	prc	pvwbuf	pvwbbufFull	false	sl	1				0	false
+		oth	20	prc	pvwbufB	enPvwabufB	false	sl	1		pvwabufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false
+		oth	20	prc	pvwbufB	enPvwbbufB	false	sl	1		pvwbbufLock=lockBufB and !strbDPvwabufToHostif and state(readA)	1	0	false
+		oth	21	prc	pvwbufB	aPvwbufB_vec	false	slvdn	14					false
+		oth	21	prc	pvwbufB	aPvwbufB	false	nat		0..14400			0	false
+		oprt	22	prc	pvwbufB	tixVPvwbufstate	false	slvdn	8				tixVPvwbufstateIdle	false	getPvwinfoTixVPvwbufstate
+		oth	22	prc	pvwbufB	pvwtkst	false	slvdn	32				0	false	getPvwinfoTkst
+		oth	23	prc	pvwbufB	ackPvwbufToHostif	false	sl	1				0	false
+		oprt	23	prc	pvwbufB	ackPvwabufToHostif	false	sl	1		pvwabufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwabufToHostif
+		oprt	23	prc	pvwbufB	ackPvwbbufToHostif	false	sl	1		pvwbbufLock=lockBufB	ackPvwbufToHostif	0	false	ackPvwbbufToHostif
+		oth	24	prc	pvwrawgray	dPvwrawgrayGr	false	slvdn	8				0	false
+		strb	24	prc	pvwrawgray	strbDPvwrawgrayGr	false	sl	1				0	false
 		oth	0	prc	pvwrawgray	enRawgraybuf	false	sl	1		state(LASA..D)	1	0	false
 		oth	0	prc	pvwrawgray	weRawgraybuf	false	sl	1				0	false
-		oth	27	prc	pvwrawgray	aRawgraybuf_vec	false	slvdn	11					false
-		oth	27	prc	pvwrawgray	aRawgraybuf	false	nat		0..2048			0	false
+		oth	25	prc	pvwrawgray	aRawgraybuf_vec	false	slvdn	11					false
+		oth	25	prc	pvwrawgray	aRawgraybuf	false	nat		0..2048			0	false
 		oth	0	prc	pvwrawgray	dwrRawgraybuf	false	slvdn	8				0	false
-		oth	28	prc	pvwrawrgb	dPvwrawrgbRd	false	slvdn	8				0	false
-		strb	28	prc	pvwrawrgb	strbDPvwrawrgbRd	false	sl	1				0	false
-		oth	29	prc	pvwrawrgb	dPvwrawrgbGn	false	slvdn	8				0	false
-		oth	29	prc	pvwrawrgb	dPvwrawrgbBl	false	slvdn	8				0	false
-		strb	29	prc	pvwrawrgb	strbDPvwrawrgbGnBl	false	sl	1				0	false
-		oth	38	prc	sample	vsync_sig	false	sl	1				0	false
-		oth	38	prc	sample	vsync_shift	false	sl	1				0	false
-		oth	44	prc	sample	href_sig	false	sl	1				0	false
-		oth	44	prc	sample	href_shift	false	sl	1				0	false
-		oth	39	prc	sample	d	false	slvdn	8				0	false
-		oth	39	prc	sample	d_shift	false	slvdn	8				0	false
-		oth	40	prc	tag	rowmax	true	nat					1944	false
-		oth	40	prc	tag	row	false	nat		0..rowmax			0	false
-		oth	41	prc	tag	row120	true	nat					852	false		skiprow (1944 - 240) / 2
-		oth	41	prc	tag	row192	true	nat					780	false		skiprow (1944 - 384) / 2
-		oth	41	prc	tag	row768	true	nat					204	false		skiprow (1944 - 1536) / 2
-		oth	41	prc	tag	row960	true	nat					12	false		skiprow (1944 - 1920) / 2
-		oth	42	prc	tag	colmax	true	nat					2592	false
-		oth	42	prc	tag	col	false	nat		0..colmax			0	false
-		oth	43	prc	tag	col160N1	true	nat					1135	false		skipcol (2592 - 320) / 2 - 1
-		oth	43	prc	tag	col256N3	true	nat					1037	false		skipcol (2592 - 512) / 2 - 3
-		oth	43	prc	tag	col1024N3	true	nat					269	false		skipcol (2592 - 2048) / 2 - 3
-		oth	43	prc	tag	col1024N9	true	nat					263	false		skipcol (2592 - 2048) / 2 - 9
-		oth	43	prc	tag	col1280	true	nat					16	false		skipcol (2592 - 2560) / 2
-		oth	43	prc	tag	col1280N9	true	nat					7	false		skipcol (2592 - 2560) / 2 - 9
+		oth	26	prc	pvwrawrgb	dPvwrawrgbRd	false	slvdn	8				0	false
+		strb	26	prc	pvwrawrgb	strbDPvwrawrgbRd	false	sl	1				0	false
+		oth	27	prc	pvwrawrgb	dPvwrawrgbGn	false	slvdn	8				0	false
+		oth	27	prc	pvwrawrgb	dPvwrawrgbBl	false	slvdn	8				0	false
+		strb	27	prc	pvwrawrgb	strbDPvwrawrgbGnBl	false	sl	1				0	false
+		oth	28	prc	sample	csid	false	slvdn	4				0	false
+		oth	28	prc	sample	csidn	false	slvdn	4				0	false
+		oth	0	prc	sample	d	false	slvdn	8				0	false
+		oth	29	prc	tag	rowmax	true	nat					1944	false
+		oth	29	prc	tag	row	false	nat		0..rowmax			0	false
+		oth	30	prc	tag	row120	true	nat					852	false		skiprow (1944 - 240) / 2
+		oth	30	prc	tag	row192	true	nat					780	false		skiprow (1944 - 384) / 2
+		oth	30	prc	tag	row768	true	nat					204	false		skiprow (1944 - 1536) / 2
+		oth	30	prc	tag	row960	true	nat					12	false		skiprow (1944 - 1920) / 2
+		oth	31	prc	tag	colmax	true	nat					2592	false
+		oth	31	prc	tag	col	false	nat		0..colmax			0	false
+		oth	32	prc	tag	col160N1	true	nat					1135	false		skipcol (2592 - 320) / 2 - 1
+		oth	32	prc	tag	col256N3	true	nat					1037	false		skipcol (2592 - 512) / 2 - 3
+		oth	32	prc	tag	col1024N3	true	nat					269	false		skipcol (2592 - 2048) / 2 - 3
+		oth	32	prc	tag	col1024N9	true	nat					263	false		skipcol (2592 - 2048) / 2 - 9
+		oth	32	prc	tag	col1280	true	nat					16	false		skipcol (2592 - 2560) / 2
+		oth	32	prc	tag	col1280N9	true	nat					7	false		skipcol (2592 - 2560) / 2 - 9
 		strb	0	prc	tag	strbFrame	false	sl	1		state(frameB) and !vsync_sig	1	0	false
-		strb	9	prc	tag	strbRow120	false	sl	1		state(rowB) and href_sig and row=row120	1	0	false
-		strb	9	prc	tag	strbRow192	false	sl	1		state(rowB) and href_sig and row=row192	1	0	false
-		strb	9	prc	tag	strbRow768	false	sl	1		state(rowB) and href_sig and row=row768	1	0	false
-		strb	9	prc	tag	strbRow960	false	sl	1		state(rowB) and href_sig and row=row960	1	0	false
-		strb	10	prc	tag	strbCol160N1	false	sl	1		state(colA) and col=col160N1	1	0	false
-		strb	10	prc	tag	strbCol256N3	false	sl	1		state(colA) and col=col256N3	1	0	false
-		strb	10	prc	tag	strbCol1024N3	false	sl	1		state(colA) and col=col1024N3	1	0	false
-		strb	10	prc	tag	strbCol1024N9	false	sl	1		state(colA) and col=col1024N9	1	0	false
-		strb	10	prc	tag	strbCol1280	false	sl	1		state(colA) and col=col1280	1	0	false
-		strb	10	prc	tag	strbCol1280N9	false	sl	1		state(colA) and col=col1280N9	1	0	false
+		strb	33	prc	tag	strbRow120	false	sl	1		state(rowB) and href_sig and row=row120	1	0	false
+		strb	33	prc	tag	strbRow192	false	sl	1		state(rowB) and href_sig and row=row192	1	0	false
+		strb	33	prc	tag	strbRow768	false	sl	1		state(rowB) and href_sig and row=row768	1	0	false
+		strb	33	prc	tag	strbRow960	false	sl	1		state(rowB) and href_sig and row=row960	1	0	false
+		strb	34	prc	tag	strbCol160N1	false	sl	1		state(colA) and col=col160N1	1	0	false
+		strb	34	prc	tag	strbCol256N3	false	sl	1		state(colA) and col=col256N3	1	0	false
+		strb	34	prc	tag	strbCol1024N3	false	sl	1		state(colA) and col=col1024N3	1	0	false
+		strb	34	prc	tag	strbCol1024N9	false	sl	1		state(colA) and col=col1024N9	1	0	false
+		strb	34	prc	tag	strbCol1280	false	sl	1		state(colA) and col=col1280	1	0	false
+		strb	34	prc	tag	strbCol1280N9	false	sl	1		state(colA) and col=col1280N9	1	0	false
+		clk	0	mdl	mipirx	rxclk	false	sl	1					false
+		oth	0	mdl	mipirx	rxd	false	slvdn	32					false
+		oth	35	mdl	mipirx	rxdLp	false	slvdn	4					false
+		oth	35	mdl	mipirx	rxdLpn	false	slvdn	4					false
+		clk	0	mdl	mipipll	pixclk	false	sl	1					false
+		oth	0	mdl	mipidec	pixd	false	slvdn	48					false
+		strb	36	mdl	mipidec	strbFrameStart	false	sl	1					false
+		strb	36	mdl	mipidec	strbFrameEnd	false	sl	1					false
+		strb	37	mdl	mipidec	strbRowStart	false	sl	1					false
+		strb	37	mdl	mipidec	strbRowEnd	false	sl	1					false
 		oth	0	mdl	bingraybuf	drdBingraybuf	false	slvdn	8					false
 		oth	0	mdl	binrgbbuf	drdBinrgbbuf	false	slvdn	8					false
 		oth	0	mdl	evenbuf	drdEvenbuf	false	slvdn	8					false
 		oth	0	mdl	rawgraybuf	drdRawgraybuf	false	slvdn	8					false
-		oth	0	void		mclkn	false	sl	1					false
-		hshk	30	prc	pvw	reqPvwToPvwbufAbufLock	false	sl	1				0	false
-		hshk	30	prc	pvwbuf	ackPvwToPvwbufAbufLock	false	sl	1				0	false
-		hshk	30	prc	pvwbuf	dnyPvwToPvwbufAbufLock	false	sl	1				0	false
-		hshk	31	prc	pvw	reqPvwToPvwbufAbufSetFull	false	sl	1				0	false
-		hshk	31	prc	pvwbuf	ackPvwToPvwbufAbufSetFull	false	sl	1				0	false
-		hshk	32	prc	pvw	reqPvwToPvwbufBbufLock	false	sl	1				0	false
-		hshk	32	prc	pvwbuf	ackPvwToPvwbufBbufLock	false	sl	1				0	false
-		hshk	32	prc	pvwbuf	dnyPvwToPvwbufBbufLock	false	sl	1				0	false
-		hshk	33	prc	pvw	reqPvwToPvwbufBbufSetFull	false	sl	1				0	false
-		hshk	33	prc	pvwbuf	ackPvwToPvwbufBbufSetFull	false	sl	1				0	false
-		hshk	34	prc	pvwbufB	reqPvwbufBToPvwbufAbufLock	false	sl	1				0	false
-		hshk	34	prc	pvwbuf	ackPvwbufBToPvwbufAbufLock	false	sl	1				0	false
-		hshk	34	prc	pvwbuf	dnyPvwbufBToPvwbufAbufLock	false	sl	1				0	false
-		hshk	35	prc	pvwbufB	reqPvwbufBToPvwbufAbufClear	false	sl	1				0	false
-		hshk	35	prc	pvwbuf	ackPvwbufBToPvwbufAbufClear	false	sl	1				0	false
-		hshk	36	prc	pvwbufB	reqPvwbufBToPvwbufBbufLock	false	sl	1				0	false
-		hshk	36	prc	pvwbuf	ackPvwbufBToPvwbufBbufLock	false	sl	1				0	false
-		hshk	36	prc	pvwbuf	dnyPvwbufBToPvwbufBbufLock	false	sl	1				0	false
-		hshk	37	prc	pvwbufB	reqPvwbufBToPvwbufBbufClear	false	sl	1				0	false
-		hshk	37	prc	pvwbuf	ackPvwbufBToPvwbufBbufClear	false	sl	1				0	false
+		oth	38	void		resetn	false	sl	1					false
+		oth	38	void		mclkn	false	sl	1					false
+		hshk	39	prc	pvw	reqPvwToPvwbufAbufLock	false	sl	1				0	false
+		hshk	39	prc	pvwbuf	ackPvwToPvwbufAbufLock	false	sl	1				0	false
+		hshk	39	prc	pvwbuf	dnyPvwToPvwbufAbufLock	false	sl	1				0	false
+		hshk	40	prc	pvw	reqPvwToPvwbufAbufSetFull	false	sl	1				0	false
+		hshk	40	prc	pvwbuf	ackPvwToPvwbufAbufSetFull	false	sl	1				0	false
+		hshk	41	prc	pvw	reqPvwToPvwbufBbufLock	false	sl	1				0	false
+		hshk	41	prc	pvwbuf	ackPvwToPvwbufBbufLock	false	sl	1				0	false
+		hshk	41	prc	pvwbuf	dnyPvwToPvwbufBbufLock	false	sl	1				0	false
+		hshk	42	prc	pvw	reqPvwToPvwbufBbufSetFull	false	sl	1				0	false
+		hshk	42	prc	pvwbuf	ackPvwToPvwbufBbufSetFull	false	sl	1				0	false
+		hshk	43	prc	pvwbufB	reqPvwbufBToPvwbufAbufLock	false	sl	1				0	false
+		hshk	43	prc	pvwbuf	ackPvwbufBToPvwbufAbufLock	false	sl	1				0	false
+		hshk	43	prc	pvwbuf	dnyPvwbufBToPvwbufAbufLock	false	sl	1				0	false
+		hshk	44	prc	pvwbufB	reqPvwbufBToPvwbufAbufClear	false	sl	1				0	false
+		hshk	44	prc	pvwbuf	ackPvwbufBToPvwbufAbufClear	false	sl	1				0	false
+		hshk	45	prc	pvwbufB	reqPvwbufBToPvwbufBbufLock	false	sl	1				0	false
+		hshk	45	prc	pvwbuf	ackPvwbufBToPvwbufBbufLock	false	sl	1				0	false
+		hshk	45	prc	pvwbuf	dnyPvwbufBToPvwbufBbufLock	false	sl	1				0	false
+		hshk	46	prc	pvwbufB	reqPvwbufBToPvwbufBbufClear	false	sl	1				0	false
+		hshk	46	prc	pvwbuf	ackPvwbufBToPvwbufBbufClear	false	sl	1				0	false
 		ImeIMSignal2.end
 		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
-		align	mclk	reset	true	state(init) or (!grrdrun and !pvwrun)	false	pixel clock alignment
-			ImeIAVKeylistKey.sref	Title	Comment
-			phase_t	(phaseFallA, phaseRiseA, phaseFallB, phaseRiseB)	phaseFallA
-			ImeIAVKeylistKey.end
-			ImeIMFsm.
-			
-				ImeICFsmstate.iref
-				1
-				ImeICFsmstate.end
-				ImeIMFsmstate.irefRefWdbeCFsmstate	sref	Extip	Comment
-				0	init	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					countA	grrdrun or pvwrun	start
-					init	else
-					ImeIAMFsmstateStep.end
-				1	countA	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					countB		countA
-					ImeIAMFsmstateStep.end
-				1	countB	true
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					countC	i=cntmax
-					countA	else
-					ImeIAMFsmstateStep.end
-				1	countC	false
-					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					run		countC
-					ImeIAMFsmstateStep.end
-				0	run	false
-				ImeIMFsmstate.end
-			ImeIMFsm.end
 		grrd	mclk	reset	false	state(init) or !grrdrun	false	gray/red operation, also managing grrd{ab/cd/ef}buf
 			ImeIAVKeylistKey.sref	Title	Comment
 			grrdbuf_t	(grrdbufAb, grrdbufCd, grrdbufEf)	grrdbufAb
@@ -3612,6 +3979,64 @@ iccl
 				ImeIMFsmstate.end
 			ImeIMFsm.end
 		ImeIMProcess.end
+	iccl_ip_AXI;top;camacq	mipirx
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		rx_clk_p						csi_clk_p
+		retrupd	0		rx_clk_n						csi_clk_n
+		retrupd	0		rxd								csid
+		retrupd	0		rxd_n								csidn
+		retrupd	0		arst_n								resetn
+		retrupd	0		hs_sel					0
+		retrupd	0		hs_io_clk_pause					0
+		retrupd	0		rx_clk_g								rxclk
+		retrupd	0		l0_rxd_data								rxd[7..0]
+		retrupd	0		l1_rxd_data								rxd[15..8]
+		retrupd	0		l2_rxd_data								rxd[23..16]
+		retrupd	0		l3_rxd_data								rxd[31..24]
+		retrupd	0		l0_lp_data								rxdLp[0]
+		retrupd	0		l0_lp_data_n								rxdLpn[0]
+		retrupd	0		l1_lp_data								rxdLp[1]
+		retrupd	0		l1_lp_data_n								rxdLpn[1]
+		retrupd	0		l2_lp_data								rxdLp[2]
+		retrupd	0		l2_lp_data_n								rxdLpn[2]
+		retrupd	0		l3_lp_data								rxdLp[3]
+		retrupd	0		l3_lp_data_n								rxdLpn[3]
+		ImeIMPort.end
+	iccl_ip_AXI;top;camacq	mipipll
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		PLL_POWERDOWN_N_0					1
+		retrupd	0		REF_CLK_0								rxclk
+		retrupd	0		OUT0_FABCLK_0								pixclk
+		ImeIMPort.end
+	iccl_ip_AXI;top;camacq	mipidec
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset_n_i								resetn
+		retrupd	0		parallel_clock_i								pixclk
+		retrupd	0		cam_clock_i								rxclk
+		retrupd	0		l0_hs_data_i								rxd[7..0]
+		retrupd	0		l1_hs_data_i								rxd[15..8]
+		retrupd	0		l2_hs_data_i								rxd[23..16]
+		retrupd	0		l3_hs_data_i								rxd[31..24]
+		retrupd	0		l0_lp_data_i								rxdLp[0]
+		retrupd	0		l0_lp_data_n_i								rxdLpn[0]
+		retrupd	0		l1_lp_data_i								rxdLp[1]
+		retrupd	0		l1_lp_data_n_i								rxdLpn[1]
+		retrupd	0		l2_lp_data_i								rxdLp[2]
+		retrupd	0		l2_lp_data_n_i								rxdLpn[2]
+		retrupd	0		l3_lp_data_i								rxdLp[3]
+		retrupd	0		l3_lp_data_n_i								rxdLpn[3]
+		retrupd	0		frame_start_o								strbFrameStart
+		retrupd	0		frame_end_o								strbFrameEnd
+		retrupd	0		frame_valid_o
+		retrupd	0		line_start_o								strbRowStart
+		retrupd	0		line_end_o								strbRowEnd
+		retrupd	0		line_valid_o
+		retrupd	0		data_out_o								pixd
+		retrupd	0		data_type_o
+		retrupd	0		virtual_channel_o
+		retrupd	0		ecc_error_o
+		retrupd	0		word_count_o
+		ImeIMPort.end
 	iccl_ip_AXI;top;camacq	bingraybuf
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
 		retrupd	0		CLK								mclk
@@ -4957,32 +5382,38 @@ iccl
 		retrupd	0		A_DIN								dwrImdefbuf
 		ImeIMPort.end
 	iccl_ip_AXI;top	laser
-		ImeICPort.iref
-		1
-		ImeICPort.end
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
 		ins	0	reset	reset	in	sl	1					reset
 		ins	0	clk	mclk	in	sl	1					mclk
-		ins	1	rtepin	cs0	out	sl	1			cs0
-		ins	1	rtepin	cs1	out	sl	1			cs1
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
-		2
 		ImeICSignal2.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
 		oprt	0	prc	op	ackInvSet	false	sl	1					false	ackInvSet
-		oth	1	prc	op	cmdNotPrep	false	sl	1					false
-		oth	1	prc	op	rNotL	false	sl	1					false
 		oth	0	prc	op	spilen	false	slvdn	17				0	false
 		oth	0	prc	op	spisend	false	slvdn	8				0	false
-		hshk	2	prc	op	reqSpi	false	sl	1				0	false
-		hshk	2	mdl	spi	dneSpi	false	sl	1				0	false
+		hshk	1	prc	op	reqSpi	false	sl	1				0	false
+		hshk	1	mdl	spi	dneSpi	false	sl	1				0	false
 		strb	0	mdl	spi	strbSpisend	false	sl	1				0	false
-		oth	0	mdl	spi	nss	false	sl	1				0	false
 		ImeIMSignal2.end
 		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
 		op	mclk	reset	false	state(init)	false	main operation
+			ImeIAVKeylistKey.sref	Title	Comment
+			txbuf_t	array(0 to sizeTxbuf-1) of std_logic_vector(7 downto 0)
+			ImeIAVKeylistKey.end
+			ImeICVariable2.iref
+			1
+			2
+			ImeICVariable2.end
+			ImeIMVariable2.irefRefWdbeCVariable	sref	Const	Falling	srefWdbeKHdltype	Width	Minmax	Onval	Offval	Defon	Comment
+			1	sizeTxbuf	true	false	nat				2	false
+			1	txbuf	false	false	txbuf_t				(x"00",x"00")	false
+			0	bytecnt	false	false	nat		0..sizeTxbuf		0	false
+			2	imax	true	false	nat				fMclk*8/1000	false	8us
+			2	i	false	false	nat		0..imax		0	false
+			0	rNotL	false	false	_bool				false	false
+			ImeIMVariable2.end
 			ImeIMFsm.
 			
 				ImeICFsmstate.iref
@@ -5021,7 +5452,7 @@ iccl
 					ImeIAMFsmstateStep.end
 				2	setA	false
 					ImeIAMFsmstateStep.srefFnxRefWdbeMFsmstate	Cond1	Ip1	Cond2	Ip2	Cond3	Ip3	Cond4	Ip4
-					setC	dneSpi	spioff	!rNotL	prepR
+					setC	dneSpi	spioff	not rNotL	prepR
 					inv	dneSpi	spioff	else
 					setB	!strbSpisend
 					ImeIAMFsmstateStep.end
@@ -5056,7 +5487,7 @@ iccl
 		retrupd	0		len								spilen
 		retrupd	0		send								spisend
 		retrupd	0		strbSend								strbSpisend
-		retrupd	0		nss								nss
+		retrupd	0		nss						cs
 		retrupd	0		sclk						sclk
 		retrupd	0		mosi						mosi
 		retrupd	0		miso					0
@@ -5099,14 +5530,16 @@ iccl
 		ins	0	reset	reset	in	sl	1					reset
 		ins	0	clk	mclk	in	sl	1					mclk
 		ins	0	clk	tkclk	in	sl	1					tkclk
-		ins	1	rtepin	step1	out	sl	1			step1
-		ins	1	rtepin	step2	out	sl	1			step2
-		ins	1	rtepin	step3	out	sl	1			step3
-		ins	1	rtepin	step4	out	sl	1			step4
+		ins	1	rtepin	nslp	out	sl	1			nslp
+		ins	1	rtepin	m0	inout	sl	1			m0
+		ins	1	rtepin	dir	out	sl	1			dir
+		ins	1	rtepin	step	out	sl	1			step
+		ins	1	rtepin	nflt	in	sl	1			nflt
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
 		2
+		3
 		ImeICSignal2.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
 		oprt	1	prc	op	angle	false	nat		0..4095			0	false	getInfoAngle
@@ -5114,13 +5547,26 @@ iccl
 		oprt	0	prc	op	ackInvMoveto	false	sl	1				0	false	ackInvMoveto
 		oprt	0	prc	op	ackInvSet	false	sl	1				0	false	ackInvSet
 		oprt	0	prc	op	ackInvZero	false	sl	1				0	false	ackInvZero
-		oprt	2	prc	op	step1	false	sl	1				0	false	step1
-		oprt	2	prc	op	step2	false	sl	1				0	false	step2
-		oprt	2	prc	op	step3	false	sl	1				0	false	step3
-		oprt	2	prc	op	step4	false	sl	1				0	false	step4
+		oth	2	prc	op	rng	false	sl	1				0	false
+		oprt	2	prc	op	nslp	false	sl	1		!rng	1	0	false	nslp
+		oprt	0	prc	op	ccwNotCw	false	sl	1				0	false	dir
+		oprt	0	prc	op	step	false	sl	1				0	false	step
+		oth	3	prc	op	m0_sig	false	sl	1				0	false
+		oth	3	prc	op	m0z	false	sl	1				0	false
 		ImeIMSignal2.end
 		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
 		op	mclk	reset	false	state(init) or (state(!inv) and (reqInvMoveto or reqInvSet or reqInvZero))	false	main operation
+			ImeICVariable2.iref
+			1
+			2
+			ImeICVariable2.end
+			ImeIMVariable2.irefRefWdbeCVariable	sref	Const	Falling	srefWdbeKHdltype	Width	Minmax	Onval	Offval	Defon	Comment
+			1	target	true	false	nat		0..1000		0	false
+			1	dAngle	false	false	int		-999..1000		0	false
+			0	Tstep	false	false	nat		0..255		0	false
+			2	targetNotSteady	true	false	_bool				false	false
+			2	atTarget	false	false	_bool				false	false
+			ImeIMVariable2.end
 			ImeIMFsm.
 			
 				ImeICFsmstate.iref
@@ -5156,6 +5602,12 @@ iccl
 				ImeIMFsmstate.end
 			ImeIMFsm.end
 		ImeIMProcess.end
+	iccl_ip_AXI;top;step	iobufM0
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		PAD							m0
+		retrupd	0		D								m0_sig
+		retrupd	0		E								m0z
+		ImeIMPort.end
 	iccl_ip_AXI;top	tkclksrc
 		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
 		retrupd	0	fMclk					fMclk

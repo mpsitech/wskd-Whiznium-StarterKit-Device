@@ -52,6 +52,7 @@ void UntWskdArty::init(
 
 	// open character device
 	fd = open(path.c_str(), O_RDWR);
+cout << "file descriptor on initialization: " << fd << endl;
 	if (fd == -1) {
 		fd = 0;
 		throw DbeException("error opening device " + path + "");
@@ -176,6 +177,7 @@ bool UntWskdArty::tx(
 		n = 0;
 
 		while (nleft > 0) {
+cout << "file descriptor about to write to: " << fd << endl;
 			n = write(fd, &(buf[reqlen-nleft]), nleft);
 
 			if (n > 0) nleft -= n; // driver transfers all data at a time or none

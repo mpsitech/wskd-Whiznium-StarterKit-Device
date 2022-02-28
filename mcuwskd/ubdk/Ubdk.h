@@ -123,9 +123,10 @@ sbit DISPEN = SFR_P2^3;
 // - flags
 extern bdata struct Flags {
 	// handshake
+	unsigned char reqDispToMutexLock:1;
+
 	unsigned char reqHostifToUsbrxtxSend:1;
 
-	unsigned char reqDispToMutexLock:1;
 	unsigned char ackDispToMutexLock:1;
 
 	unsigned char ackHostifToUsbrxtxSend:1;
@@ -134,18 +135,17 @@ extern bdata struct Flags {
 
 	unsigned char dneHostifToUsbrxtxSend:1;
 
-	unsigned char reqHostifToUsbrxtxRecv:1;
-
 	unsigned char ackLaserToMutexLock:1;
 
+	unsigned char reqHostifToUsbrxtxRecv:1;
 	unsigned char ackHostifToUsbrxtxRecv:1;
 	unsigned char dneHostifToUsbrxtxRecv:1;
 
-	unsigned char reqInvLaserSet:1;
-	unsigned char ackInvLaserSet:1;
-
 	unsigned char reqInvChronoSetHhst:1;
 	unsigned char ackInvChronoSetHhst:1;
+
+	unsigned char reqInvLaserSet:1;
+	unsigned char ackInvLaserSet:1;
 
 	unsigned char reqInvStepMoveto:1;
 	unsigned char ackInvStepMoveto:1;
@@ -170,19 +170,20 @@ extern unsigned char evts0, evts1, evts2;
 
 // handshake
 
-#define EVTS0_reqHostifToUsbrxtxSend 0x02
+#define EVTS0_reqDispToMutexLock 0x02
+#define SET_EVT_reqDispToMutexLock() \
+	{evts0 |= EVTS0_reqDispToMutexLock; \
+	acts0 |= ACTS0_disp; \
+	snss0 |= SNSS0_mutex;}
+#define IS_SET_EVT_reqDispToMutexLock() ((evts0 & EVTS0_reqDispToMutexLock) != 0)
+
+#define EVTS0_reqHostifToUsbrxtxSend 0x04
 #define SET_EVT_reqHostifToUsbrxtxSend() \
 	{evts0 |= EVTS0_reqHostifToUsbrxtxSend; \
 	acts0 |= ACTS0_hostif; \
 	snss0 |= SNSS0_usbrxtx;}
 #define IS_SET_EVT_reqHostifToUsbrxtxSend() ((evts0 & EVTS0_reqHostifToUsbrxtxSend) != 0)
 
-#define EVTS0_reqDispToMutexLock 0x04
-#define SET_EVT_reqDispToMutexLock() \
-	{evts0 |= EVTS0_reqDispToMutexLock; \
-	acts0 |= ACTS0_disp; \
-	snss0 |= SNSS0_mutex;}
-#define IS_SET_EVT_reqDispToMutexLock() ((evts0 & EVTS0_reqDispToMutexLock) != 0)
 #define EVTS0_ackDispToMutexLock 0x08
 #define SET_EVT_ackDispToMutexLock() \
 	{evts0 |= EVTS0_ackDispToMutexLock; \
@@ -211,20 +212,19 @@ extern unsigned char evts0, evts1, evts2;
 	snss0 |= SNSS0_hostif;}
 #define IS_SET_EVT_dneHostifToUsbrxtxSend() ((evts0 & EVTS0_dneHostifToUsbrxtxSend) != 0)
 
-#define EVTS0_reqHostifToUsbrxtxRecv 0x80
-#define SET_EVT_reqHostifToUsbrxtxRecv() \
-	{evts0 |= EVTS0_reqHostifToUsbrxtxRecv; \
-	acts0 |= ACTS0_hostif; \
-	snss0 |= SNSS0_usbrxtx;}
-#define IS_SET_EVT_reqHostifToUsbrxtxRecv() ((evts0 & EVTS0_reqHostifToUsbrxtxRecv) != 0)
-
-#define EVTS1_ackLaserToMutexLock 0x01
+#define EVTS0_ackLaserToMutexLock 0x80
 #define SET_EVT_ackLaserToMutexLock() \
-	{evts1 |= EVTS1_ackLaserToMutexLock; \
+	{evts0 |= EVTS0_ackLaserToMutexLock; \
 	acts0 |= ACTS0_mutex; \
 	snss0 |= SNSS0_laser;}
-#define IS_SET_EVT_ackLaserToMutexLock() ((evts1 & EVTS1_ackLaserToMutexLock) != 0)
+#define IS_SET_EVT_ackLaserToMutexLock() ((evts0 & EVTS0_ackLaserToMutexLock) != 0)
 
+#define EVTS1_reqHostifToUsbrxtxRecv 0x01
+#define SET_EVT_reqHostifToUsbrxtxRecv() \
+	{evts1 |= EVTS1_reqHostifToUsbrxtxRecv; \
+	acts0 |= ACTS0_hostif; \
+	snss0 |= SNSS0_usbrxtx;}
+#define IS_SET_EVT_reqHostifToUsbrxtxRecv() ((evts1 & EVTS1_reqHostifToUsbrxtxRecv) != 0)
 #define EVTS1_ackHostifToUsbrxtxRecv 0x02
 #define SET_EVT_ackHostifToUsbrxtxRecv() \
 	{evts1 |= EVTS1_ackHostifToUsbrxtxRecv; \
@@ -238,31 +238,31 @@ extern unsigned char evts0, evts1, evts2;
 	snss0 |= SNSS0_hostif;}
 #define IS_SET_EVT_dneHostifToUsbrxtxRecv() ((evts1 & EVTS1_dneHostifToUsbrxtxRecv) != 0)
 
-#define EVTS1_reqInvLaserSet 0x08
-#define SET_EVT_reqInvLaserSet() \
-	{evts1 |= EVTS1_reqInvLaserSet; \
-	acts0 |= ACTS0_hostif; \
-	snss0 |= SNSS0_laser;}
-#define IS_SET_EVT_reqInvLaserSet() ((evts1 & EVTS1_reqInvLaserSet) != 0)
-#define EVTS1_ackInvLaserSet 0x10
-#define SET_EVT_ackInvLaserSet() \
-	{evts1 |= EVTS1_ackInvLaserSet; \
-	acts0 |= ACTS0_laser; \
-	snss0 |= SNSS0_hostif;}
-#define IS_SET_EVT_ackInvLaserSet() ((evts1 & EVTS1_ackInvLaserSet) != 0)
-
-#define EVTS1_reqInvChronoSetHhst 0x20
+#define EVTS1_reqInvChronoSetHhst 0x08
 #define SET_EVT_reqInvChronoSetHhst() \
 	{evts1 |= EVTS1_reqInvChronoSetHhst; \
 	acts0 |= ACTS0_hostif; \
 	snss0 |= SNSS0_chrono;}
 #define IS_SET_EVT_reqInvChronoSetHhst() ((evts1 & EVTS1_reqInvChronoSetHhst) != 0)
-#define EVTS1_ackInvChronoSetHhst 0x40
+#define EVTS1_ackInvChronoSetHhst 0x10
 #define SET_EVT_ackInvChronoSetHhst() \
 	{evts1 |= EVTS1_ackInvChronoSetHhst; \
 	acts0 |= ACTS0_chrono; \
 	snss0 |= SNSS0_hostif;}
 #define IS_SET_EVT_ackInvChronoSetHhst() ((evts1 & EVTS1_ackInvChronoSetHhst) != 0)
+
+#define EVTS1_reqInvLaserSet 0x20
+#define SET_EVT_reqInvLaserSet() \
+	{evts1 |= EVTS1_reqInvLaserSet; \
+	acts0 |= ACTS0_hostif; \
+	snss0 |= SNSS0_laser;}
+#define IS_SET_EVT_reqInvLaserSet() ((evts1 & EVTS1_reqInvLaserSet) != 0)
+#define EVTS1_ackInvLaserSet 0x40
+#define SET_EVT_ackInvLaserSet() \
+	{evts1 |= EVTS1_ackInvLaserSet; \
+	acts0 |= ACTS0_laser; \
+	snss0 |= SNSS0_hostif;}
+#define IS_SET_EVT_ackInvLaserSet() ((evts1 & EVTS1_ackInvLaserSet) != 0)
 
 #define EVTS1_reqInvStepMoveto 0x80
 #define SET_EVT_reqInvStepMoveto() \
@@ -311,16 +311,16 @@ extern unsigned char evts0, evts1, evts2;
 	acts0 |= ACTS0_chrono; \
 	snss0 |= SNSS0_hostif;}
 #define IS_SET_EVT_chronoGetHhst() ((evts2 & EVTS2_chronoGetHhst) != 0)
-#define EVTS2_stepGetInfo 0x40
-#define SET_EVT_stepGetInfo() \
-	{evts2 |= EVTS2_stepGetInfo; \
-	acts0 |= ACTS0_step;}
-#define IS_SET_EVT_stepGetInfo() ((evts2 & EVTS2_stepGetInfo) != 0)
-#define EVTS2_stateGet 0x80
+#define EVTS2_stateGet 0x40
 #define SET_EVT_stateGet() \
 	{evts2 |= EVTS2_stateGet; \
 	acts0 |= ACTS0_state;}
 #define IS_SET_EVT_stateGet() ((evts2 & EVTS2_stateGet) != 0)
+#define EVTS2_stepGetInfo 0x80
+#define SET_EVT_stepGetInfo() \
+	{evts2 |= EVTS2_stepGetInfo; \
+	acts0 |= ACTS0_step;}
+#define IS_SET_EVT_stepGetInfo() ((evts2 & EVTS2_stepGetInfo) != 0)
 
 #define HAVE_NO_EVTS() ((evts0 | evts1 | evts2) == 0)
 
@@ -346,14 +346,14 @@ extern unsigned char evts0, evts1, evts2;
 	!= 0))
 
 #define CLEAR_EVTS_FROM_HOSTIF() \
-	evts0 &= ~(EVTS0_reqHostifToUsbrxtxSend | EVTS0_reqHostifToUsbrxtxRecv); \
-	evts1 &= ~(EVTS1_reqInvLaserSet | EVTS1_reqInvChronoSetHhst | EVTS1_reqInvStepMoveto); \
+	evts0 &= ~(EVTS0_reqHostifToUsbrxtxSend); \
+	evts1 &= ~(EVTS1_reqHostifToUsbrxtxRecv | EVTS1_reqInvChronoSetHhst | EVTS1_reqInvLaserSet | EVTS1_reqInvStepMoveto); \
 	evts2 &= ~(EVTS2_reqInvStepSet | EVTS2_reqInvStepZero); \
 	acts0 &= ~ACTS0_hostif;
 
 #define HAVE_EVTS_FOR_HOSTIF() (( \
 		(evts0 & (EVTS0_ackHostifToUsbrxtxSend | EVTS0_dneHostifToUsbrxtxSend)) \
-		| (evts1 & (EVTS1_ackHostifToUsbrxtxRecv | EVTS1_dneHostifToUsbrxtxRecv | EVTS1_ackInvLaserSet | EVTS1_ackInvChronoSetHhst)) \
+		| (evts1 & (EVTS1_ackHostifToUsbrxtxRecv | EVTS1_dneHostifToUsbrxtxRecv | EVTS1_ackInvChronoSetHhst | EVTS1_ackInvLaserSet)) \
 		| (evts2 & (EVTS2_ackInvStepMoveto | EVTS2_ackInvStepSet | EVTS2_ackInvStepZero | EVTS2_chronoGetHhst)) \
 	!= 0))
 
@@ -363,12 +363,12 @@ extern unsigned char evts0, evts1, evts2;
 	acts0 &= ~ACTS0_laser;
 
 #define HAVE_EVTS_FOR_LASER() (( \
-		(evts1 & (EVTS1_ackLaserToMutexLock | EVTS1_reqInvLaserSet)) \
+		(evts0 & (EVTS0_ackLaserToMutexLock)) \
+		| (evts1 & (EVTS1_reqInvLaserSet)) \
 	!= 0))
 
 #define CLEAR_EVTS_FROM_MUTEX() \
-	evts0 &= ~(EVTS0_ackDispToMutexLock); \
-	evts1 &= ~(EVTS1_ackLaserToMutexLock); \
+	evts0 &= ~(EVTS0_ackDispToMutexLock | EVTS0_ackLaserToMutexLock); \
 	acts0 &= ~ACTS0_mutex;
 
 #define HAVE_EVTS_FOR_MUTEX() (( \
@@ -396,7 +396,8 @@ extern unsigned char evts0, evts1, evts2;
 	acts0 &= ~ACTS0_usbrxtx;
 
 #define HAVE_EVTS_FOR_USBRXTX() (( \
-		(evts0 & (EVTS0_reqHostifToUsbrxtxSend | EVTS0_reqHostifToUsbrxtxRecv)) \
+		(evts0 & (EVTS0_reqHostifToUsbrxtxSend)) \
+		| (evts1 & (EVTS1_reqHostifToUsbrxtxRecv)) \
 	!= 0))
 
 // - activities
