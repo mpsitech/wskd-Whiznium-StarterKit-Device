@@ -66,7 +66,7 @@ begin
 
 	rdyRx <= '1' when (stateRecv=stateRecvWaitStartA or stateRecv=stateRecvWaitStartB) else '0';
 
-	process (reset, mclk)
+	process (reset, mclk, stateRecv)
 		variable wordcnt: natural range 0 to 4194303;
 
 		constant tstrbhigh: natural := 2;

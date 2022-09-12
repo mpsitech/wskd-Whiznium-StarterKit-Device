@@ -20,9 +20,10 @@ namespace VecVWskdIcclController {
 	constexpr uint8_t CAMIF = 0x02;
 	constexpr uint8_t FEATDET = 0x03;
 	constexpr uint8_t LASER = 0x04;
-	constexpr uint8_t STATE = 0x05;
-	constexpr uint8_t STEP = 0x06;
-	constexpr uint8_t TKCLKSRC = 0x07;
+	constexpr uint8_t PWMONIF = 0x05;
+	constexpr uint8_t STATE = 0x06;
+	constexpr uint8_t STEP = 0x07;
+	constexpr uint8_t TKCLKSRC = 0x08;
 
 	uint8_t getTix(const std::string& sref);
 	std::string getSref(const uint8_t tix);

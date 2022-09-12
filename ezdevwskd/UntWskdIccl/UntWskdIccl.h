@@ -18,6 +18,7 @@
 #include "CtrWskdIcclCamif.h"
 #include "CtrWskdIcclFeatdet.h"
 #include "CtrWskdIcclLaser.h"
+#include "CtrWskdIcclPwmonif.h"
 #include "CtrWskdIcclState.h"
 #include "CtrWskdIcclStep.h"
 #include "CtrWskdIcclTkclksrc.h"
@@ -30,8 +31,8 @@
 class UntWskdIccl : public UntWskd {
 
 public:
-	static constexpr size_t sizeRxbuf = 8;
-	static constexpr size_t sizeTxbuf = 7;
+	static constexpr size_t sizeRxbuf = 37;
+	static constexpr size_t sizeTxbuf = 38;
 
 public:
 	UntWskdIccl();
@@ -51,6 +52,7 @@ public:
 	CtrWskdIcclCamif* camif;
 	CtrWskdIcclFeatdet* featdet;
 	CtrWskdIcclLaser* laser;
+	CtrWskdIcclPwmonif* pwmonif;
 	CtrWskdIcclState* state;
 	CtrWskdIcclStep* step;
 	CtrWskdIcclTkclksrc* tkclksrc;

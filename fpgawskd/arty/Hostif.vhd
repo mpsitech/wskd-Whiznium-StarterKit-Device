@@ -20,12 +20,38 @@ entity Hostif is
 		commok: out std_logic;
 		reqReset: out std_logic;
 
-		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
+		reqInvLaserSet: out std_logic;
+		ackInvLaserSet: in std_logic;
 
-		reqInvTkclksrcSetTkst: out std_logic;
-		ackInvTkclksrcSetTkst: in std_logic;
+		laserSetL: out std_logic_vector(15 downto 0);
+		laserSetR: out std_logic_vector(15 downto 0);
 
-		tkclksrcSetTkstTkst: out std_logic_vector(31 downto 0);
+		pwmonifGetTixVState: in std_logic_vector(7 downto 0);
+		pwmonifGetRxleft: in std_logic_vector(7 downto 0);
+		pwmonifGetLenRxdata: in std_logic_vector(7 downto 0);
+		pwmonifGetRxdata: in std_logic_vector(263 downto 0);
+
+		reqInvPwmonifRx: out std_logic;
+		ackInvPwmonifRx: in std_logic;
+
+		pwmonifRxLen: out std_logic_vector(7 downto 0);
+		pwmonifRxTo: out std_logic_vector(15 downto 0);
+
+		reqInvPwmonifTx: out std_logic;
+		ackInvPwmonifTx: in std_logic;
+
+		pwmonifTxLenData: out std_logic_vector(7 downto 0);
+		pwmonifTxData: out std_logic_vector(255 downto 0);
+
+		reqInvPwmonifTxrx: out std_logic;
+		ackInvPwmonifTxrx: in std_logic;
+
+		pwmonifTxrxLenTxdata: out std_logic_vector(7 downto 0);
+		pwmonifTxrxTxdata: out std_logic_vector(255 downto 0);
+		pwmonifTxrxRxlen: out std_logic_vector(7 downto 0);
+		pwmonifTxrxRxto: out std_logic_vector(15 downto 0);
+
+		stateGetTixVArtyState: in std_logic_vector(7 downto 0);
 
 		stepGetInfoTixVState: in std_logic_vector(7 downto 0);
 		stepGetInfoAngle: in std_logic_vector(15 downto 0);
@@ -46,13 +72,12 @@ entity Hostif is
 		reqInvStepZero: out std_logic;
 		ackInvStepZero: in std_logic;
 
-		stateGetTixVArtyState: in std_logic_vector(7 downto 0);
+		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 
-		reqInvLaserSet: out std_logic;
-		ackInvLaserSet: in std_logic;
+		reqInvTkclksrcSetTkst: out std_logic;
+		ackInvTkclksrcSetTkst: in std_logic;
 
-		laserSetL: out std_logic_vector(15 downto 0);
-		laserSetR: out std_logic_vector(15 downto 0);
+		tkclksrcSetTkstTkst: out std_logic_vector(31 downto 0);
 
 		reqInvFeatdetSet: out std_logic;
 		ackInvFeatdetSet: in std_logic;
@@ -288,11 +313,11 @@ architecture Hostif of Hostif is
 	type opbuf_t is array (0 to sizeOpbuf-1) of std_logic_vector(7 downto 0);
 	signal opbuf: opbuf_t;
 
-	constant sizeRxbuf: natural := 8;
+	constant sizeRxbuf: natural := 40;
 	type rxbuf_t is array (0 to sizeRxbuf-1) of std_logic_vector(7 downto 0);
 	signal rxbuf: rxbuf_t;
 
-	constant sizeTxbuf: natural := 8;
+	constant sizeTxbuf: natural := 40;
 	type txbuf_t is array (0 to sizeTxbuf-1) of std_logic_vector(7 downto 0);
 	signal txbuf: txbuf_t;
 
@@ -334,7 +359,19 @@ architecture Hostif of Hostif is
 	signal strbCrcd: std_logic;
 	signal torestart: std_logic;
 
-	signal tkclksrcSetTkstTkst_sig: std_logic_vector(31 downto 0);
+	signal laserSetL_sig: std_logic_vector(15 downto 0);
+	signal laserSetR_sig: std_logic_vector(15 downto 0);
+
+	signal pwmonifRxLen_sig: std_logic_vector(7 downto 0);
+	signal pwmonifRxTo_sig: std_logic_vector(15 downto 0);
+
+	signal pwmonifTxLenData_sig: std_logic_vector(7 downto 0);
+	signal pwmonifTxData_sig: std_logic_vector(255 downto 0);
+
+	signal pwmonifTxrxLenTxdata_sig: std_logic_vector(7 downto 0);
+	signal pwmonifTxrxTxdata_sig: std_logic_vector(255 downto 0);
+	signal pwmonifTxrxRxlen_sig: std_logic_vector(7 downto 0);
+	signal pwmonifTxrxRxto_sig: std_logic_vector(15 downto 0);
 
 	signal stepMovetoAngle_sig: std_logic_vector(15 downto 0);
 	signal stepMovetoTstep_sig: std_logic_vector(7 downto 0);
@@ -343,8 +380,7 @@ architecture Hostif of Hostif is
 	signal stepSetCcwNotCw_sig: std_logic_vector(7 downto 0);
 	signal stepSetTstep_sig: std_logic_vector(7 downto 0);
 
-	signal laserSetL_sig: std_logic_vector(15 downto 0);
-	signal laserSetR_sig: std_logic_vector(15 downto 0);
+	signal tkclksrcSetTkstTkst_sig: std_logic_vector(31 downto 0);
 
 	signal featdetSetRng_sig: std_logic_vector(7 downto 0);
 	signal featdetSetThdNotCorner_sig: std_logic_vector(7 downto 0);
@@ -523,6 +559,9 @@ begin
 	reqInvFeatdetSetThd <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerFeatdet and opbuf(ixOpbufCommand)=tixVFeatdetCommandSetThd) else '0';
 	reqInvFeatdetTriggerThd <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerFeatdet and opbuf(ixOpbufCommand)=tixVFeatdetCommandTriggerThd) else '0';
 	reqInvLaserSet <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerLaser and opbuf(ixOpbufCommand)=tixVLaserCommandSet) else '0';
+	reqInvPwmonifRx <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerPwmonif and opbuf(ixOpbufCommand)=tixVPwmonifCommandRx) else '0';
+	reqInvPwmonifTx <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerPwmonif and opbuf(ixOpbufCommand)=tixVPwmonifCommandTx) else '0';
+	reqInvPwmonifTxrx <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerPwmonif and opbuf(ixOpbufCommand)=tixVPwmonifCommandTxrx) else '0';
 	reqInvStepMoveto <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerStep and opbuf(ixOpbufCommand)=tixVStepCommandMoveto) else '0';
 	reqInvStepSet <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerStep and opbuf(ixOpbufCommand)=tixVStepCommandSet) else '0';
 	reqInvStepZero <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVArtyControllerStep and opbuf(ixOpbufCommand)=tixVStepCommandZero) else '0';
@@ -539,6 +578,9 @@ begin
 				else ackInvFeatdetSetThd when (opbuf(ixOpbufController)=tixVArtyControllerFeatdet and opbuf(ixOpbufCommand)=tixVFeatdetCommandSetThd)
 				else ackInvFeatdetTriggerThd when (opbuf(ixOpbufController)=tixVArtyControllerFeatdet and opbuf(ixOpbufCommand)=tixVFeatdetCommandTriggerThd)
 				else ackInvLaserSet when (opbuf(ixOpbufController)=tixVArtyControllerLaser and opbuf(ixOpbufCommand)=tixVLaserCommandSet)
+				else ackInvPwmonifRx when (opbuf(ixOpbufController)=tixVArtyControllerPwmonif and opbuf(ixOpbufCommand)=tixVPwmonifCommandRx)
+				else ackInvPwmonifTx when (opbuf(ixOpbufController)=tixVArtyControllerPwmonif and opbuf(ixOpbufCommand)=tixVPwmonifCommandTx)
+				else ackInvPwmonifTxrx when (opbuf(ixOpbufController)=tixVArtyControllerPwmonif and opbuf(ixOpbufCommand)=tixVPwmonifCommandTxrx)
 				else ackInvStepMoveto when (opbuf(ixOpbufController)=tixVArtyControllerStep and opbuf(ixOpbufCommand)=tixVStepCommandMoveto)
 				else ackInvStepSet when (opbuf(ixOpbufController)=tixVArtyControllerStep and opbuf(ixOpbufCommand)=tixVStepCommandSet)
 				else ackInvStepZero when (opbuf(ixOpbufController)=tixVArtyControllerStep and opbuf(ixOpbufCommand)=tixVStepCommandZero)
@@ -580,7 +622,19 @@ begin
 	avllenRxbuf <= 0;
 
 	-- IP impl.op.wiring --- BEGIN
-	tkclksrcSetTkstTkst <= tkclksrcSetTkstTkst_sig;
+	laserSetL <= laserSetL_sig;
+	laserSetR <= laserSetR_sig;
+
+	pwmonifRxLen <= pwmonifRxLen_sig;
+	pwmonifRxTo <= pwmonifRxTo_sig;
+
+	pwmonifTxLenData <= pwmonifTxLenData_sig;
+	pwmonifTxData <= pwmonifTxData_sig;
+
+	pwmonifTxrxLenTxdata <= pwmonifTxrxLenTxdata_sig;
+	pwmonifTxrxTxdata <= pwmonifTxrxTxdata_sig;
+	pwmonifTxrxRxlen <= pwmonifTxrxRxlen_sig;
+	pwmonifTxrxRxto <= pwmonifTxrxRxto_sig;
 
 	stepMovetoAngle <= stepMovetoAngle_sig;
 	stepMovetoTstep <= stepMovetoTstep_sig;
@@ -589,8 +643,7 @@ begin
 	stepSetCcwNotCw <= stepSetCcwNotCw_sig;
 	stepSetTstep <= stepSetTstep_sig;
 
-	laserSetL <= laserSetL_sig;
-	laserSetR <= laserSetR_sig;
+	tkclksrcSetTkstTkst <= tkclksrcSetTkstTkst_sig;
 
 	featdetSetRng <= featdetSetRng_sig;
 	featdetSetThdNotCorner <= featdetSetThdNotCorner_sig;
@@ -717,14 +770,22 @@ begin
 			dRxbuf <= (others => '0');
 			strbDRxbuf <= '0';
 
-			tkclksrcSetTkstTkst_sig <= (others => '0');
-			stepMovetoAngle_sig <= (others => '0');
-			stepMovetoTstep_sig <= x"96";
-			stepSetRng_sig <= fls8;
-			stepSetCcwNotCw_sig <= fls8;
-			stepSetTstep_sig <= x"96";
 			laserSetL_sig <= (others => '0');
 			laserSetR_sig <= (others => '0');
+			pwmonifRxLen_sig <= (others => '0');
+			pwmonifRxTo_sig <= (others => '0');
+			pwmonifTxLenData_sig <= x"32";
+			pwmonifTxData_sig <= (others => '0');
+			pwmonifTxrxLenTxdata_sig <= x"32";
+			pwmonifTxrxTxdata_sig <= (others => '0');
+			pwmonifTxrxRxlen_sig <= (others => '0');
+			pwmonifTxrxRxto_sig <= (others => '0');
+			stepMovetoAngle_sig <= (others => '0');
+			stepMovetoTstep_sig <= x"60";
+			stepSetRng_sig <= fls8;
+			stepSetCcwNotCw_sig <= fls8;
+			stepSetTstep_sig <= x"60";
+			tkclksrcSetTkstTkst_sig <= (others => '0');
 			featdetSetRng_sig <= fls8;
 			featdetSetThdNotCorner_sig <= fls8;
 			featdetSetThdDeltaNotAbs_sig <= fls8;
@@ -873,6 +934,7 @@ begin
 
 					elsif ( (opbuf(ixOpbufController)=tixVArtyControllerCamacq and (opbuf(ixOpbufCommand)=tixVCamacqCommandGetGrrdinfo or opbuf(ixOpbufCommand)=tixVCamacqCommandGetPvwinfo))
 								or (opbuf(ixOpbufController)=tixVArtyControllerFeatdet and (opbuf(ixOpbufCommand)=tixVFeatdetCommandGetInfo or opbuf(ixOpbufCommand)=tixVFeatdetCommandGetCornerinfo))
+								or (opbuf(ixOpbufController)=tixVArtyControllerPwmonif and (opbuf(ixOpbufCommand)=tixVPwmonifCommandGet))
 								or (opbuf(ixOpbufController)=tixVArtyControllerState and (opbuf(ixOpbufCommand)=tixVStateCommandGet))
 								or (opbuf(ixOpbufController)=tixVArtyControllerStep and (opbuf(ixOpbufCommand)=tixVStepCommandGetInfo))
 								or (opbuf(ixOpbufController)=tixVArtyControllerTkclksrc and (opbuf(ixOpbufCommand)=tixVTkclksrcCommandGetTkst)) ) then
@@ -888,6 +950,7 @@ begin
 								or (opbuf(ixOpbufController)=tixVArtyControllerCamif and (opbuf(ixOpbufCommand)=tixVCamifCommandSetRng or opbuf(ixOpbufCommand)=tixVCamifCommandSetReg or opbuf(ixOpbufCommand)=tixVCamifCommandSetRegaddr or opbuf(ixOpbufCommand)=tixVCamifCommandModReg))
 								or (opbuf(ixOpbufController)=tixVArtyControllerFeatdet and (opbuf(ixOpbufCommand)=tixVFeatdetCommandSet or opbuf(ixOpbufCommand)=tixVFeatdetCommandSetCorner or opbuf(ixOpbufCommand)=tixVFeatdetCommandSetThd or opbuf(ixOpbufCommand)=tixVFeatdetCommandTriggerThd))
 								or (opbuf(ixOpbufController)=tixVArtyControllerLaser and (opbuf(ixOpbufCommand)=tixVLaserCommandSet))
+								or (opbuf(ixOpbufController)=tixVArtyControllerPwmonif and (opbuf(ixOpbufCommand)=tixVPwmonifCommandRx or opbuf(ixOpbufCommand)=tixVPwmonifCommandTx or opbuf(ixOpbufCommand)=tixVPwmonifCommandTxrx))
 								or (opbuf(ixOpbufController)=tixVArtyControllerStep and (opbuf(ixOpbufCommand)=tixVStepCommandMoveto or opbuf(ixOpbufCommand)=tixVStepCommandSet or opbuf(ixOpbufCommand)=tixVStepCommandZero))
 								or (opbuf(ixOpbufController)=tixVArtyControllerTkclksrc and (opbuf(ixOpbufCommand)=tixVTkclksrcCommandSetTkst)) ) then
 
@@ -1005,6 +1068,16 @@ begin
 						txbuf(0) <= featdetGetCornerinfoShift;
 						txbuf(1) <= featdetGetCornerinfoScoreMin;
 						txbuf(2) <= featdetGetCornerinfoScoreMax;
+					end if;
+
+				elsif opbuf(ixOpbufController)=tixVArtyControllerPwmonif then
+					if opbuf(ixOpbufCommand)=tixVPwmonifCommandGet then
+						txbuf(0) <= pwmonifGetTixVState;
+						txbuf(1) <= pwmonifGetRxleft;
+						txbuf(2) <= pwmonifGetLenRxdata;
+						for i in 0 to 31 loop
+							txbuf(3+i) <= pwmonifGetRxdata((32-i)*8-1 downto (31-i)*8);
+						end loop;
 					end if;
 
 				elsif opbuf(ixOpbufController)=tixVArtyControllerState then
@@ -1371,6 +1444,28 @@ begin
 						end loop;
 						for i in 0 to 1 loop
 							laserSetR_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(2+i);
+						end loop;
+					end if;
+
+				elsif opbuf(ixOpbufController)=tixVArtyControllerPwmonif then
+					if opbuf(ixOpbufCommand)=tixVPwmonifCommandRx then
+						pwmonifRxLen_sig <= rxbuf(0);
+						for i in 0 to 1 loop
+							pwmonifRxTo_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(1+i);
+						end loop;
+					elsif opbuf(ixOpbufCommand)=tixVPwmonifCommandTx then
+						pwmonifTxLenData_sig <= rxbuf(0);
+						for i in 0 to 31 loop
+							pwmonifTxData_sig((32-i)*8-1 downto (31-i)*8) <= rxbuf(1+i);
+						end loop;
+					elsif opbuf(ixOpbufCommand)=tixVPwmonifCommandTxrx then
+						pwmonifTxrxLenTxdata_sig <= rxbuf(0);
+						for i in 0 to 31 loop
+							pwmonifTxrxTxdata_sig((32-i)*8-1 downto (31-i)*8) <= rxbuf(1+i);
+						end loop;
+						pwmonifTxrxRxlen_sig <= rxbuf(33);
+						for i in 0 to 1 loop
+							pwmonifTxrxRxto_sig((2-i)*8-1 downto (1-i)*8) <= rxbuf(34+i);
 						end loop;
 					end if;
 

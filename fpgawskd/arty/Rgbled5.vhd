@@ -20,11 +20,7 @@ entity Rgbled5 is
 		rgb: in std_logic_vector(23 downto 0);
 		r: out std_logic;
 		g: out std_logic;
-		b: out std_logic;
-
-		stateBlue_dbg: out std_logic_vector(7 downto 0);
-		stateGreen_dbg: out std_logic_vector(7 downto 0);
-		stateRed_dbg: out std_logic_vector(7 downto 0)
+		b: out std_logic
 	);
 end Rgbled5;
 

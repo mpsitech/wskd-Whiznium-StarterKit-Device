@@ -68,7 +68,7 @@ begin
 
 	rdyTx <= '1' when (stateSend=stateSendWaitStartA or stateSend=stateSendWaitStartB) else '0';
 
-	process (reset, mclk)
+	process (reset, mclk, stateSend)
 		variable wordcnt: natural range 0 to 4194303;
 
 		constant tstrblow: natural := 4;

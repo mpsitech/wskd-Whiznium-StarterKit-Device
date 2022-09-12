@@ -50,7 +50,7 @@ begin
 
 	freq <= freq_sig;
 
-	process (reset, mclk)
+	process (reset, mclk, stateOp)
 		constant imax: natural := fMclk/100/2; -- 5us wait for tens
 		variable i: natural range 0 to imax; -- tens
 		

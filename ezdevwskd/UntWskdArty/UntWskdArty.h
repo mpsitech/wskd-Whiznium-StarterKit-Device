@@ -18,6 +18,7 @@
 #include "CtrWskdArtyCamif.h"
 #include "CtrWskdArtyFeatdet.h"
 #include "CtrWskdArtyLaser.h"
+#include "CtrWskdArtyPwmonif.h"
 #include "CtrWskdArtyState.h"
 #include "CtrWskdArtyStep.h"
 #include "CtrWskdArtyTkclksrc.h"
@@ -30,8 +31,8 @@
 class UntWskdArty : public UntWskd {
 
 public:
-	static constexpr size_t sizeRxbuf = 8;
-	static constexpr size_t sizeTxbuf = 7;
+	static constexpr size_t sizeRxbuf = 37;
+	static constexpr size_t sizeTxbuf = 38;
 
 public:
 	UntWskdArty();
@@ -51,6 +52,7 @@ public:
 	CtrWskdArtyCamif* camif;
 	CtrWskdArtyFeatdet* featdet;
 	CtrWskdArtyLaser* laser;
+	CtrWskdArtyPwmonif* pwmonif;
 	CtrWskdArtyState* state;
 	CtrWskdArtyStep* step;
 	CtrWskdArtyTkclksrc* tkclksrc;

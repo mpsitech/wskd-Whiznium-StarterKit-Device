@@ -87,7 +87,7 @@ Cmd* CtrWskdIcclTkclksrc::getNewCmd(
 };
 
 Cmd* CtrWskdIcclTkclksrc::getNewCmdGetTkst() {
-	Cmd* cmd = new Cmd(0x07, VecVCommand::GETTKST, Cmd::VecVRettype::STATSNG);
+	Cmd* cmd = new Cmd(0x08, VecVCommand::GETTKST, Cmd::VecVRettype::STATSNG);
 
 	cmd->addParRet("tkst", Par::VecVType::UINT32);
 
@@ -110,7 +110,7 @@ void CtrWskdIcclTkclksrc::getTkst(
 };
 
 Cmd* CtrWskdIcclTkclksrc::getNewCmdSetTkst() {
-	Cmd* cmd = new Cmd(0x07, VecVCommand::SETTKST, Cmd::VecVRettype::VOID);
+	Cmd* cmd = new Cmd(0x08, VecVCommand::SETTKST, Cmd::VecVRettype::VOID);
 
 	cmd->addParInv("tkst", Par::VecVType::UINT32);
 

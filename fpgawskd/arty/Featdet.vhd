@@ -50,65 +50,48 @@ entity Featdet is
 		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
 		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
 
-		reqGrrdcdbufFromCamacq: out std_logic;
-
 		reqFlgbufToHostif: in std_logic;
+		ackFlgbufToHostif: out std_logic;
+		dneFlgbufToHostif: in std_logic;
+		avllenFlgbufToHostif: out std_logic_vector(8 downto 0);
+
+		dFlgbufToHostif: out std_logic_vector(31 downto 0);
+		strbDFlgbufToHostif: in std_logic;
 
 		reqGrrdabbufFromCamacq: out std_logic;
+
+		reqGrrdefbufFromCamacq: out std_logic;
+
 		ackGrrdabbufFromCamacq: in std_logic;
 
-		ackGrrdcdbufFromCamacq: in std_logic;
-
-		ackFlgbufToHostif: out std_logic;
-
-		dneGrrdcdbufFromCamacq: out std_logic;
-
-		dneFlgbufToHostif: in std_logic;
+		ackGrrdefbufFromCamacq: in std_logic;
 
 		dneGrrdabbufFromCamacq: out std_logic;
 
+		dneGrrdefbufFromCamacq: out std_logic;
+
 		avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
-
-		avllenFlgbufToHostif: out std_logic_vector(8 downto 0);
-
-		avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
+		avllenGrrdefbufFromCamacq: in std_logic_vector(3 downto 0);
 
 		dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
 
-		dFlgbufToHostif: out std_logic_vector(31 downto 0);
+		dGrrdefbufFromCamacq: in std_logic_vector(7 downto 0);
 
-		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
+		reqGrrdcdbufFromCamacq: out std_logic;
 
 		strbDGrrdabbufFromCamacq: out std_logic;
 
-		strbDFlgbufToHostif: in std_logic;
-
-		strbDGrrdcdbufFromCamacq: out std_logic;
-
-		reqGrrdefbufFromCamacq: out std_logic;
-		ackGrrdefbufFromCamacq: in std_logic;
-		dneGrrdefbufFromCamacq: out std_logic;
-
-		avllenGrrdefbufFromCamacq: in std_logic_vector(3 downto 0);
-
-		dGrrdefbufFromCamacq: in std_logic_vector(7 downto 0);
 		strbDGrrdefbufFromCamacq: out std_logic;
 
-		strb_dbg: out std_logic_vector(3 downto 0);
+		ackGrrdcdbufFromCamacq: in std_logic;
+		dneGrrdcdbufFromCamacq: out std_logic;
 
-		stateCopy_dbg: out std_logic_vector(7 downto 0);
-		stateCorner_dbg: out std_logic_vector(7 downto 0);
-		stateExp_dbg: out std_logic_vector(7 downto 0);
-		stateFactk_dbg: out std_logic_vector(7 downto 0);
-		stateFlg_dbg: out std_logic_vector(7 downto 0);
-		stateFlgbuf_dbg: out std_logic_vector(7 downto 0);
-		stateFlgbufB_dbg: out std_logic_vector(7 downto 0);
-		stateFwd_dbg: out std_logic_vector(7 downto 0);
-		stateImdstream_dbg: out std_logic_vector(7 downto 0);
-		stateMaxsel_dbg: out std_logic_vector(7 downto 0);
-		stateOp_dbg: out std_logic_vector(7 downto 0);
-		stateStream_dbg: out std_logic_vector(7 downto 0);
-		stateThd_dbg: out std_logic_vector(7 downto 0)
+		avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
+
+		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
+		strbDGrrdcdbufFromCamacq: out std_logic;
+
+		strb_dbg: out std_logic_vector(3 downto 0)
 	);
 end Featdet;
 
@@ -1102,9 +1085,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.copy.wiring --- BEGIN
-	stateCopy_dbg <= x"00" when stateCopy=stateCopyInit
-				else x"10" when stateCopy=stateCopyRun
-				else (others => '1');
 	-- IP impl.copy.wiring --- END
 
 	-- IP impl.copy.rising --- BEGIN
@@ -1257,9 +1237,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.exp.wiring --- BEGIN
-	stateExp_dbg <= x"00" when stateExp=stateExpInit
-				else x"10" when stateExp=stateExpRun
-				else (others => '1');
 	-- IP impl.exp.wiring --- END
 
 	-- IP impl.exp.rising --- BEGIN
@@ -1338,9 +1315,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.factk.wiring --- BEGIN
-	stateFactk_dbg <= x"00" when stateFactk=stateFactkInit
-				else x"10" when stateFactk=stateFactkRun
-				else (others => '1');
 	-- IP impl.factk.wiring --- END
 
 	-- IP impl.factk.rising --- BEGIN
@@ -1939,9 +1913,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.fwd.wiring --- BEGIN
-	stateFwd_dbg <= x"00" when stateFwd=stateFwdInit
-				else x"10" when stateFwd=stateFwdRun
-				else (others => '1');
 	-- IP impl.fwd.wiring --- END
 
 	-- IP impl.fwd.rising --- BEGIN
@@ -2740,12 +2711,6 @@ begin
 	ackInvSet <= ackInvSet_sig;
 	ackInvSetCorner <= ackInvSetCorner_sig;
 	ackInvSetThd <= ackInvSetThd_sig;
-
-	stateOp_dbg <= x"00" when stateOp=stateOpInit
-				else x"10" when stateOp=stateOpInvSet
-				else x"20" when stateOp=stateOpInv
-				else x"30" when stateOp=stateOpRun
-				else (others => '1');
 	-- IP impl.op.wiring --- END
 
 	-- IP impl.op.rising --- BEGIN

@@ -2,7 +2,7 @@
 # checkout script for Wskd device access library sources, release ezdevwskd_tdx (ubuntu cross-compilation)
 # copyright: (C) 2017-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 24 Dec 2021
+# date created: 8 Jun 2022
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -32,6 +32,9 @@ cp ../../ezdevwskd/UntWskdIccl/*.cpp $BUILDROOT/ezdevwskd/
 
 cp ../../ezdevwskd/UntWskdMcep/*.h $BUILDROOT/ezdevwskd/
 cp ../../ezdevwskd/UntWskdMcep/*.cpp $BUILDROOT/ezdevwskd/
+
+cp ../../ezdevwskd/UntWskdMpbb/*.h $BUILDROOT/ezdevwskd/
+cp ../../ezdevwskd/UntWskdMpbb/*.cpp $BUILDROOT/ezdevwskd/
 
 cp ../../ezdevwskd/UntWskdUbdk/*.h $BUILDROOT/ezdevwskd/
 cp ../../ezdevwskd/UntWskdUbdk/*.cpp $BUILDROOT/ezdevwskd/

@@ -3,7 +3,7 @@
 # checkin script for Digilent Arty Z7 unit of Wskd embedded system code, release fpgawskd_any
 # copyright: (C) 2017-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 24 Dec 2021
+# date created: 8 Jun 2022
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then

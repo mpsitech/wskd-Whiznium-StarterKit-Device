@@ -533,6 +533,70 @@ string UntWskd::getCmdTemplate(
 	return retval;
 };
 
+void UntWskd::parseCmd(
+			string s
+			, Dbecore::Cmd*& cmd
+		) {
+	string cmdsref;
+	uint cmdix;
+
+	utinyint tixVController;
+	utinyint tixVCommand;
+
+	if (cmd) delete cmd;
+	cmd = NULL;
+
+	size_t ptr;
+
+	if (s.length() == 0) return;
+	if (s[s.length()-1] != ')') return;
+	s = s.substr(0, s.length()-1);
+	ptr = s.find('(');
+	if (ptr == string::npos) return;
+
+	cmdix = getCmdix(s.substr(0, ptr));
+	tixVController = (cmdix >> 8);
+	tixVCommand = (cmdix & 0xFF);
+	s = s.substr(ptr+1);
+
+	cmd = getNewCmd(tixVController, tixVCommand);
+	if (cmd) cmd->parlistToParsInv(s);
+};
+
+uint UntWskd::getCmdix(
+			const string& cmdsref
+		) {
+	utinyint tixVController = 0;
+	utinyint tixVCommand = 0;
+
+	size_t ptr;
+
+	ptr = cmdsref.find('.');
+
+	if (ptr != string::npos) {
+		tixVController = getTixVControllerBySref(cmdsref.substr(0, ptr));
+		tixVCommand = getTixVCommandBySref(tixVController, cmdsref.substr(ptr+1));
+
+		return((tixVController << 8) + tixVCommand);
+
+	} else return 0;
+};
+
+string UntWskd::getCmdsref(
+			const uint cmdix
+		) {
+	string cmdsref;
+
+	utinyint tixVController = (cmdix >> 8);
+	utinyint tixVCommand = (cmdix & 0xFF);
+
+	cmdsref = getSrefByTixVController(tixVController);
+	cmdsref += ".";
+	cmdsref += getSrefByTixVCommand(tixVController, tixVCommand);
+
+	return cmdsref;
+};
+
 void UntWskd::clearHist() {
 	rwmHist.wlock("UntWskd", "clearHist");
 

@@ -94,7 +94,7 @@ begin
 	
 	strbRecv <= '0' when (stateXfer=stateXferLoad or stateXfer=stateXferDataA or stateXfer=stateXferDataB or stateXfer=stateXferStore) else '1';
 
-	process (reset, mclk)
+	process (reset, mclk, stateXfer)
 		variable send_var: std_logic_vector(7 downto 0);
 
 		variable recvraw: std_logic_vector(7 downto 0);

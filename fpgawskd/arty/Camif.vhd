@@ -50,14 +50,8 @@ entity Camif is
 		modRegMask: in std_logic_vector(7 downto 0);
 		modRegVal: in std_logic_vector(7 downto 0);
 
-		rst: out std_logic;
-		pwdn: out std_logic;
-		xclk: out std_logic;
-
 		scl: out std_logic;
-		sda: inout std_logic;
-
-		stateOp_dbg: out std_logic_vector(7 downto 0)
+		sda: inout std_logic
 	);
 end Camif;
 
@@ -74,7 +68,7 @@ architecture Camif of Camif is
 			clkFastNotStd: std_logic := '1';
 			clkFastplusNotFast: std_logic := '0';
 
-			devaddr: std_logic_vector(7 downto 0) := "01111000"
+			devaddr: std_logic_vector(7 downto 0) := "00110100"
 		);
 		port (
 			reset: in std_logic;
@@ -90,9 +84,7 @@ architecture Camif of Camif is
 			recv: out std_logic_vector(7 downto 0);
 
 			scl: out std_logic;
-			sda: inout std_logic;
-
-			stateXfer_dbg: out std_logic_vector(7 downto 0)
+			sda: inout std_logic
 		);
 	end component;
 
@@ -113,8 +105,6 @@ architecture Camif of Camif is
 
 	---- camera master clock (camclk)
 
-	signal xclk_sig: std_logic;
-
 	-- IP sigs.camclk.cust --- INSERT
 
 	---- main operation (op)
@@ -130,8 +120,6 @@ architecture Camif of Camif is
 	signal stateOp: stateOp_t := stateOpInit;
 
 	signal rng_sig: std_logic;
-	signal rst_sig: std_logic;
-	signal pwdn_sig: std_logic;
 	signal ackInvSetRng_sig: std_logic;
 	signal ackInvSetReg_sig: std_logic;
 	signal ackInvSetRegaddr_sig: std_logic;
@@ -177,7 +165,7 @@ begin
 			clkFastNotStd => '1', -- 1Mbps/400kbps vs. 100kbps
 			clkFastplusNotFast => '0', -- 1Mbps vs. 400kbps
 
-			devaddr => "01111000" -- 0x3C left-shifted by one
+			devaddr => "00110100" -- 0x1A left-shifted by one
 		)
 		port map (
 			reset => reset,
@@ -193,9 +181,7 @@ begin
 			recv => i2cRecv,
 
 			scl => scl,
-			sda => sda,
-
-			stateXfer_dbg => open
+			sda => sda
 		);
 
 	myParrom : Parrom
@@ -213,7 +199,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.camclk.wiring --- BEGIN
-	xclk <= xclk_sig;
 	-- IP impl.camclk.wiring --- END
 
 	-- IP impl.camclk.rising --- BEGIN
@@ -249,9 +234,9 @@ begin
 	-- IP impl.op.wiring --- RBEGIN
 	rng <= rng_sig;
 
-	rst <= rst_sig;
+	--rst <= rst_sig;
 
-	pwdn <= pwdn_sig;
+	--pwdn <= pwdn_sig;
 
 	ackInvSetRng <= ackInvSetRng_sig;
 	ackInvSetReg <= ackInvSetReg_sig;
@@ -354,7 +339,7 @@ begin
 					stateOp <= stateOpPrepB;
 
 				elsif reqInvSetRng='1' then
-					if (setRngRng=fls8 and pwdn_sig='0') then
+					if setRngRng=fls8 and !pwdn_sig then
 						-- IP impl.op.init.pwdn --- IBEGIN
 						rng_sig <= '0';
 						pwdn_sig <= '1';
@@ -364,7 +349,7 @@ begin
 
 						stateOp <= stateOpPwupdnB;
 
-					elsif (setRngRng=tru8 and pwdn_sig='1') then
+					elsif setRngRng=tru8 and pwdn_sig then
 						-- IP impl.op.init.pwup --- IBEGIN
 						pwdn_sig <= '0'; -- power up
 

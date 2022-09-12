@@ -16,7 +16,6 @@ entity Camacq is
 	port (
 		reset: in std_logic;
 		mclk: in std_logic;
-		btnPhase: in std_logic;
 
 		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 
@@ -41,41 +40,38 @@ entity Camacq is
 
 		reqGrrdabbufToFeatdet: in std_logic;
 		ackGrrdabbufToFeatdet: out std_logic;
+
+		reqGrrdcdbufToFeatdet: in std_logic;
+
 		dneGrrdabbufToFeatdet: in std_logic;
 		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
 
-		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
-		strbDGrrdabbufToFeatdet: in std_logic;
-
-		reqGrrdcdbufToFeatdet: in std_logic;
 		ackGrrdcdbufToFeatdet: out std_logic;
-
-		reqGrrdefbufToFeatdet: in std_logic;
-
 		dneGrrdcdbufToFeatdet: in std_logic;
 
-		reqPvwabufToHostif: in std_logic;
-
-		ackGrrdefbufToFeatdet: out std_logic;
+		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
 
 		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
 
-		ackPvwabufToHostif: out std_logic;
+		strbDGrrdabbufToFeatdet: in std_logic;
 
 		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
-
-		dneGrrdefbufToFeatdet: in std_logic;
-
-		dnePvwabufToHostif: in std_logic;
-
 		strbDGrrdcdbufToFeatdet: in std_logic;
 
+		reqGrrdefbufToFeatdet: in std_logic;
+		ackGrrdefbufToFeatdet: out std_logic;
+		dneGrrdefbufToFeatdet: in std_logic;
 		avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
 
-		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
-
 		dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
+
+		reqPvwabufToHostif: in std_logic;
+
 		strbDGrrdefbufToFeatdet: in std_logic;
+
+		ackPvwabufToHostif: out std_logic;
+		dnePvwabufToHostif: in std_logic;
+		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
 
 		dPvwabufToHostif: out std_logic_vector(31 downto 0);
 		strbDPvwabufToHostif: in std_logic;
@@ -88,42 +84,26 @@ entity Camacq is
 		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
 		strbDPvwbbufToHostif: in std_logic;
 
-		pclk: in std_logic;
-		href: in std_logic;
-		vsync: in std_logic;
+		csi_clk_p: in std_logic;
+		csi_clk_n: in std_logic;
 
-		d2: in std_logic;
-		d3: in std_logic;
-		d4: in std_logic;
-		d5: in std_logic;
-		d6: in std_logic;
-		d7: in std_logic;
-		d8: in std_logic;
-		d9: in std_logic;
+		csi_d0_p: in std_logic;
+		csi_d0_n: in std_logic;
 
-		cntFallA_dbg: out std_logic_vector(7 downto 0);
-		cntRiseA_dbg: out std_logic_vector(7 downto 0);
-		cntFallB_dbg: out std_logic_vector(7 downto 0);
-		cntRiseB_dbg: out std_logic_vector(7 downto 0);
+		csi_d1_p: in std_logic;
+		csi_d1_n: in std_logic;
 
-		strb_dbg: out std_logic_vector(5 downto 0);
+		csi_d2_p: in std_logic;
+		csi_d2_n: in std_logic;
 
-		stateAlign_dbg: out std_logic_vector(7 downto 0);
-		stateGrrd_dbg: out std_logic_vector(7 downto 0);
-		stateGrrdabbufB_dbg: out std_logic_vector(7 downto 0);
-		stateGrrdacc_dbg: out std_logic_vector(7 downto 0);
-		stateGrrdcdbufB_dbg: out std_logic_vector(7 downto 0);
-		stateGrrdefbufB_dbg: out std_logic_vector(7 downto 0);
-		stateOp_dbg: out std_logic_vector(7 downto 0);
-		statePvw_dbg: out std_logic_vector(7 downto 0);
-		statePvwbingray_dbg: out std_logic_vector(7 downto 0);
-		statePvwbinrgb_dbg: out std_logic_vector(7 downto 0);
-		statePvwbuf_dbg: out std_logic_vector(7 downto 0);
-		statePvwbufB_dbg: out std_logic_vector(7 downto 0);
-		statePvwrawgray_dbg: out std_logic_vector(7 downto 0);
-		statePvwrawrgb_dbg: out std_logic_vector(7 downto 0);
-		stateSample_dbg: out std_logic_vector(7 downto 0);
-		stateTag_dbg: out std_logic_vector(7 downto 0)
+		csi_d3_p: in std_logic;
+		csi_d3_n: in std_logic;
+
+		rx_clk_p: in std_logic;
+		rx_clk_n: in std_logic;
+
+		pixclk_dbg: out std_logic;
+		strb_dbg: out std_logic_vector(3 downto 0)
 	);
 end Camacq;
 
@@ -150,6 +130,13 @@ architecture Camacq of Camacq is
 			B_ADDR: in std_logic_vector(10 downto 0);
 			B_DOUT: out std_logic_vector(7 downto 0);
 			B_DIN: in std_logic_vector(7 downto 0)
+		);
+	end component;
+
+	component BUFG is
+		port (
+			I: in std_logic;
+			O: out std_logic
 		);
 	end component;
 
@@ -186,6 +173,91 @@ architecture Camacq of Camacq is
 
 			W_ADDR: in std_logic_vector(10 downto 0);
 			W_DATA: out std_logic_vector(7 downto 0)
+		);
+	end component;
+
+	component Mipidec_w4 is
+		port (
+			reset_n_i: out std_logic;
+			parallel_clock_i: in std_logic;
+			cam_clock_i: in std_logic;
+
+			l0_hs_data_i: in std_logic_vector(7 downto 0);
+			l1_hs_data_i: in std_logic_vector(7 downto 0);
+
+			l0_lp_data_i: in std_logic;
+			l0_lp_data_n_i: in std_logic;
+
+			l1_lp_data_i: in std_logic;
+			l1_lp_data_n_i: in std_logic;
+
+			frame_start_o: out std_logic;
+			frame_end_o: out std_logic;
+			frame_valid_o: out std_logic;
+
+			line_start_o: out std_logic;
+			line_end_o: out std_logic;
+			line_valid_o: out std_logic;
+
+			data_out_o: out std_logic_vector(47 downto 0);
+			data_type_o: out std_logic_vector(7 downto 0);
+
+			virtual_channel_o: out std_logic_vector(1 downto 0);
+			ecc_error_o: out std_logic;
+			word_count_o: out std_logic_vector(15 downto 0);
+
+			l2_hs_data_i: in std_logic_vector(7 downto 0);
+			l3_hs_data_i: in std_logic_vector(7 downto 0);
+
+			l2_lp_data_i: in std_logic;
+			l2_lp_data_n_i: in std_logic;
+
+			l3_lp_data_i: in std_logic;
+			l3_lp_data_n_i: in std_logic
+		);
+	end component;
+
+	component Ccc_div6 is
+		port (
+			PLL_POWERDOWN_N_0: in std_logic;
+			REF_CLK_0: in std_logic;
+			OUT0_FABCLK_0: out std_logic;
+			PLL_LOCK_0: out std_logic
+		);
+	end component;
+
+	component Mipirx_w4 is
+		port (
+			rx_clk_p: in std_logic;
+			rx_clk_n: in std_logic;
+
+			rxd: in std_logic_vector(3 downto 0);
+			rxd_n: in std_logic_vector(3 downto 0);
+
+			arst_n: in std_logic;
+
+			hs_sel: in std_logic;
+			hs_io_clk_pause: in std_logic;
+
+			rx_clk_g: out std_logic;
+
+			l0_rxd_data: out std_logic_vector(7 downto 0);
+			l1_rxd_data: out std_logic_vector(7 downto 0);
+
+			l0_lp_data: out std_logic;
+			l0_lp_data_n: out std_logic;
+
+			l1_lp_data: out std_logic;
+			l1_lp_data_n: out std_logic;
+
+			l2_rxd_data: in std_logic_vector(7 downto 0);
+			l3_rxd_data: in std_logic_vector(7 downto 0);
+
+			l2_lp_data: in std_logic;
+			l2_lp_data_n: in std_logic;
+
+			l3_lp_data: in std_logic;
+			l3_lp_data_n: in std_logic
 		);
 	end component;
 
@@ -239,27 +311,6 @@ architecture Camacq of Camacq is
 	constant tixVPvwbufstateEmpty: std_logic_vector(7 downto 0) := x"01";
 	constant tixVPvwbufstateAbuf: std_logic_vector(7 downto 0) := x"02";
 	constant tixVPvwbufstateBbuf: std_logic_vector(7 downto 0) := x"03";
-
-	---- pixel clock alignment (align)
-	type stateAlign_t is (
-		stateAlignInit,
-		stateAlignCountA, stateAlignCountB, stateAlignCountC,
-		stateAlignRun
-	);
-	signal stateAlign: stateAlign_t := stateAlignInit;
-
-	constant cntmax: natural := 8;
-
-	signal cntFallA: natural range 0 to cntmax;
-	signal cntRiseA: natural range 0 to cntmax;
-	signal cntFallB: natural range 0 to cntmax;
-	signal cntRiseB: natural range 0 to cntmax;
-
-	type phase_t is (phaseFallA, phaseRiseA, phaseFallB, phaseRiseB);
-	signal phase: phase_t;
-	signal pclk_shift: std_logic;
-
-	-- IP sigs.align.cust --- INSERT
 
 	---- gray/red operation, also managing grrd{ab/cd/ef}buf (grrd)
 	type stateGrrd_t is (
@@ -545,14 +596,10 @@ architecture Camacq of Camacq is
 	);
 	signal stateSample: stateSample_t := stateSampleInit;
 
-	signal vsync_sig: std_logic;
-	signal vsync_shift: std_logic;
-
-	signal href_sig: std_logic;
-	signal href_shift: std_logic;
+	signal csid: std_logic_vector(3 downto 0);
+	signal csidn: std_logic_vector(3 downto 0);
 
 	signal d: std_logic_vector(7 downto 0);
-	signal d_shift: std_logic_vector(7 downto 0);
 
 	-- IP sigs.sample.cust --- INSERT
 
@@ -610,6 +657,25 @@ architecture Camacq of Camacq is
 	---- myEvenbuf
 	signal drdEvenbuf: std_logic_vector(7 downto 0);
 
+	---- myMipidec
+	signal pixd: std_logic_vector(47 downto 0);
+
+	signal strbFrameStart: std_logic;
+	signal strbFrameEnd: std_logic;
+
+	signal strbRowStart: std_logic;
+	signal strbRowEnd: std_logic;
+
+	---- myMipipll
+	signal pixclk, pixclk_sig: std_logic;
+
+	---- myMipirx
+	signal rxclk, rxclk_sig: std_logic;
+	signal rxd: std_logic_vector(31 downto 0);
+
+	signal rxdLp: std_logic_vector(3 downto 0);
+	signal rxdLpn: std_logic_vector(3 downto 0);
+
 	---- myRawgraybuf
 	signal drdRawgraybuf: std_logic_vector(7 downto 0);
 
@@ -651,6 +717,7 @@ architecture Camacq of Camacq is
 	signal ackPvwbufBToPvwbufBbufClear: std_logic;
 
 	---- other
+	signal resetn: std_logic;
 	signal mclkn: std_logic;
 	-- IP sigs.oth.cust --- INSERT
 
@@ -696,6 +763,18 @@ begin
 			B_ADDR => (others => '0'),
 			B_DOUT => open,
 			B_DIN => (others => '0')
+		);
+
+	myBufgPixclk : BUFG
+		port map (
+			I => pixclk,
+			O => pixclk_sig
+		);
+
+	myBufgRxclk : BUFG
+		port map (
+			I => rxclk,
+			O => rxclk_sig
 		);
 
 	myEvenbuf : Dpsram_size4kB_n8
@@ -762,6 +841,88 @@ begin
 			W_DATA => dwrGrrdbuf
 		);
 
+	myMipidec : Mipidec_w4
+		port map (
+			reset_n_i => resetn,
+			parallel_clock_i => pixclk_sig,
+			cam_clock_i => rxclk_sig,
+
+			l0_hs_data_i => rxd(7 downto 0),
+			l1_hs_data_i => rxd(15 downto 8),
+
+			l0_lp_data_i => rxdLp(0),
+			l0_lp_data_n_i => rxdLpn(0),
+
+			l1_lp_data_i => rxdLp(1),
+			l1_lp_data_n_i => rxdLpn(1),
+
+			frame_start_o => strbFrameStart,
+			frame_end_o => strbFrameEnd,
+			frame_valid_o => open,
+
+			line_start_o => strbRowStart,
+			line_end_o => strbRowEnd,
+			line_valid_o => open,
+
+			data_out_o => pixd,
+			data_type_o => open,
+
+			virtual_channel_o => open,
+			ecc_error_o => open,
+			word_count_o => open,
+
+			l2_hs_data_i => rxd(23 downto 16),
+			l3_hs_data_i => rxd(31 downto 24),
+
+			l2_lp_data_i => rxdLp(2),
+			l2_lp_data_n_i => rxdLpn(2),
+
+			l3_lp_data_i => rxdLp(3),
+			l3_lp_data_n_i => rxdLpn(3)
+		);
+
+	myMipipll : Ccc_div6
+		port map (
+			PLL_POWERDOWN_N_0 => '1',
+			REF_CLK_0 => rxclk_sig,
+			OUT0_FABCLK_0 => pixclk,
+			PLL_LOCK_0 => open
+		);
+
+	myMipirx : Mipirx_w4
+		port map (
+			rx_clk_p => rx_clk_p,
+			rx_clk_n => rx_clk_n,
+
+			rxd => csid,
+			rxd_n => csidn,
+
+			arst_n => resetn,
+
+			hs_sel => '0',
+			hs_io_clk_pause => '0',
+
+			rx_clk_g => rxclk,
+
+			l0_rxd_data => rxd(7 downto 0),
+			l1_rxd_data => rxd(15 downto 8),
+
+			l0_lp_data => rxdLp(0),
+			l0_lp_data_n => rxdLpn(0),
+
+			l1_lp_data => rxdLp(1),
+			l1_lp_data_n => rxdLpn(1),
+
+			l2_rxd_data => rxd(23 downto 16),
+			l3_rxd_data => rxd(31 downto 24),
+
+			l2_lp_data => rxdLp(2),
+			l2_lp_data_n => rxdLpn(2),
+
+			l3_lp_data => rxdLp(3),
+			l3_lp_data_n => rxdLpn(3)
+		);
+
 	myPvwabuf : Tpsram_size58kB_rp32_wp8
 		port map (
 			R_CLK => mclk,
@@ -810,153 +971,6 @@ begin
 			B_DOUT => open,
 			B_DIN => (others => '0')
 		);
-
-	------------------------------------------------------------------------
-	-- implementation: pixel clock alignment (align)
-	------------------------------------------------------------------------
-
-	-- IP impl.align.wiring --- RBEGIN
-	cntFallA_dbg <= std_logic_vector(to_unsigned(cntFallA, 8));
-	cntRiseA_dbg <= std_logic_vector(to_unsigned(cntRiseA, 8));
-	cntFallB_dbg <= std_logic_vector(to_unsigned(cntFallB, 8));
-	cntRiseB_dbg <= std_logic_vector(to_unsigned(cntRiseB, 8));
-
-	stateAlign_dbg <= x"00" when stateAlign=stateAlignInit
-				else x"10" when stateAlign=stateAlignCountA
-				else x"11" when stateAlign=stateAlignCountB
-				else x"12" when stateAlign=stateAlignCountC
-				else x"20" when stateAlign=stateAlignRun
-				else (others => '1');
-	-- IP impl.align.wiring --- REND
-
-	-- IP impl.align.rising --- BEGIN
-	process (reset, mclk, stateAlign)
-		-- IP impl.align.vars --- RBEGIN
-		variable i: natural range 0 to cntmax;
-		
-		variable btndead: boolean;
-		-- IP impl.align.vars --- REND
-
-	begin
-		if reset='1' then
-			-- IP impl.align.asyncrst --- RBEGIN
-			stateAlign <= stateAlignInit;
-			cntFallA <= 0;
-			cntRiseA <= 0;
-			cntFallB <= 0;
-			cntRiseB <= 0;
-			phase <= phaseFallA;
-			-- IP impl.align.asyncrst --- REND
-
-		elsif rising_edge(mclk) then
-			if (stateAlign=stateAlignInit or (grrdrun='0' and pvwrun='0')) then
-				-- IP impl.align.syncrst --- RBEGIN
-				phase <= phaseFallA;
-				-- IP impl.align.syncrst --- REND
-
-				if (grrdrun='1' or pvwrun='1') then
-					-- IP impl.align.init.start --- IBEGIN
-					cntFallA <= 0;
-					cntRiseA <= 0;
-					cntFallB <= 0;
-					cntRiseB <= 0;
-
-					i := 0;
-					
-					btndead := false;
-					-- IP impl.align.init.start --- IEND
-
-					stateAlign <= stateAlignCountA;
-
-				else
-					stateAlign <= stateAlignInit;
-				end if;
-
-			elsif stateAlign=stateAlignCountA then
-				-- IP impl.align.countA --- IBEGIN
-				if pclk_shift='1' then
-					cntFallA <= cntFallA + 1;
-				end if;
-
-				if pclk='1' then
-					cntRiseA <= cntRiseA + 1;
-				end if;
-				-- IP impl.align.countA --- IEND
-
-				stateAlign <= stateAlignCountB;
-
-			elsif stateAlign=stateAlignCountB then
-				-- IP impl.align.countB.ext --- IBEGIN
-				if pclk_shift='1' then
-					cntFallB <= cntFallB + 1;
-				end if;
-
-				if pclk='1' then
-					cntRiseB <= cntRiseB + 1;
-				end if;
-
-				i := i + 1;
-				-- IP impl.align.countB.ext --- IEND
-
-				if i=cntmax then
-					stateAlign <= stateAlignCountC;
-
-				else
-					stateAlign <= stateAlignCountA;
-				end if;
-
-			elsif stateAlign=stateAlignCountC then
-				-- IP impl.align.countC --- IBEGIN
-				if cntFallA<cntmax and cntRiseA=cntmax then
-					phase <= phaseRiseA;
-				elsif cntRiseA<cntmax and cntFallB=cntmax then
-					phase <= phaseFallB;
-				elsif cntFallB<cntmax and cntRiseB=cntmax then
-					phase <= phaseRiseB;
-				elsif cntRiseB<cntmax and cntFallA=cntmax then
-					phase <= phaseFallA;
-				end if;
-				-- IP impl.align.countC --- IEND
-
-				stateAlign <= stateAlignRun;
-
-			elsif stateAlign=stateAlignRun then
-				-- IP impl.align.run --- IBEGIN
-				if btnPhase='0' and not btndead then
-					if phase=phaseRiseA then
-						phase <= phaseFallB;
-					elsif phase=phaseFallB then
-						phase <= phaseRiseB;
-					elsif phase=phaseRiseB then
-						phase <= phaseFallA;
-					else
-						phase <= phaseRiseA;
-					end if;
-					
-					btndead := true;
-
-				elsif btnPhase='1' and btndead then
-					btndead := false;
-				end if;
-				-- IP impl.align.run --- IEND
-			end if;
-		end if;
-	end process;
-	-- IP impl.align.rising --- END
-
-	-- IP impl.align.falling --- RBEGIN
-	process (reset, mclk)
-		-- IP impl.align.falling.vars --- BEGIN
-		-- IP impl.align.falling.vars --- END
-	begin
-		if reset='1' then
-			pclk_shift <= '0';
-
-		elsif falling_edge(mclk) then
-			pclk_shift <= pclk;
-		end if;
-	end process;
-	-- IP impl.align.falling --- REND
 
 	------------------------------------------------------------------------
 	-- implementation: gray/red operation, also managing grrd{ab/cd/ef}buf (grrd)
@@ -1651,12 +1665,6 @@ begin
 	-- IP impl.op.wiring --- BEGIN
 	ackInvSetGrrd <= ackInvSetGrrd_sig;
 	ackInvSetPvw <= ackInvSetPvw_sig;
-
-	stateOp_dbg <= x"00" when stateOp=stateOpInit
-				else x"10" when stateOp=stateOpInvGrrd
-				else x"20" when stateOp=stateOpInvPvw
-				else x"30" when stateOp=stateOpInv
-				else (others => '1');
 	-- IP impl.op.wiring --- END
 
 	-- IP impl.op.rising --- BEGIN
@@ -3741,10 +3749,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.sample.wiring --- BEGIN
-	stateSample_dbg <= x"00" when stateSample=stateSampleInit
-				else x"10" when stateSample=stateSampleRunA
-				else x"11" when stateSample=stateSampleRunB
-				else (others => '1');
 	-- IP impl.sample.wiring --- END
 
 	-- IP impl.sample.rising --- BEGIN
@@ -3840,12 +3844,12 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.tag.wiring --- BEGIN
-	strbFrame <= '1' when (stateTag=stateTagFrameB and vsync_sig='0') else '0';
+	strbFrame <= '1' when state(frameB) and !vsync_sig else '0';
 
-	strbRow120 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row120) else '0';
-	strbRow192 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row192) else '0';
-	strbRow768 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row768) else '0';
-	strbRow960 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row960) else '0';
+	strbRow120 <= '1' when state(rowB) and href_sig and row=row120 else '0';
+	strbRow192 <= '1' when state(rowB) and href_sig and row=row192 else '0';
+	strbRow768 <= '1' when state(rowB) and href_sig and row=row768 else '0';
+	strbRow960 <= '1' when state(rowB) and href_sig and row=row960 else '0';
 
 	strbCol160N1 <= '1' when (stateTag=stateTagColA and col=col160N1) else '0';
 	strbCol256N3 <= '1' when (stateTag=stateTagColA and col=col256N3) else '0';
@@ -3853,15 +3857,6 @@ begin
 	strbCol1024N9 <= '1' when (stateTag=stateTagColA and col=col1024N9) else '0';
 	strbCol1280 <= '1' when (stateTag=stateTagColA and col=col1280) else '0';
 	strbCol1280N9 <= '1' when (stateTag=stateTagColA and col=col1280N9) else '0';
-
-	stateTag_dbg <= x"00" when stateTag=stateTagInit
-				else x"10" when stateTag=stateTagFrameA
-				else x"11" when stateTag=stateTagFrameB
-				else x"20" when stateTag=stateTagRowA
-				else x"21" when stateTag=stateTagRowB
-				else x"30" when stateTag=stateTagColA
-				else x"31" when stateTag=stateTagColB
-				else (others => '1');
 	-- IP impl.tag.wiring --- END
 
 	-- IP impl.tag.rising --- BEGIN
@@ -3896,24 +3891,24 @@ begin
 				end if;
 
 			elsif stateTag=stateTagFrameA then
-				if vsync_sig='1' then
+				if vsync_sig then
 					stateTag <= stateTagFrameB;
 				end if;
 
 			elsif stateTag=stateTagFrameB then
-				if vsync_sig='0' then
+				if !vsync_sig then
 					row <= 0; -- IP impl.tag.frameB --- ILINE
 
 					stateTag <= stateTagRowA;
 				end if;
 
 			elsif stateTag=stateTagRowA then
-				if href_sig='0' then
+				if !href_sig then
 					stateTag <= stateTagRowB;
 				end if;
 
 			elsif stateTag=stateTagRowB then
-				if href_sig='1' then
+				if href_sig then
 					col <= 0; -- IP impl.tag.rowB --- ILINE
 
 					stateTag <= stateTagColA;

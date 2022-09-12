@@ -84,7 +84,7 @@ Cmd* CtrWskdArtyState::getNewCmd(
 };
 
 Cmd* CtrWskdArtyState::getNewCmdGet() {
-	Cmd* cmd = new Cmd(0x05, VecVCommand::GET, Cmd::VecVRettype::STATSNG);
+	Cmd* cmd = new Cmd(0x06, VecVCommand::GET, Cmd::VecVRettype::STATSNG);
 
 	cmd->addParRet("tixVArtyState", Par::VecVType::TIX, VecVWskdArtyState::getTix, VecVWskdArtyState::getSref, VecVWskdArtyState::fillFeed);
 

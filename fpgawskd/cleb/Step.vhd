@@ -43,10 +43,8 @@ entity Step is
 		nslp: out std_logic;
 		m0: inout std_logic;
 		dir: out std_logic;
-		step: out std_logic;
-		nflt: in std_logic; -- iccl only
-
-		stateOp_dbg: out std_logic_vector(7 downto 0)
+		step0: out std_logic;
+		nflt: in std_logic -- iccl only
 	);
 end Step;
 
@@ -92,7 +90,7 @@ architecture Step of Step is
 	signal nslp_sig: std_logic;
 
 	signal ccwNotCw: std_logic;
-	signal step_sig: std_logic;
+	signal step0_sig: std_logic;
 
 	signal m0_sig: std_logic;
 	signal m0z: std_logic;
@@ -120,14 +118,15 @@ begin
 	-- implementation: main operation (op)
 	------------------------------------------------------------------------
 
-	-- IP impl.op.wiring --- BEGIN
-	getInfoAngle <= angle;
+	-- IP impl.op.wiring --- RBEGIN
+	angle_vec <= std_logic_vector(to_unsigned(angle, 16));
+	getInfoAngle <= angle_vec;
 
 	ackInvMoveto <= ackInvMoveto_sig;
 	ackInvSet <= ackInvSet_sig;
 	ackInvZero <= ackInvZero_sig;
 
-	nslp_sig <= '1' when rng='0' else '0';
+	nslp_sig <= '1' when rng='1' else '0';
 	nslp <= nslp_sig;
 
 	dir <= ccwNotCw;
@@ -139,7 +138,7 @@ begin
 				else x"21" when stateOp=stateOpRunB
 				else x"30" when stateOp=stateOpInv
 				else (others => '1');
-	-- IP impl.op.wiring --- END
+	-- IP impl.op.wiring --- REND
 
 	-- IP impl.op.rising --- BEGIN
 	process (reset, mclk, stateOp)
@@ -163,41 +162,82 @@ begin
 			ackInvZero_sig <= '0';
 			rng <= '0';
 			ccwNotCw <= '0';
-			step_sig <= '0';
+			step0_sig <= '0';
 			m0_sig <= '0';
 			m0z <= '0';
 			-- IP impl.op.asyncrst --- END
 
 		elsif rising_edge(mclk) then
 			if (stateOp=stateOpInit or (stateOp/=stateOpInv and (reqInvMoveto='1' or reqInvSet='1' or reqInvZero='1'))) then
-				-- IP impl.op.syncrst --- BEGIN
-				angle <= 0;
+				-- IP impl.op.syncrst --- RBEGIN
 				ackInvMoveto_sig <= '0';
 				ackInvSet_sig <= '0';
 				ackInvZero_sig <= '0';
-				rng <= '0';
-				ccwNotCw <= '0';
 				step_sig <= '0';
 				m0_sig <= '0';
 				m0z <= '0';
 
 				dAngle := 0;
-				Tstep := 0;
-				atTarget := false;
-				-- IP impl.op.syncrst --- END
+				-- IP impl.op.syncrst --- REND
 
 				if reqInvMoveto='1' then
-					-- IP impl.op.init.moveto --- INSERT
+					-- IP impl.op.init.moveto --- IBEGIN
+					targetNotSteady := true;
+
+					-- determine shortest path
+					target := to_integer(unsigned(movetoAngle));
+					dAngle := target - angle;
+
+					atTarget := (dAngle = 0);
+
+					if not atTarget then
+						if dAngle > 500 then
+							-- dAngle := dAngle - 1000; -- will become negative
+							ccwNotCw <= '1';
+						elsif dAngle < -499 then
+							--dAngle := dAngle + 1000; -- will become positive
+							ccwNotCw <= '0';
+						elsif dAngle > 0 then
+							ccwNotCw <= '0';
+						else
+							ccwNotCw <= '1';
+						end if;
+					end if;
+
+					Tstep := to_integer(unsigned(movetoTstep));
+
+					ackInvMoveto_sig <= '1';
+					-- IP impl.op.init.moveto --- IEND
 
 					stateOp <= stateOpInv;
 
 				elsif reqInvSet='1' then
-					-- IP impl.op.init.set --- INSERT
+					-- IP impl.op.init.set --- IBEGIN
+					targetNotSteady := false;
+
+					if setRng=tru8 then
+						rng <= '1';
+					else
+						rng <= '0';
+					end if;
+					if setCcwNotCw=tru8 then
+						ccwNotCw <= '1';
+					else
+						ccwNotCw <= '0';
+					end if;
+					Tstep := to_integer(unsigned(setTstep));
+
+					ackInvSet_sig <= '1';
+					-- IP impl.op.init.set --- IEND
 
 					stateOp <= stateOpInv;
 
 				elsif reqInvZero='1' then
-					-- IP impl.op.init.zero --- INSERT
+					-- IP impl.op.init.zero --- IBEGIN
+					angle <= 0;
+					
+					ackInvZero_sig <= '1';
+					-- IP impl.op.init.zero --- IEND
 
 					stateOp <= stateOpInv;
 
@@ -208,12 +248,12 @@ begin
 			elsif stateOp=stateOpReady then
 				if Tstep/=0 then
 					if not targetNotSteady and rng then
-						-- IP impl.op.ready.steady --- INSERT
+						i := 0; -- IP impl.op.ready.steady --- ILINE
 
 						stateOp <= stateOpRunB;
 
 					elsif targetNotSteady and not atTarget then
-						-- IP impl.op.ready.target --- INSERT
+						i := 0; -- IP impl.op.ready.target --- ILINE
 
 						stateOp <= stateOpRunB;
 
@@ -226,17 +266,37 @@ begin
 
 			elsif stateOp=stateOpRunA then
 				if tkclk='1' then
-					-- IP impl.op.runA --- INSERT
+					-- IP impl.op.runA --- IBEGIN
+					if i=Tstep then
+						i := 0;
+						
+						if ccwNotCw='0' then
+							if angle=999 then
+								angle <= 0;
+							else
+								angle <= angle + 1;
+							end if;
+						else
+							if angle=0 then
+								angle <= 999;
+							else
+								angle <= angle - 1;
+							end if;
+						end if;
+						
+						step_sig <= not step_sig;
+					end if;
+					-- IP impl.op.runA --- IEND
 
 					stateOp <= stateOpRunB;
 				end if;
 
 			elsif stateOp=stateOpRunB then
 				if tkclk='0' then
-					-- IP impl.op.runB --- INSERT
+					i := i + 1; -- IP impl.op.runB --- ILINE
 
 					if targetNotSteady and target=angle then
-						-- IP impl.op.runB.done --- INSERT
+						atTarget := true; -- IP impl.op.runB.done --- ILINE
 
 						stateOp <= stateOpReady;
 

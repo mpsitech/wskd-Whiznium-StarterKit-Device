@@ -70,6 +70,10 @@ public:
 
 	std::string getCmdTemplate(const uint8_t tixVController, const uint8_t tixVCommand, const bool invretNotInv = false);
 
+	void parseCmd(std::string s, Dbecore::Cmd*& cmd);
+	Sbecore::uint getCmdix(const std::string& cmdsref);
+	std::string getCmdsref(const Sbecore::uint cmdix);
+
 	void clearHist();
 	void appendToHist(const std::string& s);
 	void appendToLastInHist(const std::string& s);

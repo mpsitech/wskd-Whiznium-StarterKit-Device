@@ -26,19 +26,23 @@ entity Top is
 		dbg1: out std_logic;
 		btn0: in std_logic;
 		btn1: in std_logic;
+
 		rxd: in std_logic;
 		txd: out std_logic;
+
 		cs: out std_logic;
 		sclk: out std_logic;
 		mosi: out std_logic;
-		led4_r: out std_logic;
-		led4_g: out std_logic;
-		led5_r: out std_logic;
-		led5_g: out std_logic;
+		rgb1_r: out std_logic;
+		rgb1_g: out std_logic;
+		rgb1_b: out std_logic;
+		rgb2_r: out std_logic;
+		rgb2_g: out std_logic;
+		rgb2_b: out std_logic;
 		nslp: out std_logic;
 		m0: inout std_logic;
 		dir: out std_logic;
-		step: out std_logic;
+		step0: out std_logic;
 		nflt: in std_logic
 	);
 end Top;
@@ -146,9 +150,7 @@ architecture Top of Top is
 
 			nss: out std_logic;
 			sclk: out std_logic;
-			mosi: out std_logic;
-
-			stateOp_dbg: out std_logic_vector(7 downto 0)
+			mosi: out std_logic
 		);
 	end component;
 
@@ -160,11 +162,7 @@ architecture Top of Top is
 			rgb: in std_logic_vector(23 downto 0);
 			r: out std_logic;
 			g: out std_logic;
-			b: out std_logic;
-
-			stateBlue_dbg: out std_logic_vector(7 downto 0);
-			stateGreen_dbg: out std_logic_vector(7 downto 0);
-			stateRed_dbg: out std_logic_vector(7 downto 0)
+			b: out std_logic
 		);
 	end component;
 
@@ -176,11 +174,7 @@ architecture Top of Top is
 			rgb: in std_logic_vector(23 downto 0);
 			r: out std_logic;
 			g: out std_logic;
-			b: out std_logic;
-
-			stateBlue_dbg: out std_logic_vector(7 downto 0);
-			stateGreen_dbg: out std_logic_vector(7 downto 0);
-			stateRed_dbg: out std_logic_vector(7 downto 0)
+			b: out std_logic
 		);
 	end component;
 
@@ -194,9 +188,7 @@ architecture Top of Top is
 
 			rgb: out std_logic_vector(23 downto 0);
 
-			getTixVClebState: out std_logic_vector(7 downto 0);
-
-			stateLed_dbg: out std_logic_vector(7 downto 0)
+			getTixVClebState: out std_logic_vector(7 downto 0)
 		);
 	end component;
 
@@ -231,10 +223,8 @@ architecture Top of Top is
 			nslp: out std_logic;
 			m0: inout std_logic;
 			dir: out std_logic;
-			step: out std_logic;
-			nflt: in std_logic;
-
-			stateOp_dbg: out std_logic_vector(7 downto 0)
+			step0: out std_logic;
+			nflt: in std_logic
 		);
 	end component;
 
@@ -495,9 +485,7 @@ begin
 
 			nss => cs,
 			sclk => sclk,
-			mosi => mosi,
-
-			stateOp_dbg => open
+			mosi => mosi
 		);
 
 	myRgbled4 : Rgbled4
@@ -506,13 +494,9 @@ begin
 			mclk => mclk,
 			tkclk => tkclk,
 			rgb => rgb4,
-			r => led4_r,
-			g => led4_g,
-			b => open,
-
-			stateBlue_dbg => open,
-			stateGreen_dbg => open,
-			stateRed_dbg => open
+			r => rgb1_r,
+			g => rgb1_g,
+			b => rgb1_b
 		);
 
 	myRgbled5 : Rgbled5
@@ -521,13 +505,9 @@ begin
 			mclk => mclk,
 			tkclk => tkclk,
 			rgb => rgb5,
-			r => led5_r,
-			g => led5_g,
-			b => open,
-
-			stateBlue_dbg => open,
-			stateGreen_dbg => open,
-			stateRed_dbg => open
+			r => rgb2_r,
+			g => rgb2_g,
+			b => rgb2_b
 		);
 
 	myState : State
@@ -540,9 +520,7 @@ begin
 
 			rgb => rgb4,
 
-			getTixVClebState => stateGetTixVClebState,
-
-			stateLed_dbg => open
+			getTixVClebState => stateGetTixVClebState
 		);
 
 	myStep : Step
@@ -576,10 +554,8 @@ begin
 			nslp => nslp,
 			m0 => m0,
 			dir => dir,
-			step => step,
-			nflt => nflt, -- iccl only
-
-			stateOp_dbg => open
+			step0 => step0,
+			nflt => nflt -- iccl only
 		);
 
 	myTkclksrc : Tkclksrc

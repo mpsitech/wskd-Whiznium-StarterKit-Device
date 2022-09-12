@@ -1,8 +1,8 @@
 -- file Rgbled4.vhd
 -- Rgbled4 other module implementation
 -- copyright: (C) 2016-2020 MPSI Technologies GmbH
--- author: Alexander Wirthmueller (auto-generation)
--- date created: 24 Dec 2021
+-- author: Catherine Johnson (auto-generation)
+-- date created: 1 Dec 2020
 -- IP header --- ABOVE
 
 library ieee;
@@ -20,11 +20,7 @@ entity Rgbled4 is
 		rgb: in std_logic_vector(23 downto 0);
 		r: out std_logic;
 		g: out std_logic;
-		b: out std_logic;
-
-		stateBlue_dbg: out std_logic_vector(7 downto 0);
-		stateGreen_dbg: out std_logic_vector(7 downto 0);
-		stateRed_dbg: out std_logic_vector(7 downto 0)
+		b: out std_logic
 	);
 end Rgbled4;
 
@@ -78,29 +74,52 @@ begin
 	-- implementation: blue LED PWM (blue)
 	------------------------------------------------------------------------
 
-	-- IP impl.blue.wiring --- BEGIN
-	stateBlue_dbg <= x"00" when stateBlue=stateBlueOn
-				else x"10" when stateBlue=stateBlueOff
-				else (others => '1');
-	-- IP impl.blue.wiring --- END
+	-- IP impl.blue.wiring --- RBEGIN
+	b <= '0' when stateBlue=stateBlueOn else '1';
+	-- IP impl.blue.wiring --- REND
 
 	-- IP impl.blue.rising --- BEGIN
 	process (reset, tkclk, stateBlue)
-		-- IP impl.blue.vars --- BEGIN
-		-- IP impl.blue.vars --- END
+		-- IP impl.blue.vars --- RBEGIN
+		variable i: natural range 0 to 256;
+		-- IP impl.blue.vars --- REND
 
 	begin
 		if reset='1' then
-			-- IP impl.blue.asyncrst --- BEGIN
-			stateBlue <= stateBlueOn;
-			-- IP impl.blue.asyncrst --- END
+			-- IP impl.blue.asyncrst --- RBEGIN
+			if rgb(7 downto 0)=x"00" then
+				stateBlue <= stateBlueOff;
+			else
+				stateBlue <= stateBlueOn;
+			end if;
+			
+			i := 0;
+			-- IP impl.blue.asyncrst --- REND
 
 		elsif rising_edge(tkclk) then
 			if stateBlue=stateBlueOn then
-				-- IP impl.blue.on --- INSERT
+				-- IP impl.blue.on --- IBEGIN
+				i := i + 1;
+
+				if i=256 then
+					i := 0;
+				elsif i >= to_integer(unsigned(rgb(7 downto 0))) then
+					stateBlue <= stateBlueOff;
+				end if;
+				-- IP impl.blue.on --- IEND
 
 			elsif stateBlue=stateBlueOff then
-				-- IP impl.blue.off --- INSERT
+				-- IP impl.blue.off --- IBEGIN
+				i := i + 1;
+
+				if i=256 then
+					i := 0;
+
+					if rgb(7 downto 0)/=x"00" then
+						stateBlue <= stateBlueOn;
+					end if;
+				end if;
+				-- IP impl.blue.off --- IEND
 			end if;
 		end if;
 	end process;
@@ -110,29 +129,52 @@ begin
 	-- implementation: green LED PWM (green)
 	------------------------------------------------------------------------
 
-	-- IP impl.green.wiring --- BEGIN
-	stateGreen_dbg <= x"00" when stateGreen=stateGreenOn
-				else x"10" when stateGreen=stateGreenOff
-				else (others => '1');
-	-- IP impl.green.wiring --- END
+	-- IP impl.green.wiring --- RBEGIN
+	g <= '0' when stateGreen=stateGreenOn else '1';
+	-- IP impl.green.wiring --- REND
 
 	-- IP impl.green.rising --- BEGIN
 	process (reset, tkclk, stateGreen)
-		-- IP impl.green.vars --- BEGIN
-		-- IP impl.green.vars --- END
+		-- IP impl.green.vars --- RBEGIN
+		variable i: natural range 0 to 256;
+		-- IP impl.green.vars --- REND
 
 	begin
 		if reset='1' then
-			-- IP impl.green.asyncrst --- BEGIN
-			stateGreen <= stateGreenOn;
-			-- IP impl.green.asyncrst --- END
+			-- IP impl.green.asyncrst --- RBEGIN
+			if rgb(15 downto 8)=x"00" then
+				stateGreen <= stateGreenOff;
+			else
+				stateGreen <= stateGreenOn;
+			end if;
+
+			i := 0;
+			-- IP impl.green.asyncrst --- REND
 
 		elsif rising_edge(tkclk) then
 			if stateGreen=stateGreenOn then
-				-- IP impl.green.on --- INSERT
+				-- IP impl.green.on --- IBEGIN
+				i := i + 1;
+
+				if i=256 then
+					i := 0;
+				elsif i >= to_integer(unsigned(rgb(15 downto 8))) then
+					stateGreen <= stateGreenOff;
+				end if;
+				-- IP impl.green.on --- IEND
 
 			elsif stateGreen=stateGreenOff then
-				-- IP impl.green.off --- INSERT
+				-- IP impl.green.off --- IBEGIN
+				i := i + 1;
+
+				if i=256 then
+					i := 0;
+
+					if rgb(15 downto 8)/=x"00" then
+						stateGreen <= stateGreenOn;
+					end if;
+				end if;
+				-- IP impl.green.off --- IEND
 			end if;
 		end if;
 	end process;
@@ -142,29 +184,52 @@ begin
 	-- implementation: red LED PWM (red)
 	------------------------------------------------------------------------
 
-	-- IP impl.red.wiring --- BEGIN
-	stateRed_dbg <= x"00" when stateRed=stateRedOn
-				else x"10" when stateRed=stateRedOff
-				else (others => '1');
-	-- IP impl.red.wiring --- END
+	-- IP impl.red.wiring --- RBEGIN
+	r <= '0' when stateRed=stateRedOn else '1';
+	-- IP impl.red.wiring --- REND
 
 	-- IP impl.red.rising --- BEGIN
 	process (reset, tkclk, stateRed)
-		-- IP impl.red.vars --- BEGIN
-		-- IP impl.red.vars --- END
+		-- IP impl.red.vars --- RBEGIN
+		variable i: natural range 0 to 256;
+		-- IP impl.red.vars --- REND
 
 	begin
 		if reset='1' then
-			-- IP impl.red.asyncrst --- BEGIN
-			stateRed <= stateRedOn;
-			-- IP impl.red.asyncrst --- END
+			-- IP impl.red.asyncrst --- RBEGIN
+			if rgb(23 downto 16)=x"00" then
+				stateRed <= stateRedOff;
+			else
+				stateRed <= stateRedOn;
+			end if;
+
+			i := 0;
+			-- IP impl.red.asyncrst --- REND
 
 		elsif rising_edge(tkclk) then
 			if stateRed=stateRedOn then
-				-- IP impl.red.on --- INSERT
+				-- IP impl.red.on --- IBEGIN
+				i := i + 1;
+
+				if i=256 then
+					i := 0;
+				elsif i >= to_integer(unsigned(rgb(23 downto 16))) then
+					stateRed <= stateRedOff;
+				end if;
+				-- IP impl.red.on --- IEND
 
 			elsif stateRed=stateRedOff then
-				-- IP impl.red.off --- INSERT
+				-- IP impl.red.off --- IBEGIN
+				i := i + 1;
+
+				if i=256 then
+					i := 0;
+
+					if rgb(23 downto 16)/=x"00" then
+						stateRed <= stateRedOn;
+					end if;
+				end if;
+				-- IP impl.red.off --- IEND
 			end if;
 		end if;
 	end process;

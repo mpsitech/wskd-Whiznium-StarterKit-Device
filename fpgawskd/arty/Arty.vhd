@@ -34,9 +34,10 @@ package Arty is
 	constant tixVArtyControllerCamif: std_logic_vector(7 downto 0) := x"02";
 	constant tixVArtyControllerFeatdet: std_logic_vector(7 downto 0) := x"03";
 	constant tixVArtyControllerLaser: std_logic_vector(7 downto 0) := x"04";
-	constant tixVArtyControllerState: std_logic_vector(7 downto 0) := x"05";
-	constant tixVArtyControllerStep: std_logic_vector(7 downto 0) := x"06";
-	constant tixVArtyControllerTkclksrc: std_logic_vector(7 downto 0) := x"07";
+	constant tixVArtyControllerPwmonif: std_logic_vector(7 downto 0) := x"05";
+	constant tixVArtyControllerState: std_logic_vector(7 downto 0) := x"06";
+	constant tixVArtyControllerStep: std_logic_vector(7 downto 0) := x"07";
+	constant tixVArtyControllerTkclksrc: std_logic_vector(7 downto 0) := x"08";
 
 	constant tixVArtyStateNc: std_logic_vector(7 downto 0) := x"00";
 	constant tixVArtyStateReady: std_logic_vector(7 downto 0) := x"01";
@@ -67,6 +68,11 @@ package Arty is
 	constant tixVFeatdetCommandTriggerThd: std_logic_vector(7 downto 0) := x"05";
 
 	constant tixVLaserCommandSet: std_logic_vector(7 downto 0) := x"00";
+
+	constant tixVPwmonifCommandGet: std_logic_vector(7 downto 0) := x"00";
+	constant tixVPwmonifCommandRx: std_logic_vector(7 downto 0) := x"01";
+	constant tixVPwmonifCommandTx: std_logic_vector(7 downto 0) := x"02";
+	constant tixVPwmonifCommandTxrx: std_logic_vector(7 downto 0) := x"03";
 
 	constant tixVStateCommandGet: std_logic_vector(7 downto 0) := x"00";
 

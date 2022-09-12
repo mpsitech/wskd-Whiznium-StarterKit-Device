@@ -12,7 +12,7 @@
 
 /*
 	peripherals:
-		step: pca0 (step@21)
+		step: pca0 (step0@21)
 		laser, disp: spi0 (mosi@22, sclk@24)
 		chrono: tmr0
 		hostif: usb0
@@ -20,9 +20,9 @@
 		(none)
 	output pins:
 		disp: dispen@11, dispcs@1
-		laser: cs0@12, cs1@13
+		laser: cs0, cs1
 		state: ledr@18, ledg@17, ledb@16
-		step: nslp@2, m0@23, dir@15, step@21
+		step: nslp@2, m0@23, dir@15, step0@21
 */
 
 #include <stdbool.h>
@@ -111,10 +111,10 @@ sbit LEDB = SFR_P1^6;
 sbit LEDG = SFR_P1^5;
 sbit LEDR = SFR_P1^4;
 sbit MOSI = SFR_P1^0;
-sbit STEP = SFR_P1^1;
-sbit CS0 = SFR_P2^2;
-sbit CS1 = SFR_P2^1;
+sbit STEP0 = SFR_P1^1;
+sbit CS = SFR_P2^1;
 sbit DISPEN = SFR_P2^3;
+sbit NFLT = SFR_P2^2;
 // IP pins --- END
 
 /**

@@ -17,6 +17,9 @@ entity Featdet is
 		reset: in std_logic;
 		mclk: in std_logic;
 
+		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
+		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
+
 		reqInvSet: in std_logic;
 		ackInvSet: out std_logic;
 
@@ -47,38 +50,35 @@ entity Featdet is
 		reqInvTriggerThd: in std_logic;
 		ackInvTriggerThd: out std_logic;
 
-		camacqGetGrrdinfoTixVGrrdbufstate: in std_logic_vector(7 downto 0);
-		camacqGetGrrdinfoTkst: in std_logic_vector(31 downto 0);
-
 		reqGrrdabbufFromCamacq: out std_logic;
 		ackGrrdabbufFromCamacq: in std_logic;
+
+		reqGrrdcdbufFromCamacq: out std_logic;
+
 		dneGrrdabbufFromCamacq: out std_logic;
 
 		avllenGrrdabbufFromCamacq: in std_logic_vector(3 downto 0);
 
+		ackGrrdcdbufFromCamacq: in std_logic;
+		dneGrrdcdbufFromCamacq: out std_logic;
+
 		dGrrdabbufFromCamacq: in std_logic_vector(7 downto 0);
+
+		avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
+
 		strbDGrrdabbufFromCamacq: out std_logic;
 
+		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
+		strbDGrrdcdbufFromCamacq: out std_logic;
+
 		reqGrrdefbufFromCamacq: out std_logic;
-
-		reqGrrdcdbufFromCamacq: out std_logic;
-		ackGrrdcdbufFromCamacq: in std_logic;
-
 		ackGrrdefbufFromCamacq: in std_logic;
 		dneGrrdefbufFromCamacq: out std_logic;
 
-		dneGrrdcdbufFromCamacq: out std_logic;
-
 		avllenGrrdefbufFromCamacq: in std_logic_vector(3 downto 0);
-		avllenGrrdcdbufFromCamacq: in std_logic_vector(3 downto 0);
 
 		dGrrdefbufFromCamacq: in std_logic_vector(7 downto 0);
-
-		dGrrdcdbufFromCamacq: in std_logic_vector(7 downto 0);
-
 		strbDGrrdefbufFromCamacq: out std_logic;
-
-		strbDGrrdcdbufFromCamacq: out std_logic;
 
 		reqFlgbufToHostif: in std_logic;
 		ackFlgbufToHostif: out std_logic;
@@ -88,21 +88,7 @@ entity Featdet is
 		dFlgbufToHostif: out std_logic_vector(31 downto 0);
 		strbDFlgbufToHostif: in std_logic;
 
-		strb_dbg: out std_logic_vector(3 downto 0);
-
-		stateCopy_dbg: out std_logic_vector(7 downto 0);
-		stateCorner_dbg: out std_logic_vector(7 downto 0);
-		stateExp_dbg: out std_logic_vector(7 downto 0);
-		stateFactk_dbg: out std_logic_vector(7 downto 0);
-		stateFlg_dbg: out std_logic_vector(7 downto 0);
-		stateFlgbuf_dbg: out std_logic_vector(7 downto 0);
-		stateFlgbufB_dbg: out std_logic_vector(7 downto 0);
-		stateFwd_dbg: out std_logic_vector(7 downto 0);
-		stateImdstream_dbg: out std_logic_vector(7 downto 0);
-		stateMaxsel_dbg: out std_logic_vector(7 downto 0);
-		stateOp_dbg: out std_logic_vector(7 downto 0);
-		stateStream_dbg: out std_logic_vector(7 downto 0);
-		stateThd_dbg: out std_logic_vector(7 downto 0)
+		strb_dbg: out std_logic_vector(3 downto 0)
 	);
 end Featdet;
 
@@ -497,7 +483,7 @@ architecture Featdet of Featdet is
 	signal colsumXA2: std_logic_vector(18 downto 0);
 
 	---- myColsumXB
-	signal colsumXB: std_logic_vector(19 downto 0);
+	signal colsumXB: std_logic_vector(20 downto 0);
 
 	---- myColsumXC
 	signal colsumXC: std_logic_vector(20 downto 0);
@@ -509,7 +495,7 @@ architecture Featdet of Featdet is
 	signal colsumXYA2: std_logic_vector(18 downto 0);
 
 	---- myColsumXYB
-	signal colsumXYB: std_logic_vector(19 downto 0);
+	signal colsumXYB: std_logic_vector(20 downto 0);
 
 	---- myColsumXYC
 	signal colsumXYC: std_logic_vector(20 downto 0);
@@ -521,7 +507,7 @@ architecture Featdet of Featdet is
 	signal colsumYA2: std_logic_vector(18 downto 0);
 
 	---- myColsumYB
-	signal colsumYB: std_logic_vector(19 downto 0);
+	signal colsumYB: std_logic_vector(20 downto 0);
 
 	---- myColsumYC
 	signal colsumYC: std_logic_vector(20 downto 0);
@@ -1521,9 +1507,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.copy.wiring --- BEGIN
-	stateCopy_dbg <= x"00" when stateCopy=stateCopyInit
-				else x"10" when stateCopy=stateCopyRun
-				else (others => '1');
 	-- IP impl.copy.wiring --- END
 
 	-- IP impl.copy.rising --- BEGIN
@@ -1676,9 +1659,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.exp.wiring --- BEGIN
-	stateExp_dbg <= x"00" when stateExp=stateExpInit
-				else x"10" when stateExp=stateExpRun
-				else (others => '1');
 	-- IP impl.exp.wiring --- END
 
 	-- IP impl.exp.rising --- BEGIN
@@ -1757,9 +1737,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.factk.wiring --- BEGIN
-	stateFactk_dbg <= x"00" when stateFactk=stateFactkInit
-				else x"10" when stateFactk=stateFactkRun
-				else (others => '1');
 	-- IP impl.factk.wiring --- END
 
 	-- IP impl.factk.rising --- BEGIN
@@ -2358,9 +2335,6 @@ begin
 	------------------------------------------------------------------------
 
 	-- IP impl.fwd.wiring --- BEGIN
-	stateFwd_dbg <= x"00" when stateFwd=stateFwdInit
-				else x"10" when stateFwd=stateFwdRun
-				else (others => '1');
 	-- IP impl.fwd.wiring --- END
 
 	-- IP impl.fwd.rising --- BEGIN
@@ -3120,12 +3094,6 @@ begin
 	ackInvSet <= ackInvSet_sig;
 	ackInvSetCorner <= ackInvSetCorner_sig;
 	ackInvSetThd <= ackInvSetThd_sig;
-
-	stateOp_dbg <= x"00" when stateOp=stateOpInit
-				else x"10" when stateOp=stateOpInvSet
-				else x"20" when stateOp=stateOpInv
-				else x"30" when stateOp=stateOpRun
-				else (others => '1');
 	-- IP impl.op.wiring --- END
 
 	-- IP impl.op.rising --- BEGIN

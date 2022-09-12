@@ -41,7 +41,7 @@ public:
 	CtrWskdIcclTkclksrc(UntWskd* unt);
 
 public:
-	static const uint8_t tixVController = 0x07;
+	static const uint8_t tixVController = 0x08;
 
 public:
 	static uint8_t getTixVCommandBySref(const std::string& sref);

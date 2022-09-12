@@ -11,29 +11,46 @@ arty
 		5
 		6
 		ImeICPin.end
-		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
-		retrupd	1	dbg0	T14
-		retrupd	1	dbg1	T15
-		retrupd	1	dbg2	V17
-		retrupd	1	dbg3	V18
-		retrupd	1	dbg4	R17
-		retrupd	1	dbg5	R14
-		retrupd	2	csi_clk_p	Y18
-		retrupd	3	csi_d0_p	U18
-		retrupd	2	csi_clk_n	Y19
-		retrupd	3	csi_d0_n	U19
-		retrupd	4	csi_d1_p	Y16
-		retrupd	5	scl	W18
-		retrupd	4	csi_d1_n	Y17
-		retrupd	5	sda	W19
-		retrupd	6	cs	W14
-		retrupd	6	sclk	V16
-		retrupd	6	mosi	Y14
-		retrupd	0	nslp	W16
-		retrupd	0	m0	T11
-		retrupd	0	dir	V12
-		retrupd	0	step	T10
-		retrupd	0	trig	W13
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location	Arty	Arty Schematic
+		retrupd	0	csi_clk_lp	V17	J3[0]	CK_IO8
+		retrupd	0	csi_d0_lp	V18	J3[2]	CK_IO9
+		retrupd	1	sda	T16	J3[4]	CK_IO10
+		retrupd	1	scl	R17	J3[6]	CK_IO11
+		retrupd	0	flsh	P18	J3[8]	CK_IO12
+		retrupd	0	trig	N17	J3[10]	CK_IO13
+		retrupd	0	pmnd_txd	W15		CK_MISO
+		retrupd	2	csi_clk_p	N18
+		retrupd	2	csi_clk_n	P19
+		retrupd	3	csi_d0_p	V20
+		retrupd	3	csi_d0_n	W20
+		retrupd	4	csi_d1_p	T20
+		retrupd	4	csi_d1_n	U20
+		retrupd	0	csi_clk_lp_alt	Y18	JA[0]	JA1_P
+		retrupd	0	csi_d0_lp_alt	U18	JA[1]	JA3_P
+		retrupd	0	sda_alt	Y19	JA[2]	JA1_N
+		retrupd	0	scl_alt	U19	JA[3]	JA3_N
+		retrupd	0	flsh_alt	Y16	JA[4]	JA2_P
+		retrupd	0	trig_alt	W18	JA[5]	JA4_P
+		retrupd	0	JA2_N	Y17	JA[6]	JA2_N
+		retrupd	0	JA4_N	W19	JA[7]	JA4_N
+		retrupd	5	cs	W14	JB[0]	JB1_P
+		retrupd	5	sclk	V16	JB[1]	JB3_P
+		retrupd	5	mosi	Y14	JB[2]	JB1_N
+		retrupd	0	nslp	W16	JB[3]	JB3_N
+		retrupd	0	nflt	T11	JB[4]	JB2_P
+		retrupd	0	m0	V12	JB[5]	JB4_P
+		retrupd	0	dir	T10	JB[6]	JB2_N
+		retrupd	0	step0	W13	JB[7]	JB4_N
+		retrupd	0	led[0]	R14
+		retrupd	0	led[1]	P14
+		retrupd	6	dbg0	T14	J4[0]	CK_IO0
+		retrupd	6	dbg1	U12	J4[2]	CK_IO1
+		retrupd	6	dbg2	U13	J4[4]	CK_IO2
+		retrupd	6	dbg3	V13	J4[6]	CK_IO3
+		retrupd	6	dbg4	V15	J4[8]	CK_IO4
+		retrupd	6	dbg5	T15	J4[10]	CK_IO5
+		retrupd	6	dbg6	R16	J4[12]	CK_IO6
+		retrupd	6	dbg7	U17	J4[14]	CK_IO7
 		ImeIMPin.end
 	retrupd	bank35	_3v3
 		ImeICPin.iref
@@ -42,6 +59,9 @@ arty
 		ImeICPin.end
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
 		retrupd	0	extclk	H16
+		retrupd	0	pmnd_rxd	H15		CK_SCK
+		retrupd	0	led[2]	N16
+		retrupd	0	led[3]	M14
 		retrupd	1	led4_b	L15
 		retrupd	1	led4_g	G17
 		retrupd	1	led4_r	N15
@@ -252,17 +272,14 @@ arty
 		ImeICPort.iref
 		1
 		2
-		3
 		ImeICPort.end
 		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
 		ins	0	reset	reset	in	sl	1					reset
 		ins	0	clk	mclk	in	sl	1					mclk
-		ins	1	rtepin	csi_clk_p	in	sl	1			csi_clk_p
-		ins	1	rtepin	csi_clk_n	in	sl	1			csi_clk_n
-		ins	2	rtepin	csi_d0_p	in	sl	1			csi_d0_p
-		ins	2	rtepin	csi_d0_n	in	sl	1			csi_d0_n
-		ins	3	rtepin	csi_d1_p	in	sl	1			csi_d1_p
-		ins	3	rtepin	csi_d1_n	in	sl	1			csi_d1_n
+		ins	1	rtepin	csi_d0_p	in	sl	1			csi_d0_p
+		ins	1	rtepin	csi_d0_n	in	sl	1			csi_d0_n
+		ins	2	rtepin	csi_d1_p	in	sl	1			csi_d1_p
+		ins	2	rtepin	csi_d1_n	in	sl	1			csi_d1_n
 		ins	0	dbg	rxclk_dbg	out	sl	1					camacqRxclk_dbg
 		ImeIMPort.end
 		ImeICSignal2.iref
@@ -1109,9 +1126,6 @@ arty
 		ins	0	clk	mclk	in	sl	1					mclk
 		ins	0	clk	tkclk	in	sl	1					tkclk
 		ins	0	rtetop	rng	out	sl	1					camrng
-		ins	0	rtepin	rst	out	sl	1			rst
-		ins	0	rtepin	pwdn	out	sl	1			pwdn
-		ins	0	rtepin	xclk	out	sl	1			xclk
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
@@ -1119,10 +1133,7 @@ arty
 		3
 		ImeICSignal2.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
-		oprt	0	prc	camclk	xclk	false	sl	1				0	false	xclk
 		oprt	0	prc	op	rng	false	sl	1				0	true	rng
-		oprt	0	prc	op	rst	false	sl	1				0	true	rst
-		oprt	0	prc	op	pwdn	false	sl	1				0	true	pwdn
 		oprt	0	prc	op	ackInvSetRng	false	sl	1				0	false	ackInvSetRng
 		oprt	0	prc	op	ackInvSetReg	false	sl	1				0	false	ackInvSetReg
 		oprt	0	prc	op	ackInvSetRegaddr	false	sl	1				0	false	ackInvSetRegaddr
@@ -2409,6 +2420,19 @@ arty
 		retrupd	0		mosi						mosi
 		retrupd	0		miso					0
 		ImeIMPort.end
+	arty_ip_AXI;top	pwmonif
+		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
+		retrupd	0	fMclk					fMclk
+		retrupd	0	fSclk				9600
+		retrupd	0	toRx				100
+		ImeIMGeneric.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		tkclk								tkclk
+		retrupd	0		rxd						pmnd_rxd
+		retrupd	0		txd						pmnd_txd
+		ImeIMPort.end
 	arty_ip_AXI;top	state
 		ImeICPort.iref
 		1
@@ -2450,7 +2474,7 @@ arty
 		ins	1	rtepin	nslp	out	sl	1			nslp
 		ins	1	rtepin	m0	inout	sl	1			m0
 		ins	1	rtepin	dir	out	sl	1			dir
-		ins	1	rtepin	step	out	sl	1			step
+		ins	1	rtepin	step0	out	sl	1			step0
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
@@ -2466,7 +2490,7 @@ arty
 		oth	2	prc	op	rng	false	sl	1				0	false
 		oprt	2	prc	op	nslp	false	sl	1		!rng	1	0	false	nslp
 		oprt	0	prc	op	ccwNotCw	false	sl	1				0	false	dir
-		oprt	0	prc	op	step	false	sl	1				0	false	step
+		oprt	0	prc	op	step0	false	sl	1				0	false	step0
 		oth	3	prc	op	m0_sig	false	sl	1				0	false
 		oth	3	prc	op	m0z	false	sl	1				0	false
 		ImeIMSignal2.end
@@ -2536,32 +2560,56 @@ arty
 	ImeIMModule.end
 cleb
 	ImeIMBank.srefIxWdbeVIop	sref	srefKVoltstd
+	retrupd	bankSd	_1v8
+		ImeICPin.iref
+		1
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	1	pcie_clk_p	C12	GBTCLK0_M2C_P
+		retrupd	1	pcie_clk_n	C11	GBTCLK0_M2C_N
+		ImeIMPin.end
 	retrupd	bank0	_3v3
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
-		retrupd	0	btn2	E11	SW5
+		retrupd	0	pmnd_rxd	D17	PMOD2_9
+		retrupd	0	pmnd_txd	E18	PMOD2_10
 		ImeIMPin.end
-	retrupd	bank1	_3v3
+	retrupd	bank3	_1v8
 		ImeICPin.iref
 		1
 		2
 		ImeICPin.end
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
-		retrupd	1	btn0	G15	SW3
-		retrupd	1	btn1	G14	SW2
-		retrupd	1	btn3	G19	SW4
-		retrupd	2	rxd	F18
-		retrupd	2	txd	F16
+		retrupd	0	rgb1_r	V14	LA22_P
+		retrupd	1	rgb2_r	R13	LA21_N
+		retrupd	1	rgb2_g	P13	LA21_P
+		retrupd	1	rgb2_b	U14	LA22_N
+		retrupd	2	btn0	Y15	LA29_P
+		retrupd	2	btn1	Y16	LA29_N
+		retrupd	2	btn2	U15	LA28_P
+		retrupd	2	btn3	V16	LA28_N
+		retrupd	0	pcie_nperst	W11	LA14_P
+		retrupd	0	pcie_nwake	Y11	LA14_N
 		ImeIMPin.end
-	retrupd	bank2	_3v3
+	retrupd	bank4	_1v8
 		ImeICPin.iref
 		1
-		2
 		ImeICPin.end
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
-		retrupd	1	led4_r	W20	LED12 (yellow)
-		retrupd	1	led4_g	U20	LED10 (green)
-		retrupd	2	led5_r	V20	LED13 (yellow)
-		retrupd	2	led5_g	T20	LED11 (green)
+		retrupd	0	rgb1_g	R11	LA23_N
+		retrupd	0	rgb1_b	P11	LA23_P
+		retrupd	0	led4	W6	LA03_P
+		retrupd	0	led5	Y6	LA03_N
+		retrupd	1	pcie_scl	W8	LA15_P
+		retrupd	1	pcie_sda	V9	LA15_N
+		ImeIMPin.end
+	retrupd	bank5	_1v8
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	0	led0	R5	LA05_P
+		retrupd	0	led1	R6	LA05_N
+		retrupd	0	led2	V1	LA04_P
+		retrupd	0	led3	W1	LA04_N
+		retrupd	0	led6	Y2	LA02_P
+		retrupd	0	led7	Y3	LA02_N
 		ImeIMPin.end
 	retrupd	bank6	_3v3
 		ImeICPin.iref
@@ -2576,42 +2624,61 @@ cleb
 		1
 		2
 		3
-		4
-		5
-		6
-		7
 		ImeICPin.end
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
-		retrupd	1	csi_clk_p	D10
-		retrupd	1	csi_clk_n	D9
-		retrupd	2	csi_d1_p	D7
-		retrupd	2	csi_d1_n	D8
-		retrupd	3	csi_d0_p	D6
-		retrupd	3	csi_d0_n	D5
-		retrupd	4	scl	D4
-		retrupd	4	sda	D3
-		retrupd	5	cs	E10
-		retrupd	5	mosi	E9
-		retrupd	0	m0	E7
-		retrupd	0	step	E8
-		retrupd	5	sclk	E4
-		retrupd	0	nslp	E3
-		retrupd	0	dir	E2
-		retrupd	0	trig	F1
-		retrupd	6	csi_d2_p	J2
-		retrupd	6	csi_d2_n	J1
-		retrupd	7	csi_d3_p	K2
-		retrupd	7	csi_d3_n	K1
-		retrupd	0	flsh	K3
-		retrupd	0	nflt	K4
+		retrupd	0	PMOD0_1	D10	PMOD0_1
+		retrupd	1	scl_alt	D5	PMOD0_8
+		retrupd	1	sda_alt	D9	PMOD0_2
+		retrupd	0	flsh_alt	D7	PMOD0_3
+		retrupd	0	PMOD0_4	D8	PMOD0_4
+		retrupd	0	PMOD0_7	D6	PMOD0_7
+		retrupd	0	trig_alt	D4	PMOD0_9
+		retrupd	0	PMOD0_10	D3	PMOD0_10
+		retrupd	2	cs	E10	PMOD1_1
+		retrupd	2	sclk	E4	PMOD1_7
+		retrupd	2	mosi	E9	PMOD1_2
+		retrupd	0	nflt	E7	PMOD1_3
+		retrupd	0	dir	E8	PMOD1_4
+		retrupd	0	nslp	E3	PMOD1_8
+		retrupd	0	m0	E2	PMOD1_9
+		retrupd	0	step0	F1	PMOD1_10
+		retrupd	0	trig	J2	PMOD2_1
+		retrupd	0	flsh	J1	PMOD2_2
+		retrupd	3	scl	K2	PMOD2_3
+		retrupd	3	sda	K1	PMOD2_4
+		retrupd	0	PMOD2_7	K3	PMOD2_7
+		retrupd	0	PMOD2_8	K4	PMOD2_8
 		ImeIMPin.end
-	retrupd	bankSd	_3v3
+	retrupd	bank61	_1v2
 		ImeICPin.iref
 		1
+		2
+		3
+		4
+		5
 		ImeICPin.end
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
-		retrupd	1	extclkp	C12	SD_REFCLKP
-		retrupd	1	extclkn	C11	SD_REFCLKN
+		retrupd	1	csi_clk_p	A8
+		retrupd	1	csi_clk_n	B8
+		retrupd	2	csi_d0_p	A7
+		retrupd	2	csi_d0_n	B7
+		retrupd	3	csi_d1_p	A9
+		retrupd	3	csi_d1_n	B9
+		retrupd	4	csi_d2_p	A6
+		retrupd	4	csi_d2_n	B6
+		retrupd	5	csi_d3_p	A10
+		retrupd	5	csi_d3_n	B10
+		ImeIMPin.end
+	retrupd	bank80	_1v8
+		ImeICPin.iref
+		1
+		2
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
+		retrupd	1	pcie_rx_p	A13	DP0_C2M_P
+		retrupd	1	pcie_rx_n	A12	DP0_C2M_N
+		retrupd	2	pcie_tx_p	A16	DP0_M2C_P
+		retrupd	2	pcie_tx_n	A15	DP0_M2C_N
 		ImeIMPin.end
 	ImeIMBank.end
 	ImeIMModule.hsrefSupRefWdbeMModule	sref
@@ -2674,9 +2741,9 @@ cleb
 		ins	0	clk	mclk	in	sl	1					mclk
 		ins	0	clk	tkclk	in	sl	1					tkclk
 		ins	0	rtetop	rgb	in	slvdn	24					rgb4
-		ins	0	rtepin	r	out	sl	1			led4_r
-		ins	0	rtepin	g	out	sl	1			led4_g
-		ins	0	rtepin	b	out	sl	1
+		ins	0	rtepin	r	out	sl	1			rgb1_r
+		ins	0	rtepin	g	out	sl	1			rgb1_g
+		ins	0	rtepin	b	out	sl	1			rgb1_b
 		ImeIMPort.end
 		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
 		red	tkclk	reset				red LED PWM
@@ -2710,9 +2777,9 @@ cleb
 		ins	0	clk	mclk	in	sl	1					mclk
 		ins	0	clk	tkclk	in	sl	1					tkclk
 		ins	0	rtetop	rgb	in	slvdn	24					rgb5
-		ins	0	rtepin	r	out	sl	1			led5_r
-		ins	0	rtepin	g	out	sl	1			led5_g
-		ins	0	rtepin	b	out	sl	1
+		ins	0	rtepin	r	out	sl	1			rgb2_r
+		ins	0	rtepin	g	out	sl	1			rgb2_g
+		ins	0	rtepin	b	out	sl	1			rgb2_b
 		ImeIMPort.end
 		ImeIMProcess.sref	clkSrefWdbeMSignal	asrSrefWdbeMSignal	Falling	Syncrst	Extip	Comment
 		red	tkclk	reset				red LED PWM
@@ -2904,7 +2971,7 @@ cleb
 		ins	1	rtepin	nslp	out	sl	1			nslp
 		ins	1	rtepin	m0	inout	sl	1			m0
 		ins	1	rtepin	dir	out	sl	1			dir
-		ins	1	rtepin	step	out	sl	1			step
+		ins	1	rtepin	step0	out	sl	1			step0
 		ins	1	rtepin	nflt	in	sl	1			nflt			iccl only
 		ImeIMPort.end
 		ImeICSignal2.iref
@@ -2921,7 +2988,7 @@ cleb
 		oth	2	prc	op	rng	false	sl	1				0	false
 		oprt	2	prc	op	nslp	false	sl	1		!rng	1	0	false	nslp
 		oprt	0	prc	op	ccwNotCw	false	sl	1				0	false	dir
-		oprt	0	prc	op	step	false	sl	1				0	false	step
+		oprt	0	prc	op	step0	false	sl	1				0	false	step0
 		oth	3	prc	op	m0_sig	false	sl	1				0	false
 		oth	3	prc	op	m0z	false	sl	1				0	false
 		ImeIMSignal2.end
@@ -3015,32 +3082,37 @@ iccl
 		6
 		7
 		8
+		9
 		ImeICPin.end
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
-		retrupd	1	csi_clk_p	C4
-		retrupd	1	csi_clk_n	B4
-		retrupd	2	csi_d1_p	D9
-		retrupd	2	csi_d1_n	D8
-		retrupd	3	csi_d0_p	C5
-		retrupd	3	csi_d0_n	B5
-		retrupd	4	scl	C6
-		retrupd	4	sda	D6
-		retrupd	5	cs	E14
-		retrupd	5	mosi	D14
-		retrupd	0	m0	G15
-		retrupd	0	step	H15
-		retrupd	5	sclk	D13
-		retrupd	0	nslp	G17
-		retrupd	0	dir	H17
-		retrupd	0	trig	H13
-		retrupd	6	csi_d2_p	C10
-		retrupd	6	csi_d2_n	C9
-		retrupd	7	csi_d3_p	H12
-		retrupd	7	csi_d3_n	G12
-		retrupd	0	flsh	F11
-		retrupd	0	nflt	F16
-		retrupd	8	dbg0	A6
-		retrupd	8	dbg1	A7
+		retrupd	1	csi_clk_p	C4	GPIO169PB1
+		retrupd	1	csi_clk_n	B4	GPIO169NB1
+		retrupd	2	csi_d0_p	C5	GPIO170PB1
+		retrupd	2	csi_d0_n	B5	GPIO170NB1
+		retrupd	3	csi_d1_p	D9	GPIO174PB1
+		retrupd	3	csi_d1_n	D8	GPIO174NB1
+		retrupd	4	csi_d2_p	H12	GPIO182PB1
+		retrupd	4	csi_d2_n	G12	GPIO182NB1
+		retrupd	5	csi_d3_p	G17	GPIO8PB1
+		retrupd	5	csi_d3_n	H17	GPIO8NB1
+		retrupd	0	csi_clk_lp	A6	GPIO172PB1
+		retrupd	0	csi_d0_lp	A7	GPIO173PB1
+		retrupd	6	scl	H15	GPIO7NB1
+		retrupd	6	sda	D14	GPIO2NB1
+		retrupd	7	cs	H13	GPIO185NB1
+		retrupd	7	sclk	C10	GPIO176PB1
+		retrupd	7	mosi	D13	GPIO2PB1
+		retrupd	0	m0	D6	GPIO168NB1
+		retrupd	0	step0	G15	GPIO7PB1
+		retrupd	0	nslp	C6	GPIO171PB1
+		retrupd	0	dir	E14	GPIO9NB1
+		retrupd	0	trig	C9	GPIO176NB1
+		retrupd	0	flsh	F11	GPIO181NB1
+		retrupd	0	nflt	F16	GPIO11NB1
+		retrupd	8	dbg0	A8	GPIO175PB1
+		retrupd	8	dbg1	B8	GPIO175NB1
+		retrupd	9	pmnd_rxd	A21
+		retrupd	9	pmnd_txd	B20
 		ImeIMPin.end
 	ImeIMBank.end
 	ImeIMModule.hsrefSupRefWdbeMModule	sref
@@ -4137,9 +4209,6 @@ iccl
 		ins	0	clk	mclk	in	sl	1					mclk
 		ins	0	clk	tkclk	in	sl	1					tkclk
 		ins	0	rtetop	rng	out	sl	1					camrng
-		ins	0	rtepin	rst	out	sl	1			rst
-		ins	0	rtepin	pwdn	out	sl	1			pwdn
-		ins	0	rtepin	xclk	out	sl	1			xclk
 		ImeIMPort.end
 		ImeICSignal2.iref
 		1
@@ -4147,10 +4216,7 @@ iccl
 		3
 		ImeICSignal2.end
 		ImeIMSignal2.srefIxVBasetype	irefRefWdbeCSignal	srefMgeIxVTbl	srefMgeUref	sref	Const	srefWdbeKHdltype	Width	Minmax	Comb	Onval	Offval	Defon	srefDrvRefWdbeMPort	Comment
-		oprt	0	prc	camclk	xclk	false	sl	1				0	false	xclk
 		oprt	0	prc	op	rng	false	sl	1				0	true	rng
-		oprt	0	prc	op	rst	false	sl	1				0	true	rst
-		oprt	0	prc	op	pwdn	false	sl	1				0	true	pwdn
 		oprt	0	prc	op	ackInvSetRng	false	sl	1				0	false	ackInvSetRng
 		oprt	0	prc	op	ackInvSetReg	false	sl	1				0	false	ackInvSetReg
 		oprt	0	prc	op	ackInvSetRegaddr	false	sl	1				0	false	ackInvSetRegaddr
@@ -5492,6 +5558,19 @@ iccl
 		retrupd	0		mosi						mosi
 		retrupd	0		miso					0
 		ImeIMPort.end
+	iccl_ip_AXI;top	pwmonif
+		ImeIMGeneric.srefIxWdbeVIop	irefRefWdbeCGeneric	sref	srefWdbeKHdltype	Width	Minmax	Defval	srcSrefWdbeMGeneric	Comment
+		retrupd	0	fMclk					fMclk
+		retrupd	0	fSclk				9600
+		retrupd	0	toRx				100
+		ImeIMGeneric.end
+		ImeIMPort.srefIxWdbeVIop	irefRefWdbeCPort	srefMdlIxVCat	sref	srefIxVDir	srefWdbeKHdltype	Width	Minmax	Defval	cpiSrefWdbeMPin	cprSrefWdbeMPort	csiSrefWdbeMSignal	Comment
+		retrupd	0		reset								reset
+		retrupd	0		mclk								mclk
+		retrupd	0		tkclk								tkclk
+		retrupd	0		rxd						pmnd_rxd
+		retrupd	0		txd						pmnd_txd
+		ImeIMPort.end
 	iccl_ip_AXI;top	state
 		ImeICPort.iref
 		1
@@ -5533,7 +5612,7 @@ iccl
 		ins	1	rtepin	nslp	out	sl	1			nslp
 		ins	1	rtepin	m0	inout	sl	1			m0
 		ins	1	rtepin	dir	out	sl	1			dir
-		ins	1	rtepin	step	out	sl	1			step
+		ins	1	rtepin	step0	out	sl	1			step0
 		ins	1	rtepin	nflt	in	sl	1			nflt
 		ImeIMPort.end
 		ImeICSignal2.iref
@@ -5550,7 +5629,7 @@ iccl
 		oth	2	prc	op	rng	false	sl	1				0	false
 		oprt	2	prc	op	nslp	false	sl	1		!rng	1	0	false	nslp
 		oprt	0	prc	op	ccwNotCw	false	sl	1				0	false	dir
-		oprt	0	prc	op	step	false	sl	1				0	false	step
+		oprt	0	prc	op	step0	false	sl	1				0	false	step0
 		oth	3	prc	op	m0_sig	false	sl	1				0	false
 		oth	3	prc	op	m0z	false	sl	1				0	false
 		ImeIMSignal2.end
@@ -5645,7 +5724,105 @@ mcep
 		retrupd	0	sclk	AF27	IOB4A40
 		retrupd	0	dir	AE20	IOB4A4
 		retrupd	0	mosi	AH9	IOB4A33
-		retrupd	0	step	U13	IOB4A3
+		retrupd	0	step0	U13	IOB4A3
+		ImeIMPin.end
+	ImeIMBank.end
+mpbb
+	ImeIMBank.srefIxWdbeVIop	sref	srefKVoltstd
+	retrupd	bank43	_3v3
+		ImeICPin.iref
+		1
+		2
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location	carrier board		connector
+		retrupd	1	cs	AE12	IO3[0]	IO3_D0_P	A85		IO3 <-> J5 (arty) <-> PMOD1 (cleb)
+		retrupd	1	sclk	AF11	IO3[1]	IO3_D4_P	A73
+		retrupd	1	mosi	AF12	IO3[2]	IO3_D1_N	A87
+		retrupd	0	nslp	AG11	IO3[3]	IO3_D5_N	A75
+		retrupd	0	nflt	AH12	IO3[4]	IO3_D2_P	A67
+		retrupd	0	m0	AB10	IO3[5]	IO3_D6_P	A79
+		retrupd	0	dir	AH11	IO3[6]	IO3_D3_N	A69
+		retrupd	0	step0	AB9	IO3[7]	IO3_D7_N	A81
+		retrupd	2	dbg0	W10	IO4[1]	IO4_D4_P	A70	scl	IO4 <-> J4 (arty) <-> PMOD0 (cleb)
+		retrupd	2	dbg1	Y10	IO4[3]	IO4_D5_N	A72	sda
+		retrupd	2	dbg2	Y9	IO4[4]	IO4_D2_P	A64	csi_clk_lp
+		retrupd	2	dbg3	AC12	IO4[5]	IO4_D6_P	A76	csi_d0_lp
+		retrupd	2	dbg4	AA8	IO4[6]	IO4_D3_N	A66
+		retrupd	2	dbg5	AD12	IO4[7]	IO4_D7_N	A78
+		ImeIMPin.end
+	retrupd	bank65	_1v2
+		ImeICPin.iref
+		1
+		2
+		3
+		4
+		5
+		6
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location	carrier board		connector
+		retrupd	1	csia_clk_p	L7	FMC_LA01_CC_P		B130	L13
+		retrupd	1	csia_clk_n	L6	FMC_LA01_CC_N		B132
+		retrupd	2	csia_d0_p	K8	FMC_LA06_P		B136	L22
+		retrupd	2	csia_d0_n	K7	FMC_LA06_N		B138
+		retrupd	3	csia_d1_p	H9	FMC_LA07_P		B124	L24
+		retrupd	3	csia_d1_n	H8	FMC_LA07_N		B126
+		retrupd	4	csia_d2_p	J7	FMC_LA08_P		B120	L21
+		retrupd	4	csia_d2_n	H7	FMC_LA08_N		B122
+		retrupd	5	csia_d3_p	J6	FMC_LA09_P		B114	L20
+		retrupd	5	csia_d3_n	H6	FMC_LA09_N		B116
+		retrupd	6	led[0]	K9	FMC_LA05_P		B142	L23	level-shifted
+		retrupd	6	led[1]	J9	FMC_LA05_N		B144		level-shifted
+		retrupd	6	led[2]	M8	FMC_LA04_P		B148	L18	level-shifted
+		retrupd	6	led[3]	L8	FMC_LA04_N		B150		level-shifted
+		retrupd	6	led[4]	N7	FMC_LA03_P		B160	L15	level-shifted
+		retrupd	6	led[5]	N6	FMC_LA03_N		B162		level-shifted
+		retrupd	6	led[6]	N9	FMC_LA02_P		B164	L17	level-shifted
+		retrupd	6	led[7]	N8	FMC_LA02_N		B166		level-shifted
+		ImeIMPin.end
+	retrupd	bank66	_1v2
+		ImeICPin.iref
+		1
+		2
+		3
+		4
+		5
+		6
+		7
+		8
+		9
+		10
+		11
+		12
+		ImeICPin.end
+		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location	carrier board		connector
+		retrupd	1	csib_clk_p	D7	FMC_LA18_CC_P		B123	L13
+		retrupd	1	csib_clk_n	D6	FMC_LA18_CC_N		B125
+		retrupd	2	csib_d0_p	C8	FMC_LA24_P		B129	L22
+		retrupd	2	csib_d0_n	B8	FMC_LA24_N		B131
+		retrupd	3	csib_d1_p	A9	FMC_LA25_P		B117	L23
+		retrupd	3	csib_d1_n	A8	FMC_LA25_N		B119
+		retrupd	4	csib_d2_p	A7	FMC_LA26_P		B111	L21
+		retrupd	4	csib_d2_n	A6	FMC_LA26_N		B113
+		retrupd	5	csib_d3_p	C6	FMC_LA27_P		B107	L20
+		retrupd	5	csib_d3_n	B6	FMC_LA27_N		B109
+		retrupd	6	scla	C1	FMC_LA33_P		B75	L7	level-shifted
+		retrupd	6	sdaa	B1	FMC_LA33_N		B77		level-shifted
+		retrupd	7	triga	G5	FMC_LA32_P		B81	L6	level-shifted
+		retrupd	7	flsha	F5	FMC_LA32_N		B83		level-shifted
+		retrupd	8	sclb	A2	FMC_LA31_P		B87	L8	level-shifted
+		retrupd	8	sdab	A1	FMC_LA31_N		B89		level-shifted
+		retrupd	9	trigb	B3	FMC_LA30_P		B91	L9	level-shifted
+		retrupd	9	flshb	A3	FMC_LA30_N		B93		level-shifted
+		retrupd	10	btn0	B4	FMC_LA29_P		B97	L10
+		retrupd	10	btn1	A4	FMC_LA29_N		B99
+		retrupd	10	btn2	B5	FMC_LA28_P		B101	L19
+		retrupd	10	btn3	A5	FMC_LA28_N		B103
+		retrupd	11	led4_b	C9	FMC_LA23_P		B133	L24	level-shifted
+		retrupd	11	led4_g	B9	FMC_LA23_N		B135		level-shifted
+		retrupd	11	led4_r	E9	FMC_LA22_P		B139	L18	level-shifted
+		retrupd	12	led5_b	D9	FMC_LA22_N		B141		level-shifted
+		retrupd	12	led5_g	F8	FMC_LA21_P		B145	L17	level-shifted
+		retrupd	12	led5_r	E8	FMC_LA21_N		B147		level-shifted
 		ImeIMPin.end
 	ImeIMBank.end
 ubdk
@@ -5677,7 +5854,7 @@ ubdk
 			ImeIJMPinSref.end
 		retr	0	p1.1
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
-			pca0	step
+			pca0	step0
 			ImeIJMPinSref.end
 		retr	0	p1.4
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
@@ -5700,11 +5877,11 @@ ubdk
 		ImeIMPin.srefIxWdbeVIop	irefRefWdbeCPin	sref	Location
 		retr	0	p2.1
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
-				cs1
+				cs
 			ImeIJMPinSref.end
 		retr	0	p2.2
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
-				cs0
+				nflt
 			ImeIJMPinSref.end
 		retr	0	p2.3
 			ImeIJMPinSref.srefX1RefWdbeMPeripheral	sref
@@ -5790,7 +5967,7 @@ ubdk
 		ins	1	rtepin	nslp	out	sl	1			nslp
 		ins	1	rtepin	m0	out	sl	1			m0
 		ins	1	rtepin	dir	out	sl	1			dir
-		ins	1	rtepin	step	out	sl	1			step
+		ins	1	rtepin	step0	out	sl	1			step0
 		ImeIMPort.end
 	ImeIMModule.end
 ImeIMUnit.end

@@ -34,9 +34,10 @@ package Iccl is
 	constant tixVIcclControllerCamif: std_logic_vector(7 downto 0) := x"02";
 	constant tixVIcclControllerFeatdet: std_logic_vector(7 downto 0) := x"03";
 	constant tixVIcclControllerLaser: std_logic_vector(7 downto 0) := x"04";
-	constant tixVIcclControllerState: std_logic_vector(7 downto 0) := x"05";
-	constant tixVIcclControllerStep: std_logic_vector(7 downto 0) := x"06";
-	constant tixVIcclControllerTkclksrc: std_logic_vector(7 downto 0) := x"07";
+	constant tixVIcclControllerPwmonif: std_logic_vector(7 downto 0) := x"05";
+	constant tixVIcclControllerState: std_logic_vector(7 downto 0) := x"06";
+	constant tixVIcclControllerStep: std_logic_vector(7 downto 0) := x"07";
+	constant tixVIcclControllerTkclksrc: std_logic_vector(7 downto 0) := x"08";
 
 	constant tixVIcclStateNc: std_logic_vector(7 downto 0) := x"00";
 	constant tixVIcclStateReady: std_logic_vector(7 downto 0) := x"01";
@@ -67,6 +68,11 @@ package Iccl is
 	constant tixVFeatdetCommandTriggerThd: std_logic_vector(7 downto 0) := x"05";
 
 	constant tixVLaserCommandSet: std_logic_vector(7 downto 0) := x"00";
+
+	constant tixVPwmonifCommandGet: std_logic_vector(7 downto 0) := x"00";
+	constant tixVPwmonifCommandRx: std_logic_vector(7 downto 0) := x"01";
+	constant tixVPwmonifCommandTx: std_logic_vector(7 downto 0) := x"02";
+	constant tixVPwmonifCommandTxrx: std_logic_vector(7 downto 0) := x"03";
 
 	constant tixVStateCommandGet: std_logic_vector(7 downto 0) := x"00";
 

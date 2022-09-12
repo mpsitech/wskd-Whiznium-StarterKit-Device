@@ -57,7 +57,7 @@ begin
 
 	crc <= crc_sig;
 	
-	process (reset, mclk)
+	process (reset, mclk, stateOp)
 	begin
 		if reset='1' then
 			stateOp <= stateOpInit;

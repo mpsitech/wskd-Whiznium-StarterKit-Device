@@ -50,7 +50,7 @@ begin
 
 	clean <= clean_sig;
 
-	process (reset, mclk)
+	process (reset, mclk, stateOp)
 		variable i: natural range 0 to tdead;
 
 	begin

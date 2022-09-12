@@ -59,7 +59,7 @@ public:
 	CtrWskdArtyStep(UntWskd* unt);
 
 public:
-	static const uint8_t tixVController = 0x06;
+	static const uint8_t tixVController = 0x07;
 
 public:
 	static uint8_t getTixVCommandBySref(const std::string& sref);

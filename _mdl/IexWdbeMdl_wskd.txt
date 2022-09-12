@@ -446,6 +446,7 @@ fpga	xc7z010-1clg400	arty	Digilent Arty Z7	true	vivado
 		cpha	1
 		fSclk	8333333
 		ImeIMGeneric.end
+	ectr	arty_ip_AXI;top	uart_Easy_v1_0	pwmonif	interface to power monitor via UART
 	ectr	arty_ip_AXI;top		state	state monitor
 	ectr	arty_ip_AXI;top		step	stepper motor control (NEMA17 via DRV8834)
 	mnfprim	arty_ip_AXI;top;step	IOBUF	iobufM0
@@ -951,12 +952,14 @@ fpga	mpfs250t-fcvg484	iccl	Microchip PolarFire Soc Icicle kit	true	libero
 		cpha	1
 		fSclk	8333333
 		ImeIMGeneric.end
+	ectr	iccl_ip_AXI;top	uart_Easy_v1_0	pwmonif	interface to power monitor via UART
 	ectr	iccl_ip_AXI;top		state	state monitor
 	ectr	iccl_ip_AXI;top		step	stepper motor control (NEMA17 via DRV8834)
 	mnfprim	iccl_ip_AXI;top;step	BIBUF	iobufM0
 	ectr	iccl_ip_AXI;top	tkclksrc_Easy_v1_0	tkclksrc	10kHz clock source
 	ImeIMModule.end
 fpga	5cseba6u23c7n	mcep	Aries Cyclone V evaluation platform	true	quartus
+fpga	xczu4ev-1sfvc784	mpbb	enclustra Mercury+ base board	true	vivado
 mcu	efm8ub10f16g-c-qfn28	ubdk	SiLabs EFM8UB10 Development Kit	true	splcty
 	ImeIMPeripheral.sref
 	tmr0

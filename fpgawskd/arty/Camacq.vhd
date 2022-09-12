@@ -9,6 +9,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library unisim;
+use unisim.vcomponents.all;
+
 use work.Dbecore.all;
 use work.Arty.all;
 
@@ -16,7 +19,6 @@ entity Camacq is
 	port (
 		reset: in std_logic;
 		mclk: in std_logic;
-		btnPhase: in std_logic;
 
 		tkclksrcGetTkstTkst: in std_logic_vector(31 downto 0);
 
@@ -39,54 +41,51 @@ entity Camacq is
 		getPvwinfoTixVPvwbufstate: out std_logic_vector(7 downto 0);
 		getPvwinfoTkst: out std_logic_vector(31 downto 0);
 
-		reqGrrdabbufToFeatdet: in std_logic;
-
-		reqGrrdcdbufToFeatdet: in std_logic;
-
-		ackGrrdabbufToFeatdet: out std_logic;
-
-		ackGrrdcdbufToFeatdet: out std_logic;
-
-		dneGrrdabbufToFeatdet: in std_logic;
-
-		dneGrrdcdbufToFeatdet: in std_logic;
-
-		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
-
-		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
-
-		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
-
-		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
-
-		strbDGrrdabbufToFeatdet: in std_logic;
-
-		strbDGrrdcdbufToFeatdet: in std_logic;
-
 		reqGrrdefbufToFeatdet: in std_logic;
 
-		reqPvwabufToHostif: in std_logic;
+		reqGrrdabbufToFeatdet: in std_logic;
 
 		ackGrrdefbufToFeatdet: out std_logic;
 
-		ackPvwabufToHostif: out std_logic;
+		ackGrrdabbufToFeatdet: out std_logic;
 
 		dneGrrdefbufToFeatdet: in std_logic;
 
-		dnePvwabufToHostif: in std_logic;
+		dneGrrdabbufToFeatdet: in std_logic;
 
 		avllenGrrdefbufToFeatdet: out std_logic_vector(3 downto 0);
 
+		avllenGrrdabbufToFeatdet: out std_logic_vector(3 downto 0);
+
+		reqGrrdcdbufToFeatdet: in std_logic;
+
+		dGrrdabbufToFeatdet: out std_logic_vector(7 downto 0);
+
 		dGrrdefbufToFeatdet: out std_logic_vector(7 downto 0);
 
-		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
+		ackGrrdcdbufToFeatdet: out std_logic;
+
+		strbDGrrdabbufToFeatdet: in std_logic;
 
 		strbDGrrdefbufToFeatdet: in std_logic;
 
+		dneGrrdcdbufToFeatdet: in std_logic;
+		avllenGrrdcdbufToFeatdet: out std_logic_vector(3 downto 0);
+
+		dGrrdcdbufToFeatdet: out std_logic_vector(7 downto 0);
+		strbDGrrdcdbufToFeatdet: in std_logic;
+
+		reqPvwabufToHostif: in std_logic;
+		ackPvwabufToHostif: out std_logic;
+		dnePvwabufToHostif: in std_logic;
+		avllenPvwabufToHostif: out std_logic_vector(7 downto 0);
+
 		dPvwabufToHostif: out std_logic_vector(31 downto 0);
-		strbDPvwabufToHostif: in std_logic;
 
 		reqPvwbbufToHostif: in std_logic;
+
+		strbDPvwabufToHostif: in std_logic;
+
 		ackPvwbbufToHostif: out std_logic;
 		dnePvwbbufToHostif: in std_logic;
 		avllenPvwbbufToHostif: out std_logic_vector(7 downto 0);
@@ -94,27 +93,17 @@ entity Camacq is
 		dPvwbbufToHostif: out std_logic_vector(31 downto 0);
 		strbDPvwbbufToHostif: in std_logic;
 
-		pclk: in std_logic;
-		href: in std_logic;
-		vsync: in std_logic;
+		csi_d0_p: in std_logic;
+		csi_d0_n: in std_logic;
 
-		d2: in std_logic;
-		d3: in std_logic;
-		d4: in std_logic;
-		d5: in std_logic;
-		d6: in std_logic;
-		d7: in std_logic;
-		d8: in std_logic;
-		d9: in std_logic;
+		csi_d1_p: in std_logic;
+		csi_d1_n: in std_logic;
 
-		cntFallA_dbg: out std_logic_vector(7 downto 0);
-		cntRiseA_dbg: out std_logic_vector(7 downto 0);
-		cntFallB_dbg: out std_logic_vector(7 downto 0);
-		cntRiseB_dbg: out std_logic_vector(7 downto 0);
+		clk_in_p: in std_logic;
+		clk_in_n: in std_logic;
 
-		strb_dbg: out std_logic_vector(5 downto 0);
+		rxclk_dbg: out std_logic;
 
-		stateAlign_dbg: out std_logic_vector(7 downto 0);
 		stateGrrd_dbg: out std_logic_vector(7 downto 0);
 		stateGrrdabbufB_dbg: out std_logic_vector(7 downto 0);
 		stateGrrdacc_dbg: out std_logic_vector(7 downto 0);
@@ -128,7 +117,6 @@ entity Camacq is
 		statePvwbufB_dbg: out std_logic_vector(7 downto 0);
 		statePvwrawgray_dbg: out std_logic_vector(7 downto 0);
 		statePvwrawrgb_dbg: out std_logic_vector(7 downto 0);
-		stateSample_dbg: out std_logic_vector(7 downto 0);
 		stateTag_dbg: out std_logic_vector(7 downto 0)
 	);
 end Camacq;
@@ -187,6 +175,23 @@ architecture Camacq of Camacq is
 		);
 	end component;
 
+	component Mipirx_w2 is
+		port (
+			clk_in_p: in std_logic;
+			clk_in_n: in std_logic;
+
+			data_in_from_pins_p: in std_logic_vector(1 downto 0);
+			data_in_from_pins_n: in std_logic_vector(1 downto 0);
+
+			clk_reset: in std_logic;
+			io_reset: in std_logic;
+
+			bitslip: in std_logic_vector(1 downto 0);
+			clk_div_out: out std_logic;
+			data_in_to_device: out std_logic_vector(15 downto 0)
+		);
+	end component;
+
 	component Dpbram_size58kB is
 		port (
 			clkA: in std_logic;
@@ -223,27 +228,6 @@ architecture Camacq of Camacq is
 	constant tixVPvwbufstateEmpty: std_logic_vector(7 downto 0) := x"01";
 	constant tixVPvwbufstateAbuf: std_logic_vector(7 downto 0) := x"02";
 	constant tixVPvwbufstateBbuf: std_logic_vector(7 downto 0) := x"03";
-
-	---- pixel clock alignment (align)
-	type stateAlign_t is (
-		stateAlignInit,
-		stateAlignCountA, stateAlignCountB, stateAlignCountC,
-		stateAlignRun
-	);
-	signal stateAlign: stateAlign_t := stateAlignInit;
-
-	constant cntmax: natural := 8;
-
-	signal cntFallA: natural range 0 to cntmax;
-	signal cntRiseA: natural range 0 to cntmax;
-	signal cntFallB: natural range 0 to cntmax;
-	signal cntRiseB: natural range 0 to cntmax;
-
-	type phase_t is (phaseFallA, phaseRiseA, phaseFallB, phaseRiseB);
-	signal phase: phase_t;
-	signal pclk_shift: std_logic;
-
-	-- IP sigs.align.cust --- INSERT
 
 	---- gray/red operation, also managing grrd{ab/cd/ef}buf (grrd)
 	type stateGrrd_t is (
@@ -522,21 +506,12 @@ architecture Camacq of Camacq is
 
 	-- IP sigs.pvwrawrgb.cust --- INSERT
 
-	---- camera data sampling at every other rising or falling mclk edge (sample)
-	type stateSample_t is (
-		stateSampleInit,
-		stateSampleRunA, stateSampleRunB
-	);
-	signal stateSample: stateSample_t := stateSampleInit;
+	---- currently only rearranges lanes (sample)
 
-	signal vsync_sig: std_logic;
-	signal vsync_shift: std_logic;
-
-	signal href_sig: std_logic;
-	signal href_shift: std_logic;
+	signal csid: std_logic_vector(15 downto 0);
+	signal csidn: std_logic_vector(15 downto 0);
 
 	signal d: std_logic_vector(7 downto 0);
-	signal d_shift: std_logic_vector(7 downto 0);
 
 	-- IP sigs.sample.cust --- INSERT
 
@@ -594,6 +569,10 @@ architecture Camacq of Camacq is
 	---- myEvenbuf
 	signal drdEvenbuf: std_logic_vector(7 downto 0);
 
+	---- myMipirx
+	signal rxclk, rxclk_sig: std_logic;
+	signal rxd: std_logic_vector(15 downto 0);
+
 	---- myRawgraybuf
 	signal drdRawgraybuf: std_logic_vector(7 downto 0);
 
@@ -636,7 +615,22 @@ architecture Camacq of Camacq is
 
 	---- other
 	signal mclkn: std_logic;
-	-- IP sigs.oth.cust --- INSERT
+	-- IP sigs.oth.cust --- IBEGIN
+
+	signal resetn: std_logic;
+	signal dphyclk: std_logic;
+
+	signal strbRowEnd: std_logic;
+	signal strbFrameEnd: std_logic;
+
+	signal dest: STD_LOGIC_VECTOR(3 DOWNTO 0);
+	signal data: STD_LOGIC_VECTOR(31 DOWNTO 0);
+	signal keep: STD_LOGIC_VECTOR(3 DOWNTO 0);
+	signal user: STD_LOGIC_VECTOR(95 DOWNTO 0);
+
+	signal href_sig: std_logic := '0';
+	signal vsync_sig: std_logic := '0';
+	-- IP sigs.oth.cust --- IEND
 
 begin
 
@@ -666,6 +660,12 @@ begin
 			a => aBinrgbbuf_vec,
 			drd => drdBinrgbbuf,
 			dwr => dwrBinrgbbuf
+		);
+
+	myBufgRxclk : BUFG
+		port map (
+			I => rxclk,
+			O => rxclk_sig
 		);
 
 	myEvenbuf : Spbram_v1_0_size4kB
@@ -743,6 +743,22 @@ begin
 			dwrB => (others => '0')
 		);
 
+	myMipirx : Mipirx_w2
+		port map (
+			clk_in_p => clk_in_p,
+			clk_in_n => clk_in_n,
+
+			data_in_from_pins_p => csid,
+			data_in_from_pins_n => csidn,
+
+			clk_reset => reset,
+			io_reset => reset,
+
+			bitslip => (others => '0'),
+			clk_div_out => rxclk,
+			data_in_to_device => rxd
+		);
+
 	myPvwabuf : Dpbram_size58kB
 		port map (
 			clkA => mclk,
@@ -796,153 +812,6 @@ begin
 			drd => drdRawgraybuf,
 			dwr => dwrRawgraybuf
 		);
-
-	------------------------------------------------------------------------
-	-- implementation: pixel clock alignment (align)
-	------------------------------------------------------------------------
-
-	-- IP impl.align.wiring --- RBEGIN
-	cntFallA_dbg <= std_logic_vector(to_unsigned(cntFallA, 8));
-	cntRiseA_dbg <= std_logic_vector(to_unsigned(cntRiseA, 8));
-	cntFallB_dbg <= std_logic_vector(to_unsigned(cntFallB, 8));
-	cntRiseB_dbg <= std_logic_vector(to_unsigned(cntRiseB, 8));
-
-	stateAlign_dbg <= x"00" when stateAlign=stateAlignInit
-				else x"10" when stateAlign=stateAlignCountA
-				else x"11" when stateAlign=stateAlignCountB
-				else x"12" when stateAlign=stateAlignCountC
-				else x"20" when stateAlign=stateAlignRun
-				else (others => '1');
-	-- IP impl.align.wiring --- REND
-
-	-- IP impl.align.rising --- BEGIN
-	process (reset, mclk, stateAlign)
-		-- IP impl.align.vars --- RBEGIN
-		variable i: natural range 0 to cntmax;
-		
-		variable btndead: boolean;
-		-- IP impl.align.vars --- REND
-
-	begin
-		if reset='1' then
-			-- IP impl.align.asyncrst --- RBEGIN
-			stateAlign <= stateAlignInit;
-			cntFallA <= 0;
-			cntRiseA <= 0;
-			cntFallB <= 0;
-			cntRiseB <= 0;
-			phase <= phaseFallA;
-			-- IP impl.align.asyncrst --- REND
-
-		elsif rising_edge(mclk) then
-			if (stateAlign=stateAlignInit or (grrdrun='0' and pvwrun='0')) then
-				-- IP impl.align.syncrst --- RBEGIN
-				phase <= phaseFallA;
-				-- IP impl.align.syncrst --- REND
-
-				if (grrdrun='1' or pvwrun='1') then
-					-- IP impl.align.init.start --- IBEGIN
-					cntFallA <= 0;
-					cntRiseA <= 0;
-					cntFallB <= 0;
-					cntRiseB <= 0;
-
-					i := 0;
-					
-					btndead := false;
-					-- IP impl.align.init.start --- IEND
-
-					stateAlign <= stateAlignCountA;
-
-				else
-					stateAlign <= stateAlignInit;
-				end if;
-
-			elsif stateAlign=stateAlignCountA then
-				-- IP impl.align.countA --- IBEGIN
-				if pclk_shift='1' then
-					cntFallA <= cntFallA + 1;
-				end if;
-
-				if pclk='1' then
-					cntRiseA <= cntRiseA + 1;
-				end if;
-				-- IP impl.align.countA --- IEND
-
-				stateAlign <= stateAlignCountB;
-
-			elsif stateAlign=stateAlignCountB then
-				-- IP impl.align.countB.ext --- IBEGIN
-				if pclk_shift='1' then
-					cntFallB <= cntFallB + 1;
-				end if;
-
-				if pclk='1' then
-					cntRiseB <= cntRiseB + 1;
-				end if;
-
-				i := i + 1;
-				-- IP impl.align.countB.ext --- IEND
-
-				if i=cntmax then
-					stateAlign <= stateAlignCountC;
-
-				else
-					stateAlign <= stateAlignCountA;
-				end if;
-
-			elsif stateAlign=stateAlignCountC then
-				-- IP impl.align.countC --- IBEGIN
-				if cntFallA<cntmax and cntRiseA=cntmax then
-					phase <= phaseRiseA;
-				elsif cntRiseA<cntmax and cntFallB=cntmax then
-					phase <= phaseFallB;
-				elsif cntFallB<cntmax and cntRiseB=cntmax then
-					phase <= phaseRiseB;
-				elsif cntRiseB<cntmax and cntFallA=cntmax then
-					phase <= phaseFallA;
-				end if;
-				-- IP impl.align.countC --- IEND
-
-				stateAlign <= stateAlignRun;
-
-			elsif stateAlign=stateAlignRun then
-				-- IP impl.align.run --- IBEGIN
-				if btnPhase='1' and not btndead then
-					if phase=phaseRiseA then
-						phase <= phaseFallB;
-					elsif phase=phaseFallB then
-						phase <= phaseRiseB;
-					elsif phase=phaseRiseB then
-						phase <= phaseFallA;
-					else
-						phase <= phaseRiseA;
-					end if;
-					
-					btndead := true;
-
-				elsif btnPhase='0' and btndead then
-					btndead := false;
-				end if;
-				-- IP impl.align.run --- IEND
-			end if;
-		end if;
-	end process;
-	-- IP impl.align.rising --- END
-
-	-- IP impl.align.falling --- RBEGIN
-	process (reset, mclk)
-		-- IP impl.align.falling.vars --- BEGIN
-		-- IP impl.align.falling.vars --- END
-	begin
-		if reset='1' then
-			pclk_shift <= '0';
-
-		elsif falling_edge(mclk) then
-			pclk_shift <= pclk;
-		end if;
-	end process;
-	-- IP impl.align.falling --- REND
 
 	------------------------------------------------------------------------
 	-- implementation: gray/red operation, also managing grrd{ab/cd/ef}buf (grrd)
@@ -1637,12 +1506,6 @@ begin
 	-- IP impl.op.wiring --- BEGIN
 	ackInvSetGrrd <= ackInvSetGrrd_sig;
 	ackInvSetPvw <= ackInvSetPvw_sig;
-
-	stateOp_dbg <= x"00" when stateOp=stateOpInit
-				else x"10" when stateOp=stateOpInvGrrd
-				else x"20" when stateOp=stateOpInvPvw
-				else x"30" when stateOp=stateOpInv
-				else (others => '1');
 	-- IP impl.op.wiring --- END
 
 	-- IP impl.op.rising --- BEGIN
@@ -3723,115 +3586,44 @@ begin
 	-- IP impl.pvwrawrgb.rising --- END
 
 	------------------------------------------------------------------------
-	-- implementation: camera data sampling at every other rising or falling mclk edge (sample)
+	-- implementation: currently only rearranges lanes (sample)
 	------------------------------------------------------------------------
 
-	-- IP impl.sample.wiring --- BEGIN
-	stateSample_dbg <= x"00" when stateSample=stateSampleInit
-				else x"10" when stateSample=stateSampleRunA
-				else x"11" when stateSample=stateSampleRunB
-				else (others => '1');
-	-- IP impl.sample.wiring --- END
+	-- IP impl.sample.wiring --- RBEGIN
+	csid <= csi_d1_p & csi_d0_p;
+	csidn <= csi_d1_n & csi_d0_n;
+	-- IP impl.sample.wiring --- REND
 
 	-- IP impl.sample.rising --- BEGIN
-	process (reset, mclk, stateSample)
+	process (reset, mclk)
 		-- IP impl.sample.vars --- RBEGIN
 		-- IP impl.sample.vars --- REND
 
 	begin
 		if reset='1' then
-			-- IP impl.sample.asyncrst --- RBEGIN
-			stateSample <= stateSampleInit;
-
-			vsync_sig <= '0';
-			href_sig <= '0';
-
+			-- IP impl.sample.asyncrst --- BEGIN
+			csid <= (others => '0');
+			csidn <= (others => '0');
 			d <= (others => '0');
-			-- IP impl.sample.asyncrst --- REND
+			-- IP impl.sample.asyncrst --- END
 
 		elsif rising_edge(mclk) then
-			if (stateSample=stateSampleInit or (grrdrun='0' and pvwrun='0')) then
-				-- IP impl.sample.syncrst --- RBEGIN
-				vsync_sig <= '0';
-				href_sig <= '0';
-
-				d <= (others => '0');
-				-- IP impl.sample.syncrst --- REND
-
-				if (grrdrun='1' or pvwrun='1') then
-					stateSample <= stateSampleRunA;
-
-				else
-					stateSample <= stateSampleInit;
-				end if;
-
-			elsif stateSample=stateSampleRunA then
-				-- IP impl.sample.runA --- IBEGIN
-				if phase=phaseFallA then
-					vsync_sig <= vsync_shift;
-					href_sig <= href_shift;
-					d <= d_shift;
-
-				elsif phase=phaseRiseA then
-					vsync_sig <= vsync;
-					href_sig <= href;
-					d <= d9 & d8 & d7 & d6 & d5 & d4 & d3 & d2;
-				end if;
-				-- IP impl.sample.runA --- IEND
-
-				stateSample <= stateSampleRunB;
-
-			elsif stateSample=stateSampleRunB then
-				-- IP impl.sample.runB --- IBEGIN
-				if phase=phaseFallB then
-					vsync_sig <= vsync_shift;
-					href_sig <= href_shift;
-					d <= d_shift;
-
-				elsif phase=phaseRiseB then
-					vsync_sig <= vsync;
-					href_sig <= href;
-					d <= d9 & d8 & d7 & d6 & d5 & d4 & d3 & d2;
-				end if;
-				-- IP impl.sample.runB --- IEND
-
-				stateSample <= stateSampleRunA;
-			end if;
+			-- IP impl.sample --- INSERT
 		end if;
 	end process;
 	-- IP impl.sample.rising --- END
-
-	-- IP impl.sample.falling --- RBEGIN
-	process (reset, mclk)
-		-- IP impl.sample.falling.vars --- BEGIN
-		-- IP impl.sample.falling.vars --- END
-	begin
-		if reset='1' then
-			vsync_shift <= '0';
-			href_shift <= '0';
-
-			d_shift <= (others => '0');
-
-		elsif falling_edge(mclk) then
-			vsync_shift <= vsync;
-			href_shift <= href;
-
-			d_shift <= d9 & d8 & d7 & d6 & d5 & d4 & d3 & d2;
-		end if;
-	end process;
-	-- IP impl.sample.falling --- REND
 
 	------------------------------------------------------------------------
 	-- implementation: camera frame tagging (tag)
 	------------------------------------------------------------------------
 
 	-- IP impl.tag.wiring --- BEGIN
-	strbFrame <= '1' when (stateTag=stateTagFrameB and vsync_sig='0') else '0';
+	strbFrame <= '1' when state(frameB) and !vsync_sig else '0';
 
-	strbRow120 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row120) else '0';
-	strbRow192 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row192) else '0';
-	strbRow768 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row768) else '0';
-	strbRow960 <= '1' when (stateTag=stateTagRowB and href_sig='1' and row=row960) else '0';
+	strbRow120 <= '1' when state(rowB) and href_sig and row=row120 else '0';
+	strbRow192 <= '1' when state(rowB) and href_sig and row=row192 else '0';
+	strbRow768 <= '1' when state(rowB) and href_sig and row=row768 else '0';
+	strbRow960 <= '1' when state(rowB) and href_sig and row=row960 else '0';
 
 	strbCol160N1 <= '1' when (stateTag=stateTagColA and col=col160N1) else '0';
 	strbCol256N3 <= '1' when (stateTag=stateTagColA and col=col256N3) else '0';
@@ -3839,15 +3631,6 @@ begin
 	strbCol1024N9 <= '1' when (stateTag=stateTagColA and col=col1024N9) else '0';
 	strbCol1280 <= '1' when (stateTag=stateTagColA and col=col1280) else '0';
 	strbCol1280N9 <= '1' when (stateTag=stateTagColA and col=col1280N9) else '0';
-
-	stateTag_dbg <= x"00" when stateTag=stateTagInit
-				else x"10" when stateTag=stateTagFrameA
-				else x"11" when stateTag=stateTagFrameB
-				else x"20" when stateTag=stateTagRowA
-				else x"21" when stateTag=stateTagRowB
-				else x"30" when stateTag=stateTagColA
-				else x"31" when stateTag=stateTagColB
-				else (others => '1');
 	-- IP impl.tag.wiring --- END
 
 	-- IP impl.tag.rising --- BEGIN
@@ -3882,24 +3665,24 @@ begin
 				end if;
 
 			elsif stateTag=stateTagFrameA then
-				if vsync_sig='1' then
+				if vsync_sig then
 					stateTag <= stateTagFrameB;
 				end if;
 
 			elsif stateTag=stateTagFrameB then
-				if vsync_sig='0' then
+				if !vsync_sig then
 					row <= 0; -- IP impl.tag.frameB --- ILINE
 
 					stateTag <= stateTagRowA;
 				end if;
 
 			elsif stateTag=stateTagRowA then
-				if href_sig='0' then
+				if !href_sig then
 					stateTag <= stateTagRowB;
 				end if;
 
 			elsif stateTag=stateTagRowB then
-				if href_sig='1' then
+				if href_sig then
 					col <= 0; -- IP impl.tag.rowB --- ILINE
 
 					stateTag <= stateTagColA;
@@ -3940,9 +3723,14 @@ begin
 	
 	-- IP impl.oth.cust --- IBEGIN
 	mclkn <= not mclk;
+	resetn <= not reset;
+
+	strb_dbg <= strbFrameEnd & strbRowEnd;
+
+	d <= data(25 downto 24) & data(17 downto 16) & data(9 downto 8) & data(1 downto 0);
 
 	--strb_dbg <= strbFrame & strbRow960 & strbRow768 & strbCol1280N9 & strbCol1280 & strbCol1024N3;
-	strb_dbg <= strbFrame & strbRow192 & strbRow768 & strbDPvwbinrgbGnBl & strbDPvwbinrgbRd & strbDPvwbingrayGr;
+	--strb_dbg <= strbFrame & strbRow192 & strbRow768 & strbDPvwbinrgbGnBl & strbDPvwbinrgbRd & strbDPvwbingrayGr;
 	--strb_dbg <= "000000";
 	-- IP impl.oth.cust --- IEND
 

@@ -26,13 +26,9 @@ entity Laser is
 		setL: in std_logic_vector(15 downto 0);
 		setR: in std_logic_vector(15 downto 0);
 
-		cs0: out std_logic;
-		cs1: out std_logic;
-
+		nss: out std_logic;
 		sclk: out std_logic;
-		mosi: out std_logic;
-
-		stateOp_dbg: out std_logic_vector(7 downto 0)
+		mosi: out std_logic
 	);
 end Laser;
 
@@ -93,10 +89,6 @@ architecture Laser of Laser is
 	signal stateOp: stateOp_t := stateOpInit;
 
 	signal ackInvSet_sig: std_logic;
-
-	signal cmdNotPrep: std_logic;
-	signal rNotL: std_logic;
-
 	signal spilen: std_logic_vector(16 downto 0);
 	signal spisend: std_logic_vector(7 downto 0);
 
@@ -104,7 +96,6 @@ architecture Laser of Laser is
 
 	---- mySpi
 	signal strbSpisend: std_logic;
-	signal nss: std_logic;
 
 	---- handshake
 	-- op to mySpi
@@ -272,7 +263,7 @@ begin
 				if dneSpi='1' then
 					reqSpi <= '0'; -- IP impl.op.setA.spioff --- ILINE
 
-					if rNotL='0' then
+					if not rNotL then
 						-- IP impl.op.setA.prepR --- IBEGIN
 						rNotL <= '1';
 

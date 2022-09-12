@@ -35,6 +35,7 @@ void UntWskdArty::init(
 	camif = new CtrWskdArtyCamif(this);
 	featdet = new CtrWskdArtyFeatdet(this);
 	laser = new CtrWskdArtyLaser(this);
+	pwmonif = new CtrWskdArtyPwmonif(this);
 	state = new CtrWskdArtyState(this);
 	step = new CtrWskdArtyStep(this);
 	tkclksrc = new CtrWskdArtyTkclksrc(this);
@@ -74,6 +75,7 @@ void UntWskdArty::term() {
 	delete camif;
 	delete featdet;
 	delete laser;
+	delete pwmonif;
 	delete state;
 	delete step;
 	delete tkclksrc;
@@ -249,6 +251,7 @@ uint8_t UntWskdArty::getTixVCommandBySref(
 	else if (tixVController == VecVWskdArtyController::CAMIF) tixVCommand = VecVWskdArtyCamifCommand::getTix(sref);
 	else if (tixVController == VecVWskdArtyController::FEATDET) tixVCommand = VecVWskdArtyFeatdetCommand::getTix(sref);
 	else if (tixVController == VecVWskdArtyController::LASER) tixVCommand = VecVWskdArtyLaserCommand::getTix(sref);
+	else if (tixVController == VecVWskdArtyController::PWMONIF) tixVCommand = VecVWskdArtyPwmonifCommand::getTix(sref);
 	else if (tixVController == VecVWskdArtyController::STATE) tixVCommand = VecVWskdArtyStateCommand::getTix(sref);
 	else if (tixVController == VecVWskdArtyController::STEP) tixVCommand = VecVWskdArtyStepCommand::getTix(sref);
 	else if (tixVController == VecVWskdArtyController::TKCLKSRC) tixVCommand = VecVWskdArtyTkclksrcCommand::getTix(sref);
@@ -266,6 +269,7 @@ string UntWskdArty::getSrefByTixVCommand(
 	else if (tixVController == VecVWskdArtyController::CAMIF) sref = VecVWskdArtyCamifCommand::getSref(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::FEATDET) sref = VecVWskdArtyFeatdetCommand::getSref(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::LASER) sref = VecVWskdArtyLaserCommand::getSref(tixVCommand);
+	else if (tixVController == VecVWskdArtyController::PWMONIF) sref = VecVWskdArtyPwmonifCommand::getSref(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::STATE) sref = VecVWskdArtyStateCommand::getSref(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::STEP) sref = VecVWskdArtyStepCommand::getSref(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::TKCLKSRC) sref = VecVWskdArtyTkclksrcCommand::getSref(tixVCommand);
@@ -283,6 +287,7 @@ void UntWskdArty::fillFeedFCommand(
 	else if (tixVController == VecVWskdArtyController::CAMIF) VecVWskdArtyCamifCommand::fillFeed(feed);
 	else if (tixVController == VecVWskdArtyController::FEATDET) VecVWskdArtyFeatdetCommand::fillFeed(feed);
 	else if (tixVController == VecVWskdArtyController::LASER) VecVWskdArtyLaserCommand::fillFeed(feed);
+	else if (tixVController == VecVWskdArtyController::PWMONIF) VecVWskdArtyPwmonifCommand::fillFeed(feed);
 	else if (tixVController == VecVWskdArtyController::STATE) VecVWskdArtyStateCommand::fillFeed(feed);
 	else if (tixVController == VecVWskdArtyController::STEP) VecVWskdArtyStepCommand::fillFeed(feed);
 	else if (tixVController == VecVWskdArtyController::TKCLKSRC) VecVWskdArtyTkclksrcCommand::fillFeed(feed);
@@ -312,6 +317,7 @@ Cmd* UntWskdArty::getNewCmd(
 	else if (tixVController == VecVWskdArtyController::CAMIF) cmd = CtrWskdArtyCamif::getNewCmd(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::FEATDET) cmd = CtrWskdArtyFeatdet::getNewCmd(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::LASER) cmd = CtrWskdArtyLaser::getNewCmd(tixVCommand);
+	else if (tixVController == VecVWskdArtyController::PWMONIF) cmd = CtrWskdArtyPwmonif::getNewCmd(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::STATE) cmd = CtrWskdArtyState::getNewCmd(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::STEP) cmd = CtrWskdArtyStep::getNewCmd(tixVCommand);
 	else if (tixVController == VecVWskdArtyController::TKCLKSRC) cmd = CtrWskdArtyTkclksrc::getNewCmd(tixVCommand);

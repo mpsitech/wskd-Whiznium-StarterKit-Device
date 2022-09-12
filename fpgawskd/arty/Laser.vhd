@@ -26,13 +26,9 @@ entity Laser is
 		setL: in std_logic_vector(15 downto 0);
 		setR: in std_logic_vector(15 downto 0);
 
-		cs0: out std_logic;
-		cs1: out std_logic;
-
+		nss: out std_logic;
 		sclk: out std_logic;
-		mosi: out std_logic;
-
-		stateOp_dbg: out std_logic_vector(7 downto 0)
+		mosi: out std_logic
 	);
 end Laser;
 
@@ -93,10 +89,6 @@ architecture Laser of Laser is
 	signal stateOp: stateOp_t := stateOpInit;
 
 	signal ackInvSet_sig: std_logic;
-
-	signal cmdNotPrep: std_logic;
-	signal rNotL: std_logic;
-
 	signal spilen: std_logic_vector(16 downto 0);
 	signal spisend: std_logic_vector(7 downto 0);
 
@@ -104,7 +96,6 @@ architecture Laser of Laser is
 
 	---- mySpi
 	signal strbSpisend: std_logic;
-	signal nss: std_logic;
 
 	---- handshake
 	-- op to mySpi
@@ -158,65 +149,51 @@ begin
 	-- implementation: main operation (op)
 	------------------------------------------------------------------------
 
-	-- IP impl.op.wiring --- RBEGIN
-	ackInvSet_sig <= '1' when stateOp=stateOpInv else '0';
+	-- IP impl.op.wiring --- BEGIN
 	ackInvSet <= ackInvSet_sig;
-
-	cs0 <= nss when (cmdNotPrep='0' or (cmdNotPrep='1' and rNotL = '0')) else '1';
-	cs1 <= nss when (cmdNotPrep='0' or (cmdNotPrep='1' and rNotL = '1')) else '1';
-	-- IP impl.op.wiring --- REND
+	-- IP impl.op.wiring --- END
 
 	-- IP impl.op.rising --- BEGIN
 	process (reset, mclk, stateOp)
-		-- IP impl.op.vars --- RBEGIN
+		-- IP impl.op.vars --- BEGIN
 		constant sizeTxbuf: natural := 2;
 		type txbuf_t is array(0 to sizeTxbuf-1) of std_logic_vector(7 downto 0);
-		variable txbuf: txbuf_t := (x"00", x"00");
+		variable txbuf: txbuf_t := (x"00",x"00");
 
-		variable bytecnt: natural range 0 to sizeTxbuf;
+		variable bytecnt: natural range 0 to sizeTxbuf := 0;
 
-		constant imax: natural := fMclk*8/1000; -- 8µs
-		variable i: natural range 0 to imax;
-		-- IP impl.op.vars --- REND
+		constant imax: natural := fMclk*8/1000; -- 8us
+		variable i: natural range 0 to imax := 0;
+
+		variable rNotL: boolean := false;
+		-- IP impl.op.vars --- END
 
 	begin
 		if reset='1' then
-			-- IP impl.op.asyncrst --- RBEGIN
+			-- IP impl.op.asyncrst --- BEGIN
 			stateOp <= stateOpInit;
 			spilen <= (others => '0');
-			spisend <= x"00";
+			spisend <= (others => '0');
 			reqSpi <= '0';
-			cmdNotPrep <= '0';
-			rNotL <= '0';
-			
-			bytecnt := 0;
-			-- IP impl.op.asyncrst --- REND
+			-- IP impl.op.asyncrst --- END
 
 		elsif rising_edge(mclk) then
 			if stateOp=stateOpInit then
 				-- IP impl.op.syncrst --- RBEGIN
-				spisend <= x"00";
-				reqSpi <= '0';
-				cmdNotPrep <= '0';
-				rNotL <= '0';
-
-				txbuf(0) := x"F0";
-				txbuf(1) := x"00";
-				
 				spilen <= std_logic_vector(to_unsigned(sizeTxbuf, 17));
+				spisend <= (others => '0');
+				reqSpi <= '0';
 
+				txbuf := (x"F0",x"10"); -- DAC O/P, wake-up
 				bytecnt := 0;
+				rNotL := false;
 				-- IP impl.op.syncrst --- REND
 
 				stateOp <= stateOpPrepC;
 
 			elsif stateOp=stateOpPrepA then
 				if dneSpi='1' then
-					-- IP impl.op.prepA.done --- IBEGIN
-					reqSpi <= '0';
-
-					i := 0;
-					-- IP impl.op.prepA.done --- IEND
+					reqSpi <= '0'; -- IP impl.op.prepA.done --- ILINE
 
 					stateOp <= stateOpWait;
 
@@ -247,7 +224,7 @@ begin
 				i := i + 1; -- IP impl.op.wait.ext --- ILINE
 
 				if i=imax then
-					cmdNotPrep <= '1'; -- IP impl.op.wait.done --- ILINE
+					-- IP impl.op.wait.done --- INSERT
 
 					stateOp <= stateOpIdle;
 				end if;
@@ -255,7 +232,7 @@ begin
 			elsif stateOp=stateOpIdle then
 				if reqInvSet='1' then
 					-- IP impl.op.idle.prepL --- IBEGIN
-					rNotL <= '0';
+					rNotL := false;
 
 					txbuf(0) := "0000" & setL(9 downto 6);
 					txbuf(1) := setL(5 downto 0) & "00";
@@ -272,16 +249,18 @@ begin
 				if dneSpi='1' then
 					reqSpi <= '0'; -- IP impl.op.setA.spioff --- ILINE
 
-					if rNotL='0' then
+					if not rNotL then
 						-- IP impl.op.setA.prepR --- IBEGIN
-						rNotL <= '1';
+						rNotL := true;
 
-						txbuf(0) := "0000" & setR(9 downto 6);
+						txbuf(0) := "0001" & setR(9 downto 6);
 						txbuf(1) := setR(5 downto 0) & "00";
 		
 						spilen <= std_logic_vector(to_unsigned(sizeTxbuf, 17));
 		
 						bytecnt := 0;
+						
+						i := 0;
 						-- IP impl.op.setA.prepR --- IEND
 
 						stateOp <= stateOpSetC;

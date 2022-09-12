@@ -57,7 +57,7 @@ begin
 
 	ackInvSetTkst <= '1' when stateOp=stateOpInv else '0';
 
-	process (reset, mclk)
+	process (reset, mclk, stateOp)
 		variable i: natural range 0 to (fMclk/10)/2;
 
 	begin

@@ -44,36 +44,36 @@ entity Iccl_ip_v1_0_S_AXI is
 
 		dbg0: out std_logic;
 		dbg1: out std_logic;
-		pclk: in std_logic;
-		href: in std_logic;
-		vsync: in std_logic;
-		d2: in std_logic;
-		d3: in std_logic;
-		d4: in std_logic;
-		d5: in std_logic;
-		d6: in std_logic;
-		d7: in std_logic;
-		d8: in std_logic;
-		d9: in std_logic;
-		rst: out std_logic;
-		pwdn: out std_logic;
-		xclk: out std_logic;
-		sioc: out std_logic;
-		siod: inout std_logic;
+		csi_clk_p: in std_logic;
+		csi_clk_n: in std_logic;
+		csi_d0_p: in std_logic;
+		csi_d0_n: in std_logic;
+		csi_d1_p: in std_logic;
+		csi_d1_n: in std_logic;
+		csi_d2_p: in std_logic;
+		csi_d2_n: in std_logic;
+		csi_d3_p: in std_logic;
+		csi_d3_n: in std_logic;
+
+		scl: out std_logic;
+		sda: inout std_logic;
+
 		btn0: in std_logic;
 		btn1: in std_logic;
-		cs0: out std_logic;
-		cs1: out std_logic;
+		cs: out std_logic;
 		sclk: out std_logic;
 		mosi: out std_logic;
+		pmnd_rxd: in std_logic;
+		pmnd_txd: out std_logic;
 		led4_r: out std_logic;
 		led4_g: out std_logic;
 		led5_r: out std_logic;
 		led5_g: out std_logic;
-		step1: out std_logic;
-		step2: out std_logic;
-		step3: out std_logic;
-		step4: out std_logic
+		nslp: out std_logic;
+		m0: inout std_logic;
+		dir: out std_logic;
+		step0: out std_logic;
+		nflt: in std_logic
 	);
 end Iccl_ip_v1_0_S_AXI;
 
@@ -92,22 +92,20 @@ architecture Iccl_ip_v1_0_S_AXI of Iccl_ip_v1_0_S_AXI is
 			extclk: in std_logic;
 			dbg0: out std_logic;
 			dbg1: out std_logic;
-			pclk: in std_logic;
-			href: in std_logic;
-			vsync: in std_logic;
-			d2: in std_logic;
-			d3: in std_logic;
-			d4: in std_logic;
-			d5: in std_logic;
-			d6: in std_logic;
-			d7: in std_logic;
-			d8: in std_logic;
-			d9: in std_logic;
-			rst: out std_logic;
-			pwdn: out std_logic;
-			xclk: out std_logic;
-			sioc: out std_logic;
-			siod: inout std_logic;
+			csi_clk_p: in std_logic;
+			csi_clk_n: in std_logic;
+			csi_d0_p: in std_logic;
+			csi_d0_n: in std_logic;
+			csi_d1_p: in std_logic;
+			csi_d1_n: in std_logic;
+			csi_d2_p: in std_logic;
+			csi_d2_n: in std_logic;
+			csi_d3_p: in std_logic;
+			csi_d3_n: in std_logic;
+
+			scl: out std_logic;
+			sda: inout std_logic;
+
 			btn0: in std_logic;
 			btn1: in std_logic;
 
@@ -123,18 +121,20 @@ architecture Iccl_ip_v1_0_S_AXI of Iccl_ip_v1_0_S_AXI is
 			tx: out std_logic_vector(31 downto 0);
 			strbTx: in std_logic;
 
-			cs0: out std_logic;
-			cs1: out std_logic;
+			cs: out std_logic;
 			sclk: out std_logic;
 			mosi: out std_logic;
+			pmnd_rxd: in std_logic;
+			pmnd_txd: out std_logic;
 			led4_r: out std_logic;
 			led4_g: out std_logic;
 			led5_r: out std_logic;
 			led5_g: out std_logic;
-			step1: out std_logic;
-			step2: out std_logic;
-			step3: out std_logic;
-			step4: out std_logic
+			nslp: out std_logic;
+			m0: inout std_logic;
+			dir: out std_logic;
+			step0: out std_logic;
+			nflt: in std_logic
 		);
 	end component;
 
@@ -230,22 +230,20 @@ begin
 			extclk => extclk,
 			dbg0 => dbg0,
 			dbg1 => dbg1,
-			pclk => pclk,
-			href => href,
-			vsync => vsync,
-			d2 => d2,
-			d3 => d3,
-			d4 => d4,
-			d5 => d5,
-			d6 => d6,
-			d7 => d7,
-			d8 => d8,
-			d9 => d9,
-			rst => rst,
-			pwdn => pwdn,
-			xclk => xclk,
-			sioc => sioc,
-			siod => siod,
+			csi_clk_p => csi_clk_p,
+			csi_clk_n => csi_clk_n,
+			csi_d0_p => csi_d0_p,
+			csi_d0_n => csi_d0_n,
+			csi_d1_p => csi_d1_p,
+			csi_d1_n => csi_d1_n,
+			csi_d2_p => csi_d2_p,
+			csi_d2_n => csi_d2_n,
+			csi_d3_p => csi_d3_p,
+			csi_d3_n => csi_d3_n,
+
+			scl => scl,
+			sda => sda,
+
 			btn0 => btn0,
 			btn1 => btn1,
 
@@ -261,18 +259,20 @@ begin
 			tx => tx,
 			strbTx => strbTx,
 
-			cs0 => cs0,
-			cs1 => cs1,
+			cs => cs,
 			sclk => sclk,
 			mosi => mosi,
+			pmnd_rxd => pmnd_rxd,
+			pmnd_txd => pmnd_txd,
 			led4_r => led4_r,
 			led4_g => led4_g,
 			led5_r => led5_r,
 			led5_g => led5_g,
-			step1 => step1,
-			step2 => step2,
-			step3 => step3,
-			step4 => step4
+			nslp => nslp,
+			m0 => m0,
+			dir => dir,
+			step0 => step0,
+			nflt => nflt
 		);
 
 	------------------------------------------------------------------------

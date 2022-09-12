@@ -127,7 +127,7 @@ Cmd* CtrWskdIcclStep::getNewCmd(
 };
 
 Cmd* CtrWskdIcclStep::getNewCmdGetInfo() {
-	Cmd* cmd = new Cmd(0x06, VecVCommand::GETINFO, Cmd::VecVRettype::STATSNG);
+	Cmd* cmd = new Cmd(0x07, VecVCommand::GETINFO, Cmd::VecVRettype::STATSNG);
 
 	cmd->addParRet("tixVState", Par::VecVType::TIX, CtrWskdIcclStep::VecVState::getTix, CtrWskdIcclStep::VecVState::getSref, CtrWskdIcclStep::VecVState::fillFeed);
 	cmd->addParRet("angle", Par::VecVType::UINT16);
@@ -153,7 +153,7 @@ void CtrWskdIcclStep::getInfo(
 };
 
 Cmd* CtrWskdIcclStep::getNewCmdMoveto() {
-	Cmd* cmd = new Cmd(0x06, VecVCommand::MOVETO, Cmd::VecVRettype::VOID);
+	Cmd* cmd = new Cmd(0x07, VecVCommand::MOVETO, Cmd::VecVRettype::VOID);
 
 	cmd->addParInv("angle", Par::VecVType::UINT16);
 	cmd->addParInv("Tstep", Par::VecVType::UINT8);
@@ -180,7 +180,7 @@ void CtrWskdIcclStep::moveto(
 };
 
 Cmd* CtrWskdIcclStep::getNewCmdSet() {
-	Cmd* cmd = new Cmd(0x06, VecVCommand::SET, Cmd::VecVRettype::VOID);
+	Cmd* cmd = new Cmd(0x07, VecVCommand::SET, Cmd::VecVRettype::VOID);
 
 	cmd->addParInv("rng", Par::VecVType::_BOOL);
 	cmd->addParInv("ccwNotCw", Par::VecVType::_BOOL);
@@ -210,7 +210,7 @@ void CtrWskdIcclStep::set(
 };
 
 Cmd* CtrWskdIcclStep::getNewCmdZero() {
-	Cmd* cmd = new Cmd(0x06, VecVCommand::ZERO, Cmd::VecVRettype::VOID);
+	Cmd* cmd = new Cmd(0x07, VecVCommand::ZERO, Cmd::VecVRettype::VOID);
 
 	return cmd;
 };

@@ -28,9 +28,7 @@ entity Laser is
 
 		nss: out std_logic;
 		sclk: out std_logic;
-		mosi: out std_logic;
-
-		stateOp_dbg: out std_logic_vector(7 downto 0)
+		mosi: out std_logic
 	);
 end Laser;
 
@@ -153,20 +151,6 @@ begin
 
 	-- IP impl.op.wiring --- BEGIN
 	ackInvSet <= ackInvSet_sig;
-
-	stateOp_dbg <= x"00" when stateOp=stateOpInit
-				else x"10" when stateOp=stateOpPrepA
-				else x"11" when stateOp=stateOpPrepB
-				else x"12" when stateOp=stateOpPrepC
-				else x"13" when stateOp=stateOpPrepD
-				else x"20" when stateOp=stateOpWait
-				else x"30" when stateOp=stateOpIdle
-				else x"40" when stateOp=stateOpSetA
-				else x"41" when stateOp=stateOpSetB
-				else x"42" when stateOp=stateOpSetC
-				else x"43" when stateOp=stateOpSetD
-				else x"50" when stateOp=stateOpInv
-				else (others => '1');
 	-- IP impl.op.wiring --- END
 
 	-- IP impl.op.rising --- BEGIN
@@ -195,22 +179,21 @@ begin
 
 		elsif rising_edge(mclk) then
 			if stateOp=stateOpInit then
-				-- IP impl.op.syncrst --- BEGIN
-				spilen <= (others => '0');
+				-- IP impl.op.syncrst --- RBEGIN
+				spilen <= std_logic_vector(to_unsigned(sizeTxbuf, 17));
 				spisend <= (others => '0');
 				reqSpi <= '0';
 
-				txbuf := (x"00",x"00");
+				txbuf := (x"F0",x"10"); -- DAC O/P, wake-up
 				bytecnt := 0;
-				i := 0;
 				rNotL := false;
-				-- IP impl.op.syncrst --- END
+				-- IP impl.op.syncrst --- REND
 
 				stateOp <= stateOpPrepC;
 
 			elsif stateOp=stateOpPrepA then
 				if dneSpi='1' then
-					-- IP impl.op.prepA.done --- INSERT
+					reqSpi <= '0'; -- IP impl.op.prepA.done --- ILINE
 
 					stateOp <= stateOpWait;
 
@@ -219,12 +202,16 @@ begin
 				end if;
 
 			elsif stateOp=stateOpPrepB then
-				-- IP impl.op.prepB --- INSERT
+				bytecnt := bytecnt + 1; -- IP impl.op.prepB --- ILINE
 
 				stateOp <= stateOpPrepC;
 
 			elsif stateOp=stateOpPrepC then
-				-- IP impl.op.prepC --- INSERT
+				-- IP impl.op.prepC --- IBEGIN
+				reqSpi <= '1';
+	
+				spisend <= txbuf(bytecnt); -- reason for reqSpi not simple logic
+				-- IP impl.op.prepC --- IEND
 
 				stateOp <= stateOpPrepD;
 
@@ -234,7 +221,7 @@ begin
 				end if;
 
 			elsif stateOp=stateOpWait then
-				-- IP impl.op.wait.ext --- INSERT
+				i := i + 1; -- IP impl.op.wait.ext --- ILINE
 
 				if i=imax then
 					-- IP impl.op.wait.done --- INSERT
@@ -244,17 +231,37 @@ begin
 
 			elsif stateOp=stateOpIdle then
 				if reqInvSet='1' then
-					-- IP impl.op.idle.prepL --- INSERT
+					-- IP impl.op.idle.prepL --- IBEGIN
+					rNotL := false;
+
+					txbuf(0) := "0000" & setL(9 downto 6);
+					txbuf(1) := setL(5 downto 0) & "00";
+	
+					spilen <= std_logic_vector(to_unsigned(sizeTxbuf, 17));
+	
+					bytecnt := 0;
+					-- IP impl.op.idle.prepL --- IEND
 
 					stateOp <= stateOpSetC;
 				end if;
 
 			elsif stateOp=stateOpSetA then
 				if dneSpi='1' then
-					-- IP impl.op.setA.spioff --- INSERT
+					reqSpi <= '0'; -- IP impl.op.setA.spioff --- ILINE
 
 					if not rNotL then
-						-- IP impl.op.setA.prepR --- INSERT
+						-- IP impl.op.setA.prepR --- IBEGIN
+						rNotL := true;
+
+						txbuf(0) := "0001" & setR(9 downto 6);
+						txbuf(1) := setR(5 downto 0) & "00";
+		
+						spilen <= std_logic_vector(to_unsigned(sizeTxbuf, 17));
+		
+						bytecnt := 0;
+						
+						i := 0;
+						-- IP impl.op.setA.prepR --- IEND
 
 						stateOp <= stateOpSetC;
 
@@ -267,12 +274,16 @@ begin
 				end if;
 
 			elsif stateOp=stateOpSetB then
-				-- IP impl.op.setB --- INSERT
+				bytecnt := bytecnt + 1; -- IP impl.op.setB --- ILINE
 
 				stateOp <= stateOpSetC;
 
 			elsif stateOp=stateOpSetC then
-				-- IP impl.op.setC --- INSERT
+				-- IP impl.op.setC --- IBEGIN
+				reqSpi <= '1';
+
+				spisend <= txbuf(bytecnt); -- reason for reqSpi not simple logic
+				-- IP impl.op.setC --- IEND
 
 				stateOp <= stateOpSetD;
 

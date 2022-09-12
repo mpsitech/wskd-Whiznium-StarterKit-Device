@@ -22,9 +22,7 @@ entity State is
 
 		rgb: out std_logic_vector(23 downto 0);
 
-		getTixVArtyState: out std_logic_vector(7 downto 0);
-
-		stateLed_dbg: out std_logic_vector(7 downto 0)
+		getTixVArtyState: out std_logic_vector(7 downto 0)
 	);
 end State;
 

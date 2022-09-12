@@ -40,12 +40,11 @@ entity Step is
 		reqInvZero: in std_logic;
 		ackInvZero: out std_logic;
 
-		step1: out std_logic;
-		step2: out std_logic;
-		step3: out std_logic;
-		step4: out std_logic;
-
-		stateOp_dbg: out std_logic_vector(7 downto 0)
+		nslp: out std_logic;
+		m0: inout std_logic;
+		dir: out std_logic;
+		step0: out std_logic;
+		nflt: in std_logic
 	);
 end Step;
 
@@ -54,6 +53,15 @@ architecture Step of Step is
 	------------------------------------------------------------------------
 	-- component declarations
 	------------------------------------------------------------------------
+
+	component BIBUF is
+		port (
+			Y: out std_logic;
+			PAD: inout std_logic;
+			D: in std_logic;
+			E: in std_logic
+		);
+	end component;
 
 	------------------------------------------------------------------------
 	-- signal declarations
@@ -78,10 +86,14 @@ architecture Step of Step is
 	signal ackInvSet_sig: std_logic;
 	signal ackInvZero_sig: std_logic;
 
-	signal step1_sig: std_logic;
-	signal step2_sig: std_logic;
-	signal step3_sig: std_logic;
-	signal step4_sig: std_logic;
+	signal rng: std_logic;
+	signal nslp_sig: std_logic;
+
+	signal ccwNotCw: std_logic;
+	signal step0_sig: std_logic;
+
+	signal m0_sig: std_logic;
+	signal m0z: std_logic;
 
 	-- IP sigs.op.cust --- INSERT
 
@@ -93,6 +105,14 @@ begin
 	------------------------------------------------------------------------
 	-- sub-module instantiation
 	------------------------------------------------------------------------
+
+	myIobufM0 : BIBUF
+		port map (
+			Y => open,
+			PAD => m0,
+			D => m0_sig,
+			E => m0z
+		);
 
 	------------------------------------------------------------------------
 	-- implementation: main operation (op)

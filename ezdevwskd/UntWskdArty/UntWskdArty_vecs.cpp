@@ -26,6 +26,7 @@ uint8_t VecVWskdArtyController::getTix(
 	else if (s == "camif") return CAMIF;
 	else if (s == "featdet") return FEATDET;
 	else if (s == "laser") return LASER;
+	else if (s == "pwmonif") return PWMONIF;
 	else if (s == "state") return STATE;
 	else if (s == "step") return STEP;
 	else if (s == "tkclksrc") return TKCLKSRC;
@@ -40,6 +41,7 @@ string VecVWskdArtyController::getSref(
 	else if (tix == CAMIF) return("camif");
 	else if (tix == FEATDET) return("featdet");
 	else if (tix == LASER) return("laser");
+	else if (tix == PWMONIF) return("pwmonif");
 	else if (tix == STATE) return("state");
 	else if (tix == STEP) return("step");
 	else if (tix == TKCLKSRC) return("tkclksrc");
@@ -52,7 +54,7 @@ void VecVWskdArtyController::fillFeed(
 		) {
 	feed.clear();
 
-	std::set<uint8_t> items = {CAMACQ,CAMIF,FEATDET,LASER,STATE,STEP,TKCLKSRC};
+	std::set<uint8_t> items = {CAMACQ,CAMIF,FEATDET,LASER,PWMONIF,STATE,STEP,TKCLKSRC};
 
 	for (auto it = items.begin(); it != items.end(); it++) feed.appendIxSrefTitles(*it, getSref(*it), getSref(*it));
 };

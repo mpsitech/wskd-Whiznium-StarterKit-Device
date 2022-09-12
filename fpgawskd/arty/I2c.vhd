@@ -22,7 +22,7 @@ entity I2c is
 		clkFastNotStd: std_logic := '1'; -- 1Mbps/400kbps vs. 100kbps
 		clkFastplusNotFast: std_logic := '0'; -- 1Mbps vs. 400kbps
 
-		devaddr: std_logic_vector(7 downto 0) := "01111000" -- 0x3C left-shifted by one
+		devaddr: std_logic_vector(7 downto 0) := "00110100" -- 0x1A left-shifted by one
 	);
 	port (
 		reset: in std_logic;
@@ -38,9 +38,7 @@ entity I2c is
 		recv: out std_logic_vector(7 downto 0);
 
 		scl: out std_logic;
-		sda: inout std_logic;
-
-		stateXfer_dbg: out std_logic_vector(7 downto 0)
+		sda: inout std_logic
 	);
 end I2c;
 
@@ -107,20 +105,6 @@ begin
 	scl_sig <= '0' when (stateXfer=stateXferBitA or stateXfer=stateXferAckA or stateXfer=stateXferRestart
 				 or stateXfer=stateXferStopA) else '1';
 	scl <= scl_sig;
-
-	stateXfer_dbg <= x"00" when stateXfer=stateXferInit
-				else x"10" when stateXfer=stateXferStartA
-				else x"11" when stateXfer=stateXferStartB
-				else x"20" when stateXfer=stateXferBitA
-				else x"21" when stateXfer=stateXferBitB
-				else x"30" when stateXfer=stateXferAckA
-				else x"31" when stateXfer=stateXferAckB
-				else x"40" when stateXfer=stateXferRestart
-				else x"50" when stateXfer=stateXferStopA
-				else x"51" when stateXfer=stateXferStopB
-				else x"52" when stateXfer=stateXferStopC
-				else x"60" when stateXfer=stateXferDone
-				else (others => '1');
 	-- IP impl.xfer.wiring --- END
 
 	-- IP impl.xfer.rising --- BEGIN

@@ -55,7 +55,7 @@ begin
 
 	crc <= crc_sig;
 	
-	process (reset, mclk)
+	process (reset, mclk, stateOp)
 		variable crc_int: std_logic_vector(15 downto 0);
 
 		variable dinc: std_logic_vector(31 downto 0);
